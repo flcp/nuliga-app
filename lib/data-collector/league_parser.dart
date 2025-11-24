@@ -1,3 +1,4 @@
+import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
 import 'package:nuliga_app/model/team_standing.dart';
 
@@ -18,46 +19,82 @@ class LeagueParser {
       return [];
     }
 
-    // Skip header row (first)
     final dataRows = rows.skip(1);
-
     final List<TeamStanding> result = [];
 
     for (final row in dataRows) {
       final cells = row.querySelectorAll('td');
-      if (cells.length < 10) continue; // Skip empty or malformed rows
-
-      final rank = int.parse(cells[1].text.trim());
-
-      final teamName = cells[2].querySelector('a')?.text.trim() ?? '';
-      final teamUrl = cells[2].querySelector('a')?.attributes['href'] ?? '';
-
-      final leaguePointsWon = int.parse(cells[7].text.trim().split(":")[0]);
-
-      final gamesWon = int.parse(cells[8].text.trim().split(":")[0]);
-      final gamesLost = int.parse(cells[8].text.trim().split(":")[1]);
-
-      final setsWon = int.parse(cells[9].text.trim().split(":")[0]);
-      final setsLost = int.parse(cells[9].text.trim().split(":")[1]);
 
       result.add(
         TeamStanding(
-          rank: rank,
-          teamName: teamName,
-          teamUrl: teamUrl,
-          totalMatches: int.parse(cells[3].text.trim()),
-          wins: int.parse(cells[4].text.trim()),
-          draws: int.parse(cells[5].text.trim()),
-          losses: int.parse(cells[6].text.trim()),
-          leaguePointsWon: leaguePointsWon,
-          gamesWon: gamesWon,
-          gamesLost: gamesLost,
-          setsWon: setsWon,
-          setsLost: setsLost
+          rank: getCellOrZero(cells, 1),
+          teamName: getTeamname(cells),
+          teamUrl: getTeamUrl(cells),
+          totalMatches: getCellOrZero(cells, 3),
+          wins: getCellOrZero(cells, 4),
+          draws: getCellOrZero(cells, 5),
+          losses: getCellOrZero(cells, 6),
+          leaguePointsWon: getCellTupleOrZero(cells, 7)[0],
+          gamesWon: getCellTupleOrZero(cells, 8)[0],
+          gamesLost: getCellTupleOrZero(cells, 8)[1],
+          setsWon: getCellTupleOrZero(cells, 9)[0],
+          setsLost: getCellTupleOrZero(cells, 9)[1],
         ),
       );
     }
 
     return result;
+  }
+
+  static int getCellOrZero(List<Element> cells, int index) {
+    final cell = getCellOrEmpty(cells, index);
+    return convertToIntOrZero(cell);
+  }
+
+  static int convertToIntOrZero(String input) {
+    final result = int.tryParse(input);
+
+    if (result == null || result < 0) {
+      return 0;
+    }
+
+    return result;
+  }
+
+  static String getCellOrEmpty(List<Element> cells, int index) {
+    if (cells.length < index) return "";
+
+    return cells[index].text.trim();
+  }
+
+  static String getTeamname(List<Element> cells) {
+    final href = getTeamLinkElement(cells);
+    return href?.text.trim() ?? "??";
+  }
+
+  static String getTeamUrl(List<Element> cells) {
+    final href = getTeamLinkElement(cells);
+    return href?.attributes['href'] ?? "??";
+  }
+
+  static Element? getTeamLinkElement(List<Element> cells) {
+    final index = 2;
+    if (cells.length < index) return null;
+
+    return cells[index].querySelector('a');
+  }
+
+  static List<int> getCellTupleOrZero(List<Element> cells, int index) {
+    // e.g. "9:1"
+    final cell = getCellOrEmpty(cells, index);
+    if (cell.isEmpty || !cell.contains(':')) return [0, 0];
+
+    final numbers = cell.split(":");
+    if (numbers.length < 2) return [0, 0];
+
+    final firstNumber = convertToIntOrZero(numbers[0]);
+    final secondNumber = convertToIntOrZero(numbers[1]);
+
+    return [firstNumber, secondNumber];
   }
 }

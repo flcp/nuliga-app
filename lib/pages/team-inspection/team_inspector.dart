@@ -21,7 +21,7 @@ class _TeamInspectorState extends State<TeamInspector>
     FavoriteClub(
       name: "SSC Karlsruhe II",
       tableUrl:
-          "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35307",
+          "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35309",
     ),
   ];
   late FavoriteClub _selectedClub;

@@ -7,6 +7,10 @@ class LeagueParser {
   static const _tableClass = "result-set";
 
   static List<TeamStanding> parse(String htmlContent) {
+    if (htmlContent.trim().isEmpty) {
+      return [];
+    }
+
     final document = html.parse(htmlContent);
 
     final table = document.querySelector('table.$_tableClass');

@@ -1,4 +1,4 @@
-class TeamStanding {
+class LeagueTeamRanking {
   final int rank;
   final String teamName;
   final String teamUrl;
@@ -11,11 +11,11 @@ class TeamStanding {
   final int leaguePointsWon;
   final int gamesWon;
   final int gamesLost;
-  
+
   final int setsWon;
   final int setsLost;
 
-  TeamStanding({
+  LeagueTeamRanking({
     required this.rank,
     required this.teamName,
     required this.teamUrl,
@@ -29,9 +29,4 @@ class TeamStanding {
     required this.setsWon,
     required this.setsLost,
   });
-
-  // @override
-  // String toString() =>
-  //     '[$rank] $teamName  M:$totalMatches  S/U/N: $wins/$draws/$losses  '
-  //     'Points:$points  Games:$gamesRaw  Sets:$setsRaw';
 }

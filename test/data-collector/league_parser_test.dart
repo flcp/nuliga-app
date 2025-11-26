@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nuliga_app/data-collector/league_parser.dart';
+import 'package:nuliga_app/services/league-table/league_parser.dart';
 
 void main() {
   group('LeagueParser with valid file input', () {

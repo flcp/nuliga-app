@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/data-collector/http.dart';
-import 'package:nuliga_app/mockPage.dart';
+import 'package:nuliga_app/services/league-table/http.dart';
 
-import 'data-collector/league_parser.dart';
+import 'services/league-table/league_parser.dart';
 
 void main() {
   runApp(const MaterialApp(home: ParsedView()));
 }
 
 class ParsedView extends StatelessWidget {
-  final _bottomIndex = 0;
-
   const ParsedView({super.key});
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/data-collector/http.dart';
-import 'package:nuliga_app/data-collector/league_parser.dart';
+import 'package:nuliga_app/model/league_team_standing.dart';
+
+import '../../../services/league_table_service.dart';
 
 class TeamTable extends StatelessWidget {
   final String url;
@@ -10,8 +11,8 @@ class TeamTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String>(
-      future: fetchWebsite(url),
+    return FutureBuilder<List<LeagueTeamRanking>>(
+      future: LeagueTableService.getLeagueTeamRankings(url),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -21,8 +22,7 @@ class TeamTable extends StatelessWidget {
           return Center(child: Text("Error: ${snapshot.error}"));
         }
 
-        final html = snapshot.data ?? "";
-        final teamStandings = LeagueParser.parse(html);
+        final teamStandings = snapshot.data ?? [];
 
         return ListView.builder(
           itemCount: teamStandings.length,

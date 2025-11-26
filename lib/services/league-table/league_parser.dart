@@ -1,12 +1,11 @@
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
-import 'package:nuliga_app/model/team_standing.dart';
+import 'package:nuliga_app/model/league_team_standing.dart';
 
-/// Parses the HTML content and returns a list of [TeamStanding].
 class LeagueParser {
   static const _tableClass = "result-set";
 
-  static List<TeamStanding> parse(String htmlContent) {
+  static List<LeagueTeamRanking> parse(String htmlContent) {
     if (htmlContent.trim().isEmpty) {
       return [];
     }
@@ -24,13 +23,13 @@ class LeagueParser {
     }
 
     final dataRows = rows.skip(1);
-    final List<TeamStanding> result = [];
+    final List<LeagueTeamRanking> result = [];
 
     for (final row in dataRows) {
       final cells = row.querySelectorAll('td');
 
       result.add(
-        TeamStanding(
+        LeagueTeamRanking(
           rank: getCellOrZero(cells, 1),
           teamName: getTeamname(cells),
           teamUrl: getTeamUrl(cells),

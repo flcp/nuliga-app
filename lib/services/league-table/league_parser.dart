@@ -65,7 +65,7 @@ class LeagueParser {
   }
 
   static String getCellOrEmpty(List<Element> cells, int index) {
-    if (cells.length < index) return "";
+    if (index >= cells.length) return "";
 
     return cells[index].text.trim();
   }

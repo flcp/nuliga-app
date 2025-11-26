@@ -6,19 +6,15 @@ import 'package:nuliga_app/pages/team-inspection/team_inspector.dart';
 final List<TabItem> tabs = [
   TabItem(
     button: Tab(icon: Icon(Icons.format_list_numbered), text: "Tabelle"),
-    view: TeamTable(
-      url:
-          "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35307",
-      teamName: "SSC Karlsruhe",
-    ),
+    viewBuilder: (club) => TeamTable(url: club.tableUrl, teamName: club.name),
   ),
   TabItem(
     button: Tab(icon: Icon(Icons.event), text: "Nächste"),
-    view: Center(child: Text('Profile Content')),
+    viewBuilder: (_) => Center(child: Text('Profile Content')),
   ),
   TabItem(
     button: Tab(icon: Icon(Icons.history), text: "Letzte"),
-    view: Center(child: Text('Settings Content')),
+    viewBuilder: (_) => Center(child: Text('Settings Content')),
   ),
 ];
 
@@ -37,7 +33,9 @@ class TabManager extends StatelessWidget {
   Widget build(BuildContext context) {
     return TabBarView(
       controller: _tabController,
-      children: tabs.map((e) => e.view).toList(),
+      children: tabs
+          .map((e) => e.viewBuilder(_selectedClub) ?? const SizedBox.shrink())
+          .toList(),
     );
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/pages/team-inspection/team_inspector.dart';
 
 class TabItem {
-  final Tab button; // Tab-Widget mit Text/Icon etc.
-  final Widget view; // Der Inhalt im TabBarView
-  final String? key; // Optional: ein Key oder Identifier
+  final Tab button;
+  final Widget? Function(FavoriteClub) viewBuilder;
+  final String? key;
 
-  TabItem({required this.button, required this.view, this.key});
+  TabItem({required this.button, required this.viewBuilder, this.key});
 }

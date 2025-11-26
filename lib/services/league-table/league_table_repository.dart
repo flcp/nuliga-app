@@ -6,7 +6,7 @@ class LeagueTableRepository {
   static Future<List<LeagueTeamRanking>> getLeagueTeamRankings(
     String leagueUrl,
   ) async {
-    final htmlContent = await fetchWebsite(leagueUrl);
+    final htmlContent = await fetchWebsiteCached(leagueUrl);
     final result = LeagueParser.parse(htmlContent);
 
     return result;

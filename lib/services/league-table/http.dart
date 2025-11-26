@@ -1,32 +1,39 @@
 import 'package:http/http.dart' as http;
 
-String? _lastResponseBody;
-
-// todo remove
 Duration cooldown = Duration(seconds: 30);
 
-// Future<String> fetchWebsiteCached(String urlString) async {}
+class CachedResponse {
+  final DateTime lastRequestTime;
+  final String lastResponseBody;
+
+  CachedResponse(this.lastRequestTime, this.lastResponseBody);
+}
+
+Map<String, CachedResponse> cache = {};
+
+Future<String> fetchWebsiteCached(String url) async {
+  final now = DateTime.now();
+  final previousResponse = cache[url];
+  if (previousResponse != null) {
+    if (now.difference(previousResponse.lastRequestTime) < cooldown) {
+      print("serving cached response from ${previousResponse.lastRequestTime}");
+      return previousResponse.lastResponseBody;
+    }
+  }
+
+  final responseBody = await fetchWebsite(url);
+  cache[url] = CachedResponse(now, responseBody);
+
+  return responseBody;
+}
 
 Future<String> fetchWebsite(String urlString) async {
-  final now = DateTime.now();
-
-  // if (_lastRequestTime != null &&
-  //     now.difference(_lastRequestTime!) < cooldown &&
-  //     _lastResponseBody != null) {
-  //   print("Rate limiting hit");
-  //   return _lastResponseBody!;
-  // }
-
-  // _lastRequestTime = now;
-
   final url = Uri.parse(urlString);
 
   try {
     final response = await http.get(url);
-    _lastResponseBody = response.body;
-
     return response.body;
-  } catch (e) {}
-
-  return "";
+  } catch (e) {
+    return "";
+  }
 }

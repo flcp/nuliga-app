@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/pages/team-inspection/tab_manager.dart';
+import 'package:nuliga_app/pages/team-inspection/team_inspector_tab_manager.dart';
 
 class TeamInspector extends StatefulWidget {
   const TeamInspector({super.key});
@@ -46,46 +46,45 @@ class _TeamInspectorState extends State<TeamInspector>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Inspect team"),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: tabs.map((e) => e.button).toList(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            TabBar(
+              controller: _tabController,
+              tabs: tabs.map((e) => e.button).toList(),
+            ),
+            SizedBox(
+              height: 60,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 10,
+                ),
+                children: _favoriteClubs.map((club) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: ChoiceChip(
+                      label: Text(club.name),
+                      selected: _selectedClub == club,
+                      onSelected: (bool selected) {
+                        setState(() {
+                          _selectedClub = club;
+                        });
+                      },
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            Expanded(
+              child: TeamInspectorTabManager(
+                tabController: _tabController,
+                selectedClub: _selectedClub,
+              ),
+            ),
+          ],
         ),
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 60,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-              itemCount: _favoriteClubs.length,
-              itemBuilder: (context, index) {
-                final club = _favoriteClubs[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: ChoiceChip(
-                    label: Text(club.name),
-                    selected: _selectedClub == club,
-                    onSelected: (bool selected) {
-                      setState(() {
-                        _selectedClub = club;
-                      });
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-
-          Expanded(
-            child: TabManager(
-              tabController: _tabController,
-              selectedClub: _selectedClub,
-            ),
-          ),
-        ],
       ),
     );
   }

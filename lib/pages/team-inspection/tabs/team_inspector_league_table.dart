@@ -3,11 +3,15 @@ import 'package:nuliga_app/model/league_team_standing.dart';
 
 import '../../../services/league_table_service.dart';
 
-class TeamTable extends StatelessWidget {
+class TeamInspectorLeagueTable extends StatelessWidget {
   final String url;
   final String teamName;
 
-  const TeamTable({required this.url, required this.teamName, super.key});
+  const TeamInspectorLeagueTable({
+    required this.url,
+    required this.teamName,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

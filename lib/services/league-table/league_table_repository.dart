@@ -1,5 +1,5 @@
 import 'package:nuliga_app/model/league_team_standing.dart';
-import 'package:nuliga_app/services/league-table/http.dart';
+import 'package:nuliga_app/services/shared/http.dart';
 import 'package:nuliga_app/services/league-table/league_parser.dart';
 
 class LeagueTableRepository {

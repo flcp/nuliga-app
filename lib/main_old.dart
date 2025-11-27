@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/services/league-table/http.dart';
+import 'package:nuliga_app/services/shared/http.dart';
 
 import 'services/league-table/league_parser.dart';
 

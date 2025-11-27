@@ -8,7 +8,7 @@ void main() {
     test(
       'parses sample file and identifies stats for first and last correctly',
       () async {
-        final file = File('test/assets/test-page.html');
+        final file = File('test/assets/league-table/test-page.html');
         final html = await file.readAsString();
 
         final result = LeagueParser.parse(html);
@@ -46,7 +46,7 @@ void main() {
 
   group('LeagueParser with invalid file input', () {
     test('defaults to 0 when encountering non-numbers', () async {
-      final file = File('test/assets/broken-entries.html');
+      final file = File('test/assets/league-table/broken-entries.html');
       final html = await file.readAsString();
 
       final result = LeagueParser.parse(html);
@@ -68,7 +68,7 @@ void main() {
     });
 
     test('defaults to 0 when encountering empty ', () async {
-      final file = File('test/assets/broken-entries.html');
+      final file = File('test/assets/league-table/broken-entries.html');
       final html = await file.readAsString();
 
       final result = LeagueParser.parse(html);
@@ -92,7 +92,7 @@ void main() {
     test(
       'defaults to 0 when encountering colon separated non-numbers',
       () async {
-        final file = File('test/assets/broken-entries.html');
+        final file = File('test/assets/league-table/broken-entries.html');
         final html = await file.readAsString();
 
         final result = LeagueParser.parse(html);
@@ -115,7 +115,7 @@ void main() {
     );
 
     test('defaults to 0 when encountering negative numbers', () async {
-      final file = File('test/assets/broken-entries.html');
+      final file = File('test/assets/league-table/broken-entries.html');
       final html = await file.readAsString();
 
       final result = LeagueParser.parse(html);

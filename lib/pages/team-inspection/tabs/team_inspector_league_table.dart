@@ -28,28 +28,29 @@ class TeamInspectorLeagueTable extends StatelessWidget {
 
         final teamStandings = snapshot.data ?? [];
 
-        return ListView.builder(
-          itemCount: teamStandings.length,
-          itemBuilder: (context, i) {
-            final teamStanding = teamStandings[i];
-
-            return ListTile(
-              title: Text(teamStanding.teamName),
-              trailing: FractionallySizedBox(
-                widthFactor: 0.2,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(teamStanding.leaguePointsWon.toString()),
-                    Text(
-                      "${teamStanding.wins}:${teamStanding.draws}:${teamStanding.losses}",
+        return ListView(
+          children: teamStandings
+              .map(
+                (teamStanding) => ListTile(
+                  leading: Text("${teamStanding.rank.toString()}."),
+                  title: Text(teamStanding.teamName),
+                  selected: teamStanding.teamName == teamName,
+                  trailing: FractionallySizedBox(
+                    widthFactor: 0.15,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(teamStanding.leaguePointsWon.toString()),
+                        Text(
+                          "${teamStanding.wins}.${teamStanding.draws}:${teamStanding.losses}",
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            );
-          },
+              )
+              .toList(),
         );
       },
     );

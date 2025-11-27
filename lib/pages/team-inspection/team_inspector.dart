@@ -46,45 +46,41 @@ class _TeamInspectorState extends State<TeamInspector>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            TabBar(
-              controller: _tabController,
-              tabs: tabs.map((e) => e.button).toList(),
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          TabBar(
+            controller: _tabController,
+            tabs: tabs.map((e) => e.button).toList(),
+          ),
+          SizedBox(
+            height: 60,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              children: _favoriteClubs.map((club) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: ChoiceChip(
+                    label: Text(club.name),
+                    selected: _selectedClub == club,
+                    onSelected: (bool selected) {
+                      setState(() {
+                        _selectedClub = club;
+                      });
+                    },
+                  ),
+                );
+              }).toList(),
             ),
-            SizedBox(
-              height: 60,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 10,
-                ),
-                children: _favoriteClubs.map((club) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: ChoiceChip(
-                      label: Text(club.name),
-                      selected: _selectedClub == club,
-                      onSelected: (bool selected) {
-                        setState(() {
-                          _selectedClub = club;
-                        });
-                      },
-                    ),
-                  );
-                }).toList(),
-              ),
+          ),
+          Expanded(
+            child: TeamInspectorTabManager(
+              tabController: _tabController,
+              selectedClub: _selectedClub,
             ),
-            Expanded(
-              child: TeamInspectorTabManager(
-                tabController: _tabController,
-                selectedClub: _selectedClub,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

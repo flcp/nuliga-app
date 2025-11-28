@@ -15,13 +15,31 @@ void main() {
       expect(result[0].homeTeam, "Fortuna Schwetzingen");
       expect(result[0].opponentTeam, "TSG Weinheim");
     });
+    test('parses sample file and parses date and time correctly', () async {
+      final file = File('test/assets/next-matches/test-page.html');
+      final html = await file.readAsString();
+
+      final result = NextMatchesParser.getEntriesAsFutureMatches(html);
+
+      expect(result[0].time, DateTime(2025, 10, 11, 14, 0));
+    });
+    test('parses sample file and back fills date from previous line', () async {
+      final file = File('test/assets/next-matches/test-page.html');
+      final html = await file.readAsString();
+
+      final result = NextMatchesParser.getEntriesAsFutureMatches(html);
+
+      expect(result[1].time, DateTime(2025, 10, 11, 14, 0));
+    });
   });
-  test('NextMatchesParser with invalid file input', () async {
+
+
+  test('NextMatchesParser with invalid file input returns empty list', () async {
     final file = File('test/assets/next-matches/otherFormat.json');
     final html = await file.readAsString();
 
     final result = NextMatchesParser.getEntriesAsFutureMatches(html);
 
-    expect(result.length, 56);
+    expect(result.length, 0);
   });
 }

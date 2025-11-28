@@ -11,7 +11,7 @@ void main() {
         final file = File('test/assets/league-table/test-page.html');
         final html = await file.readAsString();
 
-        final result = LeagueParser.parse(html);
+        final result = LeagueParser.parseLeagueTable(html);
 
         expect(result.length, 8);
 
@@ -49,7 +49,7 @@ void main() {
       final file = File('test/assets/league-table/broken-entries.html');
       final html = await file.readAsString();
 
-      final result = LeagueParser.parse(html);
+      final result = LeagueParser.parseLeagueTable(html);
 
       expect(result.length, 4);
 
@@ -71,7 +71,7 @@ void main() {
       final file = File('test/assets/league-table/broken-entries.html');
       final html = await file.readAsString();
 
-      final result = LeagueParser.parse(html);
+      final result = LeagueParser.parseLeagueTable(html);
 
       expect(result.length, 4);
 
@@ -95,7 +95,7 @@ void main() {
         final file = File('test/assets/league-table/broken-entries.html');
         final html = await file.readAsString();
 
-        final result = LeagueParser.parse(html);
+        final result = LeagueParser.parseLeagueTable(html);
 
         expect(result.length, 4);
 
@@ -118,7 +118,7 @@ void main() {
       final file = File('test/assets/league-table/broken-entries.html');
       final html = await file.readAsString();
 
-      final result = LeagueParser.parse(html);
+      final result = LeagueParser.parseLeagueTable(html);
 
       expect(result.length, 4);
 

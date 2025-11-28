@@ -28,6 +28,10 @@ class TeamInspectorLeagueTable extends StatelessWidget {
 
         final teamStandings = snapshot.data ?? [];
 
+        if (teamStandings.isEmpty) {
+          return Center(child: Text("Could not fetch data from website. Try different URL"));
+        }
+
         return ListView(
           children: teamStandings
               .map(

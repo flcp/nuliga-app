@@ -27,7 +27,7 @@ class ParsedView extends StatelessWidget {
           }
 
           final html = snapshot.data ?? "";
-          final teamStandings = LeagueParser.parse(html);
+          final teamStandings = LeagueParser.parseLeagueTable(html);
 
           return ListView.builder(
             itemCount: teamStandings.length,

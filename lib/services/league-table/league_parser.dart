@@ -5,7 +5,7 @@ import 'package:nuliga_app/model/league_team_standing.dart';
 class LeagueParser {
   static const _tableClass = "result-set";
 
-  static List<LeagueTeamRanking> parse(String htmlContent) {
+  static List<LeagueTeamRanking> parseLeagueTable(String htmlContent) {
     if (htmlContent.trim().isEmpty) {
       return [];
     }
@@ -14,7 +14,7 @@ class LeagueParser {
 
     final table = document.querySelector('table.$_tableClass');
     if (table == null) {
-      throw StateError('No table found with class "$_tableClass"');
+      return [];
     }
 
     final rows = table.querySelectorAll('tr');

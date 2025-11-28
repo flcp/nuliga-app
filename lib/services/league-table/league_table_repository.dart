@@ -7,7 +7,7 @@ class LeagueTableRepository {
     String leagueUrl,
   ) async {
     final htmlContent = await fetchWebsiteCached(leagueUrl);
-    final result = LeagueParser.parse(htmlContent);
+    final result = LeagueParser.parseLeagueTable(htmlContent);
 
     return result;
   }

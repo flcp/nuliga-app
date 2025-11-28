@@ -35,8 +35,13 @@ class NextMatchesParser {
       final row = dataRows[i];
       final cells = row.querySelectorAll('td');
 
+      if (cells.length < 6) {
+        print("could not find all info, skipping row");
+        continue;
+      }
+
       if (i > 0 && cells[date].text.trim().isEmpty) {
-        cells[date] = dataRows[i-1].querySelectorAll('td')[date];
+        cells[date].text = dataRows[i-1].querySelectorAll('td')[date].text;
       }
       final dateTime = getMatchDateTime(cells[date], cells[time]);
 
@@ -47,9 +52,10 @@ class NextMatchesParser {
 
   // date in format 25.10.2025
   // time in format 14:00
+  // time sometimes 14:05 v
   static DateTime getMatchDateTime(Element dateCell, Element timeCell) {
     final dateParts = dateCell.text.trim().split(".");
-    final timeParts = timeCell.text.trim().split(":");
+    final timeParts = timeCell.text.trim().split(" ")[0].split(":");
 
     if (dateParts.length < 3 || timeParts.length < 2) {
       return DateTime.fromMicrosecondsSinceEpoch(0);

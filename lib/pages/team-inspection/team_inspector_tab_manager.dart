@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/tab_item.dart';
 import 'package:nuliga_app/pages/team-inspection/tabs/team_inspector_league_table.dart';
+import 'package:nuliga_app/pages/team-inspection/tabs/team_inspector_next_matches.dart';
 import 'package:nuliga_app/pages/team-inspection/team_inspector.dart';
 
 final List<TabItem> tabs = [
@@ -11,11 +12,11 @@ final List<TabItem> tabs = [
   ),
   TabItem(
     button: Tab(icon: Icon(Icons.event), text: "Nächste"),
-    viewBuilder: (_) => Center(child: Text('Profile Content')),
+    viewBuilder: (club) => TeamInspectorNextMatches(url: club.tableUrl, teamName: club.name),
   ),
   TabItem(
-    button: Tab(icon: Icon(Icons.history), text: "Letzte"),
-    viewBuilder: (_) => Center(child: Text('Settings Content')),
+    button: Tab(icon: Icon(Icons.history), text: "Ergebnisse"),
+    viewBuilder: (_) => Center(child: Text('ergebnisse Content')),
   ),
 ];
 

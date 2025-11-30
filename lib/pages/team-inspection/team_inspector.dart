@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/club_navigation_item.dart';
 import 'package:nuliga_app/pages/team-inspection/team_inspector_tab_manager.dart';
 
 class TeamInspector extends StatefulWidget {
@@ -12,29 +13,37 @@ class _TeamInspectorState extends State<TeamInspector>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  final List<FavoriteClub> _favoriteClubs = [
-    FavoriteClub(
+  final List<ClubNavigationItem> _favoriteClubs = [
+    ClubNavigationItem(
       name: "SSC Karlsruhe",
       tableUrl:
           "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35307",
+      matchesUrl:
+          "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35307",
     ),
-    FavoriteClub(
+    ClubNavigationItem(
       name: "SSC Karlsruhe II",
       tableUrl:
           "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35309",
+      matchesUrl:
+          "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35328",
     ),
-    FavoriteClub(
+    ClubNavigationItem(
       name: "SSC Karlsruhe III",
       tableUrl:
           "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35309",
+      matchesUrl:
+          "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35328",
     ),
-    FavoriteClub(
+    ClubNavigationItem(
       name: "SSC Karlsruhe IV",
       tableUrl:
           "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35328",
+      matchesUrl:
+          "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35309",
     ),
   ];
-  late FavoriteClub _selectedClub;
+  late ClubNavigationItem _selectedClub;
 
   @override
   void initState() {
@@ -84,11 +93,4 @@ class _TeamInspectorState extends State<TeamInspector>
       ),
     );
   }
-}
-
-class FavoriteClub {
-  final String name;
-  final String tableUrl;
-
-  FavoriteClub({required this.name, required this.tableUrl});
 }

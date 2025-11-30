@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/club_navigation_item.dart';
 import 'package:nuliga_app/model/tab_item.dart';
 import 'package:nuliga_app/pages/team-inspection/tabs/team_inspector_league_table.dart';
 import 'package:nuliga_app/pages/team-inspection/tabs/team_inspector_next_matches.dart';
-import 'package:nuliga_app/pages/team-inspection/team_inspector.dart';
 
 final List<TabItem> tabs = [
   TabItem(
@@ -12,7 +12,7 @@ final List<TabItem> tabs = [
   ),
   TabItem(
     button: Tab(icon: Icon(Icons.event), text: "Nächste"),
-    viewBuilder: (club) => TeamInspectorNextMatches(url: club.tableUrl, teamName: club.name),
+    viewBuilder: (club) => TeamInspectorNextMatches(nextMatchesUrl: club.matchesUrl, teamName: club.name),
   ),
   TabItem(
     button: Tab(icon: Icon(Icons.history), text: "Ergebnisse"),
@@ -24,11 +24,11 @@ class TeamInspectorTabManager extends StatelessWidget {
   const TeamInspectorTabManager({
     super.key,
     required TabController tabController,
-    required FavoriteClub selectedClub,
+    required ClubNavigationItem selectedClub,
   }) : _tabController = tabController,
        _selectedClub = selectedClub;
 
-  final FavoriteClub _selectedClub;
+  final ClubNavigationItem _selectedClub;
   final TabController _tabController;
 
   @override

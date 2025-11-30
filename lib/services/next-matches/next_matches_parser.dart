@@ -13,6 +13,7 @@ class NextMatchesParser {
 
   static List<FutureMatch> getEntriesAsFutureMatches(String htmlContent) {
     if (htmlContent.trim().isEmpty) {
+      print("htmlcontent empty");
       return [];
     }
 
@@ -20,11 +21,13 @@ class NextMatchesParser {
 
     final table = document.querySelector('table.$_tableClass');
     if (table == null) {
+      print("table not found");
       return [];
     }
 
     final rows = table.querySelectorAll('tr');
     if (rows.isEmpty) {
+      print("table found, but no rows");
       return [];
     }
 

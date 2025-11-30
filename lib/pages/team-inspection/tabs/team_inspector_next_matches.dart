@@ -3,23 +3,18 @@ import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
 
 class TeamInspectorNextMatches extends StatelessWidget {
-  final String url;
+  final String nextMatchesUrl;
   final String teamName;
 
   const TeamInspectorNextMatches({
     super.key,
     required this.teamName,
-    required this.url,
+    required this.nextMatchesUrl,
   });
-
-  String getMatchesOverviewUrl() {
-    // todo
-    return "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35307";
-  }
 
   @override
   Widget build(BuildContext context) {
-    final String matchOverviewUrl = getMatchesOverviewUrl();
+    final String matchOverviewUrl = nextMatchesUrl;
 
     return FutureBuilder<List<FutureMatch>>(
       future: NextMatchesService.getNextMatchesForTeam(
@@ -28,18 +23,21 @@ class TeamInspectorNextMatches extends StatelessWidget {
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
+          //todo extract
           return const Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {
+          // todo extract
           return Center(child: Text("Error: ${snapshot.error}"));
         }
 
         final nextMatches = snapshot.data ?? [];
 
         if (nextMatches.isEmpty) {
+          // todo extract
           return Center(
-            child: Text("Could not fetch data from website. Try different URL"),
+            child: Text("Nothing to display. Try refreshing or another URL"),
           );
         }
 
@@ -47,6 +45,7 @@ class TeamInspectorNextMatches extends StatelessWidget {
           children: nextMatches
               .map(
                 (match) => ListTile(
+                  selected: isOnNextMatchDay(match, nextMatches),
                   leading: SizedBox(
                     width: 90,
                     child: Column(
@@ -80,5 +79,16 @@ class TeamInspectorNextMatches extends StatelessWidget {
         );
       },
     );
+  }
+
+  bool isOnNextMatchDay(FutureMatch match, List<FutureMatch> nextMatches) {
+    final nextMatchTime = nextMatches
+        .map((m) => m.time)
+        .toList()
+        .reduce((min, e) => e.isBefore(min) ? e : min);
+
+    return match.time.day == nextMatchTime.day &&
+        match.time.month == nextMatchTime.month &&
+        match.time.year == nextMatchTime.year;
   }
 }

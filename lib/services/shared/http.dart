@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 Duration cooldown = Duration(seconds: 300);
@@ -12,6 +13,13 @@ class CachedResponse {
 Map<String, CachedResponse> cache = {};
 
 Future<String> fetchWebsiteCached(String url) async {
+  // TODO: REMOVE
+  var mockedWebsite = await fetchWebsiteMocked(url);
+  if (mockedWebsite.isNotEmpty) {
+    return mockedWebsite;
+  }
+  
+
   final now = DateTime.now();
   final previousResponse = cache[url];
   if (previousResponse != null) {
@@ -25,6 +33,18 @@ Future<String> fetchWebsiteCached(String url) async {
   cache[url] = CachedResponse(now, responseBody);
 
   return responseBody;
+}
+
+Future<String> fetchWebsiteMocked(String url) async {
+  if (url == "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35307") {
+    print("returning league overview from file");
+    return await rootBundle.loadString("lib/services/shared/assets/league_overview.html");
+  } else if (url == "") {
+    print("returning matches overview from file");
+
+    return await rootBundle.loadString("lib/services/shared/assets/all_matches.html");
+  }
+  return "";
 }
 
 Future<String> fetchWebsite(String urlString) async {

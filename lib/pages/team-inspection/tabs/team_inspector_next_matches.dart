@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
+import 'package:nuliga_app/services/shared/http.dart';
 
-class TeamInspectorNextMatches extends StatelessWidget {
+class TeamInspectorNextMatches extends StatefulWidget {
   final String nextMatchesUrl;
   final String teamName;
 
@@ -13,13 +14,25 @@ class TeamInspectorNextMatches extends StatelessWidget {
   });
 
   @override
+  State<TeamInspectorNextMatches> createState() =>
+      _TeamInspectorNextMatchesState();
+}
+
+class _TeamInspectorNextMatchesState extends State<TeamInspectorNextMatches> {
+  Future<void> refresh() {
+    clearCache();
+    setState(() {});
+    return Future.value();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final String matchOverviewUrl = nextMatchesUrl;
+    final String matchOverviewUrl = widget.nextMatchesUrl;
 
     return FutureBuilder<List<FutureMatch>>(
       future: NextMatchesService.getNextMatchesForTeam(
         matchOverviewUrl,
-        teamName,
+        widget.teamName,
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -27,55 +40,57 @@ class TeamInspectorNextMatches extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (snapshot.hasError) {
-          // todo extract
-          return Center(child: Text("Error: ${snapshot.error}"));
-        }
+        final nextMatches = getDataOrEmptyList(snapshot);
 
-        final nextMatches = snapshot.data ?? [];
-
-        if (nextMatches.isEmpty) {
-          // todo extract
-          return Center(
-            child: Text("Nothing to display. Try refreshing or another URL"),
-          );
-        }
-
-        return ListView(
-          children: nextMatches
-              .map(
-                (match) => ListTile(
-                  selected: isOnNextMatchDay(match, nextMatches),
-                  leading: SizedBox(
-                    width: 90,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "${match.time.day}.${match.time.month}.${match.time.year}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  title: Text(
-                    match.homeTeam == teamName
-                        ? match.opponentTeam
-                        : match.homeTeam,
+        return RefreshIndicator(
+          onRefresh: () => refresh(),
+          child: Stack(
+            children: [
+              if (nextMatches.isEmpty)
+                Center(
+                  child: Text(
+                    "Nothing to display. Try refreshing or another URL",
                   ),
                 ),
-              )
-              .toList(),
+
+              ListView(
+                children: nextMatches
+                    .map(
+                      (match) => ListTile(
+                        selected: isOnNextMatchDay(match, nextMatches),
+                        leading: SizedBox(
+                          width: 90,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "${match.time.day}.${match.time.month}.${match.time.year}",
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        title: Text(
+                          match.homeTeam == widget.teamName
+                              ? match.opponentTeam
+                              : match.homeTeam,
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -90,5 +105,23 @@ class TeamInspectorNextMatches extends StatelessWidget {
     return match.time.day == nextMatchTime.day &&
         match.time.month == nextMatchTime.month &&
         match.time.year == nextMatchTime.year;
+  }
+
+  List<FutureMatch> getDataOrEmptyList(
+    AsyncSnapshot<List<FutureMatch>> snapshot,
+  ) {
+    if (snapshot.hasError) {
+      return [];
+    }
+
+    if (snapshot.data == null) {
+      return [];
+    }
+
+    if (snapshot.data!.isEmpty) {
+      return [];
+    }
+
+    return snapshot.data!;
   }
 }

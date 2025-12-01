@@ -28,29 +28,43 @@ class TeamInspectorLeagueTable extends StatelessWidget {
         final teamStandings = snapshot.data ?? [];
 
         if (teamStandings.isEmpty) {
-          return Center(child: Text("Nothing to display. Try refreshing or another URL"));
+          return Center(
+            child: Text("Nothing to display. Try refreshing or another URL"),
+          );
         }
+
+        const fontSize = 16.0;
 
         return ListView(
           children: teamStandings
               .map(
                 (teamStanding) => ListTile(
-                  leading: Text("${teamStanding.rank.toString()}."),
-                  title: Text(teamStanding.teamName),
-                  selected: teamStanding.teamName == teamName,
-                  trailing: FractionallySizedBox(
-                    widthFactor: 0.15,
-                    child: Row(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                    "${teamStanding.rank.toString()}.",
+                    style: const TextStyle(fontSize: fontSize),
+                  ),
+                      Text(
+                        teamStanding.teamName,
+                        style: const TextStyle(
+                          fontSize: fontSize,
+                        ),
+                      ),
+                      Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(teamStanding.leaguePointsWon.toString()),
                         Text(
-                          "${teamStanding.wins}.${teamStanding.draws}:${teamStanding.losses}",
+                          "${teamStanding.wins}:${teamStanding.draws}:${teamStanding.losses}",
                         ),
                       ],
                     ),
+                    ],
                   ),
+                  selected: teamStanding.teamName == teamName,
                 ),
               )
               .toList(),

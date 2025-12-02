@@ -4,13 +4,13 @@ import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/http.dart';
 
 class TeamInspectorNextMatches extends StatefulWidget {
-  final String nextMatchesUrl;
+  final String matchOverviewUrl;
   final String teamName;
 
   const TeamInspectorNextMatches({
     super.key,
     required this.teamName,
-    required this.nextMatchesUrl,
+    required this.matchOverviewUrl,
   });
 
   @override
@@ -27,11 +27,10 @@ class _TeamInspectorNextMatchesState extends State<TeamInspectorNextMatches> {
 
   @override
   Widget build(BuildContext context) {
-    final String matchOverviewUrl = widget.nextMatchesUrl;
 
     return FutureBuilder<List<FutureMatch>>(
       future: NextMatchesService.getNextMatchesForTeam(
-        matchOverviewUrl,
+        widget.matchOverviewUrl,
         widget.teamName,
       ),
       builder: (context, snapshot) {

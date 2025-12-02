@@ -12,7 +12,7 @@ final List<TabItem> tabs = [
   ),
   TabItem(
     button: Tab(icon: Icon(Icons.event), text: "Nächste"),
-    viewBuilder: (club) => TeamInspectorNextMatches(nextMatchesUrl: club.matchesUrl, teamName: club.name),
+    viewBuilder: (club) => TeamInspectorNextMatches(matchOverviewUrl: club.matchesUrl, teamName: club.name),
   ),
   TabItem(
     button: Tab(icon: Icon(Icons.history), text: "Ergebnisse"),

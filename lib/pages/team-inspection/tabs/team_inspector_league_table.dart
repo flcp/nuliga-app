@@ -39,29 +39,35 @@ class TeamInspectorLeagueTable extends StatelessWidget {
           children: teamStandings
               .map(
                 (teamStanding) => ListTile(
+                  contentPadding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
                   title: Row(
+                    
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                    "${teamStanding.rank.toString()}.",
-                    style: const TextStyle(fontSize: fontSize),
-                  ),
-                      Text(
-                        teamStanding.teamName,
-                        style: const TextStyle(
-                          fontSize: fontSize,
-                        ),
-                      ),
                       Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(teamStanding.leaguePointsWon.toString()),
-                        Text(
-                          "${teamStanding.wins}:${teamStanding.draws}:${teamStanding.losses}",
-                        ),
-                      ],
-                    ),
+                        spacing: 8,
+                        children: [
+                          Text(
+                            "${teamStanding.rank.toString()}.",
+                            style: const TextStyle(fontSize: fontSize),
+                          ),
+                          Text(
+                            teamStanding.teamName,
+                            style: const TextStyle(fontSize: fontSize),
+                          ),
+                        ],
+                      ),
+
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: 24,
+                        children: [
+                          Text(teamStanding.leaguePointsWon.toString()),
+                          Text(
+                            "${teamStanding.wins}:${teamStanding.draws}:${teamStanding.losses}",
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                   selected: teamStanding.teamName == teamName,

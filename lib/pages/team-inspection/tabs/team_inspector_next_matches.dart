@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
+import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http.dart';
 
 class TeamInspectorNextMatches extends StatefulWidget {
@@ -104,23 +105,5 @@ class _TeamInspectorNextMatchesState extends State<TeamInspectorNextMatches> {
     return match.time.day == nextMatchTime.day &&
         match.time.month == nextMatchTime.month &&
         match.time.year == nextMatchTime.year;
-  }
-
-  List<FutureMatch> getDataOrEmptyList(
-    AsyncSnapshot<List<FutureMatch>> snapshot,
-  ) {
-    if (snapshot.hasError) {
-      return [];
-    }
-
-    if (snapshot.data == null) {
-      return [];
-    }
-
-    if (snapshot.data!.isEmpty) {
-      return [];
-    }
-
-    return snapshot.data!;
   }
 }

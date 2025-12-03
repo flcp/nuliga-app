@@ -21,6 +21,7 @@ class TeamInspectorLeagueTable extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
+        // todo gleiches vorgehen wie im anderen tab
         if (snapshot.hasError) {
           return Center(child: Text("Error: ${snapshot.error}"));
         }
@@ -41,20 +42,13 @@ class TeamInspectorLeagueTable extends StatelessWidget {
                 (teamStanding) => ListTile(
                   contentPadding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
                   title: Row(
-                    
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         spacing: 8,
                         children: [
-                          Text(
-                            "${teamStanding.rank.toString()}.",
-                            style: const TextStyle(fontSize: fontSize),
-                          ),
-                          Text(
-                            teamStanding.teamName,
-                            style: const TextStyle(fontSize: fontSize),
-                          ),
+                          Text("${teamStanding.rank.toString()}."),
+                          Text(teamStanding.teamName),
                         ],
                       ),
 

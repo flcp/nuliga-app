@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/pages/shared/loading_indicator.dart';
+import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http.dart';
@@ -34,8 +36,7 @@ class _NextMatchesListState extends State<NextMatchesList> {
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          //todo: extract
-          return const Center(child: CircularProgressIndicator());
+          return LoadingIndicator();
         }
 
         final nextMatches = getDataOrEmptyList(snapshot);
@@ -44,12 +45,7 @@ class _NextMatchesListState extends State<NextMatchesList> {
           onRefresh: () => refresh(),
           child: Stack(
             children: [
-              if (nextMatches.isEmpty)
-                Center(
-                  child: Text(
-                    "Nothing to display. Try refreshing or another URL",
-                  ),
-                ),
+              if (nextMatches.isEmpty) NothingToDisplayIndicator(),
 
               ListView(
                 children: nextMatches

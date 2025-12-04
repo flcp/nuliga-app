@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/league_team_standing.dart';
-import '../../../services/league_table_service.dart';
+import '../../services/league_table_service.dart';
 
 class TeamInspectorLeagueTable extends StatelessWidget {
   final String url;

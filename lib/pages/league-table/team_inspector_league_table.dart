@@ -21,11 +21,12 @@ class TeamInspectorLeagueTable extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        // todo gleiches vorgehen wie im anderen tab
+        // todo: gleiches vorgehen wie im anderen tab
         if (snapshot.hasError) {
           return Center(child: Text("Error: ${snapshot.error}"));
         }
 
+        // todo: refresh
         final teamStandings = snapshot.data ?? [];
 
         if (teamStandings.isEmpty) {

@@ -35,7 +35,7 @@ class _TeamInspectorNextMatchesState extends State<TeamInspectorNextMatches> {
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          //todo extract
+          //todo: extract
           return const Center(child: CircularProgressIndicator());
         }
 

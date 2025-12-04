@@ -4,7 +4,7 @@ class FutureMatch {
   String opponentTeam;
   String location;
 
-  // todo anderer konstruktor
+  // todo: anderer konstruktor
   FutureMatch(
     this.time,
     this.homeTeam,

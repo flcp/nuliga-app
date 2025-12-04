@@ -18,6 +18,11 @@ class FollowedTeamsProvider extends ChangeNotifier {
       _selectedTeamId = _followedTeams.first.id;
     }
   }
+
+  void selectTeam(ClubNavigationItem team) {
+    _selectedTeamId = team.id;
+    notifyListeners();
+  }
 }
 
 final navigationItems = [

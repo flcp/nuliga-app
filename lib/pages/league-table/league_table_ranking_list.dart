@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/league_team_standing.dart';
 import '../../services/league_table_service.dart';
 
-class TeamInspectorLeagueTable extends StatelessWidget {
+class LeagueTableRankingList extends StatelessWidget {
   final String url;
   final String teamName;
 
-  const TeamInspectorLeagueTable({
+  const LeagueTableRankingList({
     required this.url,
     required this.teamName,
     super.key,

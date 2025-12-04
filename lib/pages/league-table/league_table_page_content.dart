@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/pages/next-matches/team_inspector_next_matches.dart';
+import 'package:nuliga_app/pages/league-table/league_table_ranking_list.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:provider/provider.dart';
 
-class NextMatchesContent extends StatelessWidget {
-  const NextMatchesContent({super.key});
+class LeagueTablePageContent extends StatelessWidget {
+  const LeagueTablePageContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,9 @@ class NextMatchesContent extends StatelessWidget {
     }
 
     return Expanded(
-      child: TeamInspectorNextMatches(
+      child: LeagueTableRankingList(
         teamName: selectedTeam!.name,
-        matchOverviewUrl: selectedTeam.matchesUrl,
+        url: selectedTeam.tableUrl,
       ),
     );
   }

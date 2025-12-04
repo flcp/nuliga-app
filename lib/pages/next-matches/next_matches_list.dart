@@ -4,22 +4,21 @@ import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http.dart';
 
-class TeamInspectorNextMatches extends StatefulWidget {
+class NextMatchesList extends StatefulWidget {
   final String matchOverviewUrl;
   final String teamName;
 
-  const TeamInspectorNextMatches({
+  const NextMatchesList({
     super.key,
     required this.teamName,
     required this.matchOverviewUrl,
   });
 
   @override
-  State<TeamInspectorNextMatches> createState() =>
-      _TeamInspectorNextMatchesState();
+  State<NextMatchesList> createState() => _NextMatchesListState();
 }
 
-class _TeamInspectorNextMatchesState extends State<TeamInspectorNextMatches> {
+class _NextMatchesListState extends State<NextMatchesList> {
   Future<void> refresh() {
     clearCache();
     setState(() {});

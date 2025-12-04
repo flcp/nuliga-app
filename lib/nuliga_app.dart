@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/mockPage.dart';
-import 'package:nuliga_app/pages/league_table.dart';
-import 'package:nuliga_app/pages/next_matches.dart';
+import 'package:nuliga_app/pages/league_table_page.dart';
+import 'package:nuliga_app/pages/next_matches_page.dart';
 
 class NuligaApp extends StatefulWidget {
   const NuligaApp({super.key});
@@ -13,7 +13,12 @@ class NuligaApp extends StatefulWidget {
 class _NuligaAppState extends State<NuligaApp> {
   int _selectedIndex = 0;
 
-  static const _widgets = [MockPage(), LeagueTable(), NextMatches(), Center()];
+  static const _widgets = [
+    MockPage(),
+    LeagueTablePage(),
+    NextMatchesPage(),
+    Center(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {

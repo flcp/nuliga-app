@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/nuliga_app.dart';
+import 'package:nuliga_app/services/followed_teams_provider.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(const BottomNavigationBarExampleApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class BottomNavigationBarExampleApp extends StatelessWidget {
-  const BottomNavigationBarExampleApp({super.key});
+  final followedTeamsProvider = FollowedTeamsProvider();
+  await followedTeamsProvider.initialize();
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(home: NuligaApp());
-  }
+  runApp(
+    ChangeNotifierProvider.value(
+      value: followedTeamsProvider,
+      child: const MaterialApp(home: NuligaApp()),
+    ),
+  );
 }

@@ -34,8 +34,6 @@ class TeamInspectorLeagueTable extends StatelessWidget {
           );
         }
 
-        const fontSize = 16.0;
-
         return ListView(
           children: teamStandings
               .map(

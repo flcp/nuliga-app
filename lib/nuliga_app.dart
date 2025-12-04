@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/mockPage.dart';
+import 'package:nuliga_app/pages/league_table.dart';
 import 'package:nuliga_app/pages/team-inspection/team_inspector.dart';
 
 class NuligaApp extends StatefulWidget {
@@ -12,7 +13,7 @@ class NuligaApp extends StatefulWidget {
 class _NuligaAppState extends State<NuligaApp> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgets = <Widget>[MockPage(), TeamInspector()];
+  static const _widgets = [MockPage(), TeamInspector(), LeagueTable()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -23,14 +24,18 @@ class _NuligaAppState extends State<NuligaApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: _widgets.elementAt(_selectedIndex)),
+      body: _widgets.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.wrong_location),
             label: 'Mock',
           ),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.format_list_numbered),
+            label: 'Tabelle',
+          ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

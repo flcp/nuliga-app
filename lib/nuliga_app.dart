@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/mockPage.dart';
 import 'package:nuliga_app/pages/league_table.dart';
+import 'package:nuliga_app/pages/next_matches.dart';
 import 'package:nuliga_app/pages/team-inspection/team_inspector.dart';
 
 class NuligaApp extends StatefulWidget {
@@ -13,7 +14,13 @@ class NuligaApp extends StatefulWidget {
 class _NuligaAppState extends State<NuligaApp> {
   int _selectedIndex = 0;
 
-  static const _widgets = [MockPage(), TeamInspector(), LeagueTable()];
+  static const _widgets = [
+    MockPage(),
+    TeamInspector(),
+    LeagueTable(),
+    NextMatches(),
+    Center(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -26,15 +33,21 @@ class _NuligaAppState extends State<NuligaApp> {
     return Scaffold(
       body: _widgets.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.wrong_location),
-            label: 'Mock',
+            label: "Mock",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
             icon: Icon(Icons.format_list_numbered),
-            label: 'Tabelle',
+            label: "Tabelle",
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.event), label: "Nächste"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            label: "Ergebnisse",
           ),
         ],
         currentIndex: _selectedIndex,

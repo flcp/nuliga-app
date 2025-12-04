@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/club_navigation_item.dart';
 import 'package:nuliga_app/model/tab_item.dart';
 import 'package:nuliga_app/pages/league-table/team_inspector_league_table.dart';
-import 'package:nuliga_app/pages/team-inspection/tabs/team_inspector_next_matches.dart';
+import 'package:nuliga_app/pages/next-matches/team_inspector_next_matches.dart';
 
 final List<TabItem> tabs = [
   TabItem(

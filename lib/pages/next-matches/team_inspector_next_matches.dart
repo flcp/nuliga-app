@@ -28,7 +28,6 @@ class _TeamInspectorNextMatchesState extends State<TeamInspectorNextMatches> {
 
   @override
   Widget build(BuildContext context) {
-
     return FutureBuilder<List<FutureMatch>>(
       future: NextMatchesService.getNextMatchesForTeam(
         widget.matchOverviewUrl,

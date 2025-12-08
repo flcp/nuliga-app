@@ -8,7 +8,7 @@ class NextMatchesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Tabelle")),
+      appBar: AppBar(title: Text("Nächste Matches")),
       body: Column(
         children: [FollowedTeamNavigation(), NextMatchesPageContent()],
       ),

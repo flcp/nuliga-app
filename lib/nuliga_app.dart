@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/mockPage.dart';
+import 'package:nuliga_app/pages/last_matches_page.dart';
 import 'package:nuliga_app/pages/league_table_page.dart';
 import 'package:nuliga_app/pages/next_matches_page.dart';
 
@@ -17,7 +18,7 @@ class _NuligaAppState extends State<NuligaApp> {
     MockPage(),
     LeagueTablePage(),
     NextMatchesPage(),
-    Center(),
+    LastMatchesPage(),
   ];
 
   void _onItemTapped(int index) {

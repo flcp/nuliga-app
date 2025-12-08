@@ -34,5 +34,14 @@ void main() {
 
       expect(result[1].time, DateTime(2025, 10, 11, 14, 0));
     });
+
+    test('with invalid file input returns empty list', () async {
+      final file = File('test/assets/last-matches/otherFormat.json');
+      final html = await file.readAsString();
+
+      final result = LastMatchesOverviewParser().getMatchResultEntries(html);
+
+      expect(result.length, 0);
+    });
   });
 }

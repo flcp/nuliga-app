@@ -47,28 +47,17 @@ class _LeagueTableRankingListState extends State<LeagueTableRankingList> {
                 children: teamStandings
                     .map(
                       (teamStanding) => ListTile(
-                        contentPadding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
-                              spacing: 8,
+                              spacing: 16,
                               children: [
                                 Text("${teamStanding.rank.toString()}."),
                                 Text(teamStanding.teamName),
                               ],
                             ),
-
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              spacing: 24,
-                              children: [
-                                Text(teamStanding.leaguePointsWon.toString()),
-                                Text(
-                                  "${teamStanding.wins}:${teamStanding.draws}:${teamStanding.losses}",
-                                ),
-                              ],
-                            ),
+                            Text(teamStanding.leaguePointsWon.toString()),
                           ],
                         ),
                         selected: teamStanding.teamName == widget.teamName,

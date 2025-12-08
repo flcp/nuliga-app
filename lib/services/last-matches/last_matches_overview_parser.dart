@@ -3,7 +3,7 @@ import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
 
 class LastMatchesOverviewParser {
-  List<MatchResult> getEntriesAsMatchResults(String htmlContent) {
+  List<MatchResult> getMatchResultEntries(String htmlContent) {
     if (htmlContent.trim().isEmpty) {
       print("htmlcontent empty");
       return [];

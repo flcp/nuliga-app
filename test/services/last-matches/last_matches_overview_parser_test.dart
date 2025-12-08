@@ -9,13 +9,30 @@ void main() {
       final file = File('test/assets/last-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = LastMatchesOverviewParser().getEntriesAsMatchResults(html);
+      final result = LastMatchesOverviewParser().getMatchResultEntries(html);
 
       expect(result.length, 20);
       expect(result[0].homeTeam, "Fortuna Schwetzingen");
       expect(result[0].opponentTeam, "TSG Weinheim");
       expect(result[0].homeTeamMatchesWon, 7);
       expect(result[0].opponentTeamMatchesWon, 1);
+    });
+
+    test('parses sample file and parses date and time correctly', () async {
+      final file = File('test/assets/last-matches/test-page.html');
+      final html = await file.readAsString();
+
+      final result = LastMatchesOverviewParser().getMatchResultEntries(html);
+
+      expect(result[0].time, DateTime(2025, 10, 11, 14, 0));
+    });
+    test('parses sample file and back fills date from previous line', () async {
+      final file = File('test/assets/last-matches/test-page.html');
+      final html = await file.readAsString();
+
+      final result = LastMatchesOverviewParser().getMatchResultEntries(html);
+
+      expect(result[1].time, DateTime(2025, 10, 11, 14, 0));
     });
   });
 }

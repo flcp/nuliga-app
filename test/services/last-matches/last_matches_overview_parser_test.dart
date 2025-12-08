@@ -34,7 +34,9 @@ void main() {
 
       expect(result[1].time, DateTime(2025, 10, 11, 14, 0));
     });
+  });
 
+  group('LastMatchesOverviewParser with invalid file input', () {
     test('with invalid file input returns empty list', () async {
       final file = File('test/assets/last-matches/otherFormat.json');
       final html = await file.readAsString();
@@ -43,5 +45,9 @@ void main() {
 
       expect(result.length, 0);
     });
+  });
+
+  group('LastMatchesOverviewParser with no match links', () {
+    // TODO: add functionality and add tests
   });
 }

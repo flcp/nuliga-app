@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-Duration cooldown = Duration(seconds: 300);
+Duration cooldown = Duration(seconds: 30);
 
 class CachedResponse {
   final DateTime lastRequestTime;
@@ -13,17 +13,19 @@ class CachedResponse {
 Map<String, CachedResponse> cache = {};
 
 Future<void> clearCache() {
-  cache.removeWhere((_,_) => true);
+  cache.removeWhere((_, _) => true);
   return Future.value();
 }
 
 Future<String> fetchWebsiteCached(String url) async {
   // TODO: REMOVE
-  var mockedWebsite = await fetchWebsiteMocked(url);
-  if (mockedWebsite.isNotEmpty) {
-    return mockedWebsite;
+  var loadSSC1FromFiles = false;
+  if (loadSSC1FromFiles) {
+    var mockedWebsite = await fetchWebsiteMocked(url);
+    if (mockedWebsite.isNotEmpty) {
+      return mockedWebsite;
+    }
   }
-  
 
   final now = DateTime.now();
   final previousResponse = cache[url];
@@ -40,15 +42,19 @@ Future<String> fetchWebsiteCached(String url) async {
   return responseBody;
 }
 
-
 Future<String> fetchWebsiteMocked(String url) async {
-
-  if (url == "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35307") {
+  if (url ==
+      "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35307") {
     print("serving league overview from file");
-    return await rootBundle.loadString("lib/services/shared/assets/league_overview.html");
-  } else if (url == "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35307") {
+    return await rootBundle.loadString(
+      "lib/services/shared/assets/league_overview.html",
+    );
+  } else if (url ==
+      "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35307") {
     print("serving matches overview from file");
-    return await rootBundle.loadString("lib/services/shared/assets/all_matches.html");
+    return await rootBundle.loadString(
+      "lib/services/shared/assets/all_matches.html",
+    );
   }
   return "";
 }

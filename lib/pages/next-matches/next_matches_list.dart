@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/pages/next-matches/next_matches_list_item.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_list_location_indicator.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
@@ -51,30 +52,11 @@ class _NextMatchesListState extends State<NextMatchesList> {
               ListView(
                 children: nextMatches
                     .map(
-                      (match) => ListTile(
-                        selected: isOnNextMatchDay(match, nextMatches),
-                        subtitle: Row(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              child: Text(
-                                "${match.time.day}.${match.time.month}.${match.time.year}",
-                              ),
-                            ),
-                            Text(
-                              "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
-                            ),
-                          ],
-                        ),
-                        title: Text(
-                          match.homeTeam == widget.teamName
-                              ? match.opponentTeam
-                              : match.homeTeam,
-                        ),
-                        trailing: LocationIndicator(
-                          match: match,
-                          matchOverviewUrl: widget.matchOverviewUrl,
-                        ),
+                      (match) => NextMatchesListItem(
+                        match: match,
+                        hometeam: widget.teamName,
+                        matchOverviewUrl: widget.matchOverviewUrl,
+                        highlighted: isOnNextMatchDay(match, nextMatches),
                       ),
                     )
                     .toList(),

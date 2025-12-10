@@ -1,5 +1,7 @@
 import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/services/next-matches/match_location_repository.dart';
 import 'package:nuliga_app/services/next-matches/next_matches_repository.dart';
+import 'package:nuliga_app/services/shared/http.dart';
 
 class NextMatchesService {
   static Future<List<FutureMatch>> getNextMatchesForTeam(
@@ -24,5 +26,23 @@ class NextMatchesService {
     return allMatches
         .where((match) => match.time.isAfter(todayAtMidnight))
         .toList();
+  }
+
+  static Future<String> getLocationMapsLink(
+    FutureMatch match,
+    String matchOverviewUrl,
+  ) async {
+    if (match.locationUrl.isEmpty) return Future.value("");
+
+    final url = getBaseUrl(matchOverviewUrl) + match.locationUrl;
+    final locationAdress = await MatchLocationRepository.getMatchLocation(url);
+
+    return createGoogleMapsLink(locationAdress);
+  }
+
+  static String createGoogleMapsLink(String address) {
+    final encodedAdress = Uri.encodeComponent(address);
+
+    return "https://www.google.com/maps/search/?api=1&query=${encodedAdress}";
   }
 }

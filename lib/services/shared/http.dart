@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-Duration cooldown = Duration(seconds: 30);
+Duration cooldown = Duration(seconds: 120);
 
 class CachedResponse {
   final DateTime lastRequestTime;

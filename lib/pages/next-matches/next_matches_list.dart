@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/pages/next-matches/next_matches_list_location_indicator.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
@@ -70,11 +71,9 @@ class _NextMatchesListState extends State<NextMatchesList> {
                               ? match.opponentTeam
                               : match.homeTeam,
                         ),
-                        trailing: IconButton(
-                          icon: Icon(Icons.directions),
-                          onPressed: () {
-                            print(match.locationUrl);
-                          },
+                        trailing: LocationIndicator(
+                          match: match,
+                          matchOverviewUrl: widget.matchOverviewUrl,
                         ),
                       ),
                     )

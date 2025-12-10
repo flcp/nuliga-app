@@ -4,6 +4,8 @@ import 'package:html/parser.dart' as parser;
 
 class MatchLocationParser {
   static String getLocationAdress(String html) {
+    if (html.trim().isEmpty) return "";
+
     final document = parser.parse(html);
 
     // Find the <h2> that contains "Hallenadresse"

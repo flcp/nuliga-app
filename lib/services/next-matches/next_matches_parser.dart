@@ -1,4 +1,3 @@
-import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
 import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
@@ -48,11 +47,20 @@ class NextMatchesParser {
         cells[Parser.matchesTimeIndex],
       );
 
+      final locationUrl = Parser.getLinkOrEmpty(
+        cells,
+        Parser.matchesLocationIndex,
+      );
+
       result.add(
         FutureMatch(
-          dateTime,
-          Parser.getCellOrEmpty(cells, Parser.matchesHomeTeamIndex),
-          Parser.getCellOrEmpty(cells, Parser.matchesOpponentTeamIndex),
+          time: dateTime,
+          locationUrl: locationUrl,
+          homeTeam: Parser.getCellOrEmpty(cells, Parser.matchesHomeTeamIndex),
+          opponentTeam: Parser.getCellOrEmpty(
+            cells,
+            Parser.matchesOpponentTeamIndex,
+          ),
         ),
       );
     }

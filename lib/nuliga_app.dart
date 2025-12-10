@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/mockPage.dart';
 import 'package:nuliga_app/pages/last_matches_page.dart';
 import 'package:nuliga_app/pages/league_table_page.dart';
 import 'package:nuliga_app/pages/next_matches_page.dart';
@@ -15,9 +14,8 @@ class _NuligaAppState extends State<NuligaApp> {
   int _selectedIndex = 0;
 
   static const _widgets = [
-    MockPage(),
-    LeagueTablePage(),
     NextMatchesPage(),
+    LeagueTablePage(),
     LastMatchesPage(),
   ];
 
@@ -34,15 +32,12 @@ class _NuligaAppState extends State<NuligaApp> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.wrong_location),
-            label: "Mock",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.event), label: "Nächste"),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.format_list_numbered),
             label: "Tabelle",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.event), label: "Nächste"),
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
             label: "Ergebnisse",

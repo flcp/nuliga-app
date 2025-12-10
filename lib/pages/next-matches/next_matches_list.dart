@@ -52,32 +52,29 @@ class _NextMatchesListState extends State<NextMatchesList> {
                     .map(
                       (match) => ListTile(
                         selected: isOnNextMatchDay(match, nextMatches),
-                        leading: SizedBox(
-                          width: 90,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
+                        subtitle: Row(
+                          children: [
+                            SizedBox(
+                              width: 100,
+                              child: Text(
                                 "${match.time.day}.${match.time.month}.${match.time.year}",
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
                               ),
-                              Text(
-                                "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
+                            ),
+                          ],
                         ),
                         title: Text(
                           match.homeTeam == widget.teamName
                               ? match.opponentTeam
                               : match.homeTeam,
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.directions),
+                          onPressed: () {
+                            print(match.locationUrl);
+                          },
                         ),
                       ),
                     )

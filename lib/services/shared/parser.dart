@@ -65,4 +65,10 @@ class Parser {
 
     return cells[index].text.trim();
   }
+
+  static String getLinkOrEmpty(List<Element> cells, int index) {
+    if (index >= cells.length) return "";
+
+    return cells[index].querySelector('a')?.attributes['href'] ?? "";
+  }
 }

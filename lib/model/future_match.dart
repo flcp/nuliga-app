@@ -2,13 +2,12 @@ class FutureMatch {
   DateTime time;
   String homeTeam;
   String opponentTeam;
-  String location;
+  String locationUrl;
 
-  // todo: anderer konstruktor
-  FutureMatch(
-    this.time,
-    this.homeTeam,
-    this.opponentTeam, [
-    this.location = "",
-  ]);
+  FutureMatch({
+    required this.time,
+    required this.homeTeam,
+    required this.opponentTeam,
+    this.locationUrl = "",
+  });
 }

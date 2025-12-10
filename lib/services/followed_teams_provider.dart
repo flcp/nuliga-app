@@ -3,7 +3,8 @@ import 'package:nuliga_app/model/followed_club.dart';
 
 class FollowedTeamsProvider extends ChangeNotifier {
   late List<FollowedClub> _followedTeams = [];
-  late String? _selectedTeamId;
+  // ignore: avoid_init_to_null
+  late String? _selectedTeamId = null;
 
   List<FollowedClub> get followedTeams => _followedTeams;
 
@@ -17,10 +18,6 @@ class FollowedTeamsProvider extends ChangeNotifier {
 
   Future<void> initialize() async {
     _followedTeams = navigationItems;
-
-    if (_followedTeams.isNotEmpty) {
-      _selectedTeamId = _followedTeams.first.id;
-    }
   }
 
   void selectTeam(FollowedClub? team) {

@@ -18,7 +18,7 @@ class LastMatchesPageContent extends StatelessWidget {
 
     return Expanded(
       child: LastMatchesList(
-        teamName: selectedTeam!.name,
+        teamName: selectedTeam.name,
         matchOverviewUrl: selectedTeam.matchesUrl,
       ),
     );

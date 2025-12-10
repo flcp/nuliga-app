@@ -18,7 +18,7 @@ class LeagueTablePageContent extends StatelessWidget {
 
     return Expanded(
       child: LeagueTableRankingList(
-        teamName: selectedTeam!.name,
+        teamName: selectedTeam.name,
         url: selectedTeam.tableUrl,
       ),
     );

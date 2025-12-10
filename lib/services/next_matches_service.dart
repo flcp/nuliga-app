@@ -43,6 +43,6 @@ class NextMatchesService {
   static String createGoogleMapsLink(String address) {
     final encodedAdress = Uri.encodeComponent(address);
 
-    return "https://www.google.com/maps/search/?api=1&query=${encodedAdress}";
+    return "https://www.google.com/maps/search/?api=1&query=$encodedAdress";
   }
 }

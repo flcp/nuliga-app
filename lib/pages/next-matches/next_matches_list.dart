@@ -55,7 +55,10 @@ class _NextMatchesListState extends State<NextMatchesList> {
                         match: match,
                         hometeam: widget.teamName,
                         matchOverviewUrl: widget.matchOverviewUrl,
-                        highlighted: isOnNextMatchDay(match, nextMatches),
+                        highlighted: NextMatchesService.isOnNextMatchDay(
+                          match,
+                          nextMatches,
+                        ),
                       ),
                     )
                     .toList(),
@@ -65,16 +68,5 @@ class _NextMatchesListState extends State<NextMatchesList> {
         );
       },
     );
-  }
-
-  bool isOnNextMatchDay(FutureMatch match, List<FutureMatch> nextMatches) {
-    final nextMatchTime = nextMatches
-        .map((m) => m.time)
-        .toList()
-        .reduce((min, e) => e.isBefore(min) ? e : min);
-
-    return match.time.day == nextMatchTime.day &&
-        match.time.month == nextMatchTime.month &&
-        match.time.year == nextMatchTime.year;
   }
 }

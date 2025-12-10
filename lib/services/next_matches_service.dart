@@ -4,6 +4,20 @@ import 'package:nuliga_app/services/next-matches/next_matches_repository.dart';
 import 'package:nuliga_app/services/shared/http.dart';
 
 class NextMatchesService {
+  static Future<List<FutureMatch>> getNextTwoMatches(
+    String matchesUrl,
+    String name,
+  ) async {
+    var allMatches = await NextMatchesRepository.getNextMatches(matchesUrl);
+    var matchesForTeam = allMatches
+        .where((match) => match.homeTeam == name || match.opponentTeam == name)
+        .toList();
+    var matchesForTeamTodayOrLater = _getMatchesTodayOrLater(matchesForTeam);
+    return matchesForTeamTodayOrLater
+        .where((match) => isOnNextMatchDay(match, matchesForTeamTodayOrLater))
+        .toList();
+  }
+
   static Future<List<FutureMatch>> getNextMatchesForTeam(
     String matchupsUrl,
     String teamName,
@@ -15,10 +29,10 @@ class NextMatchesService {
               match.homeTeam == teamName || match.opponentTeam == teamName,
         )
         .toList();
-    return getMatchesTodayOrLater(matchesForTeam);
+    return _getMatchesTodayOrLater(matchesForTeam);
   }
 
-  static List<FutureMatch> getMatchesTodayOrLater(
+  static List<FutureMatch> _getMatchesTodayOrLater(
     List<FutureMatch> allMatches,
   ) {
     final now = DateTime.now();
@@ -35,14 +49,28 @@ class NextMatchesService {
     if (match.locationUrl.isEmpty) return Future.value("");
 
     final url = getBaseUrl(matchOverviewUrl) + match.locationUrl;
-    final locationAdress = await MatchLocationRepository.getMatchLocation(url);
+    final locationAddress = await MatchLocationRepository.getMatchLocation(url);
 
-    return createGoogleMapsLink(locationAdress);
+    return _createGoogleMapsLink(locationAddress);
   }
 
-  static String createGoogleMapsLink(String address) {
-    final encodedAdress = Uri.encodeComponent(address);
+  static String _createGoogleMapsLink(String address) {
+    final encodedAddress = Uri.encodeComponent(address);
 
-    return "https://www.google.com/maps/search/?api=1&query=$encodedAdress";
+    return "https://www.google.com/maps/search/?api=1&query=$encodedAddress";
+  }
+
+  static bool isOnNextMatchDay(
+    FutureMatch match,
+    List<FutureMatch> nextMatches,
+  ) {
+    final nextMatchTime = nextMatches
+        .map((m) => m.time)
+        .toList()
+        .reduce((min, e) => e.isBefore(min) ? e : min);
+
+    return match.time.day == nextMatchTime.day &&
+        match.time.month == nextMatchTime.month &&
+        match.time.year == nextMatchTime.year;
   }
 }

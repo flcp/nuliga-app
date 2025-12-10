@@ -13,7 +13,7 @@ class NextMatchesPageContent extends StatelessWidget {
         .selectedFollowedTeam;
 
     if (selectedTeam == null) {
-      Center(child: Text("Keine Teams gefollowed oder ausgewählt."));
+      return Center(child: Text("Keine Teams ausgewählt."));
     }
 
     return Expanded(

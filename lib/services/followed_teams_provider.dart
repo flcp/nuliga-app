@@ -8,6 +8,10 @@ class FollowedTeamsProvider extends ChangeNotifier {
   List<ClubNavigationItem> get followedTeams => _followedTeams;
 
   ClubNavigationItem? get selectedFollowedTeam {
+    if (_selectedTeamId == null) {
+      return null;
+    }
+
     return _followedTeams.firstWhere((c) => c.id == _selectedTeamId);
   }
 
@@ -19,8 +23,8 @@ class FollowedTeamsProvider extends ChangeNotifier {
     }
   }
 
-  void selectTeam(ClubNavigationItem team) {
-    _selectedTeamId = team.id;
+  void selectTeam(ClubNavigationItem? team) {
+    _selectedTeamId = team?.id;
     notifyListeners();
   }
 }

@@ -12,8 +12,8 @@ class FollowedTeamNavigation extends StatelessWidget {
         .watch<FollowedTeamsProvider>()
         .selectedFollowedTeam;
 
-    if (followedTeams.isEmpty || selectedFollowedTeam == null) {
-      return const Center(child: Text('No club selected'));
+    if (followedTeams.isEmpty) {
+      return const Center(child: Text('No club followed'));
     }
 
     return SizedBox(
@@ -27,9 +27,16 @@ class FollowedTeamNavigation extends StatelessWidget {
             child: ChoiceChip(
               label: Text(team.name),
               selected: team == selectedFollowedTeam,
-              onSelected: (_) {
-                context.read<FollowedTeamsProvider>().selectTeam(team);
+              onSelected: (selectionActivated) {
+                if (selectionActivated) {
+                  context.read<FollowedTeamsProvider>().selectTeam(team);
+                } else {
+                  context.read<FollowedTeamsProvider>().selectTeam(null);
+                }
               },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
             ),
           );
         }).toList(),

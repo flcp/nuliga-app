@@ -22,12 +22,16 @@ class NextMatchesListItem extends StatelessWidget {
       selected: highlighted,
       subtitle: Row(
         children: [
+          const Icon(Icons.calendar_today, size: 16.0, color: Colors.grey),
+          const SizedBox(width: 8.0),
           SizedBox(
-            width: 100,
+            width: 90,
             child: Text(
               "${match.time.day}.${match.time.month}.${match.time.year}",
             ),
           ),
+          const Icon(Icons.access_time, size: 16.0, color: Colors.grey),
+          const SizedBox(width: 8.0),
           Text(
             "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
           ),
@@ -35,6 +39,9 @@ class NextMatchesListItem extends StatelessWidget {
       ),
       title: Text(
         match.homeTeam == hometeam ? match.opponentTeam : match.homeTeam,
+        style: TextStyle(
+          fontWeight: highlighted ? FontWeight.bold : FontWeight.normal,
+        ),
       ),
       trailing: LocationIndicator(
         match: match,

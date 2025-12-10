@@ -25,7 +25,7 @@ class FollowedTeamNavigation extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: ChoiceChip(
-              label: Text(team.name),
+              label: Text(team.shortName),
               selected: team == selectedFollowedTeam,
               onSelected: (selectionActivated) {
                 if (selectionActivated) {

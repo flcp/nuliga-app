@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/club_navigation_item.dart';
+import 'package:nuliga_app/model/followed_club.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ActionBarOpenLinkButton extends StatelessWidget {
@@ -9,8 +9,8 @@ class ActionBarOpenLinkButton extends StatelessWidget {
     required this.urlAccessor,
   });
 
-  final ClubNavigationItem? selectedFollowedTeam;
-  final String Function(ClubNavigationItem) urlAccessor;
+  final FollowedClub? selectedFollowedTeam;
+  final String Function(FollowedClub) urlAccessor;
 
   @override
   Widget build(BuildContext context) {

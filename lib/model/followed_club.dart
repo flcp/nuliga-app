@@ -1,11 +1,11 @@
-class ClubNavigationItem {
+class FollowedClub {
   final String id;
   final String name;
   final String shortName;
   final String tableUrl;
   final String matchesUrl;
 
-  ClubNavigationItem({
+  FollowedClub({
     required this.id,
     required this.name,
     required this.shortName,

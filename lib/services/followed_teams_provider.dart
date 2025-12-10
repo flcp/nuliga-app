@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/club_navigation_item.dart';
+import 'package:nuliga_app/model/followed_club.dart';
 
 class FollowedTeamsProvider extends ChangeNotifier {
-  late List<ClubNavigationItem> _followedTeams = [];
+  late List<FollowedClub> _followedTeams = [];
   late String? _selectedTeamId;
 
-  List<ClubNavigationItem> get followedTeams => _followedTeams;
+  List<FollowedClub> get followedTeams => _followedTeams;
 
-  ClubNavigationItem? get selectedFollowedTeam {
+  FollowedClub? get selectedFollowedTeam {
     if (_selectedTeamId == null) {
       return null;
     }
@@ -23,14 +23,14 @@ class FollowedTeamsProvider extends ChangeNotifier {
     }
   }
 
-  void selectTeam(ClubNavigationItem? team) {
+  void selectTeam(FollowedClub? team) {
     _selectedTeamId = team?.id;
     notifyListeners();
   }
 }
 
 final navigationItems = [
-  ClubNavigationItem(
+  FollowedClub(
     id: "1",
     name: "SSC Karlsruhe",
     shortName: "SSC I",
@@ -39,7 +39,7 @@ final navigationItems = [
     matchesUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35307",
   ),
-  ClubNavigationItem(
+  FollowedClub(
     id: "2",
     name: "SSC Karlsruhe II",
     shortName: "SSC II",
@@ -48,7 +48,7 @@ final navigationItems = [
     matchesUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35309",
   ),
-  ClubNavigationItem(
+  FollowedClub(
     id: "3",
     name: "SSC Karlsruhe III",
     shortName: "SSC III",
@@ -57,7 +57,7 @@ final navigationItems = [
     matchesUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35309",
   ),
-  ClubNavigationItem(
+  FollowedClub(
     id: "4",
     name: "SSC Karlsruhe IV",
     shortName: "SSC IV",

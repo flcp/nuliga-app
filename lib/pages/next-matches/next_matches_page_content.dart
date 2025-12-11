@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/pages/followed_team_navigation.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_list.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_summary_list.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
@@ -18,11 +19,16 @@ class NextMatchesPageContent extends StatelessWidget {
       return Expanded(child: NextMatchesSummaryList(teams: followedTeams));
     }
 
-    return Expanded(
-      child: NextMatchesList(
-        teamName: selectedTeam.name,
-        matchOverviewUrl: selectedTeam.matchesUrl,
-      ),
+    return Column(
+      children: [
+        FollowedTeamNavigation(),
+        Expanded(
+          child: NextMatchesList(
+            teamName: selectedTeam.name,
+            matchOverviewUrl: selectedTeam.matchesUrl,
+          ),
+        ),
+      ],
     );
   }
 }

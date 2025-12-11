@@ -10,24 +10,42 @@ class NextMatchesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: das hier in die content page reinreichen?
-    final selectedFollowedTeam = context
-        .watch<FollowedTeamsProvider>()
-        .selectedFollowedTeam;
+    final provider = context.watch<FollowedTeamsProvider>();
+
+    // Padding(
+    //         padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+    //         child: ChoiceChip(
+    //           labelPadding: const EdgeInsets.symmetric(horizontal: 0),
+    //           label: Icon(
+    //             Icons.chevron_left,
+    //             color: Theme.of(context).colorScheme.onSecondaryContainer,
+    //           ),
+    //           onSelected: (_) {
+    //             provider.selectTeam(null);
+    //           },
+    //           shape: RoundedRectangleBorder(
+    //             borderRadius: BorderRadius.circular(30),
+    //             side: BorderSide.none,
+    //           ),
+    //           selected: true,
+    //           selectedColor: Theme.of(context).colorScheme.surfaceBright,
+    //           showCheckmark: false,
+    //         ),
+    //       ),
 
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(onPressed: () => provider.selectTeam(null)),
         title: Text("Nächste Matches"),
-        actions: [
-          ActionBarOpenLinkButton(
-            selectedFollowedTeam: selectedFollowedTeam,
-            urlAccessor: (i) => i.matchesUrl,
-          ),
-        ],
+        // TODO: Move to content
+        // actions: [
+        //   ActionBarOpenLinkButton(
+        //     selectedFollowedTeam: selectedFollowedTeam,
+        //     urlAccessor: (i) => i.matchesUrl,
+        //   ),
+        // ],
       ),
-      body: Column(
-        children: [FollowedTeamNavigation(), NextMatchesPageContent()],
-      ),
+      body: NextMatchesPageContent(),
     );
   }
 }

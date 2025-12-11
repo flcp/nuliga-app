@@ -7,7 +7,9 @@ class FollowedTeamNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final followedTeams = context.watch<FollowedTeamsProvider>().followedTeams;
+    final provider = context.watch<FollowedTeamsProvider>();
+
+    final followedTeams = provider.followedTeams;
     final selectedFollowedTeam = context
         .watch<FollowedTeamsProvider>()
         .selectedFollowedTeam;
@@ -27,12 +29,8 @@ class FollowedTeamNavigation extends StatelessWidget {
             child: ChoiceChip(
               label: Text(team.shortName),
               selected: team == selectedFollowedTeam,
-              onSelected: (selectionActivated) {
-                if (selectionActivated) {
-                  context.read<FollowedTeamsProvider>().selectTeam(team);
-                } else {
-                  context.read<FollowedTeamsProvider>().selectTeam(null);
-                }
+              onSelected: (_) {
+                provider.selectTeam(team);
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),

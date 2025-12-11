@@ -31,26 +31,19 @@ class _NextMatchesSummaryListState extends State<NextMatchesSummaryList> {
               final nextTwoMatches = getDataOrEmptyList(snapshot);
 
               return Card(
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                margin: EdgeInsets.fromLTRB(16, 4, 16, 16),
                 child: Column(
                   children: [
-                    SizedBox(height: 16),
-                    Text(
-                      team.name,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                     if (snapshot.connectionState == ConnectionState.waiting)
-                      SizedBox(height: 64, child: LoadingIndicator())
+                      SizedBox(height: 144, child: LoadingIndicator())
                     else
                       ...nextTwoMatches.map(
                         (match) => NextMatchesListItem(
                           match: match,
                           hometeam: team.name,
                           matchOverviewUrl: team.matchesUrl,
-                          highlighted: false,
+                          highlighted: true,
+                          displayOnlyOpponentName: false,
                         ),
                       ),
                   ],

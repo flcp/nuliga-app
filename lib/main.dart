@@ -12,7 +12,12 @@ void main() async {
   runApp(
     ChangeNotifierProvider.value(
       value: followedTeamsProvider,
-      child: const MaterialApp(home: NuligaApp()),
+      child: MaterialApp(
+        home: const NuligaApp(),
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
+        ),
+      ),
     ),
   );
 }

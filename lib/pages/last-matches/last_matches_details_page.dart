@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/pages/followed_team_navigation.dart';
-import 'package:nuliga_app/pages/last-matches/last_matches_page_content.dart';
+import 'package:nuliga_app/pages/last-matches/last_matches_details_page_content.dart';
 import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:provider/provider.dart';
 
-class LastMatchesPage extends StatelessWidget {
-  const LastMatchesPage({super.key});
+class LastMatchesDetailsPage extends StatelessWidget {
+  const LastMatchesDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class LastMatchesPage extends StatelessWidget {
         ],
       ),
       body: Column(
-        children: [FollowedTeamNavigation(), LastMatchesPageContent()],
+        children: [FollowedTeamNavigation(), LastMatchesDetailsPageContent()],
       ),
     );
   }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/pages/last-matches/last_matches_list.dart';
+import 'package:nuliga_app/pages/last-matches/last_matches_details_list.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:provider/provider.dart';
 
-class LastMatchesPageContent extends StatelessWidget {
-  const LastMatchesPageContent({super.key});
+class LastMatchesDetailsPageContent extends StatelessWidget {
+  const LastMatchesDetailsPageContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class LastMatchesPageContent extends StatelessWidget {
     }
 
     return Expanded(
-      child: LastMatchesList(
+      child: LastMatchesDetailsList(
         teamName: selectedTeam.name,
         matchOverviewUrl: selectedTeam.matchesUrl,
       ),

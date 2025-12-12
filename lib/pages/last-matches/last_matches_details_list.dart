@@ -4,21 +4,21 @@ import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/services/last_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
-class LastMatchesList extends StatefulWidget {
+class LastMatchesDetailsList extends StatefulWidget {
   final String matchOverviewUrl;
   final String teamName;
 
-  const LastMatchesList({
+  const LastMatchesDetailsList({
     super.key,
     required this.matchOverviewUrl,
     required this.teamName,
   });
 
   @override
-  State<LastMatchesList> createState() => _LastMatchesListState();
+  State<LastMatchesDetailsList> createState() => _LastMatchesDetailsListState();
 }
 
-class _LastMatchesListState extends State<LastMatchesList> {
+class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

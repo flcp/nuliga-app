@@ -42,10 +42,6 @@ class NextMatchesDetailsListItem extends StatelessWidget {
           Text(
             "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
           ),
-          const SizedBox(width: spacingSubtitleBlocks),
-          const Icon(Icons.location_on, size: 16.0, color: Colors.grey),
-          const SizedBox(width: spacingSubtitleIcons),
-          Text(match.homeTeam == hometeam ? "Heimspiel" : "Auswärts"),
         ],
       ),
       title: MatchupIndicator(

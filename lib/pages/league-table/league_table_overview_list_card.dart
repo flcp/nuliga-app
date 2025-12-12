@@ -15,7 +15,35 @@ class LeagueTableOverviewListCard extends StatelessWidget {
       // TODO: ggf. auslagern
       // margin: EdgeInsets.fromLTRB(16, 4, 16, 24),
       child: Column(
-        children: threeClosestRankings.map((r) => Text(r.teamName)).toList(),
+        children: threeClosestRankings
+            .map((r) => LeagueTableOverviewListCardItem(teamRanking: r))
+            .toList(),
+      ),
+    );
+  }
+}
+
+class LeagueTableOverviewListCardItem extends StatelessWidget {
+  final LeagueTeamRanking teamRanking;
+  const LeagueTableOverviewListCardItem({required this.teamRanking, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(width: 24, child: Text(teamRanking.rank.toString())),
+
+          Expanded(child: Text(teamRanking.teamName)),
+          SizedBox(
+            width: 24,
+            child: Text(
+              teamRanking.leaguePointsWon.toString(),
+              textAlign: TextAlign.end,
+            ),
+          ),
+        ],
       ),
     );
   }

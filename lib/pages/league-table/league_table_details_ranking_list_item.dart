@@ -13,23 +13,28 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var twoLetterWidth = 20.0;
+    var twoLetterWidth = 18.0;
 
     return ListTile(
       title: DefaultTextStyle(
         style: TextStyle(
           fontSize: 14,
-          color: Theme.of(context).colorScheme.onSurface,
+          color: teamStanding.teamName == team
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onSurface,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(width: 24, child: Text(teamStanding.rank.toString())),
             Expanded(
-              child: Text(
-                teamStanding.teamName,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                child: Text(
+                  teamStanding.teamName,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
               ),
             ),
             SizedBox(

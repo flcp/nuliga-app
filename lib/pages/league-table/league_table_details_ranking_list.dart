@@ -48,6 +48,7 @@ class _LeagueTableDetailsRankingListState
               if (teamStandings.isEmpty) NothingToDisplayIndicator(),
               ListView(
                 children: [
+                  LeagueTableDetailsRankingListHeader(),
                   ...teamStandings.map(
                     (teamStanding) => LeagueTableDetailsRankingListItem(
                       teamStanding: teamStanding,
@@ -60,6 +61,46 @@ class _LeagueTableDetailsRankingListState
           ),
         );
       },
+    );
+  }
+}
+
+class LeagueTableDetailsRankingListHeader extends StatelessWidget {
+  const LeagueTableDetailsRankingListHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var twoLetterWidth = 18.0;
+
+    return ListTile(
+      title: DefaultTextStyle(
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(width: 24, child: Text("#")),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                child: Text(
+                  "Name",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
+            ),
+            SizedBox(width: twoLetterWidth, child: Text("W")),
+            SizedBox(width: twoLetterWidth, child: Text("D")),
+            SizedBox(width: twoLetterWidth, child: Text("L")),
+            SizedBox(width: twoLetterWidth, child: Text("M")),
+            SizedBox(width: 24, child: Text("Pts", textAlign: TextAlign.end)),
+          ],
+        ),
+      ),
     );
   }
 }

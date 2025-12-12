@@ -11,29 +11,6 @@ class NextMatchesListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final provider = context.watch<FollowedTeamsProvider>();
-
-    // Padding(
-    //         padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-    //         child: ChoiceChip(
-    //           labelPadding: const EdgeInsets.symmetric(horizontal: 0),
-    //           label: Icon(
-    //             Icons.chevron_left,
-    //             color: Theme.of(context).colorScheme.onSecondaryContainer,
-    //           ),
-    //           onSelected: (_) {
-    //             provider.selectTeam(null);
-    //           },
-    //           shape: RoundedRectangleBorder(
-    //             borderRadius: BorderRadius.circular(30),
-    //             side: BorderSide.none,
-    //           ),
-    //           selected: true,
-    //           selectedColor: Theme.of(context).colorScheme.surfaceBright,
-    //           showCheckmark: false,
-    //         ),
-    //       ),
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Nächste Matches"),
@@ -44,7 +21,7 @@ class NextMatchesListPage extends StatelessWidget {
           ),
         ],
       ),
-      body: NextMatchesListPageContent(),
+      body: NextMatchesListPageContent(team: team),
     );
   }
 }

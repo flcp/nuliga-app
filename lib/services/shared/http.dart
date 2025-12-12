@@ -19,13 +19,10 @@ Future<void> clearCache() {
 
 Future<String> fetchWebsiteCached(String url) async {
   // TODO: REMOVE
-  var loadSSC1FromFiles = false;
-  if (loadSSC1FromFiles) {
-    var mockedWebsite = await fetchWebsiteMocked(url);
-    if (mockedWebsite.isNotEmpty) {
-      return mockedWebsite;
-    }
-  }
+  // var mockedWebsite = await fetchWebsiteMocked(url);
+  // if (mockedWebsite.isNotEmpty) {
+  //   return mockedWebsite;
+  // }
 
   final now = DateTime.now();
   final previousResponse = cache[url];

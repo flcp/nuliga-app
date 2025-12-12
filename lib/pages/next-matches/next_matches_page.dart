@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/pages/followed_team_navigation.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_page_content.dart';
-import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +33,6 @@ class NextMatchesPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: () => provider.selectTeam(null)),
         title: Text("Nächste Matches"),
         // TODO: Move to content
         // actions: [

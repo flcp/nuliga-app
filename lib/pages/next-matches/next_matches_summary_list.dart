@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_list_item.dart';
+import 'package:nuliga_app/pages/next-matches/next_matches_page.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
@@ -10,9 +9,7 @@ import 'package:nuliga_app/services/shared/http.dart';
 import 'package:provider/provider.dart';
 
 class NextMatchesSummaryList extends StatefulWidget {
-  final List<FollowedClub> teams;
-
-  const NextMatchesSummaryList({super.key, required this.teams});
+  const NextMatchesSummaryList({super.key});
 
   @override
   State<NextMatchesSummaryList> createState() => _NextMatchesSummaryListState();
@@ -21,10 +18,14 @@ class NextMatchesSummaryList extends StatefulWidget {
 class _NextMatchesSummaryListState extends State<NextMatchesSummaryList> {
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<FollowedTeamsProvider>();
+
+    final teams = provider.followedTeams;
+
     return RefreshIndicator(
       onRefresh: refresh,
       child: ListView(
-        children: widget.teams.map((team) {
+        children: teams.map((team) {
           return FutureBuilder(
             future: NextMatchesService.getNextTwoMatches(
               team.matchesUrl,
@@ -34,8 +35,16 @@ class _NextMatchesSummaryListState extends State<NextMatchesSummaryList> {
               final nextTwoMatches = getDataOrEmptyList(snapshot);
 
               return InkWell(
-                onTap: () =>
-                    context.read<FollowedTeamsProvider>().selectTeam(team),
+                onTap: () {
+                  context.read<FollowedTeamsProvider>().selectTeam(team);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NextMatchesPage(),
+                    ),
+                  );
+                },
+
                 child: Card(
                   margin: EdgeInsets.fromLTRB(16, 4, 16, 24),
                   child: Column(

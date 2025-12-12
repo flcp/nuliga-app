@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/league-table/league_table_ranking_list.dart';
-import 'package:nuliga_app/services/followed_teams_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
 
 class LeagueTablePageContent extends StatelessWidget {
-  const LeagueTablePageContent({super.key});
+  final FollowedClub team;
+
+  const LeagueTablePageContent({super.key, required this.team});
 
   @override
   Widget build(BuildContext context) {
-    final selectedTeam = context
-        .watch<FollowedTeamsProvider>()
-        .selectedFollowedTeam;
-
-    if (selectedTeam == null) {
-      return Center(child: Text("Keine Teams ausgewählt."));
-    }
-
     return Expanded(
-      child: LeagueTableRankingList(
-        teamName: selectedTeam.name,
-        url: selectedTeam.tableUrl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Tabelle"),
+          actions: [
+            ActionBarOpenLinkButton(
+              selectedFollowedTeam: team,
+              urlAccessor: (i) => i.rankingTableUrl,
+            ),
+          ],
+        ),
+        body: LeagueTableRankingList(
+          teamName: team.name,
+          url: team.rankingTableUrl,
+        ),
       ),
     );
   }

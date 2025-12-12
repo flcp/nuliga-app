@@ -37,6 +37,7 @@ class _NextMatchesOverviewListState extends State<NextMatchesOverviewList> {
 
               return InkWell(
                 onTap: () {
+                  // TODO: prevent button click before is loaded
                   Navigator.push(
                     context,
                     MaterialPageRoute(

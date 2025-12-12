@@ -31,7 +31,7 @@ final navigationItems = [
     id: "1",
     name: "SSC Karlsruhe",
     shortName: "SSC I",
-    tableUrl:
+    rankingTableUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35307",
     matchesUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35307",
@@ -40,7 +40,7 @@ final navigationItems = [
     id: "2",
     name: "SSC Karlsruhe II",
     shortName: "SSC II",
-    tableUrl:
+    rankingTableUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35309",
     matchesUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35309",
@@ -49,7 +49,7 @@ final navigationItems = [
     id: "3",
     name: "SSC Karlsruhe III",
     shortName: "SSC III",
-    tableUrl:
+    rankingTableUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35309",
     matchesUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35309",
@@ -58,7 +58,7 @@ final navigationItems = [
     id: "4",
     name: "SSC Karlsruhe IV",
     shortName: "SSC IV",
-    tableUrl:
+    rankingTableUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?championship=NB+25%2F26&group=35328",
     matchesUrl:
         "https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35328",

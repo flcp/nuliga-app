@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/pages/last-matches/last_matches_page.dart';
-import 'package:nuliga_app/pages/league-table/league_table_page.dart';
+import 'package:nuliga_app/pages/league-table/league_table_overview_page.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_overview_page.dart';
 
 class NuligaApp extends StatefulWidget {
@@ -15,7 +15,7 @@ class _NuligaAppState extends State<NuligaApp> {
 
   static const _widgets = [
     NextMatchesOverviewPage(),
-    LeagueTablePage(),
+    LeagueTableOverviewPage(),
     LastMatchesPage(),
   ];
 

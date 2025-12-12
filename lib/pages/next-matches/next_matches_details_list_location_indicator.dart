@@ -4,11 +4,11 @@ import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class LocationIndicator extends StatelessWidget {
+class NextMatchesDetailsLocationIndicator extends StatelessWidget {
   final FutureMatch match;
   final String matchOverviewUrl;
 
-  const LocationIndicator({
+  const NextMatchesDetailsLocationIndicator({
     required this.match,
     super.key,
     required this.matchOverviewUrl,

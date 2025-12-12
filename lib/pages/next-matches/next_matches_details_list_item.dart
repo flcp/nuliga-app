@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
-import 'package:nuliga_app/pages/next-matches/next_matches_list_location_indicator.dart';
+import 'package:nuliga_app/pages/next-matches/next_matches_details_list_location_indicator.dart';
 
-class NextMatchesListItem extends StatelessWidget {
+class NextMatchesDetailsListItem extends StatelessWidget {
   final FutureMatch match;
   final String hometeam;
   final bool highlighted;
@@ -12,7 +12,7 @@ class NextMatchesListItem extends StatelessWidget {
   static const double spacingSubtitleBlocks = 16.0;
   static const double spacingSubtitleIcons = 8.0;
 
-  const NextMatchesListItem({
+  const NextMatchesDetailsListItem({
     super.key,
     required this.match,
     required this.hometeam,
@@ -53,7 +53,7 @@ class NextMatchesListItem extends StatelessWidget {
         hometeam: hometeam,
         displayOnlyOpponentName: displayOnlyOpponentName,
       ),
-      trailing: LocationIndicator(
+      trailing: NextMatchesDetailsLocationIndicator(
         match: match,
         matchOverviewUrl: matchOverviewUrl,
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/league_team_standing.dart';
+import 'package:nuliga_app/pages/league-table/league_table_details_ranking_list_item.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -46,26 +47,14 @@ class _LeagueTableDetailsRankingListState
             children: [
               if (teamStandings.isEmpty) NothingToDisplayIndicator(),
               ListView(
-                children: teamStandings
-                    .map(
-                      (teamStanding) => ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              spacing: 16,
-                              children: [
-                                Text("${teamStanding.rank.toString()}."),
-                                Text(teamStanding.teamName),
-                              ],
-                            ),
-                            Text(teamStanding.leaguePointsWon.toString()),
-                          ],
-                        ),
-                        selected: teamStanding.teamName == widget.teamName,
-                      ),
-                    )
-                    .toList(),
+                children: [
+                  ...teamStandings.map(
+                    (teamStanding) => LeagueTableDetailsRankingListItem(
+                      teamStanding: teamStanding,
+                      team: widget.teamName,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

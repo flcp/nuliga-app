@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/league_team_standing.dart';
 import 'package:nuliga_app/pages/league-table/league_table_details_page.dart';
+import 'package:nuliga_app/pages/league-table/league_table_overview_list_card.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:nuliga_app/services/league_table_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -48,14 +50,8 @@ class _LeagueTableOverviewListState extends State<LeagueTableOverviewList> {
                       ),
                     );
                   },
-                  child: Card(
-                    // TODO: ggf. auslagern
-                    // margin: EdgeInsets.fromLTRB(16, 4, 16, 24),
-                    child: Column(
-                      children: threeClosestRankings
-                          .map((r) => Text(r.teamName))
-                          .toList(),
-                    ),
+                  child: LeagueTableOverviewListCard(
+                    threeClosestRankings: threeClosestRankings,
                   ),
                 );
               },

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/pages/league-table/league_table_page.dart';
-import 'package:nuliga_app/pages/league-table/league_table_ranking_list.dart';
+import 'package:nuliga_app/pages/league-table/league_table_details_page.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:nuliga_app/services/league_table_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -44,7 +43,8 @@ class _LeagueTableOverviewListState extends State<LeagueTableOverviewList> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LeagueTablePage(team: team),
+                        builder: (context) =>
+                            LeagueTableDetailsPage(team: team),
                       ),
                     );
                   },

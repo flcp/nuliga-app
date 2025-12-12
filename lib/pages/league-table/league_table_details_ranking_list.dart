@@ -6,21 +6,23 @@ import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http.dart';
 import '../../services/league_table_service.dart';
 
-class LeagueTableRankingList extends StatefulWidget {
+class LeagueTableDetailsRankingList extends StatefulWidget {
   final String url;
   final String teamName;
 
-  const LeagueTableRankingList({
+  const LeagueTableDetailsRankingList({
     required this.url,
     required this.teamName,
     super.key,
   });
 
   @override
-  State<LeagueTableRankingList> createState() => _LeagueTableRankingListState();
+  State<LeagueTableDetailsRankingList> createState() =>
+      _LeagueTableDetailsRankingListState();
 }
 
-class _LeagueTableRankingListState extends State<LeagueTableRankingList> {
+class _LeagueTableDetailsRankingListState
+    extends State<LeagueTableDetailsRankingList> {
   Future<void> refresh() {
     clearCache();
     setState(() {});

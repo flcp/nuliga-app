@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/pages/league-table/league_table_page_content.dart';
+import 'package:nuliga_app/pages/league-table/league_table_details_ranking_list.dart';
 import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
 
-class LeagueTablePage extends StatelessWidget {
+class LeagueTableDetailsPage extends StatelessWidget {
   final FollowedClub team;
 
-  const LeagueTablePage({super.key, required this.team});
+  const LeagueTableDetailsPage({super.key, required this.team});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,10 @@ class LeagueTablePage extends StatelessWidget {
           ),
         ],
       ),
-      body: LeagueTablePageContent(team: team),
+      body: LeagueTableDetailsRankingList(
+        teamName: team.name,
+        url: team.rankingTableUrl,
+      ),
     );
   }
 }

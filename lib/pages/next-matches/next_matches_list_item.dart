@@ -27,7 +27,7 @@ class NextMatchesListItem extends StatelessWidget {
       selected: highlighted,
       selectedColor: Theme.of(context).textTheme.bodyMedium!.color,
       textColor: Theme.of(context).disabledColor.withAlpha(130),
-      subtitle: Row(
+      subtitle: Wrap(
         children: [
           const Icon(Icons.calendar_today, size: 16.0, color: Colors.grey),
           const SizedBox(width: spacingSubtitleIcons),

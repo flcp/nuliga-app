@@ -49,6 +49,8 @@ class _LeagueTableOverviewListState extends State<LeagueTableOverviewList> {
                     );
                   },
                   child: Card(
+                    // TODO: ggf. auslagern
+                    // margin: EdgeInsets.fromLTRB(16, 4, 16, 24),
                     child: Column(
                       children: threeClosestRankings
                           .map((r) => Text(r.teamName))

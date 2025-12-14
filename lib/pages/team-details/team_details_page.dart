@@ -27,9 +27,9 @@ class TeamDetailsPage extends StatelessWidget {
           ],
           bottom: const TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.event)),
-              Tab(icon: Icon(Icons.format_list_numbered)),
-              Tab(icon: Icon(Icons.history)),
+              Tab(icon: Icon(Icons.event), text: "Upcoming"),
+              Tab(icon: Icon(Icons.format_list_numbered), text: "Tabelle"),
+              Tab(icon: Icon(Icons.history), text: "Results"),
             ],
           ),
         ),

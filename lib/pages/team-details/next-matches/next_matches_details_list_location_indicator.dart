@@ -58,13 +58,17 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
           return SizedBox.shrink();
         }
 
-        return Icon(Icons.directions, size: size);
-        // TODO: fix
-        return IconButton(
-          icon: Icon(Icons.directions, size: size),
-          onPressed: () async {
-            await launchUrl(uri);
-          },
+        // sizedbox, sonst verschiebt sich iconbutton gegenueber icon
+        return SizedBox(
+          height: size,
+          width: size,
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            icon: Icon(Icons.directions, size: size),
+            onPressed: () async {
+              await launchUrl(uri);
+            },
+          ),
         );
       },
     );

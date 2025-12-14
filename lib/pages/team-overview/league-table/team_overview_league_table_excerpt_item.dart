@@ -13,19 +13,27 @@ class TeamOverviewLeagueTableExcerptItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(width: 24, child: Text(teamRanking.rank.toString())),
-        Expanded(child: Text(teamRanking.teamName)),
-        SizedBox(
-          width: 24,
-          child: Text(
-            teamRanking.leaguePointsWon.toString(),
-            textAlign: TextAlign.end,
+    return DefaultTextStyle.merge(
+      style: TextStyle(
+        color: highlighted
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).textTheme.bodyMedium!.color,
+        fontWeight: highlighted ? FontWeight.bold : FontWeight.normal,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(width: 24, child: Text(teamRanking.rank.toString())),
+          Expanded(child: Text(teamRanking.teamName)),
+          SizedBox(
+            width: 24,
+            child: Text(
+              teamRanking.leaguePointsWon.toString(),
+              textAlign: TextAlign.end,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

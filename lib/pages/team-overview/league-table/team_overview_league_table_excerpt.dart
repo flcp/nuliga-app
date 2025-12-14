@@ -56,7 +56,10 @@ class TeamOverviewLeagueTableExcerpt extends StatelessWidget {
               },
               blendMode: BlendMode.dstIn,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 4,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: closestRankings

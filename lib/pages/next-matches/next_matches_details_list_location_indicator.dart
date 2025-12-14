@@ -8,6 +8,8 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
   final FutureMatch match;
   final String homeTeamName;
 
+  final double size = 30.0;
+
   const NextMatchesDetailsLocationIndicator({
     required this.match,
     super.key,
@@ -17,7 +19,11 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (match.homeTeam == homeTeamName) {
-      return Text("Home");
+      return Icon(
+        Icons.home,
+        color: Theme.of(context).disabledColor,
+        size: size,
+      );
     }
 
     return FutureBuilder(
@@ -25,8 +31,8 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox(
-            width: 24,
-            height: 24,
+            width: size,
+            height: size,
             child: CircularProgressIndicator(
               strokeWidth: 2,
               valueColor: AlwaysStoppedAnimation(Colors.grey.shade200),
@@ -37,7 +43,11 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
         final locationMapsLink = getDataOrDefault(snapshot, "");
 
         if (locationMapsLink.isEmpty || !locationMapsLink.startsWith("http")) {
-          return Text("?");
+          return Icon(
+            Icons.directions,
+            size: size,
+            color: Theme.of(context).disabledColor,
+          );
         }
 
         Uri uri;
@@ -48,8 +58,10 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
           return SizedBox.shrink();
         }
 
+        return Icon(Icons.directions, size: size);
+        // TODO: fix
         return IconButton(
-          icon: Icon(Icons.directions, size: 24),
+          icon: Icon(Icons.directions, size: size),
           onPressed: () async {
             await launchUrl(uri);
           },

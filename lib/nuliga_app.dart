@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/pages/team-overview/next_matches_overview_page.dart';
+import 'package:nuliga_app/pages/team-overview/team_overview_page.dart';
 
 class NuligaApp extends StatefulWidget {
   const NuligaApp({super.key});

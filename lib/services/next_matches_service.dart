@@ -3,18 +3,23 @@ import 'package:nuliga_app/services/next-matches/match_location_repository.dart'
 import 'package:nuliga_app/services/next-matches/next_matches_repository.dart';
 
 class NextMatchesService {
-  static Future<List<FutureMatch>> getNextTwoMatches(
-    String matchesUrl,
-    String name,
-  ) async {
+  static Future<({List<FutureMatch> next, List<FutureMatch> later})>
+  getNextMatchesWithNextGamedaySeparate(String matchesUrl, String name) async {
     var allMatches = await NextMatchesRepository.getNextMatches(matchesUrl);
     var matchesForTeam = allMatches
         .where((match) => match.homeTeam == name || match.opponentTeam == name)
         .toList();
     var matchesForTeamTodayOrLater = _getMatchesTodayOrLater(matchesForTeam);
-    return matchesForTeamTodayOrLater
-        .where((match) => isOnNextMatchDay(match, matchesForTeamTodayOrLater))
-        .toList();
+    return (
+      next: matchesForTeamTodayOrLater
+          .where((match) => isOnNextMatchDay(match, matchesForTeamTodayOrLater))
+          .toList(),
+      later: matchesForTeamTodayOrLater
+          .where(
+            (match) => !isOnNextMatchDay(match, matchesForTeamTodayOrLater),
+          )
+          .toList(),
+    );
   }
 
   static Future<List<FutureMatch>> getNextMatchesForTeam(

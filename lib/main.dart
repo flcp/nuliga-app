@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/nuliga_app.dart';
+import 'package:nuliga_app/bottom_navigation.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,7 @@ void main() async {
     ChangeNotifierProvider.value(
       value: followedTeamsProvider,
       child: MaterialApp(
-        home: const NuligaApp(),
+        home: const BottomNavigation(),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
         ),

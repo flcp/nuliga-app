@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
-import 'package:nuliga_app/pages/next-matches/next_matches_details_list_location_indicator.dart';
+import 'package:nuliga_app/pages/team-details/next-matches/next_matches_details_list_location_indicator.dart';
 
 class NextMatchesDetailsListItem extends StatelessWidget {
   final FutureMatch match;

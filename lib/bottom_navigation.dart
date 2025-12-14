@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nuliga_app/pages/team-overview/team_overview_page.dart';
 
-class NuligaApp extends StatefulWidget {
-  const NuligaApp({super.key});
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({super.key});
 
   @override
-  State<NuligaApp> createState() => _NuligaAppState();
+  State<BottomNavigation> createState() => _BottomNavigationState();
 }
 
-class _NuligaAppState extends State<NuligaApp> {
+class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
   static const _widgets = [TeamOverviewPage(), Placeholder()];
@@ -22,12 +23,16 @@ class _NuligaAppState extends State<NuligaApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          systemNavigationBarColor: Colors.white,
+        ),
+      ),
       body: _widgets.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.question_mark),
             label: "TODO",

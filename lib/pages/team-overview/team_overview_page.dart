@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/pages/next-matches/next_matches_details_page.dart';
+import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/pages/team-overview/league-table/team_overview_league_table_excerpt.dart';
 import 'package:nuliga_app/pages/team-overview/next-matches/team_overview_next_matches_list.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
@@ -26,48 +26,51 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
     final provider = context.watch<FollowedTeamsProvider>();
     final teams = provider.followedTeams;
 
-    return Scaffold(
-      appBar: AppBar(title: Text("Overview")),
-      body: RefreshIndicator(
-        onRefresh: refresh,
-        child: ListView(
-          children: teams.map((team) {
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        team.name,
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () => goToNextMatches(team),
-                        child: Text("View all"),
-                      ),
-                    ],
-                  ),
+    return RefreshIndicator(
+      onRefresh: refresh,
+      child: ListView(
+        children: teams.map((team) {
+          return Column(
+            children: [
+              Text(
+                team.name,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Upcoming",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    TextButton(
+                      onPressed: () => goToNextMatches(team),
+                      child: Text("View all"),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: TeamOverviewNextMatchesList(
-                    matchesUrl: team.matchesUrl,
-                    team: team,
-                  ),
-                ),
+              ),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: TeamOverviewLeagueTableExcerpt(team: team),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: TeamOverviewNextMatchesList(
+                  matchesUrl: team.matchesUrl,
+                  team: team,
                 ),
-              ],
-            );
-          }).toList(),
-        ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: TeamOverviewLeagueTableExcerpt(team: team),
+              ),
+              SizedBox(height: 48),
+            ],
+          );
+        }).toList(),
       ),
     );
   }
@@ -75,9 +78,7 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
   void goToNextMatches(FollowedClub team) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => NextMatchesDetailsPage(team: team),
-      ),
+      MaterialPageRoute(builder: (context) => TeamDetailsPage(team: team)),
     );
   }
 }

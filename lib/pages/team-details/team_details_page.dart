@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/team-details/last-matches/last_matches_details_list.dart';
 import 'package:nuliga_app/pages/team-details/league-table/league_table_details_ranking_list.dart';
-import 'package:nuliga_app/pages/next-matches/next_matches_details_list.dart';
+import 'package:nuliga_app/pages/team-details/next-matches/next_matches_details_list.dart';
 import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
 
-class NextMatchesDetailsPage extends StatelessWidget {
+class TeamDetailsPage extends StatelessWidget {
   final FollowedClub team;
   final int startIndex;
 
-  const NextMatchesDetailsPage({
-    required this.team,
-    super.key,
-    this.startIndex = 0,
-  });
+  const TeamDetailsPage({required this.team, super.key, this.startIndex = 0});
 
   @override
   Widget build(BuildContext context) {

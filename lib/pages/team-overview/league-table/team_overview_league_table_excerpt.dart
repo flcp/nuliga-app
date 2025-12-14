@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/pages/next-matches/next_matches_details_page.dart';
+import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/pages/team-overview/league-table/team_overview_league_table_excerpt_item.dart';
 import 'package:nuliga_app/services/league_table_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -34,7 +34,7 @@ class TeamOverviewLeagueTableExcerpt extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    NextMatchesDetailsPage(team: team, startIndex: 1),
+                    TeamDetailsPage(team: team, startIndex: 1),
               ),
             );
           },
@@ -51,20 +51,26 @@ class TeamOverviewLeagueTableExcerpt extends StatelessWidget {
                     Colors.black,
                     Colors.transparent,
                   ],
-                  stops: [0, 0.25, 0.75, 1],
+                  stops: [0.05, 0.25, 0.75, 0.95],
                 ).createShader(rect);
               },
               blendMode: BlendMode.dstIn,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: closestRankings
-                    .map(
-                      (teamRanking) => TeamOverviewLeagueTableExcerptItem(
-                        teamRanking: teamRanking,
-                        highlighted: team.name == teamRanking.teamName,
-                      ),
-                    )
-                    .toList(),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: closestRankings
+                      .map(
+                        (teamRanking) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          child: TeamOverviewLeagueTableExcerptItem(
+                            teamRanking: teamRanking,
+                            highlighted: team.name == teamRanking.teamName,
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
             ),
           ),

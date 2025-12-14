@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/pages/last-matches/last_matches_details_page.dart';
-import 'package:nuliga_app/pages/league-table/league_table_overview_page.dart';
-import 'package:nuliga_app/pages/next-matches/next_matches_overview_page.dart';
+import 'package:nuliga_app/pages/team-overview/next_matches_overview_page.dart';
 
 class NuligaApp extends StatefulWidget {
   const NuligaApp({super.key});
@@ -13,11 +11,7 @@ class NuligaApp extends StatefulWidget {
 class _NuligaAppState extends State<NuligaApp> {
   int _selectedIndex = 0;
 
-  static const _widgets = [
-    NextMatchesOverviewPage(),
-    LeagueTableOverviewPage(),
-    LastMatchesDetailsPage(),
-  ];
+  static const _widgets = [NextMatchesOverviewPage(), Placeholder()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -32,15 +26,11 @@ class _NuligaAppState extends State<NuligaApp> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.event), label: "Nächste"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.format_list_numbered),
-            label: "Tabelle",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: "Ergebnisse",
+            icon: Icon(Icons.question_mark),
+            label: "TODO",
           ),
         ],
         currentIndex: _selectedIndex,

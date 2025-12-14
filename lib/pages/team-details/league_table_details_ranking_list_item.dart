@@ -13,7 +13,8 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var twoLetterWidth = 18.0;
+    final twoLetterWidth = 18.0;
+    final dimTextColor = Theme.of(context).disabledColor;
 
     return ListTile(
       title: DefaultTextStyle(
@@ -26,7 +27,13 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(width: 24, child: Text(teamStanding.rank.toString())),
+            SizedBox(
+              width: 24,
+              child: Text(
+                teamStanding.rank.toString(),
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6.0),
@@ -41,42 +48,36 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
               width: twoLetterWidth,
               child: Text(
                 teamStanding.wins.toString(),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.surfaceDim,
-                ),
+                style: TextStyle(color: dimTextColor),
               ),
             ),
             SizedBox(
               width: twoLetterWidth,
               child: Text(
                 teamStanding.draws.toString(),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.surfaceDim,
-                ),
+                style: TextStyle(color: dimTextColor),
               ),
             ),
             SizedBox(
               width: twoLetterWidth,
               child: Text(
                 teamStanding.losses.toString(),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.surfaceDim,
-                ),
+                style: TextStyle(color: dimTextColor),
+              ),
+            ),
+
+            SizedBox(
+              width: 24,
+              child: Text(
+                teamStanding.leaguePointsWon.toString(),
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
               width: twoLetterWidth,
               child: Text(
                 teamStanding.totalMatches.toString(),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.surfaceDim,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 24,
-              child: Text(
-                teamStanding.leaguePointsWon.toString(),
+                style: TextStyle(color: dimTextColor),
                 textAlign: TextAlign.end,
               ),
             ),

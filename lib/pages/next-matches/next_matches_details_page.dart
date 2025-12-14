@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/pages/team-details/last_matches_details_list.dart';
+import 'package:nuliga_app/pages/team-details/league_table_details_ranking_list.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_details_list.dart';
 import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
 
@@ -9,25 +11,47 @@ class NextMatchesDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Nächste Matches"),
-        actions: [
-          ActionBarOpenLinkButton(
-            selectedFollowedTeam: team,
-            urlAccessor: (i) => i.matchesUrl,
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(team.name),
+          actions: [
+            ActionBarOpenLinkButton(
+              selectedFollowedTeam: team,
+              urlAccessor: (i) => i.rankingTableUrl,
+            ),
+          ],
+          bottom: const TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.event)),
+              Tab(icon: Icon(Icons.format_list_numbered)),
+              Tab(icon: Icon(Icons.history)),
+            ],
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: NextMatchesDetailsList(
+        ),
+        body: TabBarView(
+          children: [
+            Column(
+              children: [
+                Expanded(
+                  child: NextMatchesDetailsList(
+                    teamName: team.name,
+                    matchOverviewUrl: team.matchesUrl,
+                  ),
+                ),
+              ],
+            ),
+            LeagueTableDetailsRankingList(
+              teamName: team.name,
+              url: team.rankingTableUrl,
+            ),
+            LastMatchesDetailsList(
               teamName: team.name,
               matchOverviewUrl: team.matchesUrl,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/league_team_standing.dart';
-import 'package:nuliga_app/pages/league-table/league_table_details_ranking_list_item.dart';
+import 'package:nuliga_app/pages/team-details/league_table_details_ranking_list_item.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -96,8 +96,11 @@ class LeagueTableDetailsRankingListHeader extends StatelessWidget {
             SizedBox(width: twoLetterWidth, child: Text("W")),
             SizedBox(width: twoLetterWidth, child: Text("D")),
             SizedBox(width: twoLetterWidth, child: Text("L")),
-            SizedBox(width: twoLetterWidth, child: Text("M")),
-            SizedBox(width: 24, child: Text("Pts", textAlign: TextAlign.end)),
+            SizedBox(width: 24, child: Text("Pts")),
+            SizedBox(
+              width: twoLetterWidth,
+              child: Text("M", textAlign: TextAlign.end),
+            ),
           ],
         ),
       ),

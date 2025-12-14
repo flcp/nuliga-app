@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/league_team_standing.dart';
-import 'package:nuliga_app/pages/league-table/league_table_details_page.dart';
+
+import 'package:nuliga_app/pages/team-details/league_table_details_page.dart';
 import 'package:nuliga_app/pages/league-table/league_table_overview_list_card.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:nuliga_app/services/league_table_service.dart';

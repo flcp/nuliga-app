@@ -3,7 +3,10 @@ import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
 
 class NextMatchesParser {
-  static List<FutureMatch> getEntriesAsFutureMatches(String htmlContent) {
+  static List<FutureMatch> getEntriesAsFutureMatches(
+    String htmlContent,
+    String baseUrl,
+  ) {
     if (htmlContent.trim().isEmpty) {
       print("htmlcontent empty");
       return [];
@@ -47,7 +50,7 @@ class NextMatchesParser {
         cells[Parser.matchesTimeIndex],
       );
 
-      final locationUrl = Parser.getLinkOrEmpty(
+      final locationRelativeUrl = Parser.getLinkOrEmpty(
         cells,
         Parser.matchesLocationIndex,
       );
@@ -55,7 +58,9 @@ class NextMatchesParser {
       result.add(
         FutureMatch(
           time: dateTime,
-          locationUrl: locationUrl,
+          locationUrl: locationRelativeUrl.isEmpty
+              ? ""
+              : baseUrl + locationRelativeUrl,
           homeTeam: Parser.getCellOrEmpty(cells, Parser.matchesHomeTeamIndex),
           opponentTeam: Parser.getCellOrEmpty(
             cells,

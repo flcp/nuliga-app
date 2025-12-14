@@ -9,7 +9,10 @@ void main() {
       final file = File('test/assets/next-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = NextMatchesParser.getEntriesAsFutureMatches(html);
+      final result = NextMatchesParser.getEntriesAsFutureMatches(
+        html,
+        "http://example.com/",
+      );
 
       expect(result.length, 56);
       expect(result[0].homeTeam, "Fortuna Schwetzingen");
@@ -19,7 +22,10 @@ void main() {
       final file = File('test/assets/next-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = NextMatchesParser.getEntriesAsFutureMatches(html);
+      final result = NextMatchesParser.getEntriesAsFutureMatches(
+        html,
+        "http://example.com/",
+      );
 
       expect(result[0].time, DateTime(2025, 10, 11, 14, 0));
     });
@@ -27,19 +33,27 @@ void main() {
       final file = File('test/assets/next-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = NextMatchesParser.getEntriesAsFutureMatches(html);
+      final result = NextMatchesParser.getEntriesAsFutureMatches(
+        html,
+        "http://example.com/",
+      );
 
       expect(result[1].time, DateTime(2025, 10, 11, 14, 0));
     });
   });
 
+  test(
+    'NextMatchesParser with invalid file input returns empty list',
+    () async {
+      final file = File('test/assets/next-matches/otherFormat.json');
+      final html = await file.readAsString();
 
-  test('NextMatchesParser with invalid file input returns empty list', () async {
-    final file = File('test/assets/next-matches/otherFormat.json');
-    final html = await file.readAsString();
+      final result = NextMatchesParser.getEntriesAsFutureMatches(
+        html,
+        "http://example.com/",
+      );
 
-    final result = NextMatchesParser.getEntriesAsFutureMatches(html);
-
-    expect(result.length, 0);
-  });
+      expect(result.length, 0);
+    },
+  );
 }

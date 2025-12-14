@@ -6,18 +6,22 @@ import 'package:url_launcher/url_launcher.dart';
 
 class NextMatchesDetailsLocationIndicator extends StatelessWidget {
   final FutureMatch match;
-  final String matchOverviewUrl;
+  final String homeTeamName;
 
   const NextMatchesDetailsLocationIndicator({
     required this.match,
     super.key,
-    required this.matchOverviewUrl,
+    required this.homeTeamName,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (match.homeTeam == homeTeamName) {
+      return Text("Home");
+    }
+
     return FutureBuilder(
-      future: NextMatchesService.getLocationMapsLink(match, matchOverviewUrl),
+      future: NextMatchesService.getLocationMapsLink(match),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox(
@@ -33,7 +37,7 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
         final locationMapsLink = getDataOrDefault(snapshot, "");
 
         if (locationMapsLink.isEmpty || !locationMapsLink.startsWith("http")) {
-          return SizedBox.shrink();
+          return Text("?");
         }
 
         Uri uri;

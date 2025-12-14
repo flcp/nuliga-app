@@ -5,7 +5,14 @@ import 'package:nuliga_app/services/shared/http.dart';
 class NextMatchesRepository {
   static Future<List<FutureMatch>> getNextMatches(String matchupsUrl) async {
     final htmlContent = await fetchWebsiteCached(matchupsUrl);
-    final result = NextMatchesParser.getEntriesAsFutureMatches(htmlContent);
+
+    final uri = Uri.parse(matchupsUrl);
+    final baseUrl = "${uri.scheme}://${uri.host}";
+
+    final result = NextMatchesParser.getEntriesAsFutureMatches(
+      htmlContent,
+      baseUrl,
+    );
 
     return result;
   }

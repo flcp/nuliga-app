@@ -42,14 +42,12 @@ class NextMatchesService {
         .toList();
   }
 
-  static Future<String> getLocationMapsLink(
-    FutureMatch match,
-    String matchOverviewUrl,
-  ) async {
+  static Future<String> getLocationMapsLink(FutureMatch match) async {
     if (match.locationUrl.isEmpty) return Future.value("");
 
-    final url = getBaseUrl(matchOverviewUrl) + match.locationUrl;
-    final locationAddress = await MatchLocationRepository.getMatchLocation(url);
+    final locationAddress = await MatchLocationRepository.getMatchLocation(
+      match.locationUrl,
+    );
 
     return _createGoogleMapsLink(locationAddress);
   }

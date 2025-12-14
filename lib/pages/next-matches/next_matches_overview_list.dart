@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/pages/next-matches/next_matches_details_list_item.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_details_page.dart';
+import 'package:nuliga_app/pages/next-matches/next_matches_overview_list_card.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
@@ -37,7 +37,10 @@ class _NextMatchesOverviewListState extends State<NextMatchesOverviewList> {
 
               return InkWell(
                 onTap: () {
-                  // TODO: prevent button click before is loaded
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return;
+                  }
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -51,15 +54,13 @@ class _NextMatchesOverviewListState extends State<NextMatchesOverviewList> {
                   child: Column(
                     children: [
                       if (snapshot.connectionState == ConnectionState.waiting)
+                        // TODO: no spinner, instead balken
                         SizedBox(height: 144, child: LoadingIndicator())
                       else
                         ...nextTwoMatches.map(
-                          (match) => NextMatchesDetailsListItem(
+                          (match) => NextMatchesOverviewListCard(
                             match: match,
-                            hometeam: team.name,
-                            matchOverviewUrl: team.matchesUrl,
-                            highlighted: true,
-                            displayOnlyOpponentName: false,
+                            team: team,
                           ),
                         ),
                     ],

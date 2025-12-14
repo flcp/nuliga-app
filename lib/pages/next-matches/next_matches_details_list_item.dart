@@ -51,7 +51,7 @@ class NextMatchesDetailsListItem extends StatelessWidget {
       ),
       trailing: NextMatchesDetailsLocationIndicator(
         match: match,
-        matchOverviewUrl: matchOverviewUrl,
+        homeTeamName: this.hometeam,
       ),
     );
   }

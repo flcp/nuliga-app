@@ -4,12 +4,12 @@ import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/pages/team-details/next-matches/next_matches_details_list_location_indicator.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 
-class TeamOverviewNextMatchCard extends StatelessWidget {
+class NextMatchesCard extends StatelessWidget {
   final FollowedClub team;
   final FutureMatch match;
   final bool highlighted;
 
-  const TeamOverviewNextMatchCard({
+  const NextMatchesCard({
     super.key,
     required this.team,
     required this.match,

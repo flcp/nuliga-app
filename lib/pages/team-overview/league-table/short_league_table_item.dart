@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/league_team_standing.dart';
 
-class TeamOverviewLeagueTableExcerptItem extends StatelessWidget {
+class ShortLeagueTableItem extends StatelessWidget {
   final LeagueTeamRanking teamRanking;
   final bool highlighted;
 
-  const TeamOverviewLeagueTableExcerptItem({
+  const ShortLeagueTableItem({
     super.key,
     required this.teamRanking,
     required this.highlighted,

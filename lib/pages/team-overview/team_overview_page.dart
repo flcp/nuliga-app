@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
-import 'package:nuliga_app/pages/team-overview/league-table/team_overview_league_table_excerpt.dart';
-import 'package:nuliga_app/pages/team-overview/next-matches/team_overview_next_matches_list.dart';
+import 'package:nuliga_app/pages/team-overview/last-matches/last_matches.dart';
+import 'package:nuliga_app/pages/team-overview/league-table/short_league_table.dart';
+import 'package:nuliga_app/pages/team-overview/next-matches/next_matches.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
 import 'package:nuliga_app/services/shared/http.dart';
 import 'package:provider/provider.dart';
@@ -57,16 +58,18 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: TeamOverviewNextMatchesList(
-                  matchesUrl: team.matchesUrl,
-                  team: team,
-                ),
+                child: NextMatches(matchesUrl: team.matchesUrl, team: team),
               ),
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: TeamOverviewLeagueTableExcerpt(team: team),
+                child: ShortLeagueTable(team: team),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: LastMatches(team: team),
+              ),
+
               SizedBox(height: 48),
             ],
           );

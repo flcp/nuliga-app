@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/pages/team-overview/next-matches/team_overview_next_match_card.dart';
+import 'package:nuliga_app/pages/team-overview/next-matches/next_matches_card.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
-class TeamOverviewNextMatchesList extends StatelessWidget {
+class NextMatches extends StatelessWidget {
   final String matchesUrl;
   final FollowedClub team;
 
-  const TeamOverviewNextMatchesList({
-    super.key,
-    required this.matchesUrl,
-    required this.team,
-  });
+  const NextMatches({super.key, required this.matchesUrl, required this.team});
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +36,14 @@ class TeamOverviewNextMatchesList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             children: [
               ...nextTwoMatches.map(
-                (match) => TeamOverviewNextMatchCard(
+                (match) => NextMatchesCard(
                   team: team,
                   match: match,
                   highlighted: true,
                 ),
               ),
               ...laterMatches.map(
-                (match) => TeamOverviewNextMatchCard(
+                (match) => NextMatchesCard(
                   team: team,
                   match: match,
                   highlighted: false,

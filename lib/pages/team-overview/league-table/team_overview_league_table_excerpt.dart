@@ -13,7 +13,7 @@ class TeamOverviewLeagueTableExcerpt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: LeagueTableService.getThreeClosestRankingsToTeam(
+      future: LeagueTableService.getClosestRankingsToTeam(
         team.rankingTableUrl,
         team,
       ),
@@ -22,7 +22,7 @@ class TeamOverviewLeagueTableExcerpt extends StatelessWidget {
           return Card(child: Text("loading"));
         }
 
-        final threeClosestRankings = getDataOrEmptyList(snapshot);
+        final closestRankings = getDataOrEmptyList(snapshot);
 
         return InkWell(
           onTap: () {
@@ -40,15 +40,32 @@ class TeamOverviewLeagueTableExcerpt extends StatelessWidget {
           },
           child: Card(
             elevation: 0,
-            child: Column(
-              children: threeClosestRankings
-                  .map(
-                    (teamRanking) => TeamOvervieewLeagueTableExcerptItem(
-                      teamRanking: teamRanking,
-                      highlighted: team.name == teamRanking.teamName,
-                    ),
-                  )
-                  .toList(),
+            child: ShaderMask(
+              shaderCallback: (Rect rect) {
+                return const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black,
+                    Colors.black,
+                    Colors.transparent,
+                  ],
+                  stops: [0, 0.25, 0.75, 1],
+                ).createShader(rect);
+              },
+              blendMode: BlendMode.dstIn,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: closestRankings
+                    .map(
+                      (teamRanking) => TeamOvervieewLeagueTableExcerptItem(
+                        teamRanking: teamRanking,
+                        highlighted: team.name == teamRanking.teamName,
+                      ),
+                    )
+                    .toList(),
+              ),
             ),
           ),
         );

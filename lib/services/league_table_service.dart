@@ -11,13 +11,13 @@ class LeagueTableService {
     return LeagueTableRepository.getLeagueTeamRankings(leagueUrl);
   }
 
-  static Future<List<LeagueTeamRanking>> getThreeClosestRankingsToTeam(
+  static Future<List<LeagueTeamRanking>> getClosestRankingsToTeam(
     String leagueUrl,
     FollowedClub team,
   ) async {
     final leagueTeamRankings =
         await LeagueTableRepository.getLeagueTeamRankings(leagueUrl);
-    if (leagueTeamRankings.length < 3) {
+    if (leagueTeamRankings.length < 5) {
       return leagueTeamRankings;
     }
 
@@ -37,8 +37,8 @@ class LeagueTableService {
     int teamIndex,
     int maxIndex,
   ) {
-    var lowIndex = teamIndex - 1;
-    var highIndex = teamIndex + 1;
+    var lowIndex = teamIndex - 2;
+    var highIndex = teamIndex + 2;
 
     while (lowIndex < 0) {
       lowIndex++;

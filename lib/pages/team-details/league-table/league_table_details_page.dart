@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/pages/team-details/league_table_details_ranking_list.dart';
+import 'package:nuliga_app/pages/team-details/league-table/league_table_details_ranking_list.dart';
 import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
 
 class LeagueTableDetailsPage extends StatelessWidget {

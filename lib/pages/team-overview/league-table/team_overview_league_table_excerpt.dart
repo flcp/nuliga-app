@@ -59,7 +59,7 @@ class TeamOverviewLeagueTableExcerpt extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: closestRankings
                     .map(
-                      (teamRanking) => TeamOvervieewLeagueTableExcerptItem(
+                      (teamRanking) => TeamOverviewLeagueTableExcerptItem(
                         teamRanking: teamRanking,
                         highlighted: team.name == teamRanking.teamName,
                       ),

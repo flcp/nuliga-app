@@ -19,12 +19,13 @@ class TeamOverviewNextMatchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final backgroundColor = highlighted
         ? Theme.of(context).primaryColorLight
-        : Theme.of(context).cardColor;
+        : Theme.of(context).cardTheme.color;
 
     return AspectRatio(
       aspectRatio: 1,
       child: Card(
         color: backgroundColor,
+        elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(

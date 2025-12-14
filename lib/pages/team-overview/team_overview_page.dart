@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_details_page.dart';
-import 'package:nuliga_app/pages/team-details/league_table_details_page.dart';
-import 'package:nuliga_app/pages/team-overview/league-table/team_overview_league_table_short_item.dart';
 import 'package:nuliga_app/pages/team-overview/league-table/team_overview_league_table_excerpt.dart';
 import 'package:nuliga_app/pages/team-overview/next-matches/team_overview_next_matches_list.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
-import 'package:nuliga_app/services/league_table_service.dart';
-import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http.dart';
 import 'package:provider/provider.dart';
 
@@ -45,7 +41,9 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                     children: [
                       Text(
                         team.name,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       TextButton(
                         onPressed: () => goToNextMatches(team),

@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/next-matches/next_matches_details_page.dart';
-import 'package:nuliga_app/pages/team-overview/team_overview_next_matches_list.dart';
+import 'package:nuliga_app/pages/team-details/league_table_details_page.dart';
+import 'package:nuliga_app/pages/team-overview/league-table/team_overview_league_table_short_item.dart';
+import 'package:nuliga_app/pages/team-overview/league-table/team_overview_league_table_excerpt.dart';
+import 'package:nuliga_app/pages/team-overview/next-matches/team_overview_next_matches_list.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
+import 'package:nuliga_app/services/league_table_service.dart';
+import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http.dart';
 import 'package:provider/provider.dart';
 
-class NextMatchesOverviewPage extends StatefulWidget {
-  const NextMatchesOverviewPage({super.key});
+class TeamOverviewPage extends StatefulWidget {
+  const TeamOverviewPage({super.key});
 
   @override
-  State<NextMatchesOverviewPage> createState() =>
-      _NextMatchesOverviewPageState();
+  State<TeamOverviewPage> createState() => _TeamOverviewPageState();
 }
 
-class _NextMatchesOverviewPageState extends State<NextMatchesOverviewPage> {
+class _TeamOverviewPageState extends State<TeamOverviewPage> {
   Future<void> refresh() {
     clearCache();
     setState(() {});
@@ -43,15 +48,7 @@ class _NextMatchesOverviewPageState extends State<NextMatchesOverviewPage> {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  NextMatchesDetailsPage(team: team),
-                            ),
-                          );
-                        },
+                        onPressed: () => goToNextMatches(team),
                         child: Text("View all"),
                       ),
                     ],
@@ -64,10 +61,24 @@ class _NextMatchesOverviewPageState extends State<NextMatchesOverviewPage> {
                     team: team,
                   ),
                 ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TeamOverviewLeagueTableExcerpt(team: team),
+                ),
               ],
             );
           }).toList(),
         ),
+      ),
+    );
+  }
+
+  void goToNextMatches(FollowedClub team) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NextMatchesDetailsPage(team: team),
       ),
     );
   }

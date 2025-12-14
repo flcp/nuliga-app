@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/league_team_standing.dart';
 
-class LeagueTableOverviewListCard extends StatelessWidget {
-  const LeagueTableOverviewListCard({
+class TeamOverviewLeagueTableShortItem extends StatelessWidget {
+  const TeamOverviewLeagueTableShortItem({
     super.key,
     required this.threeClosestRankings,
   });

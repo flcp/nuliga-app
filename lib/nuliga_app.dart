@@ -11,7 +11,7 @@ class NuligaApp extends StatefulWidget {
 class _NuligaAppState extends State<NuligaApp> {
   int _selectedIndex = 0;
 
-  static const _widgets = [NextMatchesOverviewPage(), Placeholder()];
+  static const _widgets = [TeamOverviewPage(), Placeholder()];
 
   void _onItemTapped(int index) {
     setState(() {

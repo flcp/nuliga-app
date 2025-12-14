@@ -7,12 +7,19 @@ import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
 
 class NextMatchesDetailsPage extends StatelessWidget {
   final FollowedClub team;
-  const NextMatchesDetailsPage({required this.team, super.key});
+  final int startIndex;
+
+  const NextMatchesDetailsPage({
+    required this.team,
+    super.key,
+    this.startIndex = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
+      initialIndex: startIndex,
       child: Scaffold(
         appBar: AppBar(
           title: Text(team.name),

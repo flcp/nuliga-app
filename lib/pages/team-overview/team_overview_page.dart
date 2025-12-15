@@ -32,12 +32,14 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
       child: ListView(
         children: teams.map((team) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                team.name,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Text(
+                  team.name,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -46,7 +48,7 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                   children: [
                     Text(
                       "Upcoming",
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     TextButton(
                       onPressed: () => goToNextMatches(team),
@@ -60,10 +62,33 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: NextMatches(matchesUrl: team.matchesUrl, team: team),
               ),
-
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+                child: Text(
+                  "Ranking",
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: ShortLeagueTable(team: team),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Results",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    TextButton(
+                      onPressed: () => goToResults(team),
+                      child: Text("View all"),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -82,6 +107,15 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TeamDetailsPage(team: team)),
+    );
+  }
+
+  void goToResults(FollowedClub team) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TeamDetailsPage(team: team, startIndex: 2),
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
-import 'package:nuliga_app/pages/team-details/next-matches/next_matches_details_list_location_indicator.dart';
+import 'package:nuliga_app/services/shared/date.dart';
 
 class NextMatchesDetailsListItem extends StatelessWidget {
   final FutureMatch match;
@@ -24,59 +24,57 @@ class NextMatchesDetailsListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      selected: highlighted,
-      selectedColor: Theme.of(context).textTheme.bodyMedium!.color,
-      textColor: Theme.of(context).disabledColor.withAlpha(130),
-      subtitle: Wrap(
+      subtitle: Row(
+        spacing: 12,
         children: [
-          const Icon(Icons.calendar_today, size: 16.0, color: Colors.grey),
-          const SizedBox(width: spacingSubtitleIcons),
-          SizedBox(
-            width: 90,
-            child: Text(
-              "${match.time.day}.${match.time.month}.${match.time.year}",
-            ),
+          Row(
+            spacing: 4,
+            children: [
+              Icon(
+                Icons.calendar_today,
+                size: 16.0,
+                color: Theme.of(context).disabledColor,
+              ),
+              Text(getDateString(match.time)),
+            ],
           ),
-          const Icon(Icons.access_time, size: 16.0, color: Colors.grey),
-          const SizedBox(width: spacingSubtitleIcons),
-          Text(
-            "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
+          Row(
+            spacing: 4,
+            children: [
+              Icon(
+                Icons.access_time,
+                size: 16.0,
+                color: Theme.of(context).disabledColor,
+              ),
+              Text(
+                "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
+              ),
+            ],
+          ),
+          Expanded(
+            child: Row(
+              spacing: 4,
+              children: [
+                Icon(Icons.location_on),
+                Expanded(
+                  child: Text(
+                    match.homeTeam == hometeam
+                        ? "Home"
+                        : match.locationUrl.isEmpty
+                        ? "TBD"
+                        : match.locationUrl,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
-      title: MatchupIndicator(
-        match: match,
-        hometeam: hometeam,
-        displayOnlyOpponentName: displayOnlyOpponentName,
-      ),
-      trailing: NextMatchesDetailsLocationIndicator(
-        match: match,
-        homeTeamName: this.hometeam,
+      title: Text(
+        match.homeTeam == hometeam ? match.opponentTeam : match.homeTeam,
       ),
     );
-  }
-}
-
-class MatchupIndicator extends StatelessWidget {
-  const MatchupIndicator({
-    super.key,
-    required this.match,
-    required this.hometeam,
-    required this.displayOnlyOpponentName,
-  });
-
-  final FutureMatch match;
-  final String hometeam;
-  final bool displayOnlyOpponentName;
-
-  @override
-  Widget build(BuildContext context) {
-    if (displayOnlyOpponentName) {
-      final isHomeMatch = match.homeTeam == hometeam;
-
-      return Text(isHomeMatch ? match.opponentTeam : match.homeTeam);
-    }
-
-    return Text("${match.homeTeam} – ${match.opponentTeam}");
   }
 }

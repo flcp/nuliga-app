@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/services/last_matches_service.dart';
@@ -20,53 +22,53 @@ class LastMatches extends StatelessWidget {
           return Text("loading");
         }
 
-        final matchResults = getDataOrEmptyList(
-          snapshot,
-        ).getRange(0, 3).toList();
+        final matchResults = getDataOrEmptyList(snapshot).reversed.toList();
+        final lastThreeMatchResults = matchResults.getRange(
+          0,
+          min(3, matchResults.length),
+        );
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: matchResults
+          spacing: 0,
+          children: lastThreeMatchResults
               .map(
-                (result) => SizedBox(
-                  height: 50,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            result.homeTeam,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            textAlign: TextAlign.right,
-                            softWrap: false,
-                            overflow: TextOverflow.fade,
-                          ),
+                (result) => Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          result.homeTeam,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.right,
+                          softWrap: false,
+                          overflow: TextOverflow.fade,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            result.homeTeamMatchesWon.toString(),
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          result.homeTeamMatchesWon.toString(),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
+                      ),
 
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            result.opponentTeamMatchesWon.toString(),
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          result.opponentTeamMatchesWon.toString(),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        Expanded(
-                          child: Text(
-                            result.opponentTeam,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            softWrap: true,
-                          ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          result.opponentTeam,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          softWrap: true,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               )

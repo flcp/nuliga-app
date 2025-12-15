@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/league_team_standing.dart';
 import 'package:nuliga_app/services/league-table/league_table_repository.dart';

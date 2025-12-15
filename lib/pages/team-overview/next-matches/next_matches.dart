@@ -21,10 +21,13 @@ class NextMatches extends StatelessWidget {
         ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // TODO: fix
             return ListView(
               scrollDirection: Axis.horizontal,
-              children: [AspectRatio(aspectRatio: 1, child: Card())],
+              children: [
+                AspectRatio(aspectRatio: 1, child: Card(elevation: 0)),
+                AspectRatio(aspectRatio: 1, child: Card(elevation: 0)),
+                AspectRatio(aspectRatio: 1, child: Card(elevation: 0)),
+              ],
             );
           }
 

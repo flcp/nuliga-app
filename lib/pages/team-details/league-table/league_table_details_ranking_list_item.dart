@@ -16,13 +16,15 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
     final twoLetterWidth = 18.0;
     final dimTextColor = Theme.of(context).disabledColor;
 
+    final isHighlighted = teamStanding.teamName == team;
+
     return ListTile(
-      title: DefaultTextStyle(
+      title: DefaultTextStyle.merge(
         style: TextStyle(
-          fontSize: 14,
-          color: teamStanding.teamName == team
+          color: isHighlighted
               ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.onSurface,
+              : Theme.of(context).textTheme.bodyMedium!.color,
+          fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +86,6 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
           ],
         ),
       ),
-      selected: teamStanding.teamName == team,
     );
   }
 }

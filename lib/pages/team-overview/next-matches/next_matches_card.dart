@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/future_match.dart';
-import 'package:nuliga_app/pages/team-details/next-matches/next_matches_details_list_location_indicator.dart';
+import 'package:nuliga_app/pages/shared/next_matches_location_indicator.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
+import 'package:nuliga_app/services/shared/date.dart';
 
 class NextMatchesCard extends StatelessWidget {
   final FollowedClub team;
@@ -52,7 +53,7 @@ class NextMatchesCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${match.time.day}.${match.time.month}.${match.time.year}",
+                        getShortDateString(match.time),
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       NextMatchesDetailsLocationIndicator(

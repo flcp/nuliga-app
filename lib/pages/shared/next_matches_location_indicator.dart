@@ -59,15 +59,26 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
         }
 
         // sizedbox, sonst verschiebt sich iconbutton gegenueber icon
-        return SizedBox(
-          height: size,
-          width: size,
-          child: IconButton(
-            padding: EdgeInsets.zero,
-            icon: Icon(Icons.directions, size: size),
-            onPressed: () async {
-              await launchUrl(uri);
-            },
+        return Container(
+          padding: const EdgeInsets.all(8), // space between icon and circle
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          ),
+          child: SizedBox(
+            height: size,
+            width: size,
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(
+                Icons.directions,
+                size: size,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+              onPressed: () async {
+                await launchUrl(uri);
+              },
+            ),
           ),
         );
       },

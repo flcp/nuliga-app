@@ -15,7 +15,7 @@ void main() async {
       child: MaterialApp(
         home: const BottomNavigation(),
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         ),
       ),
     ),

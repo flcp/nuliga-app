@@ -20,8 +20,8 @@ class NextMatchesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = highlighted
-        ? Theme.of(context).primaryColorLight
-        : Theme.of(context).cardTheme.color;
+        ? Theme.of(context).colorScheme.primaryContainer
+        : Theme.of(context).colorScheme.surfaceContainer;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),

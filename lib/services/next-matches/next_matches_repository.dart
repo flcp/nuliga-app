@@ -1,6 +1,6 @@
 import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/services/next-matches/next_matches_parser.dart';
-import 'package:nuliga_app/services/shared/http.dart';
+import 'package:nuliga_app/services/shared/http_client.dart';
 
 class NextMatchesRepository {
   HttpClient httpClient = HttpClient();

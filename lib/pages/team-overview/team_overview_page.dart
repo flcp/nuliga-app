@@ -5,7 +5,7 @@ import 'package:nuliga_app/pages/team-overview/last-matches/last_matches.dart';
 import 'package:nuliga_app/pages/team-overview/league-table/short_league_table.dart';
 import 'package:nuliga_app/pages/team-overview/next-matches/next_matches.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
-import 'package:nuliga_app/services/shared/http.dart';
+import 'package:nuliga_app/services/shared/http_client.dart';
 import 'package:provider/provider.dart';
 
 class TeamOverviewPage extends StatefulWidget {

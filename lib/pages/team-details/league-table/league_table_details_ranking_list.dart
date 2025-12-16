@@ -5,7 +5,7 @@ import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
 import 'package:nuliga_app/services/league-table/league_table_repository.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
-import 'package:nuliga_app/services/shared/http.dart';
+import 'package:nuliga_app/services/shared/http_client.dart';
 
 class LeagueTableDetailsRankingList extends StatefulWidget {
   final String url;

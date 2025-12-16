@@ -22,8 +22,11 @@ class NextMatchesDetailsList extends StatefulWidget {
 }
 
 class _NextMatchesDetailsListState extends State<NextMatchesDetailsList> {
+  final httpClient = HttpClient();
+  final nextMatchesService = NextMatchesService();
+
   Future<void> refresh() {
-    clearCache();
+    httpClient.clearCache();
     setState(() {});
     return Future.value();
   }
@@ -31,7 +34,7 @@ class _NextMatchesDetailsListState extends State<NextMatchesDetailsList> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<FutureMatch>>(
-      future: NextMatchesService.getNextMatchesForTeam(
+      future: nextMatchesService.getNextMatchesForTeam(
         widget.matchOverviewUrl,
         widget.teamName,
       ),

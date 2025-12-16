@@ -7,13 +7,14 @@ import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class ShortLeagueTable extends StatelessWidget {
   final FollowedClub team;
+  final leagueTableService = LeagueTableService();
 
-  const ShortLeagueTable({super.key, required this.team});
+  ShortLeagueTable({super.key, required this.team});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: LeagueTableService.getClosestRankingsToTeam(
+      future: leagueTableService.getClosestRankingsToTeam(
         team.rankingTableUrl,
         team,
       ),

@@ -3,9 +3,13 @@ import 'package:nuliga_app/services/next-matches/match_location_repository.dart'
 import 'package:nuliga_app/services/next-matches/next_matches_repository.dart';
 
 class NextMatchesService {
-  static Future<({List<FutureMatch> next, List<FutureMatch> later})>
+  final nextMatchesRepository = NextMatchesRepository();
+
+  final matchLocationRepository = MatchLocationRepository();
+
+  Future<({List<FutureMatch> next, List<FutureMatch> later})>
   getNextMatchesWithNextGamedaySeparate(String matchesUrl, String name) async {
-    var allMatches = await NextMatchesRepository.getNextMatches(matchesUrl);
+    var allMatches = await nextMatchesRepository.getNextMatches(matchesUrl);
     var matchesForTeam = allMatches
         .where((match) => match.homeTeam == name || match.opponentTeam == name)
         .toList();
@@ -22,11 +26,11 @@ class NextMatchesService {
     );
   }
 
-  static Future<List<FutureMatch>> getNextMatchesForTeam(
+  Future<List<FutureMatch>> getNextMatchesForTeam(
     String matchupsUrl,
     String teamName,
   ) async {
-    var allMatches = await NextMatchesRepository.getNextMatches(matchupsUrl);
+    var allMatches = await nextMatchesRepository.getNextMatches(matchupsUrl);
     var matchesForTeam = allMatches
         .where(
           (match) =>
@@ -46,10 +50,10 @@ class NextMatchesService {
         .toList();
   }
 
-  static Future<String> getLocationMapsLink(FutureMatch match) async {
+  Future<String> getLocationMapsLink(FutureMatch match) async {
     if (match.locationUrl.isEmpty) return Future.value("");
 
-    final locationAddress = await MatchLocationRepository.getMatchLocation(
+    final locationAddress = await matchLocationRepository.getMatchLocation(
       match.locationUrl,
     );
 

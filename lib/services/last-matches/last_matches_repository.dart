@@ -3,10 +3,12 @@ import 'package:nuliga_app/services/last-matches/last_matches_overview_parser.da
 import 'package:nuliga_app/services/shared/http.dart';
 
 class LastMatchesRepository {
-  Future<List<MatchResult>> getLastMatches(String matchupsUrl) async {
-    final htmlContent = await fetchWebsiteCached(matchupsUrl);
+  HttpClient httpClient = HttpClient();
 
-    final baseUrl = getBaseUrl(matchupsUrl);
+  Future<List<MatchResult>> getLastMatches(String matchupsUrl) async {
+    final htmlContent = await httpClient.get(matchupsUrl);
+
+    final baseUrl = HttpClient.getBaseUrl(matchupsUrl);
 
     final result = LastMatchesOverviewParser().getMatchResultEntries(
       htmlContent,

@@ -3,10 +3,12 @@ import 'package:nuliga_app/services/shared/http.dart';
 import 'package:nuliga_app/services/league-table/league_parser.dart';
 
 class LeagueTableRepository {
-  static Future<List<LeagueTeamRanking>> getLeagueTeamRankings(
+  HttpClient httpClient = HttpClient();
+
+  Future<List<LeagueTeamRanking>> getLeagueTeamRankings(
     String leagueUrl,
   ) async {
-    final htmlContent = await fetchWebsiteCached(leagueUrl);
+    final htmlContent = await httpClient.get(leagueUrl);
     final result = LeagueParser.parseLeagueTable(htmlContent);
 
     return result;

@@ -3,10 +3,12 @@ import 'package:nuliga_app/services/next-matches/next_matches_parser.dart';
 import 'package:nuliga_app/services/shared/http.dart';
 
 class NextMatchesRepository {
-  static Future<List<FutureMatch>> getNextMatches(String matchupsUrl) async {
-    final htmlContent = await fetchWebsiteCached(matchupsUrl);
+  HttpClient httpClient = HttpClient();
 
-    final baseUrl = getBaseUrl(matchupsUrl);
+  Future<List<FutureMatch>> getNextMatches(String matchupsUrl) async {
+    final htmlContent = await httpClient.get(matchupsUrl);
+
+    final baseUrl = HttpClient.getBaseUrl(matchupsUrl);
 
     final result = NextMatchesParser.getEntriesAsFutureMatches(
       htmlContent,

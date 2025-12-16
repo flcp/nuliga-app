@@ -8,14 +8,16 @@ class NextMatches extends StatelessWidget {
   final String matchesUrl;
   final FollowedClub team;
 
-  const NextMatches({super.key, required this.matchesUrl, required this.team});
+  final nextMatchesService = NextMatchesService();
+
+  NextMatches({super.key, required this.matchesUrl, required this.team});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 170,
       child: FutureBuilder(
-        future: NextMatchesService.getNextMatchesWithNextGamedaySeparate(
+        future: nextMatchesService.getNextMatchesWithNextGamedaySeparate(
           matchesUrl,
           team.name,
         ),

@@ -16,8 +16,10 @@ class TeamOverviewPage extends StatefulWidget {
 }
 
 class _TeamOverviewPageState extends State<TeamOverviewPage> {
+  HttpClient httpClient = HttpClient();
+
   Future<void> refresh() {
-    clearCache();
+    httpClient.clearCache();
     setState(() {});
     return Future.value();
   }

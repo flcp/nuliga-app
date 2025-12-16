@@ -3,9 +3,9 @@ import 'package:nuliga_app/model/league_team_standing.dart';
 import 'package:nuliga_app/pages/team-details/league-table/league_table_details_ranking_list_item.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
+import 'package:nuliga_app/services/league-table/league_table_repository.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http.dart';
-import '../../../services/league_table_service.dart';
 
 class LeagueTableDetailsRankingList extends StatefulWidget {
   final String url;
@@ -24,8 +24,11 @@ class LeagueTableDetailsRankingList extends StatefulWidget {
 
 class _LeagueTableDetailsRankingListState
     extends State<LeagueTableDetailsRankingList> {
+  final httpClient = HttpClient();
+  final leagueTableRepository = LeagueTableRepository();
+
   Future<void> refresh() {
-    clearCache();
+    httpClient.clearCache();
     setState(() {});
     return Future.value();
   }
@@ -33,7 +36,7 @@ class _LeagueTableDetailsRankingListState
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<LeagueTeamRanking>>(
-      future: LeagueTableService.getLeagueTeamRankings(widget.url),
+      future: leagueTableRepository.getLeagueTeamRankings(widget.url),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return LoadingIndicator();

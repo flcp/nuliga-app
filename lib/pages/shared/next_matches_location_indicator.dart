@@ -10,7 +10,9 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
 
   final double size = 30.0;
 
-  const NextMatchesDetailsLocationIndicator({
+  final nextMatchesService = NextMatchesService();
+
+  NextMatchesDetailsLocationIndicator({
     required this.match,
     super.key,
     required this.homeTeamName,
@@ -27,7 +29,7 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
     }
 
     return FutureBuilder(
-      future: NextMatchesService.getLocationMapsLink(match),
+      future: nextMatchesService.getLocationMapsLink(match),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox(

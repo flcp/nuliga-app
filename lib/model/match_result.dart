@@ -5,6 +5,7 @@ class MatchResult {
   final String location;
   final int homeTeamMatchesWon;
   final int opponentTeamMatchesWon;
+  final String resultDetailUrl;
 
   MatchResult({
     required this.time,
@@ -13,5 +14,6 @@ class MatchResult {
     required this.location,
     required this.homeTeamMatchesWon,
     required this.opponentTeamMatchesWon,
+    required this.resultDetailUrl,
   });
 }

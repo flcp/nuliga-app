@@ -5,8 +5,12 @@ import 'package:nuliga_app/services/shared/http.dart';
 class LastMatchesRepository {
   Future<List<MatchResult>> getLastMatches(String matchupsUrl) async {
     final htmlContent = await fetchWebsiteCached(matchupsUrl);
+
+    final baseUrl = getBaseUrl(matchupsUrl);
+
     final result = LastMatchesOverviewParser().getMatchResultEntries(
       htmlContent,
+      baseUrl,
     );
 
     return result;

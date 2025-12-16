@@ -9,7 +9,10 @@ void main() {
       final file = File('test/assets/last-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = LastMatchesOverviewParser().getMatchResultEntries(html);
+      final result = LastMatchesOverviewParser().getMatchResultEntries(
+        html,
+        "http://example.com/",
+      );
 
       expect(result.length, 20);
       expect(result[0].homeTeam, "Fortuna Schwetzingen");
@@ -22,7 +25,10 @@ void main() {
       final file = File('test/assets/last-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = LastMatchesOverviewParser().getMatchResultEntries(html);
+      final result = LastMatchesOverviewParser().getMatchResultEntries(
+        html,
+        "http://example.com/",
+      );
 
       expect(result[0].time, DateTime(2025, 10, 11, 14, 0));
     });
@@ -30,7 +36,10 @@ void main() {
       final file = File('test/assets/last-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = LastMatchesOverviewParser().getMatchResultEntries(html);
+      final result = LastMatchesOverviewParser().getMatchResultEntries(
+        html,
+        "http://example.com/",
+      );
 
       expect(result[1].time, DateTime(2025, 10, 11, 14, 0));
     });
@@ -41,7 +50,10 @@ void main() {
       final file = File('test/assets/last-matches/otherFormat.json');
       final html = await file.readAsString();
 
-      final result = LastMatchesOverviewParser().getMatchResultEntries(html);
+      final result = LastMatchesOverviewParser().getMatchResultEntries(
+        html,
+        "http://example.com/",
+      );
 
       expect(result.length, 0);
     });
@@ -50,4 +62,6 @@ void main() {
   group('LastMatchesOverviewParser with no match links', () {
     // TODO: add functionality and add tests
   });
+
+  // TODO: write test for link
 }

@@ -6,8 +6,7 @@ class NextMatchesRepository {
   static Future<List<FutureMatch>> getNextMatches(String matchupsUrl) async {
     final htmlContent = await fetchWebsiteCached(matchupsUrl);
 
-    final uri = Uri.parse(matchupsUrl);
-    final baseUrl = "${uri.scheme}://${uri.host}";
+    final baseUrl = getBaseUrl(matchupsUrl);
 
     final result = NextMatchesParser.getEntriesAsFutureMatches(
       htmlContent,

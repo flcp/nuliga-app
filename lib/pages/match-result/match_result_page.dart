@@ -1,90 +1,91 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/match_result.dart';
-import 'package:nuliga_app/model/match_result_detail.dart';
+import 'package:nuliga_app/pages/match-result/match_result_game_result_row.dart';
 import 'package:nuliga_app/services/match_result_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class MatchResultPage extends StatelessWidget {
   final MatchResult matchResult;
 
-  const MatchResultPage({required this.matchResult, super.key});
+  final matchResultService = MatchResultService();
+
+  MatchResultPage({required this.matchResult, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Scaffold(
-        appBar: AppBar(title: Text("Ergebnis")),
-        body: FutureBuilder(
-          future: MatchResultService.getMatchResultDetails(
-            matchResult.resultDetailUrl,
-          ),
-          builder: (context, asyncSnapshot) {
-            final matchResultDetail = getDataOrDefault(asyncSnapshot, null);
-            if (matchResultDetail == null) {
-              // TODO: fix
-              return Text("ERROR");
-            }
-
-            return Column(
-              children: [
-                Text("MD1"),
-                MatchResultGameResultRow(gameResult: matchResultDetail.MD1),
-                Text("MD2"),
-                MatchResultGameResultRow(gameResult: matchResultDetail.MD2),
-                Text("WD"),
-                MatchResultGameResultRow(gameResult: matchResultDetail.WD),
-                Text("XD"),
-                MatchResultGameResultRow(gameResult: matchResultDetail.XD),
-                Text("MS1"),
-                MatchResultGameResultRow(gameResult: matchResultDetail.MS1),
-                Text("MS2"),
-                MatchResultGameResultRow(gameResult: matchResultDetail.MS2),
-                Text("MS3"),
-                MatchResultGameResultRow(gameResult: matchResultDetail.MS3),
-                Text("WS"),
-                MatchResultGameResultRow(gameResult: matchResultDetail.WS),
-              ],
-            );
-          },
+    return Scaffold(
+      appBar: AppBar(title: Text("Ergebnis")),
+      body: FutureBuilder(
+        future: matchResultService.getMatchResultDetails(
+          matchResult.resultDetailUrl,
         ),
-      ),
-    );
-  }
-}
+        builder: (context, asyncSnapshot) {
+          final matchResultDetail = getDataOrDefault(asyncSnapshot, null);
+          if (matchResultDetail == null) {
+            // TODO: fix
+            return Text("ERROR");
+          }
 
-class MatchResultGameResultRow extends StatelessWidget {
-  const MatchResultGameResultRow({super.key, required this.gameResult});
+          final titleStyle = Theme.of(context).textTheme.displaySmall;
 
-  final GameResult gameResult;
+          return ListView(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(matchResult.homeTeam, style: titleStyle),
+                  ),
+                  Text(
+                    matchResult.homeTeamMatchesWon.toString(),
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  Text(" - ", style: Theme.of(context).textTheme.displaySmall),
+                  Text(
+                    matchResult.opponentTeamMatchesWon.toString(),
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Column(
-          children: gameResult.homePlayerNames
-              .map((name) => Text(name))
-              .toList(),
-        ),
-        Column(
-          children: [
-            Text(
-              "${gameResult.homeSetsWon.toString()} - ${gameResult.opponentSetsWon.toString()}",
-            ),
-            ...gameResult.sets.map(
-              (set) => Text(
-                "${set.homeScore.toString()} - ${set.opponentScore.toString()}",
+                  Expanded(
+                    child: Text(matchResult.opponentTeam, style: titleStyle),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-        Column(
-          children: gameResult.opponentPlayerNames
-              .map((name) => Text(name))
-              .toList(),
-        ),
-      ],
+              MatchResultGameResultRow(
+                gameResult: matchResultDetail.MD1,
+                title: "HD1",
+              ),
+              MatchResultGameResultRow(
+                gameResult: matchResultDetail.MD2,
+                title: "HD2",
+              ),
+              MatchResultGameResultRow(
+                gameResult: matchResultDetail.MS1,
+                title: "HE1",
+              ),
+              MatchResultGameResultRow(
+                gameResult: matchResultDetail.MS2,
+                title: "HE2",
+              ),
+              MatchResultGameResultRow(
+                gameResult: matchResultDetail.MS3,
+                title: "HE3",
+              ),
+              MatchResultGameResultRow(
+                gameResult: matchResultDetail.WS,
+                title: "DE",
+              ),
+              MatchResultGameResultRow(
+                gameResult: matchResultDetail.WD,
+                title: "DD",
+              ),
+              MatchResultGameResultRow(
+                gameResult: matchResultDetail.XD,
+                title: "MX",
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

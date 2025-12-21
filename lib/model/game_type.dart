@@ -21,4 +21,8 @@ enum GameType {
       orElse: () => throw "unknown type $typeString",
     );
   }
+
+  bool isDoubles() {
+    return this == md1 || this == md2 || this == wd || this == xd;
+  }
 }

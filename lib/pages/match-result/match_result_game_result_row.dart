@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/game_result.dart';
 
 class MatchResultGameResultRow extends StatelessWidget {
-  const MatchResultGameResultRow({
-    super.key,
-    required this.gameResult,
-    required this.title,
-  });
+  const MatchResultGameResultRow({super.key, required this.gameResult});
 
   final GameResult gameResult;
-  final String title;
 
   @override
   Widget build(BuildContext context) {

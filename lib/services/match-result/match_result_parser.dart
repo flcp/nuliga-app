@@ -24,57 +24,50 @@ class MatchResultParser {
       (cells) => cells.length > 6,
     );
 
-    final MS1 = getGameResult(
+    final ms1 = getGameResult(
       filledListOfListOfCells
           .where((cells) => cells[0].text.trim() == "1.HE")
           .single,
     );
 
-    final MS2 = getGameResult(
+    final ms2 = getGameResult(
       filledListOfListOfCells
           .where((cells) => cells[0].text.trim() == "2.HE")
           .first,
     );
-    final MS3 = getGameResult(
+    final ms3 = getGameResult(
       filledListOfListOfCells
           .where((cells) => cells[0].text.trim() == "3.HE")
           .first,
     );
-    final WS = getGameResult(
+    final ws = getGameResult(
       filledListOfListOfCells
           .where((cells) => cells[0].text.trim() == "DE")
           .first,
     );
-    final MD1 = getGameResult(
+    final md1 = getGameResult(
       filledListOfListOfCells
           .where((cells) => cells[0].text.trim() == "1.HD")
           .first,
     );
-    final MD2 = getGameResult(
+    final md2 = getGameResult(
       filledListOfListOfCells
           .where((cells) => cells[0].text.trim() == "2.HD")
           .first,
     );
-    final WD = getGameResult(
+    final wd = getGameResult(
       filledListOfListOfCells
           .where((cells) => cells[0].text.trim() == "DD")
           .first,
     );
-    final XD = getGameResult(
+    final xd = getGameResult(
       filledListOfListOfCells
           .where((cells) => cells[0].text.trim() == "GD")
           .first,
     );
 
     return MatchResultDetail(
-      MS1: MS1,
-      MS2: MS2,
-      MS3: MS3,
-      MD1: MD1,
-      MD2: MD2,
-      WS: WS,
-      XD: XD,
-      WD: WD,
+      gameResults: [ws, wd, xd, ms1, ms2, ms3, md1, md2],
     );
   }
 

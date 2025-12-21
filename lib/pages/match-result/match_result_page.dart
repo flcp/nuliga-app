@@ -50,37 +50,9 @@ class MatchResultPage extends StatelessWidget {
                   ),
                 ],
               ),
-              MatchResultGameResultRow(
-                gameResult: matchResultDetail.MD1,
-                title: "HD1",
-              ),
-              MatchResultGameResultRow(
-                gameResult: matchResultDetail.MD2,
-                title: "HD2",
-              ),
-              MatchResultGameResultRow(
-                gameResult: matchResultDetail.MS1,
-                title: "HE1",
-              ),
-              MatchResultGameResultRow(
-                gameResult: matchResultDetail.MS2,
-                title: "HE2",
-              ),
-              MatchResultGameResultRow(
-                gameResult: matchResultDetail.MS3,
-                title: "HE3",
-              ),
-              MatchResultGameResultRow(
-                gameResult: matchResultDetail.WS,
-                title: "DE",
-              ),
-              MatchResultGameResultRow(
-                gameResult: matchResultDetail.WD,
-                title: "DD",
-              ),
-              MatchResultGameResultRow(
-                gameResult: matchResultDetail.XD,
-                title: "MX",
+              ...matchResultDetail.gameResults.map(
+                (gameResult) =>
+                    MatchResultGameResultRow(gameResult: gameResult),
               ),
             ],
           );

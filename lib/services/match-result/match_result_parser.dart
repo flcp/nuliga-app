@@ -75,15 +75,20 @@ class MatchResultParser {
   }
 
   GameResult getGameResult(List<Element> cells) {
+    final homePlayers = cells[1]
+        .querySelectorAll('a')
+        .map((a) => a.text.trim())
+        .map((playerName) => Player.fromCommaSeparatedString(playerName))
+        .toList();
+    final opponentPlayers = cells[2]
+        .querySelectorAll('a')
+        .map((a) => a.text.trim())
+        .map((playerName) => Player.fromCommaSeparatedString(playerName))
+        .toList();
+
     final result = GameResult(
-      homePlayerNames: cells[1]
-          .querySelectorAll('a')
-          .map((a) => a.text.trim())
-          .toList(),
-      opponentPlayerNames: cells[2]
-          .querySelectorAll('a')
-          .map((a) => a.text.trim())
-          .toList(),
+      homePlayers: homePlayers,
+      opponentPlayers: opponentPlayers,
       sets: cells
           .sublist(3, 6)
           .map((c) => c.text.trim())

@@ -1,4 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
+import 'package:flutter/foundation.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
 
 class MatchResultDetail {
@@ -23,17 +24,39 @@ class MatchResultDetail {
   });
 }
 
+class Player {
+  final String firstName;
+  final String lastName;
+
+  Player({required this.firstName, required this.lastName});
+
+  factory Player.fromCommaSeparatedString(String name) {
+    final nameParts = name.split(",");
+
+    if (nameParts.length < 2) {
+      print("Cannot parse name");
+      return Player(firstName: "Unknown", lastName: "Unknown");
+    }
+
+    return Player(firstName: nameParts[1], lastName: nameParts[0]);
+  }
+
+  String getFullname() {
+    return "$firstName $lastName";
+  }
+}
+
 class GameResult {
-  final List<String> homePlayerNames;
-  final List<String> opponentPlayerNames;
+  final List<Player> homePlayers;
+  final List<Player> opponentPlayers;
   final List<SetResult> sets;
   late final int homeSetsWon = _getHomeSetsWon();
   late final int opponentSetsWon = _getOpponentSetsWon();
   late final bool homeTeamWon = homeSetsWon > opponentSetsWon;
 
   GameResult({
-    required this.homePlayerNames,
-    required this.opponentPlayerNames,
+    required this.homePlayers,
+    required this.opponentPlayers,
     required this.sets,
   });
 

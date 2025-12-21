@@ -1,6 +1,10 @@
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
+import 'package:nuliga_app/model/game_result.dart';
+import 'package:nuliga_app/model/game_type.dart';
 import 'package:nuliga_app/model/match_result_detail.dart';
+import 'package:nuliga_app/model/player.dart';
+import 'package:nuliga_app/model/set_result.dart';
 
 class MatchResultParser {
   Future<MatchResultDetail> getGamesAndResults(String htmlContent) async {
@@ -86,6 +90,8 @@ class MatchResultParser {
         .map((playerName) => Player.fromCommaSeparatedString(playerName))
         .toList();
 
+    final type = GameType.getGameType(cells[0].text.trim());
+
     final result = GameResult(
       homePlayers: homePlayers,
       opponentPlayers: opponentPlayers,
@@ -95,6 +101,7 @@ class MatchResultParser {
           .where((text) => text.isNotEmpty)
           .map((cellText) => SetResult.fromString(cellText))
           .toList(),
+      gameType: type,
     );
     return result;
   }

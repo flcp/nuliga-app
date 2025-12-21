@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/match_result_detail.dart';
+import 'package:nuliga_app/model/game_result.dart';
 
 class MatchResultGameResultRow extends StatelessWidget {
   const MatchResultGameResultRow({
@@ -17,53 +17,59 @@ class MatchResultGameResultRow extends StatelessWidget {
       child: ExpansionTile(
         shape: const Border(), // removes expanded divider
         childrenPadding: EdgeInsets.symmetric(horizontal: 8),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        title: Column(
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Text(title),
-            Expanded(
-              child: Column(
-                children: gameResult.homePlayers
-                    .map(
-                      (player) => Text(
-                        player.getFullname(),
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: gameResult.homeTeamWon
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
-            Text(
-              gameResult.homeSetsWon.toString(),
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            Text(" - ", style: Theme.of(context).textTheme.displaySmall),
-            Text(
-              gameResult.opponentSetsWon.toString(),
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            Expanded(
-              child: Column(
-                children: gameResult.opponentPlayers
-                    .map(
-                      (player) => Text(
-                        player.getFullname(),
-                        style: TextStyle(
-                          fontSize: 12,
+            Text(gameResult.gameType.displayName),
 
-                          fontWeight: !gameResult.homeTeamWon
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: gameResult.homePlayers
+                        .map(
+                          (player) => Text(
+                            player.getFullname(),
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: gameResult.homeTeamWon
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+                Text(
+                  gameResult.homeSetsWon.toString(),
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                Text(" - ", style: Theme.of(context).textTheme.displaySmall),
+                Text(
+                  gameResult.opponentSetsWon.toString(),
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                Expanded(
+                  child: Column(
+                    children: gameResult.opponentPlayers
+                        .map(
+                          (player) => Text(
+                            player.getFullname(),
+                            style: TextStyle(
+                              fontSize: 12,
+
+                              fontWeight: !gameResult.homeTeamWon
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

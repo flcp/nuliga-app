@@ -57,10 +57,16 @@ class NextMatchesService {
       match.locationUrl,
     );
 
-    return _createGoogleMapsLink(locationAddress);
+    return getGoogleMapsLink(locationAddress);
   }
 
-  static String _createGoogleMapsLink(String address) {
+  Future<String> getLocation(FutureMatch match) async {
+    if (match.locationUrl.isEmpty) return Future.value("");
+
+    return matchLocationRepository.getMatchLocation(match.locationUrl);
+  }
+
+  static String getGoogleMapsLink(String address) {
     final encodedAddress = Uri.encodeComponent(address);
 
     return "https://www.google.com/maps/search/?api=1&query=$encodedAddress";

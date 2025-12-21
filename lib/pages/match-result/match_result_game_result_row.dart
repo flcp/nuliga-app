@@ -33,7 +33,7 @@ class _MatchResultGameResultRowState extends State<MatchResultGameResultRow> {
               Text(
                 widget.gameResult.gameType.displayName,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface.withAlpha(120),
+                  color: Theme.of(context).colorScheme.onSurface.withAlpha(160),
                 ),
               ),
               Row(
@@ -66,7 +66,7 @@ class _MatchResultGameResultRowState extends State<MatchResultGameResultRow> {
             ],
           ),
           children: [
-            GestureDetector(
+            InkWell(
               onTap: () => _controller.collapse(),
               child: Container(
                 color: Theme.of(context).colorScheme.surfaceContainerLow,
@@ -115,7 +115,7 @@ class PlayersText extends StatelessWidget {
   Widget build(BuildContext context) {
     final greyedOutColor = Theme.of(
       context,
-    ).colorScheme.onSurface.withAlpha(120);
+    ).colorScheme.onSurface.withAlpha(180);
     final textColor = Theme.of(context).colorScheme.onSurface;
 
     return gameType.isDoubles()

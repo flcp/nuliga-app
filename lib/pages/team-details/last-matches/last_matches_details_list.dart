@@ -40,8 +40,9 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
               .map(
                 (result) => ListTile(
                   onTap: () => goToMatchResult(result),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                  trailing: Icon(Icons.chevron_right),
                   subtitle: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.calendar_today,
@@ -60,7 +61,7 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
                         child: Text(
                           result.homeTeam,
                           style: Theme.of(context).textTheme.bodyLarge,
-                          textAlign: TextAlign.right,
+                          textAlign: TextAlign.left,
                           softWrap: true,
                         ),
                       ),
@@ -83,6 +84,7 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
                         child: Text(
                           result.opponentTeam,
                           style: Theme.of(context).textTheme.bodyLarge,
+                          textAlign: TextAlign.right,
                           softWrap: true,
                         ),
                       ),

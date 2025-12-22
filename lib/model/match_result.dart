@@ -1,6 +1,6 @@
 class MatchResult {
   final DateTime time;
-  final String homeTeam;
+  final String homeTeamName;
   final String opponentTeam;
   final String location;
   final int homeTeamMatchesWon;
@@ -9,7 +9,7 @@ class MatchResult {
 
   MatchResult({
     required this.time,
-    required this.homeTeam,
+    required this.homeTeamName,
     required this.opponentTeam,
     required this.location,
     required this.homeTeamMatchesWon,

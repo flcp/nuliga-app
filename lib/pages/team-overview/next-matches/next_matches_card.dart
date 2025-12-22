@@ -19,14 +19,28 @@ class NextMatchesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardColor1 = highlighted
-        ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).colorScheme.primaryFixed;
-    final cardColor2 = Color.lerp(
-      Theme.of(context).colorScheme.primary,
-      Theme.of(context).colorScheme.tertiary,
-      0.75,
-    )!;
+    final highlightedGradient = LinearGradient(
+      colors: [
+        Theme.of(context).colorScheme.primary,
+        Color.lerp(
+          Theme.of(context).colorScheme.primary,
+          Theme.of(context).colorScheme.tertiary,
+          0.75,
+        )!,
+      ],
+      stops: [0.4, 1],
+      begin: Alignment.topLeft,
+      end: Alignment.centerRight,
+    );
+
+    final normalGradient = LinearGradient(
+      colors: [
+        Theme.of(context).colorScheme.surfaceDim.withAlpha(200),
+        Theme.of(context).colorScheme.surfaceDim,
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.centerRight,
+    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -43,12 +57,7 @@ class NextMatchesCard extends StatelessWidget {
             elevation: 0,
             child: Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [cardColor1, cardColor2],
-                  stops: [0.4, 1],
-                  begin: Alignment.topLeft,
-                  end: Alignment.centerRight,
-                ),
+                gradient: highlighted ? highlightedGradient : normalGradient,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Padding(

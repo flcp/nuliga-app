@@ -46,7 +46,7 @@ class LastMatches extends StatelessWidget {
                       ),
                     );
                   },
-                  child: LastMatchesCard(matchResult: result),
+                  child: LastMatchesCard(matchResult: result, homeTeam: team),
                 ),
               )
               .toList(),

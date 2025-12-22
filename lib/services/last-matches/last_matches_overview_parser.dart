@@ -64,7 +64,10 @@ class LastMatchesOverviewParser {
 
       result.add(
         MatchResult(
-          homeTeam: Parser.getCellOrEmpty(cells, Parser.matchesHomeTeamIndex),
+          homeTeamName: Parser.getCellOrEmpty(
+            cells,
+            Parser.matchesHomeTeamIndex,
+          ),
           opponentTeam: Parser.getCellOrEmpty(
             cells,
             Parser.matchesOpponentTeamIndex,

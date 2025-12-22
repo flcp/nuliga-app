@@ -59,7 +59,7 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
           padding: const EdgeInsets.all(8), // space between icon and circle
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Theme.of(context).colorScheme.surfaceContainer,
+            color: Theme.of(context).colorScheme.primaryFixed,
           ),
           child: SizedBox(
             height: size,
@@ -69,7 +69,7 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
               icon: Icon(
                 Icons.directions,
                 size: size,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                color: Theme.of(context).colorScheme.onPrimaryFixed,
               ),
               onPressed: () async {
                 await launchUrl(uri);

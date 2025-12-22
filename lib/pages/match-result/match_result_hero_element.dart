@@ -44,7 +44,7 @@ class MatchResultHeroElement extends StatelessWidget {
                       children: [
                         Expanded(
                           child: MatchResultHeroElementTeamName(
-                            matchResult.homeTeam,
+                            matchResult.homeTeamName,
                           ),
                         ),
                         Padding(

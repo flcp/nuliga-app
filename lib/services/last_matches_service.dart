@@ -10,7 +10,7 @@ class LastMatchesService {
     return allMatches
         .where(
           (match) =>
-              match.homeTeam == teamName || match.opponentTeam == teamName,
+              match.homeTeamName == teamName || match.opponentTeam == teamName,
         )
         .toList();
   }

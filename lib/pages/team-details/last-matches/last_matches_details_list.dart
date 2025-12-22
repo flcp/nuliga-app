@@ -60,7 +60,7 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
                     children: [
                       Expanded(
                         child: Text(
-                          result.homeTeam,
+                          result.homeTeamName,
                           style: Theme.of(context).textTheme.bodyLarge!
                               .copyWith(
                                 fontWeight:
@@ -106,19 +106,19 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
   }
 
   String getEnemyTeamName(MatchResult match, String teamName) {
-    var isFavoriteTeamHome = match.homeTeam == teamName;
-    return isFavoriteTeamHome ? match.opponentTeam : match.homeTeam;
+    var isFavoriteTeamHome = match.homeTeamName == teamName;
+    return isFavoriteTeamHome ? match.opponentTeam : match.homeTeamName;
   }
 
   int getEnemyTeamScore(MatchResult match, String teamName) {
-    var isFavoriteTeamHome = match.homeTeam == teamName;
+    var isFavoriteTeamHome = match.homeTeamName == teamName;
     return isFavoriteTeamHome
         ? match.opponentTeamMatchesWon
         : match.homeTeamMatchesWon;
   }
 
   int getHomeTeamScore(MatchResult match, String teamName) {
-    var isFavoriteTeamHome = match.homeTeam == teamName;
+    var isFavoriteTeamHome = match.homeTeamName == teamName;
     return isFavoriteTeamHome
         ? match.homeTeamMatchesWon
         : match.opponentTeamMatchesWon;

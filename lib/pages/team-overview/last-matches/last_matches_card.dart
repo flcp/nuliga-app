@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/match_result.dart';
 
 class LastMatchesCard extends StatelessWidget {
-  const LastMatchesCard({super.key, required this.matchResult});
+  const LastMatchesCard({
+    super.key,
+    required this.matchResult,
+    required this.homeTeam,
+  });
 
   final MatchResult matchResult;
+  final FollowedClub homeTeam;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Card(
@@ -17,10 +21,10 @@ class LastMatchesCard extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [colorScheme.primary, colorScheme.tertiary],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomRight,
+            gradient: getColorDependingOnWinner(
+              matchResult,
+              homeTeam,
+              Theme.of(context).colorScheme,
             ),
             borderRadius: BorderRadius.circular(12),
           ),
@@ -29,7 +33,9 @@ class LastMatchesCard extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: MatchResultHeroElementTeamName(matchResult.homeTeam),
+                  child: MatchResultHeroElementTeamName(
+                    matchResult.homeTeamName,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -62,6 +68,32 @@ class LastMatchesCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Gradient getColorDependingOnWinner(
+    MatchResult matchResult,
+    FollowedClub followedTeam,
+    ColorScheme colorScheme,
+  ) {
+    final highlightedGradient = LinearGradient(
+      colors: [colorScheme.primary, colorScheme.tertiary],
+      stops: [0.4, 1],
+      begin: Alignment.topLeft,
+      end: Alignment.centerRight,
+    );
+
+    final normalGradient = LinearGradient(
+      colors: [colorScheme.onPrimaryFixedVariant, colorScheme.onPrimaryFixed],
+      begin: Alignment.topLeft,
+      end: Alignment.centerRight,
+    );
+
+    final isHomeMatch = matchResult.homeTeamName == followedTeam.name;
+    final didFavoriteTeamWin = isHomeMatch
+        ? matchResult.homeTeamMatchesWon > matchResult.opponentTeamMatchesWon
+        : matchResult.opponentTeamMatchesWon > matchResult.homeTeamMatchesWon;
+
+    return didFavoriteTeamWin ? highlightedGradient : normalGradient;
   }
 }
 

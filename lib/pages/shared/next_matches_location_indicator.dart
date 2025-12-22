@@ -20,12 +20,10 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).colorScheme.onPrimary.withAlpha(150);
+
     if (match.homeTeam == homeTeamName) {
-      return Icon(
-        Icons.home,
-        color: Theme.of(context).disabledColor,
-        size: size,
-      );
+      return Icon(Icons.home, color: color, size: size);
     }
 
     return FutureBuilder(
@@ -37,7 +35,7 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
             height: size,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation(Colors.grey.shade200),
+              valueColor: AlwaysStoppedAnimation(color),
             ),
           );
         }
@@ -45,11 +43,7 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
         final locationMapsLink = getDataOrDefault(snapshot, "");
 
         if (locationMapsLink.isEmpty || !locationMapsLink.startsWith("http")) {
-          return Icon(
-            Icons.directions,
-            size: size,
-            color: Theme.of(context).disabledColor,
-          );
+          return Icon(Icons.directions, size: size, color: color);
         }
 
         Uri uri;
@@ -65,7 +59,7 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
           padding: const EdgeInsets.all(8), // space between icon and circle
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+            color: Theme.of(context).colorScheme.surfaceContainer,
           ),
           child: SizedBox(
             height: size,
@@ -75,7 +69,7 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
               icon: Icon(
                 Icons.directions,
                 size: size,
-                color: Theme.of(context).colorScheme.onSurface,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
               onPressed: () async {
                 await launchUrl(uri);

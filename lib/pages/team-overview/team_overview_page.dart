@@ -49,8 +49,8 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Upcoming",
-                      style: Theme.of(context).textTheme.titleLarge,
+                      "UPCOMING",
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     TextButton(
                       onPressed: () => goToNextMatches(team),
@@ -65,11 +65,11 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                 child: NextMatches(matchesUrl: team.matchesUrl, team: team),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+                padding: const EdgeInsets.fromLTRB(24, 36, 24, 16),
                 child: Text(
-                  "Ranking",
+                  "RANKING",
                   textAlign: TextAlign.start,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
               Padding(
@@ -82,8 +82,8 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Results",
-                      style: Theme.of(context).textTheme.titleLarge,
+                      "LAST",
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     TextButton(
                       onPressed: () => goToResults(team),

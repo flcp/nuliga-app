@@ -21,12 +21,8 @@ class NextMatchesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final highlightedGradient = LinearGradient(
       colors: [
-        Theme.of(context).colorScheme.primary,
-        Color.lerp(
-          Theme.of(context).colorScheme.primary,
-          Theme.of(context).colorScheme.tertiary,
-          0.75,
-        )!,
+        Theme.of(context).colorScheme.onPrimaryFixedVariant,
+        Theme.of(context).colorScheme.onPrimaryFixed,
       ],
       stops: [0.4, 1],
       begin: Alignment.topLeft,

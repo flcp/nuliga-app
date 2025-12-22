@@ -20,6 +20,7 @@ class ShortLeagueTable extends StatelessWidget {
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
+          // TODO: Fix
           return Card(child: Text("loading"));
         }
 
@@ -45,41 +46,58 @@ class ShortLeagueTable extends StatelessWidget {
             ),
             elevation: 0,
             color: Theme.of(context).colorScheme.surfaceContainer,
-            child: ShaderMask(
-              shaderCallback: (Rect rect) {
-                return const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
                   colors: [
-                    Colors.transparent,
-                    Colors.black,
-                    Colors.black,
-                    Colors.transparent,
+                    Theme.of(context).colorScheme.onPrimaryFixedVariant,
+                    Theme.of(context).colorScheme.onPrimaryFixed,
                   ],
-                  stops: [0.00, 0.2, 0.8, 1],
-                ).createShader(rect);
-              },
-              blendMode: BlendMode.dstIn,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 4,
+
+                  // stops: [0.4, 1],
+                  begin: Alignment.topLeft,
+                  end: Alignment.centerRight,
                 ),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ShaderMask(
+                shaderCallback: (Rect rect) {
+                  return const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black,
+                      Colors.black,
+                      Colors.transparent,
+                    ],
+                    stops: [0.05, 0.2, 0.8, 0.95],
+                  ).createShader(rect);
+                },
+                blendMode: BlendMode.dstIn,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: closestRankings
-                        .map(
-                          (teamRanking) => Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
-                            child: ShortLeagueTableItem(
-                              teamRanking: teamRanking,
-                              highlighted: team.name == teamRanking.teamName,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 4,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: closestRankings
+                          .map(
+                            (teamRanking) => Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 4.0,
+                              ),
+                              child: ShortLeagueTableItem(
+                                teamRanking: teamRanking,
+                                highlighted: team.name == teamRanking.teamName,
+                              ),
                             ),
-                          ),
-                        )
-                        .toList(),
+                          )
+                          .toList(),
+                    ),
                   ),
                 ),
               ),

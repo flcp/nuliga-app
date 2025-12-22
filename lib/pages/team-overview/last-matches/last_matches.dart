@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/pages/match-result/match_result_hero_element.dart';
 import 'package:nuliga_app/pages/match-result/match_result_page.dart';
+import 'package:nuliga_app/pages/team-overview/last-matches/last_matches_card.dart';
 import 'package:nuliga_app/services/last_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
@@ -44,55 +46,7 @@ class LastMatches extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24), // Rounded edges
-                    ),
-                    elevation: 0,
-                    color: Theme.of(context).colorScheme.surfaceContainer,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              result.homeTeam,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                              textAlign: TextAlign.right,
-                              softWrap: false,
-                              overflow: TextOverflow.fade,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
-                            child: Text(
-                              result.homeTeamMatchesWon.toString(),
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                          ),
-
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
-                            child: Text(
-                              result.opponentTeamMatchesWon.toString(),
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              result.opponentTeam,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                              softWrap: true,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  child: LastMatchesCard(matchResult: result),
                 ),
               )
               .toList(),

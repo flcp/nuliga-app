@@ -3,62 +3,65 @@ import 'package:nuliga_app/model/game_result.dart';
 import 'package:nuliga_app/model/game_type.dart';
 import 'package:nuliga_app/model/player.dart';
 
-class MatchResultGameResultRow extends StatefulWidget {
+class MatchResultGameResultRow extends StatelessWidget {
   const MatchResultGameResultRow({super.key, required this.gameResult});
 
   final GameResult gameResult;
 
   @override
-  State<MatchResultGameResultRow> createState() =>
-      _MatchResultGameResultRowState();
-}
-
-class _MatchResultGameResultRowState extends State<MatchResultGameResultRow> {
-  final _controller = ExpansibleController();
-
-  @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).colorScheme.onSurface.withAlpha(160);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Card(
         elevation: 0,
         child: ExpansionTile(
-          controller: _controller,
-          showTrailingIcon: false,
-          shape: const Border(),
-          childrenPadding: EdgeInsets.symmetric(horizontal: 8),
+          shape: Border.all(color: Colors.transparent),
           title: Column(
-            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
               Text(
-                widget.gameResult.gameType.displayName,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface.withAlpha(160),
-                ),
+                gameResult.gameType.displayName,
+                style: TextStyle(color: textColor, fontSize: 12),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: PlayersText(
-                      players: widget.gameResult.homePlayers,
-                      gameType: widget.gameResult.gameType,
-                      didPlayersWin: widget.gameResult.homeTeamWon,
+                      players: gameResult.homePlayers,
+                      gameType: gameResult.gameType,
+                      didPlayersWin: gameResult.homeTeamWon,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "${widget.gameResult.homeSetsWon} - ${widget.gameResult.opponentSetsWon}",
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 16,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        "${gameResult.homeSetsWon} - ${gameResult.opponentSetsWon}",
+
+                        style: Theme.of(context).textTheme.titleMedium!
+                            .copyWith(fontWeight: FontWeight.w900),
+                      ),
                     ),
                   ),
 
                   Expanded(
                     child: PlayersText(
                       align: TextAlign.right,
-                      players: widget.gameResult.opponentPlayers,
-                      gameType: widget.gameResult.gameType,
-                      didPlayersWin: !widget.gameResult.homeTeamWon,
+                      players: gameResult.opponentPlayers,
+                      gameType: gameResult.gameType,
+                      didPlayersWin: !gameResult.homeTeamWon,
                     ),
                   ),
                 ],
@@ -66,28 +69,43 @@ class _MatchResultGameResultRowState extends State<MatchResultGameResultRow> {
             ],
           ),
           children: [
-            InkWell(
-              onTap: () => _controller.collapse(),
-              child: Container(
-                color: Theme.of(context).colorScheme.surfaceContainerLow,
-                width: double.infinity,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: widget.gameResult.sets
-                      .map(
-                        (set) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 8.0,
+            DefaultTextStyle(
+              style: TextStyle(color: textColor),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Flexible(
+                    child: Column(
+                      children: gameResult.homePlayers
+                          .map((player) => Text(player.getFullname()))
+                          .toList(),
+                    ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: gameResult.sets
+                        .map(
+                          (set) => Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                              vertical: 8.0,
+                            ),
+                            child: Text(
+                              "${set.homeScore.toString()} - ${set.opponentScore.toString()}",
+                            ),
                           ),
-                          child: Text(
-                            "${set.homeScore.toString()} - ${set.opponentScore.toString()}",
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
+                        )
+                        .toList(),
+                  ),
+                  Flexible(
+                    child: Column(
+                      children: gameResult.opponentPlayers
+                          .map((player) => Text(player.getFullname()))
+                          .toList(),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

@@ -60,30 +60,36 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
                       Expanded(
                         child: Text(
                           result.homeTeam,
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                fontWeight:
+                                    result.homeTeamMatchesWon >
+                                        result.opponentTeamMatchesWon
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                              ),
                           textAlign: TextAlign.left,
                           softWrap: true,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                         child: Text(
-                          result.homeTeamMatchesWon.toString(),
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 0, 16, 0),
-                        child: Text(
-                          result.opponentTeamMatchesWon.toString(),
-                          style: Theme.of(context).textTheme.titleLarge,
+                          "${result.homeTeamMatchesWon} - ${result.opponentTeamMatchesWon}",
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ),
                       Expanded(
                         child: Text(
                           result.opponentTeam,
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                fontWeight:
+                                    result.opponentTeamMatchesWon >
+                                        result.homeTeamMatchesWon
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                              ),
                           textAlign: TextAlign.right,
                           softWrap: true,
                         ),

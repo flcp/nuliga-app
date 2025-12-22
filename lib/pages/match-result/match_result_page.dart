@@ -12,13 +12,7 @@ class MatchResultPage extends StatelessWidget {
 
   final matchResultService = MatchResultService();
 
-  final FollowedClub homeTeam;
-
-  MatchResultPage({
-    required this.matchResult,
-    super.key,
-    required this.homeTeam,
-  });
+  MatchResultPage({required this.matchResult, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +34,7 @@ class MatchResultPage extends StatelessWidget {
 
           return Column(
             children: [
-              MatchResultHeroElement(
-                matchResult: matchResult,
-                homeTeam: homeTeam,
-              ),
+              MatchResultHeroElement(matchResult: matchResult),
               Expanded(
                 child: ListView(
                   children: matchResultDetail.gameResults

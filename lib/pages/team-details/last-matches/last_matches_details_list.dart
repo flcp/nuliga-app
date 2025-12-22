@@ -9,12 +9,12 @@ import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class LastMatchesDetailsList extends StatefulWidget {
   final String matchOverviewUrl;
-  final FollowedClub team;
+  final String teamName;
 
   const LastMatchesDetailsList({
     super.key,
     required this.matchOverviewUrl,
-    required this.team,
+    required this.teamName,
   });
 
   @override
@@ -27,7 +27,7 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
     return FutureBuilder(
       future: LastMatchesService.getLastMatchesForTeam(
         widget.matchOverviewUrl,
-        widget.team.name,
+        widget.teamName,
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -40,7 +40,7 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
           children: matchResults
               .map(
                 (result) => ListTile(
-                  onTap: () => goToMatchResult(result, widget.team),
+                  onTap: () => goToMatchResult(result),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12),
                   trailing: Icon(Icons.chevron_right),
                   subtitle: Row(
@@ -124,12 +124,11 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
         : match.opponentTeamMatchesWon;
   }
 
-  void goToMatchResult(MatchResult result, FollowedClub homeTeam) {
+  void goToMatchResult(MatchResult result) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            MatchResultPage(matchResult: result, homeTeam: homeTeam),
+        builder: (context) => MatchResultPage(matchResult: result),
       ),
     );
   }

@@ -39,10 +39,8 @@ class LastMatches extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MatchResultPage(
-                          matchResult: result,
-                          homeTeam: team,
-                        ),
+                        builder: (context) =>
+                            MatchResultPage(matchResult: result),
                       ),
                     );
                   },

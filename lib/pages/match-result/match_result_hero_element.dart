@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class MatchResultHeroElement extends StatelessWidget {
-  const MatchResultHeroElement({
-    super.key,
-    required this.matchResult,
-    required this.homeTeam,
-  });
+  const MatchResultHeroElement({super.key, required this.matchResult});
 
-  final FollowedClub homeTeam;
   final MatchResult matchResult;
 
   @override

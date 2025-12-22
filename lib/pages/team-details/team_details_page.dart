@@ -48,9 +48,10 @@ class TeamDetailsPage extends StatelessWidget {
             LeagueTableDetailsRankingList(
               teamName: team.name,
               url: team.rankingTableUrl,
+              matchOverviewUrl: team.matchesUrl,
             ),
             LastMatchesDetailsList(
-              team: team,
+              teamName: team.name,
               matchOverviewUrl: team.matchesUrl,
             ),
           ],

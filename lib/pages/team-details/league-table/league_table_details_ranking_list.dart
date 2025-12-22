@@ -10,11 +10,13 @@ import 'package:nuliga_app/services/shared/http_client.dart';
 class LeagueTableDetailsRankingList extends StatefulWidget {
   final String url;
   final String teamName;
+  final String matchOverviewUrl;
 
   const LeagueTableDetailsRankingList({
     required this.url,
     required this.teamName,
     super.key,
+    required this.matchOverviewUrl,
   });
 
   @override
@@ -56,6 +58,7 @@ class _LeagueTableDetailsRankingListState
                     (teamStanding) => LeagueTableDetailsRankingListItem(
                       teamStanding: teamStanding,
                       team: widget.teamName,
+                      matchOverviewUrl: widget.matchOverviewUrl,
                     ),
                   ),
                 ],

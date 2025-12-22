@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/league_team_standing.dart';
+import 'package:nuliga_app/pages/team-details/team_details_league_team_inspectordart.dart';
 
-class LeagueTableDetailsRankingListItem extends StatelessWidget {
+class LeagueTableDetailsRankingListItem extends StatefulWidget {
   const LeagueTableDetailsRankingListItem({
     super.key,
     required this.teamStanding,
     required this.team,
+    required this.matchOverviewUrl,
   });
 
   final LeagueTeamRanking teamStanding;
   final String team;
+  final String matchOverviewUrl;
 
+  @override
+  State<LeagueTableDetailsRankingListItem> createState() =>
+      _LeagueTableDetailsRankingListItemState();
+}
+
+class _LeagueTableDetailsRankingListItemState
+    extends State<LeagueTableDetailsRankingListItem> {
   @override
   Widget build(BuildContext context) {
     final twoLetterWidth = 18.0;
     final dimTextColor = Theme.of(context).disabledColor;
 
-    final isHighlighted = teamStanding.teamName == team;
+    final isHighlighted = widget.teamStanding.teamName == widget.team;
 
     return ListTile(
+      onTap: () => goToTeamInspector(),
       title: DefaultTextStyle.merge(
         style: TextStyle(
           color: isHighlighted
@@ -32,7 +43,7 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
             SizedBox(
               width: 24,
               child: Text(
-                teamStanding.rank.toString(),
+                widget.teamStanding.rank.toString(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
@@ -40,7 +51,7 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6.0),
                 child: Text(
-                  teamStanding.teamName,
+                  widget.teamStanding.teamName,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
@@ -49,21 +60,21 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
             SizedBox(
               width: twoLetterWidth,
               child: Text(
-                teamStanding.wins.toString(),
+                widget.teamStanding.wins.toString(),
                 style: TextStyle(color: dimTextColor),
               ),
             ),
             SizedBox(
               width: twoLetterWidth,
               child: Text(
-                teamStanding.draws.toString(),
+                widget.teamStanding.draws.toString(),
                 style: TextStyle(color: dimTextColor),
               ),
             ),
             SizedBox(
               width: twoLetterWidth,
               child: Text(
-                teamStanding.losses.toString(),
+                widget.teamStanding.losses.toString(),
                 style: TextStyle(color: dimTextColor),
               ),
             ),
@@ -71,19 +82,32 @@ class LeagueTableDetailsRankingListItem extends StatelessWidget {
             SizedBox(
               width: 24,
               child: Text(
-                teamStanding.leaguePointsWon.toString(),
+                widget.teamStanding.leaguePointsWon.toString(),
                 textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
               width: twoLetterWidth,
               child: Text(
-                teamStanding.totalMatches.toString(),
+                widget.teamStanding.totalMatches.toString(),
                 style: TextStyle(color: dimTextColor),
                 textAlign: TextAlign.end,
               ),
             ),
           ],
+        ),
+      ),
+      trailing: Icon(Icons.chevron_right),
+    );
+  }
+
+  void goToTeamInspector() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TeamDetailsLeagueTeamInspector(
+          teamName: widget.teamStanding.teamName,
+          matchOverviewUrl: widget.matchOverviewUrl,
         ),
       ),
     );

@@ -1,8 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/pages/match-result/match_result_hero_element.dart';
 import 'package:nuliga_app/pages/match-result/match_result_page.dart';
 import 'package:nuliga_app/pages/team-overview/last-matches/last_matches_card.dart';
 import 'package:nuliga_app/services/last_matches_service.dart';
@@ -41,8 +39,10 @@ class LastMatches extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            MatchResultPage(matchResult: result),
+                        builder: (context) => MatchResultPage(
+                          matchResult: result,
+                          homeTeam: team,
+                        ),
                       ),
                     );
                   },

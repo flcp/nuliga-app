@@ -20,7 +20,7 @@ class TeamDetailsPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(team.name),
           actions: [
-            ActionBarOpenLinkButton(
+            ActionBarFollowedTeamOpenLinkButton(
               selectedFollowedTeam: team,
               urlAccessor: (i) => i.rankingTableUrl,
             ),
@@ -50,7 +50,7 @@ class TeamDetailsPage extends StatelessWidget {
               url: team.rankingTableUrl,
             ),
             LastMatchesDetailsList(
-              teamName: team.name,
+              team: team,
               matchOverviewUrl: team.matchesUrl,
             ),
           ],

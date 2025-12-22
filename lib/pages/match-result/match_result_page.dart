@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/pages/match-result/match_result_game_result_row.dart';
 import 'package:nuliga_app/pages/match-result/match_result_hero_element.dart';
+import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
 import 'package:nuliga_app/services/match_result_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
@@ -10,12 +12,21 @@ class MatchResultPage extends StatelessWidget {
 
   final matchResultService = MatchResultService();
 
-  MatchResultPage({required this.matchResult, super.key});
+  final FollowedClub homeTeam;
+
+  MatchResultPage({
+    required this.matchResult,
+    super.key,
+    required this.homeTeam,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Ergebnis")),
+      appBar: AppBar(
+        title: Text("Ergebnis"),
+        actions: [ActionBarOpenLinkButton(url: matchResult.resultDetailUrl)],
+      ),
       body: FutureBuilder(
         future: matchResultService.getMatchResultDetails(
           matchResult.resultDetailUrl,
@@ -29,7 +40,10 @@ class MatchResultPage extends StatelessWidget {
 
           return Column(
             children: [
-              MatchResultHeroElement(matchResult: matchResult),
+              MatchResultHeroElement(
+                matchResult: matchResult,
+                homeTeam: homeTeam,
+              ),
               Expanded(
                 child: ListView(
                   children: matchResultDetail.gameResults

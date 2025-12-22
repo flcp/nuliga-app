@@ -50,13 +50,17 @@ class LastMatchesOverviewParser {
         cells[Parser.matchesTimeIndex],
       );
 
-      final relativeUrl = Parser.getLinkOrEmpty(
+      final resultDetailUrl = Parser.getLinkOrEmpty(
         cells,
         Parser.matchesResultIndex,
+        baseUrl,
       );
-      final resultDetailUrl = relativeUrl.isNotEmpty
-          ? baseUrl + Parser.getLinkOrEmpty(cells, Parser.matchesResultIndex)
-          : "";
+
+      final locationUrl = Parser.getLinkOrEmpty(
+        cells,
+        Parser.matchesLocationIndex,
+        baseUrl,
+      );
 
       result.add(
         MatchResult(
@@ -73,7 +77,7 @@ class LastMatchesOverviewParser {
             cells,
             Parser.matchesResultIndex,
           )[1],
-          location: "",
+          location: locationUrl,
           time: dateTime,
           resultDetailUrl: resultDetailUrl,
         ),

@@ -66,6 +66,10 @@ class NextMatchesService {
     return matchLocationRepository.getMatchLocation(match.locationUrl);
   }
 
+  Future<String> getLocationFromUrl(String locationUrl) async {
+    return matchLocationRepository.getMatchLocation(locationUrl);
+  }
+
   static String getGoogleMapsLink(String address) {
     final encodedAddress = Uri.encodeComponent(address);
 

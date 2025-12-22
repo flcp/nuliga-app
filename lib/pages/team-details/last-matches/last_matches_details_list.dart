@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/match-result/match_result_page.dart';
@@ -8,12 +9,12 @@ import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class LastMatchesDetailsList extends StatefulWidget {
   final String matchOverviewUrl;
-  final String teamName;
+  final FollowedClub team;
 
   const LastMatchesDetailsList({
     super.key,
     required this.matchOverviewUrl,
-    required this.teamName,
+    required this.team,
   });
 
   @override
@@ -26,7 +27,7 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
     return FutureBuilder(
       future: LastMatchesService.getLastMatchesForTeam(
         widget.matchOverviewUrl,
-        widget.teamName,
+        widget.team.name,
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -39,7 +40,7 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
           children: matchResults
               .map(
                 (result) => ListTile(
-                  onTap: () => goToMatchResult(result),
+                  onTap: () => goToMatchResult(result, widget.team),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12),
                   trailing: Icon(Icons.chevron_right),
                   subtitle: Row(
@@ -123,11 +124,12 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
         : match.opponentTeamMatchesWon;
   }
 
-  void goToMatchResult(MatchResult result) {
+  void goToMatchResult(MatchResult result, FollowedClub homeTeam) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => MatchResultPage(matchResult: result),
+        builder: (context) =>
+            MatchResultPage(matchResult: result, homeTeam: homeTeam),
       ),
     );
   }

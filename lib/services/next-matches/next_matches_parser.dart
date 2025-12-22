@@ -50,17 +50,16 @@ class NextMatchesParser {
         cells[Parser.matchesTimeIndex],
       );
 
-      final locationRelativeUrl = Parser.getLinkOrEmpty(
+      final locationUrl = Parser.getLinkOrEmpty(
         cells,
         Parser.matchesLocationIndex,
+        baseUrl,
       );
 
       result.add(
         FutureMatch(
           time: dateTime,
-          locationUrl: locationRelativeUrl.isEmpty
-              ? ""
-              : baseUrl + locationRelativeUrl,
+          locationUrl: locationUrl,
           homeTeam: Parser.getCellOrEmpty(cells, Parser.matchesHomeTeamIndex),
           opponentTeam: Parser.getCellOrEmpty(
             cells,

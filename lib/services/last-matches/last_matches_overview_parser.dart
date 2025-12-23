@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:html/parser.dart' as html;
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
@@ -5,7 +7,8 @@ import 'package:nuliga_app/services/shared/parser.dart';
 class LastMatchesOverviewParser {
   List<MatchResult> getMatchResultEntries(String htmlContent, String baseUrl) {
     if (htmlContent.trim().isEmpty) {
-      print("htmlcontent empty");
+      developer.log("Empty html received in matches overview", level: 800);
+
       return [];
     }
 
@@ -14,13 +17,14 @@ class LastMatchesOverviewParser {
     final table = document.querySelector('table.${Parser.tableClass}');
 
     if (table == null) {
-      print("table not found");
+      developer.log("Matches table not found", level: 800);
+
       return [];
     }
 
     final rows = table.querySelectorAll('tr');
     if (rows.isEmpty) {
-      print("table found, but no rows");
+      developer.log("No rows in matches table", level: 800);
       return [];
     }
 
@@ -32,7 +36,7 @@ class LastMatchesOverviewParser {
       final cells = row.querySelectorAll('td');
 
       if (cells.length < 7) {
-        print("could not find all info, skipping row");
+        developer.log("could not find all info, skipping row", level: 800);
         continue;
       }
 

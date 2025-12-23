@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+import 'dart:developer' as developer;
 
 class Player {
   final String firstName;
@@ -10,7 +10,10 @@ class Player {
     final nameParts = name.split(",");
 
     if (nameParts.length < 2) {
-      print("Cannot parse name");
+      developer.log(
+        "Cannot parse name, returning Unknown Unknown",
+        name: "nuliga.warning",
+      );
       return Player(firstName: "Unknown", lastName: "Unknown");
     }
 

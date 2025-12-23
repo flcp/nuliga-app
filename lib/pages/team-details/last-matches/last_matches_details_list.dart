@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/match-result/match_result_page.dart';

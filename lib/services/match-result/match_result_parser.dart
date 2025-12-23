@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
 import 'package:nuliga_app/model/game_result.dart';
@@ -9,10 +11,11 @@ import 'package:nuliga_app/model/set_result.dart';
 class MatchResultParser {
   Future<MatchResultDetail> getGamesAndResults(String htmlContent) async {
     if (htmlContent.trim().isEmpty) {
-      // TODO: fix, make whole file robust
-      print("htmlcontent empty");
-      throw ("htmlcontent empty");
+      developer.log("Empty html received in matches overview", level: 800);
+      return MatchResultDetail(gameResults: []);
     }
+
+    // TODO: make whole file robust
 
     final document = html.parse(htmlContent);
 

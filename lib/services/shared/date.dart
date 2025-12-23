@@ -24,9 +24,3 @@ const _monthNames = [
 String _getMonth(DateTime date) {
   return _monthNames[date.month - 1];
 }
-
-const _weekdayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-String _getWeekday(DateTime date) {
-  return _weekdayNames[date.weekday - 1];
-}

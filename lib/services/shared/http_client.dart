@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,13 +36,14 @@ class HttpClient implements HttpClientInterface {
   Future<String> _fetchWebsiteOrEmpty(String urlString) async {
     final url = Uri.parse(urlString);
 
-    print('retrieving $url');
+    developer.log("retrieving url $url", name: "info", level: 800);
+
     try {
       final response = await http.get(url);
       return response.body;
     } catch (e) {
-      print("error fetching website $e");
-      rethrow;
+      developer.log("error fetching website", error: e, level: 1600);
+      return "";
     }
   }
 }

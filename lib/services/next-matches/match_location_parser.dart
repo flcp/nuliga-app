@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:html/dom.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as parser;
@@ -16,7 +18,7 @@ class MatchLocationParser {
           .querySelectorAll('h2')
           .firstWhere((e) => e.text.trim() == 'Hallenadresse');
     } on StateError {
-      print("Kein hallenadresse h2 gefunden");
+      developer.log("No location address found", level: 1200);
       return "";
     }
 

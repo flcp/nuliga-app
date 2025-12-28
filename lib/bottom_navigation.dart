@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nuliga_app/mockpage.dart';
+import 'package:nuliga_app/mockpage2.dart';
 import 'package:nuliga_app/pages/team-overview/team_overview_page.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -13,7 +14,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
-  static const _widgets = [TeamOverviewPage(), Mockpage()];
+  static const _widgets = [TeamOverviewPage(), Mockpage(), Mockpage2()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -34,6 +35,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.question_mark),
+            // TODO: remove
+            label: "TODO",
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.question_mark),
             // TODO: remove

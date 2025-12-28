@@ -46,58 +46,41 @@ class ShortLeagueTable extends StatelessWidget {
             ),
             elevation: 0,
             color: Theme.of(context).colorScheme.surfaceContainer,
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
+            child: ShaderMask(
+              shaderCallback: (Rect rect) {
+                return const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                   colors: [
-                    Theme.of(context).colorScheme.onPrimaryFixedVariant,
-                    Theme.of(context).colorScheme.onPrimaryFixed,
+                    Colors.transparent,
+                    Colors.black,
+                    Colors.black,
+                    Colors.transparent,
                   ],
-
-                  // stops: [0.4, 1],
-                  begin: Alignment.topLeft,
-                  end: Alignment.centerRight,
+                  stops: [0.05, 0.2, 0.8, 0.95],
+                ).createShader(rect);
+              },
+              blendMode: BlendMode.dstIn,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 4,
                 ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: ShaderMask(
-                shaderCallback: (Rect rect) {
-                  return const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black,
-                      Colors.black,
-                      Colors.transparent,
-                    ],
-                    stops: [0.05, 0.2, 0.8, 0.95],
-                  ).createShader(rect);
-                },
-                blendMode: BlendMode.dstIn,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 4,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: closestRankings
-                          .map(
-                            (teamRanking) => Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 4.0,
-                              ),
-                              child: ShortLeagueTableItem(
-                                teamRanking: teamRanking,
-                                highlighted: team.name == teamRanking.teamName,
-                              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: closestRankings
+                        .map(
+                          (teamRanking) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: ShortLeagueTableItem(
+                              teamRanking: teamRanking,
+                              highlighted: team.name == teamRanking.teamName,
                             ),
-                          )
-                          .toList(),
-                    ),
+                          ),
+                        )
+                        .toList(),
                   ),
                 ),
               ),

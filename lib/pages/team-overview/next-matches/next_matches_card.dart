@@ -19,25 +19,6 @@ class NextMatchesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final highlightedGradient = LinearGradient(
-      colors: [
-        Theme.of(context).colorScheme.onPrimaryFixedVariant,
-        Theme.of(context).colorScheme.onPrimaryFixed,
-      ],
-      stops: [0.4, 1],
-      begin: Alignment.topLeft,
-      end: Alignment.centerRight,
-    );
-
-    final normalGradient = LinearGradient(
-      colors: [
-        Theme.of(context).colorScheme.surfaceDim.withAlpha(200),
-        Theme.of(context).colorScheme.surfaceDim,
-      ],
-      begin: Alignment.topLeft,
-      end: Alignment.centerRight,
-    );
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: AspectRatio(
@@ -51,43 +32,32 @@ class NextMatchesCard extends StatelessWidget {
           ),
           child: Card(
             elevation: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: highlighted ? highlightedGradient : normalGradient,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        getOpponent(match, team),
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
-                        overflow: TextOverflow.clip,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      getOpponent(match, team),
+                      style: Theme.of(context).textTheme.titleLarge,
+                      overflow: TextOverflow.clip,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        getShortDateString(match.time),
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          getShortDateString(match.time),
-                          style: Theme.of(context).textTheme.titleSmall!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              ),
-                        ),
-                        NextMatchesDetailsLocationIndicator(
-                          match: match,
-                          homeTeamName: team.name,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      NextMatchesDetailsLocationIndicator(
+                        match: match,
+                        homeTeamName: team.name,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

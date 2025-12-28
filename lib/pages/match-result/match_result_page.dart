@@ -9,10 +9,15 @@ import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class MatchResultPage extends StatelessWidget {
   final MatchResult matchResult;
+  final String teamName;
 
   final matchResultService = MatchResultService();
 
-  MatchResultPage({required this.matchResult, super.key});
+  MatchResultPage({
+    required this.teamName,
+    required this.matchResult,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class MatchResultPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          MatchResultHeroElement(matchResult: matchResult),
+          MatchResultHeroElement(matchResult: matchResult, teamName: teamName),
           FutureBuilder(
             future: matchResultService.getMatchResultDetails(
               matchResult.resultDetailUrl,
@@ -43,8 +48,11 @@ class MatchResultPage extends StatelessWidget {
                 child: ListView(
                   children: matchResultDetail.gameResults
                       .map(
-                        (gameResult) =>
-                            MatchResultGameResultRow(gameResult: gameResult),
+                        (gameResult) => MatchResultGameResultRow(
+                          gameResult: gameResult,
+                          isHomeTeamHighlighted:
+                              matchResult.homeTeamName == teamName,
+                        ),
                       )
                       .toList(),
                 ),

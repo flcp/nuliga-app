@@ -107,6 +107,7 @@ class LeagueTableDetailsRankingListHeader extends StatelessWidget {
               width: twoLetterWidth,
               child: Text("M", textAlign: TextAlign.end),
             ),
+            SizedBox(width: 16),
           ],
         ),
       ),

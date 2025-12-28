@@ -30,6 +30,8 @@ class _LeagueTableDetailsRankingListItemState
 
     return ListTile(
       onTap: () => goToTeamInspector(),
+      horizontalTitleGap: 0,
+      contentPadding: EdgeInsets.symmetric(horizontal: 8),
       title: DefaultTextStyle.merge(
         style: TextStyle(
           color: isHighlighted
@@ -44,7 +46,8 @@ class _LeagueTableDetailsRankingListItemState
               width: 24,
               child: Text(
                 widget.teamStanding.rank.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.w900),
               ),
             ),
             Expanded(

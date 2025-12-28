@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/game_result.dart';
 import 'package:nuliga_app/model/game_type.dart';
 import 'package:nuliga_app/model/player.dart';
+import 'package:nuliga_app/pages/shared/score_pill.dart';
 
 class MatchResultGameResultRow extends StatelessWidget {
-  const MatchResultGameResultRow({super.key, required this.gameResult});
+  const MatchResultGameResultRow({
+    super.key,
+    required this.gameResult,
+    required this.isHomeTeamHighlighted,
+  });
 
+  final bool isHomeTeamHighlighted;
   final GameResult gameResult;
 
   @override
@@ -36,24 +42,9 @@ class MatchResultGameResultRow extends StatelessWidget {
                       didPlayersWin: gameResult.homeTeamWon,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        "${gameResult.homeSetsWon} - ${gameResult.opponentSetsWon}",
-
-                        style: Theme.of(context).textTheme.titleMedium!
-                            .copyWith(fontWeight: FontWeight.w900),
-                      ),
-                    ),
+                  GameResultScorePill(
+                    gameResult: gameResult,
+                    isHomeTeamHighlighted: isHomeTeamHighlighted,
                   ),
 
                   Expanded(
@@ -81,6 +72,7 @@ class MatchResultGameResultRow extends StatelessWidget {
                           .toList(),
                     ),
                   ),
+
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -137,16 +129,24 @@ class PlayersText extends StatelessWidget {
     final textColor = Theme.of(context).colorScheme.onSurface;
 
     return gameType.isDoubles()
-        ? Text(
-            players.map((player) => player.lastName).join(" / "),
-            textAlign: align,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: TextStyle(
-              color: didPlayersWin ? textColor : greyedOutColor,
-              fontWeight: didPlayersWin ? FontWeight.bold : FontWeight.normal,
-              fontSize: 14,
-            ),
+        ? Column(
+            children: players
+                .map(
+                  (player) => Text(
+                    player.lastName,
+                    textAlign: align,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: didPlayersWin ? textColor : greyedOutColor,
+                      fontWeight: didPlayersWin
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                  ),
+                )
+                .toList(),
           )
         : Text(
             players.first.getFullname(),

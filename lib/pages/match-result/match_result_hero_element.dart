@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/match_result.dart';
+import 'package:nuliga_app/pages/shared/score_pill.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class MatchResultHeroElement extends StatelessWidget {
-  const MatchResultHeroElement({super.key, required this.matchResult});
+  const MatchResultHeroElement({
+    super.key,
+    required this.matchResult,
+    required this.teamName,
+  });
 
   final MatchResult matchResult;
 
+  final String teamName;
+
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final infoColor = Theme.of(context).colorScheme.onSurface.withAlpha(150);
 
     return Padding(
@@ -20,55 +26,47 @@ class MatchResultHeroElement extends StatelessWidget {
         children: [
           Card(
             elevation: 0,
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [colorScheme.primary, colorScheme.tertiary],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: MatchResultHeroElementTeamName(
-                            matchResult.homeTeamName,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 8,
-                              horizontal: 16,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              "${matchResult.homeTeamMatchesWon} - ${matchResult.opponentTeamMatchesWon}",
-                              style: Theme.of(context).textTheme.titleLarge!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
+            // TODO: use proper color
+            color: Colors.black.withAlpha(75),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
 
-                        Expanded(
-                          child: MatchResultHeroElementTeamName(
-                            matchResult.opponentTeam,
-                          ),
+                    children: [
+                      Expanded(
+                        child: MatchResultHeroElementTeamName(
+                          matchResult.homeTeamName,
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                      Expanded(
+                        child: MatchResultHeroElementTeamName(
+                          matchResult.opponentTeam,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 64,
+                    children: [
+                      Text(
+                        matchResult.homeTeamMatchesWon.toString(),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.displayLarge!.copyWith(color: Colors.white),
+                      ),
+                      Text(
+                        matchResult.opponentTeamMatchesWon.toString(),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.displayLarge!.copyWith(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
@@ -76,6 +74,15 @@ class MatchResultHeroElement extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 4,
             children: [
+              WinLossIndicator(
+                size: 12,
+                status: matchResult.getMatchStatusForTeam(teamName),
+              ),
+              Text(
+                matchResult.getMatchStatusForTeam(teamName).name,
+                style: TextStyle(color: infoColor),
+              ),
+              SizedBox(width: 24),
               Icon(Icons.calendar_today, size: 18.0, color: infoColor),
               Text(
                 getDateString(matchResult.time),

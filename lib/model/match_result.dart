@@ -16,4 +16,40 @@ class MatchResult {
     required this.opponentTeamMatchesWon,
     required this.resultDetailUrl,
   });
+
+  MatchResultStatus getMatchStatusForTeam(String teamName) {
+    if (homeTeamMatchesWon == opponentTeamMatchesWon) {
+      return MatchResultStatus.Draw;
+    }
+
+    if (isHomeTeam(teamName)) {
+      return didHomeTeamWin() ? MatchResultStatus.Win : MatchResultStatus.Loss;
+    }
+
+    if (isOpponentTeam(teamName)) {
+      return didOpponentTeamWin()
+          ? MatchResultStatus.Win
+          : MatchResultStatus.Loss;
+    }
+
+    return MatchResultStatus.Unknown;
+  }
+
+  bool isHomeTeam(String teamName) {
+    return homeTeamName == teamName;
+  }
+
+  bool isOpponentTeam(String teamName) {
+    return opponentTeam == teamName;
+  }
+
+  bool didHomeTeamWin() {
+    return homeTeamMatchesWon > opponentTeamMatchesWon;
+  }
+
+  bool didOpponentTeamWin() {
+    return opponentTeamMatchesWon > homeTeamMatchesWon;
+  }
 }
+
+enum MatchResultStatus { Win, Loss, Draw, Unknown }

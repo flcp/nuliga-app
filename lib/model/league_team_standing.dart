@@ -29,4 +29,19 @@ class LeagueTeamRanking {
     required this.setsWon,
     required this.setsLost,
   });
+
+  static LeagueTeamRanking empty = LeagueTeamRanking(
+    rank: 0,
+    teamName: "",
+    teamUrl: "",
+    totalMatches: 0,
+    wins: 0,
+    draws: 0,
+    losses: 0,
+    leaguePointsWon: 0,
+    gamesWon: 0,
+    gamesLost: 0,
+    setsWon: 0,
+    setsLost: 0,
+  );
 }

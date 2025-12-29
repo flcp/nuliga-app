@@ -15,11 +15,13 @@ class NextMatchesService {
     var matchesForTeamTodayOrLater = _getMatchesTodayOrLater(matchesForTeam);
     return (
       next: matchesForTeamTodayOrLater
-          .where((match) => isOnNextMatchDay(match, matchesForTeamTodayOrLater))
+          .where(
+            (match) => _isOnNextMatchDay(match, matchesForTeamTodayOrLater),
+          )
           .toList(),
       later: matchesForTeamTodayOrLater
           .where(
-            (match) => !isOnNextMatchDay(match, matchesForTeamTodayOrLater),
+            (match) => !_isOnNextMatchDay(match, matchesForTeamTodayOrLater),
           )
           .toList(),
     );
@@ -49,44 +51,7 @@ class NextMatchesService {
         .toList();
   }
 
-  Future<String> getLocationMapsLink(FutureMatch match) async {
-    if (match.locationUrl.isEmpty) return Future.value("");
-
-    final locationAddress = await matchLocationRepository.getMatchLocation(
-      match.locationUrl,
-    );
-
-    return getGoogleMapsLink(locationAddress);
-  }
-
-  // TODO: fix duplication
-  Future<String> getLocation(FutureMatch match) async {
-    if (match.locationUrl.isEmpty) return Future.value("");
-
-    return matchLocationRepository.getMatchLocation(match.locationUrl);
-  }
-
-  Future<String> getLocationFromUrl(String locationUrl) async {
-    return matchLocationRepository.getMatchLocation(locationUrl);
-  }
-
-  static String getGoogleMapsLink(String address) {
-    final encodedAddress = Uri.encodeComponent(address);
-
-    return "https://www.google.com/maps/search/?api=1&query=$encodedAddress";
-  }
-
-  static List<String> getMultilineAddress(String address) {
-    final plzRegex = RegExp(r'\d{5}');
-
-    final parts = address.split(plzRegex);
-    final plz = plzRegex.allMatches(address);
-    if (parts.length < 2 || plz == null) return parts;
-
-    return [parts[0], "${plz.first.group(0)!} ${parts[1]}"];
-  }
-
-  static bool isOnNextMatchDay(
+  static bool _isOnNextMatchDay(
     FutureMatch match,
     List<FutureMatch> nextMatches,
   ) {

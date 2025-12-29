@@ -5,6 +5,19 @@ import 'package:nuliga_app/services/league-table/league_table_repository.dart';
 class LeagueTableService {
   final leagueTableRepository = LeagueTableRepository();
 
+  Future<LeagueTeamRanking> getRankingForTeam(
+    String leagueUrl,
+    String teamName,
+  ) async {
+    final teamRankings = await leagueTableRepository.getLeagueTeamRankings(
+      leagueUrl,
+    );
+    return teamRankings.firstWhere(
+      (teamRanking) => teamRanking.teamName == teamName,
+      orElse: () => LeagueTeamRanking.empty,
+    );
+  }
+
   Future<List<LeagueTeamRanking>> getLeagueTeamRankings(String leagueUrl) {
     return leagueTableRepository.getLeagueTeamRankings(leagueUrl);
   }
@@ -23,15 +36,15 @@ class LeagueTableService {
       (r) => r.teamName == team.name,
     );
 
-    final indices = getInBoundsIndices(teamIndex, leagueTeamRankings.length);
+    final indices = _getInBoundsIndices(teamIndex, leagueTeamRankings.length);
 
     return Future.value(
       leagueTeamRankings.getRange(indices.lower, indices.higher + 1).toList(),
     );
   }
 
-  // try to display one element higher and one element lower
-  static ({int lower, int higher}) getInBoundsIndices(
+  // try to get all teams with ranking +-2
+  static ({int lower, int higher}) _getInBoundsIndices(
     int teamIndex,
     int maxIndex,
   ) {

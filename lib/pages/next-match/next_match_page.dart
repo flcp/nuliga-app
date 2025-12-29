@@ -24,7 +24,7 @@ class NextMatchPage extends StatelessWidget {
             NextMatchCountdown(),
             NextMatchMatchup(match: match),
             SizedBox(height: 16),
-            NextMatchInfo(nextMatchesService: nextMatchesService, match: match),
+            NextMatchInfo(match: match),
           ],
         ),
       ),

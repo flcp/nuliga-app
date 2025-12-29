@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
-import 'package:nuliga_app/services/next_matches_service.dart';
+import 'package:nuliga_app/services/location_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -10,7 +10,7 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
 
   final double size = 30.0;
 
-  final nextMatchesService = NextMatchesService();
+  final locationService = LocationService();
 
   NextMatchesLocationIndicatorButton({
     required this.match,
@@ -29,7 +29,7 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
     }
 
     return FutureBuilder(
-      future: nextMatchesService.getLocationMapsLink(match),
+      future: locationService.getLocationMapsLink(match),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox(

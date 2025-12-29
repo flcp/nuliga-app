@@ -43,6 +43,7 @@ class NextMatchPage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 16),
             Card(
               child: FutureBuilder(
                 future: nextMatchesService.getLocation(match),

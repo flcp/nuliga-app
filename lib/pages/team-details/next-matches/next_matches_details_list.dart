@@ -47,23 +47,19 @@ class _NextMatchesDetailsListState extends State<NextMatchesDetailsList> {
 
         return RefreshIndicator(
           onRefresh: () => refresh(),
-          child: Stack(
-            children: [
-              if (nextMatches.isEmpty) NothingToDisplayIndicator(),
-
-              ListView(
-                children: nextMatches
-                    .map(
-                      (match) => NextMatchesDetailsListItem(
-                        match: match,
-                        hometeam: widget.teamName,
-                        matchOverviewUrl: widget.matchOverviewUrl,
-                      ),
-                    )
-                    .toList(),
-              ),
-            ],
-          ),
+          child: nextMatches.isEmpty
+              ? NothingToDisplayIndicator()
+              : ListView(
+                  children: nextMatches
+                      .map(
+                        (match) => NextMatchesDetailsListItem(
+                          match: match,
+                          hometeam: widget.teamName,
+                          matchOverviewUrl: widget.matchOverviewUrl,
+                        ),
+                      )
+                      .toList(),
+                ),
         );
       },
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/league_team_standing.dart';
-import 'package:nuliga_app/pages/team-details/team_details_league_team_inspectordart.dart';
+import 'package:nuliga_app/pages/team-details/team_details_league_team_inspector.dart';
 
 class LeagueTableDetailsRankingListItem extends StatefulWidget {
   const LeagueTableDetailsRankingListItem({

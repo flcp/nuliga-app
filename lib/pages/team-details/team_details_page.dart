@@ -35,15 +35,9 @@ class TeamDetailsPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            Column(
-              children: [
-                Expanded(
-                  child: NextMatchesDetailsList(
-                    teamName: team.name,
-                    matchOverviewUrl: team.matchesUrl,
-                  ),
-                ),
-              ],
+            NextMatchesDetailsList(
+              teamName: team.name,
+              matchOverviewUrl: team.matchesUrl,
             ),
             LeagueTableDetailsRankingList(
               teamName: team.name,

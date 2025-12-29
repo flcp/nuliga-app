@@ -58,10 +58,6 @@ class _NextMatchesDetailsListState extends State<NextMatchesDetailsList> {
                         match: match,
                         hometeam: widget.teamName,
                         matchOverviewUrl: widget.matchOverviewUrl,
-                        highlighted: NextMatchesService.isOnNextMatchDay(
-                          match,
-                          nextMatches,
-                        ),
                       ),
                     )
                     .toList(),

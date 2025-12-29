@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/pages/next-match/next_match_page.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NextMatchesDetailsListItem extends StatelessWidget {
+class NextMatchesDetailsListItem extends StatefulWidget {
   final FutureMatch match;
   final String hometeam;
-  final bool highlighted;
   final String matchOverviewUrl;
   final bool displayOnlyOpponentName;
-
-  static const double spacingSubtitleBlocks = 16.0;
-  static const double spacingSubtitleIcons = 8.0;
 
   const NextMatchesDetailsListItem({
     super.key,
     required this.match,
     required this.hometeam,
-    required this.highlighted,
     required this.matchOverviewUrl,
     this.displayOnlyOpponentName = true,
   });
+
+  @override
+  State<NextMatchesDetailsListItem> createState() =>
+      _NextMatchesDetailsListItemState();
+}
+
+class _NextMatchesDetailsListItemState
+    extends State<NextMatchesDetailsListItem> {
+  static const double spacingSubtitleBlocks = 16.0;
+  static const double spacingSubtitleIcons = 4.0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,34 +37,36 @@ class NextMatchesDetailsListItem extends StatelessWidget {
     ).colorScheme.onSurface.withAlpha(150);
 
     return ListTile(
+      onTap: () => goToUpComingMatch(widget.match),
+      trailing: Icon(Icons.chevron_right),
       subtitle: Row(
-        spacing: 16,
+        spacing: spacingSubtitleBlocks,
         children: [
           Row(
-            spacing: 4,
+            spacing: spacingSubtitleIcons,
             children: [
               Icon(Icons.calendar_today, size: 18.0, color: subtitleIconColor),
-              Text(getDateString(match.time)),
+              Text(getDateString(widget.match.time)),
             ],
           ),
           Row(
-            spacing: 4,
+            spacing: spacingSubtitleIcons,
             children: [
               Icon(Icons.access_time, size: 18.0, color: subtitleIconColor),
               Text(
-                "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
+                "${widget.match.time.hour}:${widget.match.time.minute.toString().padLeft(2, "0")}",
               ),
             ],
           ),
           Expanded(
             child: Row(
-              spacing: 4,
+              spacing: spacingSubtitleIcons,
               children: [
                 Icon(Icons.location_on, size: 18, color: subtitleIconColor),
                 Expanded(
                   child: NextMatchesDetailsListLocationLink(
-                    match: match,
-                    hometeam: hometeam,
+                    match: widget.match,
+                    hometeam: widget.hometeam,
                   ),
                 ),
               ],
@@ -67,8 +75,17 @@ class NextMatchesDetailsListItem extends StatelessWidget {
         ],
       ),
       title: Text(
-        match.homeTeam == hometeam ? match.opponentTeam : match.homeTeam,
+        widget.match.homeTeam == widget.hometeam
+            ? widget.match.opponentTeam
+            : widget.match.homeTeam,
       ),
+    );
+  }
+
+  void goToUpComingMatch(FutureMatch match) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NextMatchPage(match: match)),
     );
   }
 }

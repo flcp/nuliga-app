@@ -4,7 +4,6 @@ import 'package:nuliga_app/services/next-matches/next_matches_repository.dart';
 
 class NextMatchesService {
   final nextMatchesRepository = NextMatchesRepository();
-
   final matchLocationRepository = MatchLocationRepository();
 
   Future<({List<FutureMatch> next, List<FutureMatch> later})>
@@ -60,6 +59,7 @@ class NextMatchesService {
     return getGoogleMapsLink(locationAddress);
   }
 
+  // TODO: fix duplication
   Future<String> getLocation(FutureMatch match) async {
     if (match.locationUrl.isEmpty) return Future.value("");
 
@@ -74,6 +74,16 @@ class NextMatchesService {
     final encodedAddress = Uri.encodeComponent(address);
 
     return "https://www.google.com/maps/search/?api=1&query=$encodedAddress";
+  }
+
+  static List<String> getMultilineAddress(String address) {
+    final plzRegex = RegExp(r'\d{5}');
+
+    final parts = address.split(plzRegex);
+    final plz = plzRegex.allMatches(address);
+    if (parts.length < 2 || plz == null) return parts;
+
+    return [parts[0], "${plz.first.group(0)!} ${parts[1]}"];
   }
 
   static bool isOnNextMatchDay(

@@ -30,8 +30,8 @@ class LeagueParser {
       result.add(
         LeagueTeamRanking(
           rank: Parser.getCellOrZero(cells, 1),
-          teamName: getTeamname(cells),
-          teamUrl: getTeamUrl(cells),
+          teamName: _getTeamname(cells),
+          teamUrl: _getTeamUrl(cells),
           totalMatches: Parser.getCellOrZero(cells, 3),
           wins: Parser.getCellOrZero(cells, 4),
           draws: Parser.getCellOrZero(cells, 5),
@@ -48,17 +48,17 @@ class LeagueParser {
     return result;
   }
 
-  static String getTeamname(List<Element> cells) {
-    final href = getTeamLinkElement(cells);
+  static String _getTeamname(List<Element> cells) {
+    final href = _getTeamLinkElement(cells);
     return href?.text.trim() ?? "??";
   }
 
-  static String getTeamUrl(List<Element> cells) {
-    final href = getTeamLinkElement(cells);
+  static String _getTeamUrl(List<Element> cells) {
+    final href = _getTeamLinkElement(cells);
     return href?.attributes['href'] ?? "??";
   }
 
-  static Element? getTeamLinkElement(List<Element> cells) {
+  static Element? _getTeamLinkElement(List<Element> cells) {
     final index = 2;
     if (cells.length < index) return null;
 

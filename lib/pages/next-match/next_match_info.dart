@@ -38,7 +38,7 @@ class NextMatchInfo extends StatelessWidget {
                     const SizedBox(width: 12),
                     Text("Datum"),
                     const Spacer(),
-                    Text(getLongDateString(match.time)),
+                    Text(Date.getLongDateString(match.time)),
                   ],
                 ),
                 const SizedBox(height: 16),

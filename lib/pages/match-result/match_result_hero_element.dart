@@ -84,7 +84,7 @@ class MatchResultHeroElement extends StatelessWidget {
             Icon(Icons.calendar_today, size: 18.0, color: infoColor),
             SizedBox(width: Constants.iconTextSpacing),
             Text(
-              getDateString(matchResult.time),
+              Date.getDateString(matchResult.time),
               style: TextStyle(color: infoColor),
             ),
             SizedBox(width: 16),

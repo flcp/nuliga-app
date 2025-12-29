@@ -47,7 +47,7 @@ class _NextMatchesCardState extends State<NextMatchesCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      getShortDateString(widget.match.time),
+                      Date.getShortDateString(widget.match.time),
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                     NextMatchesLocationIndicatorButton(

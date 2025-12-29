@@ -1,44 +1,46 @@
-String getDateString(DateTime date) {
-  return "${date.day}. ${_getMonth(date)} ${date.year}";
-}
+class Date {
+  static const _weekdayNames = [
+    "Montag",
+    "Dienstag",
+    "Mittwoch",
+    "Donnerstag",
+    "Freitag",
+    "Samstag",
+    "Sonntag",
+  ];
 
-String getShortDateString(DateTime date) {
-  return "${date.day}. ${_getMonth(date)}";
-}
+  static const _monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
-String getLongDateString(DateTime date) {
-  return "${_getWeekdayName(date)}, ${date.day}. ${_getMonth(date)} ${date.year}";
-}
+  static String getDateString(DateTime date) {
+    return "${date.day}. ${_getMonth(date)} ${date.year}";
+  }
 
-const _monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+  static String getShortDateString(DateTime date) {
+    return "${date.day}. ${_getMonth(date)}";
+  }
 
-String _getMonth(DateTime date) {
-  return _monthNames[date.month - 1];
-}
+  static String getLongDateString(DateTime date) {
+    return "${_getWeekdayName(date)}, ${date.day}. ${_getMonth(date)} ${date.year}";
+  }
 
-const _weekdayNames = [
-  "Montag",
-  "Dienstag",
-  "Mittwoch",
-  "Donnerstag",
-  "Freitag",
-  "Samstag",
-  "Sonntag",
-];
+  static String _getMonth(DateTime date) {
+    return _monthNames[date.month - 1];
+  }
 
-String _getWeekdayName(DateTime date) {
-  return _weekdayNames[date.weekday - 1];
+  static String _getWeekdayName(DateTime date) {
+    return _weekdayNames[date.weekday - 1];
+  }
 }

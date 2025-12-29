@@ -46,7 +46,7 @@ class _NextMatchesDetailsListItemState
             spacing: spacingSubtitleIcons,
             children: [
               Icon(Icons.calendar_today, size: 18.0, color: subtitleIconColor),
-              Text(getDateString(widget.match.time)),
+              Text(Date.getDateString(widget.match.time)),
             ],
           ),
         ],

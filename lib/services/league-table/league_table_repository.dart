@@ -9,8 +9,7 @@ class LeagueTableRepository {
     String leagueUrl,
   ) async {
     final htmlContent = await httpClient.get(leagueUrl);
-    final result = LeagueParser.parseLeagueTable(htmlContent);
 
-    return result;
+    return LeagueParser.parseLeagueTable(htmlContent);
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class Match {
@@ -34,29 +36,32 @@ class Match {
     int team1Wins = 0;
     int team2Wins = 0;
     if (team1Score1 != null && team2Score1 != null) {
-      if (team1Score1! > team2Score1!)
+      if (team1Score1! > team2Score1!) {
         team1Wins++;
-      else
+      } else {
         team2Wins++;
+      }
     }
     if (team1Score2 != null && team2Score2 != null) {
-      if (team1Score2! > team2Score2!)
+      if (team1Score2! > team2Score2!) {
         team1Wins++;
-      else
+      } else {
         team2Wins++;
+      }
     }
     if (team1Score3 != null && team2Score3 != null) {
-      if (team1Score3! > team2Score3!)
+      if (team1Score3! > team2Score3!) {
         team1Wins++;
-      else
+      } else {
         team2Wins++;
+      }
     }
     return team1Wins > team2Wins ? 'Team 1' : 'Team 2';
   }
 }
 
 class Mockpage extends StatefulWidget {
-  const Mockpage({Key? key}) : super(key: key);
+  const Mockpage({super.key});
 
   @override
   State<Mockpage> createState() => _MockpageState();
@@ -241,7 +246,6 @@ class _MockpageState extends State<Mockpage> {
   }
 
   Widget _buildMatchCard(Match match, int index) {
-    final isExpanded = expandedIndex == index;
     final statusColor = match.status == 'Abgeschlossen'
         ? Colors.green
         : match.status == 'Live'

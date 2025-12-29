@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/match_result.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
-import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/date.dart';
-import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class MatchResultHeroElement extends StatelessWidget {
   const MatchResultHeroElement({
@@ -35,12 +34,12 @@ class MatchResultHeroElement extends StatelessWidget {
 
                   children: [
                     Expanded(
-                      child: MatchResultHeroElementTeamName(
+                      child: _MatchResultHeroElementTeamName(
                         matchResult.homeTeamName,
                       ),
                     ),
                     Expanded(
-                      child: MatchResultHeroElementTeamName(
+                      child: _MatchResultHeroElementTeamName(
                         matchResult.opponentTeam,
                       ),
                     ),
@@ -48,7 +47,6 @@ class MatchResultHeroElement extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 64,
                   children: [
                     Text(
                       matchResult.homeTeamMatchesWon.toString(),
@@ -56,6 +54,7 @@ class MatchResultHeroElement extends StatelessWidget {
                         context,
                       ).textTheme.displayLarge!.copyWith(color: Colors.white),
                     ),
+                    SizedBox(width: 96),
                     Text(
                       matchResult.opponentTeamMatchesWon.toString(),
                       style: Theme.of(
@@ -71,24 +70,27 @@ class MatchResultHeroElement extends StatelessWidget {
         SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 4,
           children: [
             WinLossIndicator(
               size: 12,
               status: matchResult.getMatchStatusForTeam(teamName),
             ),
+            SizedBox(width: Constants.iconTextSpacing),
             Text(
               matchResult.getMatchStatusForTeam(teamName).name,
               style: TextStyle(color: infoColor),
             ),
             SizedBox(width: 24),
             Icon(Icons.calendar_today, size: 18.0, color: infoColor),
+            SizedBox(width: Constants.iconTextSpacing),
             Text(
               getDateString(matchResult.time),
               style: TextStyle(color: infoColor),
             ),
             SizedBox(width: 16),
             Icon(Icons.access_time, size: 18.0, color: infoColor),
+            SizedBox(width: Constants.iconTextSpacing),
+
             Text(
               "${matchResult.time.hour}:${matchResult.time.minute.toString().padLeft(2, "0")}",
               style: TextStyle(color: infoColor),
@@ -101,45 +103,8 @@ class MatchResultHeroElement extends StatelessWidget {
   }
 }
 
-class MatchResultHeroElementLocation extends StatelessWidget {
-  MatchResultHeroElementLocation({
-    super.key,
-    required this.location,
-    required this.isHome,
-  });
-
-  final String location;
-  final bool isHome;
-  final nextMatchesService = NextMatchesService();
-
-  @override
-  Widget build(BuildContext context) {
-    if (isHome) {
-      return Text("Home");
-    }
-
-    if (location.isEmpty) {
-      return Text("Unbekannt");
-    }
-
-    return FutureBuilder(
-      // TODO: move to lastmatchesservice oder so
-      future: nextMatchesService.getLocationFromUrl(location),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("");
-        }
-
-        final location = getDataOrDefault(snapshot, "Unknown");
-
-        return Text(location);
-      },
-    );
-  }
-}
-
-class MatchResultHeroElementTeamName extends StatelessWidget {
-  const MatchResultHeroElementTeamName(this.teamName, {super.key});
+class _MatchResultHeroElementTeamName extends StatelessWidget {
+  const _MatchResultHeroElementTeamName(this.teamName);
 
   final String teamName;
 
@@ -148,11 +113,11 @@ class MatchResultHeroElementTeamName extends StatelessWidget {
     return Text(
       teamName,
       softWrap: true,
-      maxLines: 3,
+      maxLines: 2,
       overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.center,
       style: TextStyle(
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: Theme.of(context).colorScheme.onPrimary.withAlpha(220),
         fontSize: 17,
         fontWeight: FontWeight.bold,
       ),

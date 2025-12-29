@@ -12,9 +12,7 @@ class MatchResultPage extends StatelessWidget {
   final MatchResult matchResult;
   final String teamName;
 
-  final matchResultService = MatchResultService();
-
-  MatchResultPage({
+  const MatchResultPage({
     required this.teamName,
     required this.matchResult,
     super.key,
@@ -35,39 +33,59 @@ class MatchResultPage extends StatelessWidget {
               matchResult: matchResult,
               teamName: teamName,
             ),
-            FutureBuilder(
-              future: matchResultService.getMatchResultDetails(
-                matchResult.resultDetailUrl,
-              ),
-              builder: (context, asyncSnapshot) {
-                if (asyncSnapshot.connectionState == ConnectionState.waiting) {
-                  return LoadingIndicator();
-                }
-
-                final matchResultDetail = getDataOrDefault(asyncSnapshot, null);
-
-                if (matchResultDetail == null) {
-                  return Text("Nothing to display");
-                }
-
-                return Expanded(
-                  child: ListView(
-                    children: matchResultDetail.gameResults
-                        .map(
-                          (gameResult) => MatchResultGameResultRow(
-                            gameResult: gameResult,
-                            isHomeTeamHighlighted:
-                                matchResult.homeTeamName == teamName,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                );
-              },
+            MatchResultPageContent(
+              matchResult: matchResult,
+              teamName: teamName,
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class MatchResultPageContent extends StatelessWidget {
+  final matchResultService = MatchResultService();
+
+  MatchResultPageContent({
+    super.key,
+    required this.matchResult,
+    required this.teamName,
+  });
+
+  final MatchResult matchResult;
+  final String teamName;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: matchResultService.getMatchResultDetails(
+        matchResult.resultDetailUrl,
+      ),
+      builder: (context, asyncSnapshot) {
+        if (asyncSnapshot.connectionState == ConnectionState.waiting) {
+          return LoadingIndicator();
+        }
+
+        final matchResultDetail = getDataOrDefault(asyncSnapshot, null);
+
+        if (matchResultDetail == null) {
+          return Text("Nothing to display");
+        }
+
+        return Expanded(
+          child: ListView(
+            children: matchResultDetail.gameResults
+                .map(
+                  (gameResult) => MatchResultGameResultRow(
+                    gameResult: gameResult,
+                    isHomeTeamHighlighted: matchResult.homeTeamName == teamName,
+                  ),
+                )
+                .toList(),
+          ),
+        );
+      },
     );
   }
 }

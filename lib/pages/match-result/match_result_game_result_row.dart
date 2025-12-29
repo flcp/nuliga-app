@@ -24,7 +24,6 @@ class MatchResultGameResultRow extends StatelessWidget {
         shape: Border.all(color: Colors.transparent),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
             Text(
               gameResult.gameType.displayName,
@@ -40,11 +39,12 @@ class MatchResultGameResultRow extends StatelessWidget {
                     didPlayersWin: gameResult.homeTeamWon,
                   ),
                 ),
+                SizedBox(width: 4),
                 GameResultScorePill(
                   gameResult: gameResult,
                   isHomeTeamHighlighted: isHomeTeamHighlighted,
                 ),
-
+                SizedBox(width: 4),
                 Expanded(
                   child: PlayersText(
                     align: TextAlign.right,
@@ -58,6 +58,7 @@ class MatchResultGameResultRow extends StatelessWidget {
           ],
         ),
         children: [
+          // TODO: extract to own screen
           DefaultTextStyle(
             style: TextStyle(color: textColor),
             child: Row(
@@ -78,7 +79,7 @@ class MatchResultGameResultRow extends StatelessWidget {
                       .map(
                         (set) => Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 96.0,
+                            horizontal: 16.0,
                             vertical: 8.0,
                           ),
                           child: Text(

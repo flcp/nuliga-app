@@ -23,14 +23,11 @@ class _LeagueTableDetailsRankingListItemState
     extends State<LeagueTableDetailsRankingListItem> {
   @override
   Widget build(BuildContext context) {
-    final twoLetterWidth = 18.0;
-    final dimTextColor = Theme.of(context).disabledColor;
-
     final isHighlighted = widget.teamStanding.teamName == widget.team;
 
     return ListTile(
+      dense: true,
       onTap: () => goToTeamInspector(),
-      horizontalTitleGap: 0,
       contentPadding: EdgeInsets.symmetric(horizontal: 8),
       title: DefaultTextStyle.merge(
         style: TextStyle(
@@ -50,38 +47,17 @@ class _LeagueTableDetailsRankingListItemState
                 style: TextStyle(fontWeight: FontWeight.w900),
               ),
             ),
+            SizedBox(width: 8),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                child: Text(
-                  widget.teamStanding.teamName,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: twoLetterWidth,
               child: Text(
-                widget.teamStanding.wins.toString(),
-                style: TextStyle(color: dimTextColor),
+                widget.teamStanding.teamName,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
             ),
-            SizedBox(
-              width: twoLetterWidth,
-              child: Text(
-                widget.teamStanding.draws.toString(),
-                style: TextStyle(color: dimTextColor),
-              ),
-            ),
-            SizedBox(
-              width: twoLetterWidth,
-              child: Text(
-                widget.teamStanding.losses.toString(),
-                style: TextStyle(color: dimTextColor),
-              ),
-            ),
-
+            TwoLetterTextBox(text: widget.teamStanding.wins.toString()),
+            TwoLetterTextBox(text: widget.teamStanding.draws.toString()),
+            TwoLetterTextBox(text: widget.teamStanding.losses.toString()),
             SizedBox(
               width: 24,
               child: Text(
@@ -89,14 +65,7 @@ class _LeagueTableDetailsRankingListItemState
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(
-              width: twoLetterWidth,
-              child: Text(
-                widget.teamStanding.totalMatches.toString(),
-                style: TextStyle(color: dimTextColor),
-                textAlign: TextAlign.end,
-              ),
-            ),
+            TwoLetterTextBox(text: widget.teamStanding.totalMatches.toString()),
           ],
         ),
       ),
@@ -112,6 +81,26 @@ class _LeagueTableDetailsRankingListItemState
           teamName: widget.teamStanding.teamName,
           matchOverviewUrl: widget.matchOverviewUrl,
         ),
+      ),
+    );
+  }
+}
+
+class TwoLetterTextBox extends StatelessWidget {
+  const TwoLetterTextBox({super.key, required this.text});
+
+  static const double twoLetterWidth = 18.0;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final Color dimTextColor = Theme.of(context).disabledColor;
+    return SizedBox(
+      width: twoLetterWidth,
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(color: dimTextColor),
       ),
     );
   }

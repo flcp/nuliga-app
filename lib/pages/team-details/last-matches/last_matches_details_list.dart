@@ -39,37 +39,26 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
           children: matchResults.map((result) {
             return ListTile(
               onTap: () => goToMatchResult(result, widget.teamName),
-              contentPadding: EdgeInsets.symmetric(horizontal: 8),
               trailing: Icon(Icons.chevron_right),
-              horizontalTitleGap: 0,
               title: Row(
                 children: [
                   Expanded(
-                    child: Text(
-                      result.homeTeamName,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontWeight: result.isHomeTeam(widget.teamName)
-                            ? FontWeight.w500
-                            : FontWeight.normal,
-                      ),
-                      textAlign: TextAlign.left,
-                      softWrap: true,
+                    child: LastMatchesTeamName(
+                      teamName: result.homeTeamName,
+                      align: TextAlign.left,
+                      highlighted: result.isHomeTeam(widget.teamName),
                     ),
                   ),
                   MatchResultScorePill(
                     matchResult: result,
                     teamName: widget.teamName,
                   ),
+
                   Expanded(
-                    child: Text(
-                      result.opponentTeam,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontWeight: result.isOpponentTeam(widget.teamName)
-                            ? FontWeight.w500
-                            : FontWeight.normal,
-                      ),
-                      textAlign: TextAlign.right,
-                      softWrap: true,
+                    child: LastMatchesTeamName(
+                      teamName: result.opponentTeamName,
+                      align: TextAlign.right,
+                      highlighted: result.isOpponentTeam(widget.teamName),
                     ),
                   ),
                 ],
@@ -81,25 +70,6 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
     );
   }
 
-  String getEnemyTeamName(MatchResult match, String teamName) {
-    var isFavoriteTeamHome = match.homeTeamName == teamName;
-    return isFavoriteTeamHome ? match.opponentTeam : match.homeTeamName;
-  }
-
-  int getEnemyTeamScore(MatchResult match, String teamName) {
-    var isFavoriteTeamHome = match.homeTeamName == teamName;
-    return isFavoriteTeamHome
-        ? match.opponentTeamMatchesWon
-        : match.homeTeamMatchesWon;
-  }
-
-  int getHomeTeamScore(MatchResult match, String teamName) {
-    var isFavoriteTeamHome = match.homeTeamName == teamName;
-    return isFavoriteTeamHome
-        ? match.homeTeamMatchesWon
-        : match.opponentTeamMatchesWon;
-  }
-
   void goToMatchResult(MatchResult result, String teamName) {
     Navigator.push(
       context,
@@ -107,6 +77,32 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
         builder: (context) =>
             MatchResultPage(matchResult: result, teamName: teamName),
       ),
+    );
+  }
+}
+
+class LastMatchesTeamName extends StatelessWidget {
+  const LastMatchesTeamName({
+    super.key,
+    required this.teamName,
+    required this.align,
+    required this.highlighted,
+  });
+
+  final String teamName;
+  final TextAlign align;
+  final bool highlighted;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      teamName,
+      style: TextStyle(
+        fontWeight: highlighted ? FontWeight.w500 : FontWeight.normal,
+      ),
+      textAlign: align,
+      softWrap: false,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

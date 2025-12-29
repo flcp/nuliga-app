@@ -31,7 +31,9 @@ class LastMatchesCard extends StatelessWidget {
                 teamName: homeTeam.name,
               ),
               Expanded(
-                child: MatchResultHeroElementTeamName(matchResult.opponentTeam),
+                child: MatchResultHeroElementTeamName(
+                  matchResult.opponentTeamName,
+                ),
               ),
               Icon(Icons.chevron_right),
             ],

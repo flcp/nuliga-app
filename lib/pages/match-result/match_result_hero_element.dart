@@ -40,7 +40,7 @@ class MatchResultHeroElement extends StatelessWidget {
                     ),
                     Expanded(
                       child: _MatchResultHeroElementTeamName(
-                        matchResult.opponentTeam,
+                        matchResult.opponentTeamName,
                       ),
                     ),
                   ],

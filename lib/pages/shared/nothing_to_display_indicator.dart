@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// TODO: use again
+
 class NothingToDisplayIndicator extends StatelessWidget {
   const NothingToDisplayIndicator({super.key});
 

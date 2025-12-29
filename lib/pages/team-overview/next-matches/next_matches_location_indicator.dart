@@ -4,7 +4,7 @@ import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NextMatchesDetailsLocationIndicator extends StatelessWidget {
+class NextMatchesLocationIndicatorButton extends StatelessWidget {
   final FutureMatch match;
   final String homeTeamName;
 
@@ -12,7 +12,7 @@ class NextMatchesDetailsLocationIndicator extends StatelessWidget {
 
   final nextMatchesService = NextMatchesService();
 
-  NextMatchesDetailsLocationIndicator({
+  NextMatchesLocationIndicatorButton({
     required this.match,
     super.key,
     required this.homeTeamName,

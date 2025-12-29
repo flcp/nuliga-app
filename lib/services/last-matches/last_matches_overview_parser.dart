@@ -72,7 +72,7 @@ class LastMatchesOverviewParser {
             cells,
             Parser.matchesHomeTeamIndex,
           ),
-          opponentTeam: Parser.getCellOrEmpty(
+          opponentTeamName: Parser.getCellOrEmpty(
             cells,
             Parser.matchesOpponentTeamIndex,
           ),

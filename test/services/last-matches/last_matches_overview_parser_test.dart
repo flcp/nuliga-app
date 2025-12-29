@@ -16,7 +16,7 @@ void main() {
 
       expect(result.length, 20);
       expect(result[0].homeTeamName, "Fortuna Schwetzingen");
-      expect(result[0].opponentTeam, "TSG Weinheim");
+      expect(result[0].opponentTeamName, "TSG Weinheim");
       expect(result[0].homeTeamMatchesWon, 7);
       expect(result[0].opponentTeamMatchesWon, 1);
     });

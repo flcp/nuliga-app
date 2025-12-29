@@ -1,7 +1,7 @@
 class MatchResult {
   final DateTime time;
   final String homeTeamName;
-  final String opponentTeam;
+  final String opponentTeamName;
   final String location;
   final int homeTeamMatchesWon;
   final int opponentTeamMatchesWon;
@@ -10,7 +10,7 @@ class MatchResult {
   MatchResult({
     required this.time,
     required this.homeTeamName,
-    required this.opponentTeam,
+    required this.opponentTeamName,
     required this.location,
     required this.homeTeamMatchesWon,
     required this.opponentTeamMatchesWon,
@@ -40,7 +40,7 @@ class MatchResult {
   }
 
   bool isOpponentTeam(String teamName) {
-    return opponentTeam == teamName;
+    return opponentTeamName == teamName;
   }
 
   bool didHomeTeamWin() {

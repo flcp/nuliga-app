@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/pages/next-match/next_match_page.dart';
-import 'package:nuliga_app/pages/shared/next_matches_location_indicator.dart';
+import 'package:nuliga_app/pages/team-overview/next-matches/next_matches_location_indicator.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 
 class NextMatchesCard extends StatefulWidget {
@@ -51,7 +51,7 @@ class _NextMatchesCardState extends State<NextMatchesCard> {
                         getShortDateString(widget.match.time),
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      NextMatchesDetailsLocationIndicator(
+                      NextMatchesLocationIndicatorButton(
                         match: widget.match,
                         homeTeamName: widget.team.name,
                       ),

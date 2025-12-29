@@ -76,9 +76,9 @@ class LeagueTableDetailsRankingListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var twoLetterWidth = 18.0;
-
     return ListTile(
+      contentPadding: EdgeInsets.symmetric(horizontal: 8),
+
       title: DefaultTextStyle(
         style: TextStyle(
           fontSize: 14,
@@ -88,26 +88,17 @@ class LeagueTableDetailsRankingListHeader extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(width: 24, child: Text("#")),
+            SizedBox(width: 24, child: Text("#", textAlign: TextAlign.center)),
+            SizedBox(width: 8),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                child: Text(
-                  "Name",
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-              ),
+              child: Text("Name", overflow: TextOverflow.ellipsis, maxLines: 1),
             ),
-            SizedBox(width: twoLetterWidth, child: Text("W")),
-            SizedBox(width: twoLetterWidth, child: Text("D")),
-            SizedBox(width: twoLetterWidth, child: Text("L")),
+            SizedBox(width: 20, child: Text("W")),
+            SizedBox(width: 16, child: Text("D")),
+            SizedBox(width: 16, child: Text("L")),
             SizedBox(width: 24, child: Text("Pts")),
-            SizedBox(
-              width: twoLetterWidth,
-              child: Text("M", textAlign: TextAlign.end),
-            ),
-            SizedBox(width: 16),
+            SizedBox(width: 18, child: Text("M", textAlign: TextAlign.center)),
+            SizedBox(width: 40),
           ],
         ),
       ),

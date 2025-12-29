@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -17,19 +18,19 @@ class NextMatchInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: FutureBuilder(
-        future: nextMatchesService.getLocation(match),
-        builder: (context, asyncSnapshot) {
-          if (asyncSnapshot.connectionState == ConnectionState.waiting) {
-            return Center();
-          }
+      child: Padding(
+        padding: const EdgeInsets.all(Constants.smallCardPadding),
+        child: FutureBuilder(
+          future: nextMatchesService.getLocation(match),
+          builder: (context, asyncSnapshot) {
+            if (asyncSnapshot.connectionState == ConnectionState.waiting) {
+              return Center();
+            }
 
-          final data = getDataOrDefault(asyncSnapshot, "");
-          final location = NextMatchesService.getMultilineAddress(data);
+            final data = getDataOrDefault(asyncSnapshot, "");
+            final location = NextMatchesService.getMultilineAddress(data);
 
-          return Container(
-            padding: const EdgeInsets.all(24),
-            child: Column(
+            return Column(
               children: [
                 Row(
                   children: [
@@ -53,7 +54,6 @@ class NextMatchInfo extends StatelessWidget {
                     ),
                   ],
                 ),
-                // TODO: remove paddings for sizedbox and spacer
                 const SizedBox(height: 16),
 
                 Row(
@@ -82,9 +82,9 @@ class NextMatchInfo extends StatelessWidget {
                   ],
                 ),
               ],
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

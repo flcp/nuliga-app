@@ -77,7 +77,7 @@ class LeagueTableDetailsRankingListHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 8),
+      contentPadding: EdgeInsets.symmetric(horizontal: 12),
 
       title: DefaultTextStyle(
         style: TextStyle(

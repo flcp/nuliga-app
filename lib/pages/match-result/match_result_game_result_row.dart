@@ -22,7 +22,7 @@ class MatchResultGameResultRow extends StatelessWidget {
     return Card(
       elevation: 0,
       child: Padding(
-        padding: const EdgeInsets.all(Constants.cardPadding),
+        padding: const EdgeInsets.all(Constants.smallCardPadding),
         child: ExpansionTile(
           shape: Border.all(color: Colors.transparent),
           title: Column(
@@ -42,12 +42,11 @@ class MatchResultGameResultRow extends StatelessWidget {
                       didPlayersWin: gameResult.homeTeamWon,
                     ),
                   ),
-                  SizedBox(width: 4),
+
                   GameResultScorePill(
                     gameResult: gameResult,
                     isHomeTeamHighlighted: isHomeTeamHighlighted,
                   ),
-                  SizedBox(width: 4),
                   Expanded(
                     child: PlayersText(
                       align: TextAlign.right,

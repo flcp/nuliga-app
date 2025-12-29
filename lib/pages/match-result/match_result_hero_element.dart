@@ -26,7 +26,7 @@ class MatchResultHeroElement extends StatelessWidget {
           // TODO: use proper color
           color: Colors.black.withAlpha(75),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(Constants.smallCardPadding),
             child: Column(
               children: [
                 Row(

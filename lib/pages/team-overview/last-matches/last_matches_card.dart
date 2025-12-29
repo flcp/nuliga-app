@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/match_result.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
 
 class LastMatchesCard extends StatelessWidget {
@@ -18,7 +19,7 @@ class LastMatchesCard extends StatelessWidget {
     return Card(
       elevation: 0,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(Constants.smallCardPadding),
         child: Row(
           children: [
             Expanded(
@@ -48,15 +49,12 @@ class MatchResultHeroElementTeamName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: Text(
-        teamName,
-        softWrap: true,
-        overflow: TextOverflow.ellipsis,
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-      ),
+    return Text(
+      teamName,
+      softWrap: true,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
     );
   }
 }

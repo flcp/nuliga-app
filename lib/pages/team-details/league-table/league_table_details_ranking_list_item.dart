@@ -28,7 +28,7 @@ class _LeagueTableDetailsRankingListItemState
     return ListTile(
       dense: true,
       onTap: () => goToTeamInspector(),
-      contentPadding: EdgeInsets.symmetric(horizontal: 8),
+      contentPadding: EdgeInsets.symmetric(horizontal: 12),
       title: DefaultTextStyle.merge(
         style: TextStyle(
           color: isHighlighted

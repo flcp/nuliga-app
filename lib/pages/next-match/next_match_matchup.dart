@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 
 class NextMatchMatchup extends StatelessWidget {
   const NextMatchMatchup({super.key, required this.match});
@@ -9,8 +10,8 @@ class NextMatchMatchup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Container(
-        padding: const EdgeInsets.all(24),
+      child: Padding(
+        padding: const EdgeInsets.all(Constants.bigCardPadding),
         child: Column(
           children: [
             Text(match.homeTeam),

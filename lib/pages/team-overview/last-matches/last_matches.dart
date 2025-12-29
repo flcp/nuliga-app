@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/pages/match-result/match_result_page.dart';
 import 'package:nuliga_app/pages/team-overview/last-matches/last_matches_card.dart';
 import 'package:nuliga_app/services/last_matches_service.dart';
@@ -35,23 +36,24 @@ class LastMatches extends StatelessWidget {
           children: lastThreeMatchResults
               .map(
                 (result) => InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MatchResultPage(
-                          matchResult: result,
-                          teamName: team.name,
-                        ),
-                      ),
-                    );
-                  },
+                  onTap: () => navigateToMatchResult(context, result),
                   child: LastMatchesCard(matchResult: result, homeTeam: team),
                 ),
               )
               .toList(),
         );
       },
+    );
+  }
+
+  // TODO: überall diese Struktur
+  void navigateToMatchResult(BuildContext context, MatchResult result) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            MatchResultPage(matchResult: result, teamName: team.name),
+      ),
     );
   }
 }

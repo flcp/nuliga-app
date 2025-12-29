@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/game_result.dart';
 import 'package:nuliga_app/model/game_type.dart';
 import 'package:nuliga_app/model/player.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
 
 class MatchResultGameResultRow extends StatelessWidget {
@@ -20,86 +21,83 @@ class MatchResultGameResultRow extends StatelessWidget {
 
     return Card(
       elevation: 0,
-      child: ExpansionTile(
-        shape: Border.all(color: Colors.transparent),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: Padding(
+        padding: const EdgeInsets.all(Constants.cardPadding),
+        child: ExpansionTile(
+          shape: Border.all(color: Colors.transparent),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                gameResult.gameType.displayName,
+                style: TextStyle(color: textColor, fontSize: 12),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: PlayersText(
+                      players: gameResult.homePlayers,
+                      gameType: gameResult.gameType,
+                      didPlayersWin: gameResult.homeTeamWon,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  GameResultScorePill(
+                    gameResult: gameResult,
+                    isHomeTeamHighlighted: isHomeTeamHighlighted,
+                  ),
+                  SizedBox(width: 4),
+                  Expanded(
+                    child: PlayersText(
+                      align: TextAlign.right,
+                      players: gameResult.opponentPlayers,
+                      gameType: gameResult.gameType,
+                      didPlayersWin: !gameResult.homeTeamWon,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
           children: [
-            Text(
-              gameResult.gameType.displayName,
-              style: TextStyle(color: textColor, fontSize: 12),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: PlayersText(
-                    players: gameResult.homePlayers,
-                    gameType: gameResult.gameType,
-                    didPlayersWin: gameResult.homeTeamWon,
+            // TODO: extract to own screen
+            DefaultTextStyle(
+              style: TextStyle(color: textColor),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Flexible(
+                    child: Column(
+                      children: gameResult.homePlayers
+                          .map((player) => Text(player.getFullname()))
+                          .toList(),
+                    ),
                   ),
-                ),
-                SizedBox(width: 4),
-                GameResultScorePill(
-                  gameResult: gameResult,
-                  isHomeTeamHighlighted: isHomeTeamHighlighted,
-                ),
-                SizedBox(width: 4),
-                Expanded(
-                  child: PlayersText(
-                    align: TextAlign.right,
-                    players: gameResult.opponentPlayers,
-                    gameType: gameResult.gameType,
-                    didPlayersWin: !gameResult.homeTeamWon,
+
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: gameResult.sets
+                        .map(
+                          (set) => Text(
+                            "${set.homeScore.toString()} - ${set.opponentScore.toString()}",
+                          ),
+                        )
+                        .toList(),
                   ),
-                ),
-              ],
+                  Flexible(
+                    child: Column(
+                      children: gameResult.opponentPlayers
+                          .map((player) => Text(player.getFullname()))
+                          .toList(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
-        children: [
-          // TODO: extract to own screen
-          DefaultTextStyle(
-            style: TextStyle(color: textColor),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Flexible(
-                  child: Column(
-                    children: gameResult.homePlayers
-                        .map((player) => Text(player.getFullname()))
-                        .toList(),
-                  ),
-                ),
-
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: gameResult.sets
-                      .map(
-                        (set) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 8.0,
-                          ),
-                          child: Text(
-                            "${set.homeScore.toString()} - ${set.opponentScore.toString()}",
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-                Flexible(
-                  child: Column(
-                    children: gameResult.opponentPlayers
-                        .map((player) => Text(player.getFullname()))
-                        .toList(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

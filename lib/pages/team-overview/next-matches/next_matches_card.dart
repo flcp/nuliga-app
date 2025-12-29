@@ -24,41 +24,38 @@ class NextMatchesCard extends StatefulWidget {
 class _NextMatchesCardState extends State<NextMatchesCard> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: InkWell(
-          onTap: () => goToUpComingMatch(widget.match),
-          child: Card(
-            elevation: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      getOpponent(widget.match, widget.team),
-                      style: Theme.of(context).textTheme.titleLarge,
-                      overflow: TextOverflow.clip,
+    return AspectRatio(
+      aspectRatio: 1,
+      child: InkWell(
+        onTap: () => navigateToUpcomingMatch(widget.match),
+        child: Card(
+          elevation: 0,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    getOpponent(widget.match, widget.team),
+                    style: Theme.of(context).textTheme.titleLarge,
+                    overflow: TextOverflow.clip,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      getShortDateString(widget.match.time),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        getShortDateString(widget.match.time),
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      NextMatchesLocationIndicatorButton(
-                        match: widget.match,
-                        homeTeamName: widget.team.name,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    NextMatchesLocationIndicatorButton(
+                      match: widget.match,
+                      homeTeamName: widget.team.name,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -66,7 +63,7 @@ class _NextMatchesCardState extends State<NextMatchesCard> {
     );
   }
 
-  void goToUpComingMatch(FutureMatch match) {
+  void navigateToUpcomingMatch(FutureMatch match) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => NextMatchPage(match: match)),

@@ -15,29 +15,26 @@ class LastMatchesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-      child: Card(
-        elevation: 0,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: MatchResultHeroElementTeamName(matchResult.homeTeamName),
+    return Card(
+      elevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: MatchResultHeroElementTeamName(matchResult.homeTeamName),
+            ),
+            MatchResultScorePill(
+              matchResult: matchResult,
+              teamName: homeTeam.name,
+            ),
+            Expanded(
+              child: MatchResultHeroElementTeamName(
+                matchResult.opponentTeamName,
               ),
-              MatchResultScorePill(
-                matchResult: matchResult,
-                teamName: homeTeam.name,
-              ),
-              Expanded(
-                child: MatchResultHeroElementTeamName(
-                  matchResult.opponentTeamName,
-                ),
-              ),
-              Icon(Icons.chevron_right),
-            ],
-          ),
+            ),
+            Icon(Icons.chevron_right),
+          ],
         ),
       ),
     );

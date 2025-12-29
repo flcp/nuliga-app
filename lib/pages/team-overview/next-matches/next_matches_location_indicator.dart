@@ -20,7 +20,9 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.onPrimary.withAlpha(150);
+    final color = Theme.of(
+      context,
+    ).colorScheme.onPrimaryContainer.withAlpha(70);
 
     if (match.homeTeam == homeTeamName) {
       return Icon(Icons.home, color: color, size: size);
@@ -55,26 +57,19 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
         }
 
         // sizedbox, sonst verschiebt sich iconbutton gegenueber icon
-        return Container(
-          padding: const EdgeInsets.all(8), // space between icon and circle
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Theme.of(context).colorScheme.primaryFixed,
-          ),
-          child: SizedBox(
-            height: size,
-            width: size,
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              icon: Icon(
-                Icons.directions,
-                size: size,
-                color: Theme.of(context).colorScheme.onPrimaryFixed,
-              ),
-              onPressed: () async {
-                await launchUrl(uri);
-              },
+        return SizedBox(
+          height: size,
+          width: size,
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            icon: Icon(
+              Icons.directions,
+              size: size,
+              color: Theme.of(context).colorScheme.primary,
             ),
+            onPressed: () async {
+              await launchUrl(uri);
+            },
           ),
         );
       },

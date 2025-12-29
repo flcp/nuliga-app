@@ -27,19 +27,7 @@ class ShortLeagueTable extends StatelessWidget {
         final closestRankings = getDataOrEmptyList(snapshot);
 
         return InkWell(
-          onTap: () {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return;
-            }
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    TeamDetailsPage(team: team, startIndex: 1),
-              ),
-            );
-          },
+          onTap: () => navigateToTeamDetails(context),
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24), // Rounded edges
@@ -88,6 +76,15 @@ class ShortLeagueTable extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  void navigateToTeamDetails(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TeamDetailsPage(team: team, startIndex: 1),
+      ),
     );
   }
 }

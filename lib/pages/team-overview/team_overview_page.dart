@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/pages/team-overview/last-matches/last_matches.dart';
 import 'package:nuliga_app/pages/team-overview/league-table/short_league_table.dart';
@@ -29,23 +30,20 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
     final provider = context.watch<FollowedTeamsProvider>();
     final teams = provider.followedTeams;
 
-    return RefreshIndicator(
-      onRefresh: refresh,
-      child: ListView(
-        children: teams.map((team) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Text(
+    return Padding(
+      padding: const EdgeInsets.all(Constants.pagePadding),
+      child: RefreshIndicator(
+        onRefresh: refresh,
+        child: ListView(
+          children: teams.map((team) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
                   team.name,
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -58,27 +56,19 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                     ),
                   ],
                 ),
-              ),
+                NextMatches(matchesUrl: team.matchesUrl, team: team),
+                SizedBox(height: 24),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: NextMatches(matchesUrl: team.matchesUrl, team: team),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 36, 24, 16),
-                child: Text(
+                Text(
                   "RANKING",
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ShortLeagueTable(team: team),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
-                child: Row(
+                SizedBox(height: 12),
+                ShortLeagueTable(team: team),
+                SizedBox(height: 12),
+
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -91,16 +81,13 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                     ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: LastMatches(team: team),
-              ),
+                LastMatches(team: team),
 
-              SizedBox(height: 48),
-            ],
-          );
-        }).toList(),
+                SizedBox(height: 48),
+              ],
+            );
+          }).toList(),
+        ),
       ),
     );
   }

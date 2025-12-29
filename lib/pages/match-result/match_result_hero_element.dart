@@ -20,84 +20,83 @@ class MatchResultHeroElement extends StatelessWidget {
   Widget build(BuildContext context) {
     final infoColor = Theme.of(context).colorScheme.onSurface.withAlpha(150);
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Card(
-            elevation: 0,
-            // TODO: use proper color
-            color: Colors.black.withAlpha(75),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      children: [
+        Card(
+          elevation: 0,
+          // TODO: use proper color
+          color: Colors.black.withAlpha(75),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
 
-                    children: [
-                      Expanded(
-                        child: MatchResultHeroElementTeamName(
-                          matchResult.homeTeamName,
-                        ),
+                  children: [
+                    Expanded(
+                      child: MatchResultHeroElementTeamName(
+                        matchResult.homeTeamName,
                       ),
-                      Expanded(
-                        child: MatchResultHeroElementTeamName(
-                          matchResult.opponentTeam,
-                        ),
+                    ),
+                    Expanded(
+                      child: MatchResultHeroElementTeamName(
+                        matchResult.opponentTeam,
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 64,
-                    children: [
-                      Text(
-                        matchResult.homeTeamMatchesWon.toString(),
-                        style: Theme.of(
-                          context,
-                        ).textTheme.displayLarge!.copyWith(color: Colors.white),
-                      ),
-                      Text(
-                        matchResult.opponentTeamMatchesWon.toString(),
-                        style: Theme.of(
-                          context,
-                        ).textTheme.displayLarge!.copyWith(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 64,
+                  children: [
+                    Text(
+                      matchResult.homeTeamMatchesWon.toString(),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.displayLarge!.copyWith(color: Colors.white),
+                    ),
+                    Text(
+                      matchResult.opponentTeamMatchesWon.toString(),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.displayLarge!.copyWith(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 4,
-            children: [
-              WinLossIndicator(
-                size: 12,
-                status: matchResult.getMatchStatusForTeam(teamName),
-              ),
-              Text(
-                matchResult.getMatchStatusForTeam(teamName).name,
-                style: TextStyle(color: infoColor),
-              ),
-              SizedBox(width: 24),
-              Icon(Icons.calendar_today, size: 18.0, color: infoColor),
-              Text(
-                getDateString(matchResult.time),
-                style: TextStyle(color: infoColor),
-              ),
-              SizedBox(width: 16),
-              Icon(Icons.access_time, size: 18.0, color: infoColor),
-              Text(
-                "${matchResult.time.hour}:${matchResult.time.minute.toString().padLeft(2, "0")}",
-                style: TextStyle(color: infoColor),
-              ),
-            ],
-          ),
-        ],
-      ),
+        ),
+        SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 4,
+          children: [
+            WinLossIndicator(
+              size: 12,
+              status: matchResult.getMatchStatusForTeam(teamName),
+            ),
+            Text(
+              matchResult.getMatchStatusForTeam(teamName).name,
+              style: TextStyle(color: infoColor),
+            ),
+            SizedBox(width: 24),
+            Icon(Icons.calendar_today, size: 18.0, color: infoColor),
+            Text(
+              getDateString(matchResult.time),
+              style: TextStyle(color: infoColor),
+            ),
+            SizedBox(width: 16),
+            Icon(Icons.access_time, size: 18.0, color: infoColor),
+            Text(
+              "${matchResult.time.hour}:${matchResult.time.minute.toString().padLeft(2, "0")}",
+              style: TextStyle(color: infoColor),
+            ),
+          ],
+        ),
+        SizedBox(height: 16),
+      ],
     );
   }
 }

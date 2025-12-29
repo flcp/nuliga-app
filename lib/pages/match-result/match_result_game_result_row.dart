@@ -18,90 +18,87 @@ class MatchResultGameResultRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final textColor = Theme.of(context).colorScheme.onSurface.withAlpha(160);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Card(
-        elevation: 0,
-        child: ExpansionTile(
-          shape: Border.all(color: Colors.transparent),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Card(
+      elevation: 0,
+      child: ExpansionTile(
+        shape: Border.all(color: Colors.transparent),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
 
-            children: [
-              Text(
-                gameResult.gameType.displayName,
-                style: TextStyle(color: textColor, fontSize: 12),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: PlayersText(
-                      players: gameResult.homePlayers,
-                      gameType: gameResult.gameType,
-                      didPlayersWin: gameResult.homeTeamWon,
-                    ),
-                  ),
-                  GameResultScorePill(
-                    gameResult: gameResult,
-                    isHomeTeamHighlighted: isHomeTeamHighlighted,
-                  ),
-
-                  Expanded(
-                    child: PlayersText(
-                      align: TextAlign.right,
-                      players: gameResult.opponentPlayers,
-                      gameType: gameResult.gameType,
-                      didPlayersWin: !gameResult.homeTeamWon,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
           children: [
-            DefaultTextStyle(
-              style: TextStyle(color: textColor),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Flexible(
-                    child: Column(
-                      children: gameResult.homePlayers
-                          .map((player) => Text(player.getFullname()))
-                          .toList(),
-                    ),
+            Text(
+              gameResult.gameType.displayName,
+              style: TextStyle(color: textColor, fontSize: 12),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: PlayersText(
+                    players: gameResult.homePlayers,
+                    gameType: gameResult.gameType,
+                    didPlayersWin: gameResult.homeTeamWon,
                   ),
+                ),
+                GameResultScorePill(
+                  gameResult: gameResult,
+                  isHomeTeamHighlighted: isHomeTeamHighlighted,
+                ),
 
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: gameResult.sets
-                        .map(
-                          (set) => Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0,
-                              vertical: 8.0,
-                            ),
-                            child: Text(
-                              "${set.homeScore.toString()} - ${set.opponentScore.toString()}",
-                            ),
-                          ),
-                        )
-                        .toList(),
+                Expanded(
+                  child: PlayersText(
+                    align: TextAlign.right,
+                    players: gameResult.opponentPlayers,
+                    gameType: gameResult.gameType,
+                    didPlayersWin: !gameResult.homeTeamWon,
                   ),
-                  Flexible(
-                    child: Column(
-                      children: gameResult.opponentPlayers
-                          .map((player) => Text(player.getFullname()))
-                          .toList(),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
+        children: [
+          DefaultTextStyle(
+            style: TextStyle(color: textColor),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Flexible(
+                  child: Column(
+                    children: gameResult.homePlayers
+                        .map((player) => Text(player.getFullname()))
+                        .toList(),
+                  ),
+                ),
+
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: gameResult.sets
+                      .map(
+                        (set) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 96.0,
+                            vertical: 8.0,
+                          ),
+                          child: Text(
+                            "${set.homeScore.toString()} - ${set.opponentScore.toString()}",
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+                Flexible(
+                  child: Column(
+                    children: gameResult.opponentPlayers
+                        .map((player) => Text(player.getFullname()))
+                        .toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

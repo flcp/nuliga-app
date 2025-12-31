@@ -10,4 +10,8 @@ class FutureMatch {
     required this.opponentTeam,
     this.locationUrl = "",
   });
+
+  bool isHomeTeam(String teamName) {
+    return homeTeam == teamName;
+  }
 }

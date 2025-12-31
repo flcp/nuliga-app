@@ -37,7 +37,7 @@ class _NextMatchesDetailsListItemState
     ).colorScheme.onSurface.withAlpha(150);
 
     return ListTile(
-      onTap: () => goToUpComingMatch(widget.match),
+      onTap: () => goToUpComingMatch(widget.match, widget.hometeam),
       trailing: Icon(Icons.chevron_right),
       subtitle: Row(
         spacing: spacingSubtitleBlocks,
@@ -59,10 +59,10 @@ class _NextMatchesDetailsListItemState
     );
   }
 
-  void goToUpComingMatch(FutureMatch match) {
+  void goToUpComingMatch(FutureMatch match, String teamName) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NextMatchPage(match: match)),
+      MaterialPageRoute(builder: (context) => NextMatchPage(match: match, teamName: teamName,)),
     );
   }
 }

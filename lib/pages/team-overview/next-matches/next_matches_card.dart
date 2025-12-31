@@ -28,7 +28,7 @@ class _NextMatchesCardState extends State<NextMatchesCard> {
     return AspectRatio(
       aspectRatio: 1,
       child: InkWell(
-        onTap: () => navigateToUpcomingMatch(widget.match),
+        onTap: () => navigateToUpcomingMatch(widget.match, widget.team.name),
         child: Card(
           elevation: 0,
           child: Padding(
@@ -64,10 +64,10 @@ class _NextMatchesCardState extends State<NextMatchesCard> {
     );
   }
 
-  void navigateToUpcomingMatch(FutureMatch match) {
+  void navigateToUpcomingMatch(FutureMatch match, String teamName) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NextMatchPage(match: match)),
+      MaterialPageRoute(builder: (context) => NextMatchPage(match: match, teamName: teamName,)),
     );
   }
 

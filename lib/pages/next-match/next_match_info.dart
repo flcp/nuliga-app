@@ -7,16 +7,18 @@ import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NextMatchInfo extends StatelessWidget {
-  NextMatchInfo({super.key, required this.match});
+  NextMatchInfo({super.key, required this.match, required this.teamName});
 
   final locationService = LocationService();
   final FutureMatch match;
+  
+  final String teamName;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(Constants.smallCardPadding),
+        padding: const EdgeInsets.all(Constants.bigCardPadding),
         child: FutureBuilder(
           future: locationService.getLocation(match),
           builder: (context, asyncSnapshot) {
@@ -64,55 +66,81 @@ class NextMatchInfo extends StatelessWidget {
                     const SizedBox(width: 24),
 
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: locationMultiline
-                            .map(
-                              (locationPart) => Text(
-                                locationPart,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
-                                softWrap: true,
-                                textAlign: TextAlign.right,
-                              ),
-                            )
-                            .toList(),
+                      child: LocationText(isHomeTeam: match.isHomeTeam(teamName), locationMultiline: locationMultiline),
+                    ),
+                  ],
+                ),
+
+                if (match.locationUrl.isNotEmpty)
+                  Row(
+                    children: [
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () async {
+                          if (match.locationUrl.isNotEmpty) {
+                            final bwbvUri = Uri.parse(match.locationUrl);
+                            launchUrl(bwbvUri);
+                          }
+                        },
+                        icon: Icon(Icons.open_in_new),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () async {
-                        if (match.locationUrl.isNotEmpty) {
-                          final bwbvUri = Uri.parse(match.locationUrl);
-                          launchUrl(bwbvUri);
-                        }
-                      },
-                      icon: Icon(Icons.open_in_new),
-                    ),
-                    IconButton(
-                      onPressed: () async {
-                        final mapsLink =
-                            LocationService.convertToGoogleMapsLink(
-                              locationMultiline.join(", "),
-                            );
-                        Uri mapsLinkUri = Uri.parse(mapsLink);
-                        if (mapsLink.isNotEmpty) {
-                          launchUrl(mapsLinkUri);
-                        }
-                      },
-                      icon: Icon(Icons.directions),
-                    ),
-                  ],
-                ),
+                      IconButton(
+                        onPressed: () async {
+                          if (match.locationUrl.isEmpty) return;
+                          final mapsLink =
+                              LocationService.convertToGoogleMapsLink(
+                                locationMultiline.join(", "),
+                              );
+                          Uri mapsLinkUri = Uri.parse(mapsLink);
+                          if (mapsLink.isNotEmpty) {
+                            launchUrl(mapsLinkUri);
+                          }
+                        },
+                        icon: Icon(Icons.directions),
+                      ),
+                    ],
+                  ),
               ],
             );
           },
         ),
       ),
+    );
+  }
+}
+
+class LocationText extends StatelessWidget {
+  const LocationText({
+    super.key,
+    required this.locationMultiline, required this.isHomeTeam,
+  });
+
+  final List<String> locationMultiline;
+  final bool isHomeTeam;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isHomeTeam) {
+      return Text("Heimspiel", textAlign: TextAlign.right,);
+    }
+
+    if (locationMultiline.toList().isEmpty) {
+      return Text("Unbekannt", textAlign: TextAlign.right,);
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: locationMultiline
+          .map(
+            (locationPart) => Text(
+              locationPart,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
+              softWrap: true,
+              textAlign: TextAlign.right,
+            ),
+          )
+          .toList(),
     );
   }
 }

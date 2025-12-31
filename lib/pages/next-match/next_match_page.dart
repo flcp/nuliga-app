@@ -10,8 +10,9 @@ class NextMatchPage extends StatelessWidget {
   final FutureMatch match;
 
   final nextMatchesService = NextMatchesService();
+  final String teamName;
 
-  NextMatchPage({super.key, required this.match});
+  NextMatchPage({super.key, required this.match, required this.teamName});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class NextMatchPage extends StatelessWidget {
 
             NextMatchMatchup(match: match),
             SizedBox(height: 16),
-            NextMatchInfo(match: match),
+            NextMatchInfo(match: match, teamName: teamName,),
           ],
         ),
       ),

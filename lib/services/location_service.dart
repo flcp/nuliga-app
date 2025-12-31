@@ -21,6 +21,10 @@ class LocationService {
   }
 
   static List<String> convertToMultilineAddress(String address) {
+    if (address.isEmpty) {
+      return [];
+    }
+
     final plzRegex = RegExp(r'\d{5}');
 
     final parts = address.split(plzRegex);

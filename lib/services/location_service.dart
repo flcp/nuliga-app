@@ -11,7 +11,7 @@ class LocationService {
       match.locationUrl,
     );
 
-    return _getGoogleMapsLink(locationAddress);
+    return convertToGoogleMapsLink(locationAddress);
   }
 
   Future<String> getLocation(FutureMatch match) async {
@@ -20,17 +20,17 @@ class LocationService {
     return matchLocationRepository.getMatchLocation(match.locationUrl);
   }
 
-  List<String> getMultilineAddress(String address) {
+  static List<String> convertToMultilineAddress(String address) {
     final plzRegex = RegExp(r'\d{5}');
 
     final parts = address.split(plzRegex);
     final plz = plzRegex.allMatches(address);
-    if (parts.length < 2 || plz == null) return parts;
+    if (parts.length < 2 || plz.isEmpty) return parts;
 
     return [parts[0], "${plz.first.group(0)!} ${parts[1]}"];
   }
 
-  static String _getGoogleMapsLink(String address) {
+  static String convertToGoogleMapsLink(String address) {
     final encodedAddress = Uri.encodeComponent(address);
 
     return "https://www.google.com/maps/search/?api=1&query=$encodedAddress";

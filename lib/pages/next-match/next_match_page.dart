@@ -21,7 +21,9 @@ class NextMatchPage extends StatelessWidget {
         padding: const EdgeInsets.all(Constants.pagePadding),
         child: Column(
           children: [
-            NextMatchCountdown(),
+            NextMatchCountdown(matchTime: match.time,),
+                        SizedBox(height: 16),
+
             NextMatchMatchup(match: match),
             SizedBox(height: 16),
             NextMatchInfo(match: match),

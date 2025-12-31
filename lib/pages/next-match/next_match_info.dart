@@ -4,6 +4,7 @@ import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/location_service.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NextMatchInfo extends StatelessWidget {
   NextMatchInfo({super.key, required this.match});
@@ -24,7 +25,9 @@ class NextMatchInfo extends StatelessWidget {
             }
 
             final data = getDataOrDefault(asyncSnapshot, "");
-            final location = locationService.getMultilineAddress(data);
+            final locationMultiline = LocationService.convertToMultilineAddress(
+              data,
+            );
 
             return Column(
               children: [
@@ -53,6 +56,7 @@ class NextMatchInfo extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(Icons.location_on),
                     const SizedBox(width: 12),
@@ -62,7 +66,7 @@ class NextMatchInfo extends StatelessWidget {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: location
+                        children: locationMultiline
                             .map(
                               (locationPart) => Text(
                                 locationPart,
@@ -74,6 +78,33 @@ class NextMatchInfo extends StatelessWidget {
                             )
                             .toList(),
                       ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () async {
+                        if (match.locationUrl.isNotEmpty) {
+                          final bwbvUri = Uri.parse(match.locationUrl);
+                          launchUrl(bwbvUri);
+                        }
+                      },
+                      icon: Icon(Icons.open_in_new),
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        final mapsLink =
+                            LocationService.convertToGoogleMapsLink(
+                              locationMultiline.join(", "),
+                            );
+                        Uri mapsLinkUri = Uri.parse(mapsLink);
+                        if (mapsLink.isNotEmpty) {
+                          launchUrl(mapsLinkUri);
+                        }
+                      },
+                      icon: Icon(Icons.directions),
                     ),
                   ],
                 ),

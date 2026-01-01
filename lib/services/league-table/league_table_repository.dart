@@ -1,4 +1,4 @@
-import 'package:nuliga_app/model/league_team_standing.dart';
+import 'package:nuliga_app/model/league_team_ranking.dart';
 import 'package:nuliga_app/services/shared/http_client.dart';
 import 'package:nuliga_app/services/league-table/league_parser.dart';
 

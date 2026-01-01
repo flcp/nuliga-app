@@ -3,6 +3,7 @@ import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/pages/team-overview/last-matches/last_matches.dart';
+import 'package:nuliga_app/pages/team-overview/league-ranking-cards/league_ranking_cards.dart';
 import 'package:nuliga_app/pages/team-overview/league-table/short_league_table.dart';
 import 'package:nuliga_app/pages/team-overview/next-matches/next_matches.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
@@ -35,7 +36,9 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
       child: RefreshIndicator(
         onRefresh: refresh,
         child: ListView(
-          children: teams.map((team) {
+          children:
+          [LeagueRankingCards(teams: teams),
+          ...teams.map((team) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -86,7 +89,7 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                 SizedBox(height: 48),
               ],
             );
-          }).toList(),
+          })],
         ),
       ),
     );

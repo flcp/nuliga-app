@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/league_team_standing.dart';
+import 'package:nuliga_app/model/league_team_ranking.dart';
 import 'package:nuliga_app/pages/team-details/league-table/league_table_details_ranking_list_item.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';

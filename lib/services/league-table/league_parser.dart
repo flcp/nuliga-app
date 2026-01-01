@@ -1,6 +1,6 @@
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
-import 'package:nuliga_app/model/league_team_standing.dart';
+import 'package:nuliga_app/model/league_team_ranking.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
 
 class LeagueParser {

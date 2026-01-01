@@ -1,20 +1,41 @@
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/model/league_team_standing.dart';
+import 'package:nuliga_app/model/league_team_ranking.dart';
+import 'package:nuliga_app/model/short_league_team_ranking.dart';
 import 'package:nuliga_app/services/league-table/league_table_repository.dart';
 
 class LeagueTableService {
   final leagueTableRepository = LeagueTableRepository();
 
-  Future<LeagueTeamRanking> getRankingForTeam(
+  Future<ShortLeagueTeamRanking> getShortRankingForTeam(
     String leagueUrl,
     String teamName,
   ) async {
     final teamRankings = await leagueTableRepository.getLeagueTeamRankings(
       leagueUrl,
     );
-    return teamRankings.firstWhere(
-      (teamRanking) => teamRanking.teamName == teamName,
-      orElse: () => LeagueTeamRanking.empty,
+
+    final totalTeams = teamRankings.length;
+
+    if (totalTeams == 0) {
+      return ShortLeagueTeamRanking.empty;
+    }
+
+    LeagueTeamRanking teamRanking;
+    try {
+      teamRanking = teamRankings.firstWhere(
+        (teamRanking) => teamRanking.teamName == teamName,
+      );
+    } catch (e) {
+      return ShortLeagueTeamRanking.empty;
+    }
+
+    return Future.value(
+      ShortLeagueTeamRanking(
+        rank: teamRanking.rank,
+        totalTeams: totalTeams,
+        teamName: teamRanking.teamName,
+        teamUrl: teamRanking.teamUrl,
+      ),
     );
   }
 

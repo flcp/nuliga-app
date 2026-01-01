@@ -1,3 +1,4 @@
+
 class LeagueTeamRanking {
   final int rank;
   final String teamName;

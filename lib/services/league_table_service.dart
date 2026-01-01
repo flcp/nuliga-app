@@ -14,6 +14,7 @@ class LeagueTableService {
       leagueUrl,
     );
 
+    final leagueName = await leagueTableRepository.getLeagueName(leagueUrl);
     final totalTeams = teamRankings.length;
 
     if (totalTeams == 0) {
@@ -35,6 +36,7 @@ class LeagueTableService {
         totalTeams: totalTeams,
         teamName: teamRanking.teamName,
         teamUrl: teamRanking.teamUrl,
+        leagueName: leagueName
       ),
     );
   }

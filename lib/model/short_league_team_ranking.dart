@@ -3,12 +3,14 @@ class ShortLeagueTeamRanking {
   final String teamName;
   final String teamUrl;
   final int totalTeams;
+  final String leagueName;
 
   ShortLeagueTeamRanking({
     required this.rank,
     required this.teamName,
     required this.teamUrl,
     required this.totalTeams, 
+    required this.leagueName,
   });
 
   static ShortLeagueTeamRanking empty = ShortLeagueTeamRanking(
@@ -16,5 +18,7 @@ class ShortLeagueTeamRanking {
     teamName: "",
     teamUrl: "",
     totalTeams: 0,
+    leagueName: "",
   );
+
 }

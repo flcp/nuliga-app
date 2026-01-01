@@ -64,4 +64,39 @@ class LeagueParser {
 
     return cells[index].querySelector('a');
   }
+
+  static Future<String> parseLeagueName(String htmlContent) async {
+
+
+
+
+    if (htmlContent.trim().isEmpty) {
+      return "";
+    }
+
+    final document = html.parse(htmlContent);
+
+     // Extrahiere den Text aus dem <h1>-Tag
+  String? h1Text = document.querySelector('h1')?.text;
+
+  if (h1Text != null) {
+    // Teile den Text in Zeilen auf (an <br />-Tags)
+    List<String> lines = h1Text.split('\n').where((line) => line.trim().isNotEmpty).toList();
+
+    if (lines.length >= 2) {
+      String secondLine = lines[1].trim();
+
+      String cleanedLine = secondLine
+          .replaceAll(RegExp(r'&quot;|\"'), '')
+          .replaceAll(RegExp(r'\([^)]*\)'), '')
+          .trim();
+
+      return cleanedLine;
+    }
+  }
+
+
+
+      return "";
+  }
 }

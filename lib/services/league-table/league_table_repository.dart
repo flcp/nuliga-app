@@ -12,4 +12,10 @@ class LeagueTableRepository {
 
     return LeagueParser.parseLeagueTable(htmlContent);
   }
+
+  Future<String> getLeagueName(String leagueUrl) async {
+    final htmlContent = await httpClient.get(leagueUrl);
+
+    return LeagueParser.parseLeagueName(htmlContent);
+  }
 }

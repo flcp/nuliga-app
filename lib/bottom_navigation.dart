@@ -29,6 +29,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         systemOverlayStyle: SystemUiOverlayStyle(
           systemNavigationBarColor: Colors.white,
         ),
+        title: const Text("NuLiga App"),
       ),
       body: _widgets.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(

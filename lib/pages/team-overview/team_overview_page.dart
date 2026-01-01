@@ -36,60 +36,62 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
       child: RefreshIndicator(
         onRefresh: refresh,
         child: ListView(
-          children:
-          [LeagueRankingCards(teams: teams),
-          ...teams.map((team) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  team.name,
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "UPCOMING",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    TextButton(
-                      onPressed: () => goToNextMatches(team),
-                      child: Text("View all"),
-                    ),
-                  ],
-                ),
-                NextMatches(matchesUrl: team.matchesUrl, team: team),
-                SizedBox(height: 24),
+          children: [
 
-                Text(
-                  "RANKING",
-                  textAlign: TextAlign.start,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                SizedBox(height: 12),
-                ShortLeagueTable(team: team),
-                SizedBox(height: 12),
+            LeagueRankingCards(teams: teams),
+            ...teams.map((team) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    team.name,
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "UP NEXT",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      TextButton(
+                        onPressed: () => goToNextMatches(team),
+                        child: Text("View all"),
+                      ),
+                    ],
+                  ),
+                  NextMatches(matchesUrl: team.matchesUrl, team: team),
+                  SizedBox(height: 24),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "LAST",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    TextButton(
-                      onPressed: () => goToResults(team),
-                      child: Text("View all"),
-                    ),
-                  ],
-                ),
-                LastMatches(team: team),
+                  Text(
+                    "RANKING",
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  SizedBox(height: 12),
+                  ShortLeagueTable(team: team),
+                  SizedBox(height: 12),
 
-                SizedBox(height: 48),
-              ],
-            );
-          })],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "LAST",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      TextButton(
+                        onPressed: () => goToResults(team),
+                        child: Text("View all"),
+                      ),
+                    ],
+                  ),
+                  LastMatches(team: team),
+
+                  SizedBox(height: 48),
+                ],
+              );
+            }),
+          ],
         ),
       ),
     );

@@ -47,7 +47,10 @@ class LastMatches extends StatelessWidget {
                         : 16.0,
                   ),
                   onTap: () => navigateToMatchResult(context, result),
-                  child: LastMatchesCard(matchResult: result, homeTeam: team),
+                  child: LastMatchesCard(
+                    matchResult: result,
+                    teamName: team.name,
+                  ),
                 ),
               )
               .toList(),

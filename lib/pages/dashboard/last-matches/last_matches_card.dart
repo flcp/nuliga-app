@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
@@ -10,11 +9,11 @@ class LastMatchesCard extends StatelessWidget {
   const LastMatchesCard({
     super.key,
     required this.matchResult,
-    required this.homeTeam,
+    required this.teamName,
   });
 
   final MatchResult matchResult;
-  final FollowedClub homeTeam;
+  final String teamName;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class LastMatchesCard extends StatelessWidget {
       titleTrailing: WinLossIndicator(
         isTextDisplayed: true,
         size: 10,
-        status: matchResult.getMatchStatusForTeam(homeTeam.name),
+        status: matchResult.getMatchStatusForTeam(teamName),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.max,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/short_league_team_ranking.dart';
-import 'package:nuliga_app/pages/dasboard/league-info/league_info_card.dart';
+import 'package:nuliga_app/pages/shared/surface_card.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/league_table_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -28,8 +28,8 @@ class LeagueInfo extends StatelessWidget {
               return ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  LeagueInfoCard(child: Center()),
-                  LeagueInfoCard(child: Center()),
+                  SurfaceCard(child: Center()),
+                  SurfaceCard(child: Center()),
                 ],
               );
             }
@@ -45,14 +45,14 @@ class LeagueInfo extends StatelessWidget {
             return ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                LeagueInfoCard(
+                SurfaceCard(
                   title: shortRank.leagueName,
                   child: Text(
                     "${shortRank.rank.toString()}.",
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                 ),
-                LeagueInfoCard(
+                SurfaceCard(
                   title: "Matches gespielt",
                   child: Row(
                     children: [

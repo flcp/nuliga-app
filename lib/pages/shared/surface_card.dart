@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 
-class LeagueInfoCard extends StatelessWidget {
+class SurfaceCard extends StatelessWidget {
   final Widget child;
   final Widget? titleTrailing;
   final String title;
   final String subtitle;
   final VoidCallback? onTap;
 
-  const LeagueInfoCard({
+  const SurfaceCard({
     super.key,
     required this.child,
     this.titleTrailing,

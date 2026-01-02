@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/dasboard/next-matches/next_matches_card.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
@@ -24,10 +25,15 @@ class NextMatches extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ListView(
+              padding: EdgeInsets.symmetric(
+                horizontal: Constants.bigCardPadding,
+              ),
               scrollDirection: Axis.horizontal,
               children: [
                 AspectRatio(aspectRatio: 1, child: Card(elevation: 0)),
+                SizedBox(width: Constants.bigCardListSpacing),
                 AspectRatio(aspectRatio: 1, child: Card(elevation: 0)),
+                SizedBox(width: Constants.bigCardListSpacing),
                 AspectRatio(aspectRatio: 1, child: Card(elevation: 0)),
               ],
             );
@@ -39,6 +45,8 @@ class NextMatches extends StatelessWidget {
           final laterMatches = nextMatches.later;
 
           return ListView(
+            padding: EdgeInsets.symmetric(horizontal: Constants.bigCardPadding),
+
             scrollDirection: Axis.horizontal,
             children: [
               ...nextTwoMatches.map(

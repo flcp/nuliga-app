@@ -25,38 +25,41 @@ class NextMatchesCard extends StatefulWidget {
 class _NextMatchesCardState extends State<NextMatchesCard> {
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: InkWell(
-        onTap: () => navigateToUpcomingMatch(widget.match, widget.team.name),
-        child: Card(
-          elevation: 0,
-          child: Padding(
-            padding: const EdgeInsets.all(Constants.bigCardPadding),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    getOpponent(widget.match, widget.team),
-                    style: Theme.of(context).textTheme.titleLarge,
-                    overflow: TextOverflow.clip,
+    return Padding(
+      padding: const EdgeInsets.only(right: Constants.bigCardListSpacing),
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: InkWell(
+          onTap: () => navigateToUpcomingMatch(widget.match, widget.team.name),
+          child: Card(
+            elevation: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(Constants.bigCardPadding),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      getOpponent(widget.match, widget.team),
+                      style: Theme.of(context).textTheme.titleLarge,
+                      overflow: TextOverflow.clip,
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      Date.getShortDateString(widget.match.time),
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    NextMatchesLocationIndicatorButton(
-                      match: widget.match,
-                      homeTeamName: widget.team.name,
-                    ),
-                  ],
-                ),
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        Date.getShortDateString(widget.match.time),
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      NextMatchesLocationIndicatorButton(
+                        match: widget.match,
+                        homeTeamName: widget.team.name,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

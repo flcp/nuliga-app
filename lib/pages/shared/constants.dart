@@ -3,4 +3,5 @@ class Constants {
   static const iconTextSpacing = 8.0;
   static const smallCardPadding = 8.0;
   static const bigCardPadding = 16.0;
+  static const bigCardListSpacing = 8.0;
 }

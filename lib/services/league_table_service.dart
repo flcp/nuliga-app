@@ -33,10 +33,11 @@ class LeagueTableService {
     return Future.value(
       ShortLeagueTeamRanking(
         rank: teamRanking.rank,
+        wins: teamRanking.wins,
         totalTeams: totalTeams,
         teamName: teamRanking.teamName,
         teamUrl: teamRanking.teamUrl,
-        leagueName: leagueName
+        leagueName: leagueName,
       ),
     );
   }

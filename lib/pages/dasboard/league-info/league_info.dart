@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/short_league_team_ranking.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/league_table_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
@@ -12,99 +13,133 @@ class LeagueInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 130,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          FutureBuilder(
-            future: leagueTableService.getShortRankingForTeam(
-              team.rankingTableUrl,
-              team.name,
-            ),
-            builder: (context, asyncSnapshot) {
-              if (asyncSnapshot.connectionState == ConnectionState.waiting) {
-                return AspectRatio(aspectRatio: 1, child: Card(elevation: 0));
-              }
-
-              final shortRank = getDataOrDefault(
-                asyncSnapshot,
-                ShortLeagueTeamRanking.empty,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Constants.pagePadding),
+      child: SizedBox(
+        height: 150,
+        child: FutureBuilder(
+          future: leagueTableService.getShortRankingForTeam(
+            team.rankingTableUrl,
+            team.name,
+          ),
+          builder: (context, asyncSnapshot) {
+            if (asyncSnapshot.connectionState == ConnectionState.waiting) {
+              return ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  LeagueInfoCard(child: Center()),
+                  LeagueInfoCard(child: Center()),
+                ],
               );
-              final leagueType = shortRank.leagueName.split(' ').first;
+            }
 
-              var greyedOutColor = Theme.of(
-                context,
-              ).colorScheme.onSurface.withAlpha(90);
-              return AspectRatio(
-                aspectRatio: 1,
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 12, 2, 12),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                leagueType,
-                                style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(color: greyedOutColor),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.baseline,
-                                textBaseline: TextBaseline.alphabetic,
-                                children: [
-                                  Baseline(
-                                    baseline: 30,
-                                    baselineType: TextBaseline.alphabetic,
+            final shortRank = getDataOrDefault(
+              asyncSnapshot,
+              ShortLeagueTeamRanking.empty,
+            );
+            final greyedOutColor = Theme.of(
+              context,
+            ).colorScheme.onPrimaryContainer.withAlpha(120);
 
-                                    child: Text(
-                                      shortRank.rank.toString(),
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.headlineMedium,
-                                    ),
-                                  ),
-                                  Baseline(
-                                    baseline: 30,
-                                    baselineType: TextBaseline.alphabetic,
+            return ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                LeagueInfoCard(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        shortRank.leagueName,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(color: greyedOutColor),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Baseline(
+                            baseline: 30,
+                            baselineType: TextBaseline.alphabetic,
 
-                                    child: Text(
-                                      "  / ${shortRank.totalTeams}",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium
-                                          ?.copyWith(color: greyedOutColor),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                shortRank.teamName,
-                                style: Theme.of(context).textTheme.bodySmall,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
+                            child: Text(
+                              shortRank.rank.toString(),
+                              style: Theme.of(context).textTheme.displayMedium,
+                            ),
                           ),
-                        ),
-                        Icon(Icons.chevron_right),
-                      ],
-                    ),
+                          Baseline(
+                            baseline: 30,
+                            baselineType: TextBaseline.alphabetic,
+                            child: Text(
+                              "  / ${shortRank.totalTeams}",
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(color: greyedOutColor),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              );
-            },
+                LeagueInfoCard(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Matches won",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(color: greyedOutColor),
+                      ),
+                      Text(shortRank.wins.toString()),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class LeagueInfoCard extends StatelessWidget {
+  final Widget child;
+  const LeagueInfoCard({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final chevronColor = Theme.of(
+      context,
+    ).colorScheme.onPrimaryContainer.withAlpha(50);
+
+    return Padding(
+      padding: const EdgeInsets.only(right: Constants.bigCardListSpacing),
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Card(
+          elevation: 0,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(
+              Constants.bigCardPadding,
+              Constants.bigCardPadding,
+              2,
+              Constants.bigCardPadding,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(child: child),
+                Icon(Icons.chevron_right, color: chevronColor),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }

@@ -47,13 +47,9 @@ class LeagueInfo extends StatelessWidget {
               children: [
                 LeagueInfoCard(
                   title: shortRank.leagueName,
-                  child: Row(
-                    children: [
-                      Text(
-                        "${shortRank.rank.toString()}.",
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
-                    ],
+                  child: Text(
+                    "${shortRank.rank.toString()}.",
+                    style: Theme.of(context).textTheme.displayMedium,
                   ),
                 ),
                 LeagueInfoCard(

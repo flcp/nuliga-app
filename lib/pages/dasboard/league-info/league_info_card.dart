@@ -53,8 +53,7 @@ class LeagueInfoCard extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-
-                      child,
+                      Expanded(child: child),
                       if (subtitle.isNotEmpty) ...[
                         Text(
                           subtitle,

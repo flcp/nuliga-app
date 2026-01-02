@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/pages/dasboard/league-info/league_info_card.dart';
 import 'package:nuliga_app/pages/next-match/next_match_page.dart';
-import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/dasboard/next-matches/next_matches_location_indicator.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 
@@ -25,44 +25,41 @@ class NextMatchesCard extends StatefulWidget {
 class _NextMatchesCardState extends State<NextMatchesCard> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: Constants.bigCardListSpacing),
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: InkWell(
-          onTap: () => navigateToUpcomingMatch(widget.match, widget.team.name),
-          child: Card(
-            elevation: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(Constants.bigCardPadding),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      getOpponent(widget.match, widget.team),
-                      style: Theme.of(context).textTheme.titleLarge,
-                      overflow: TextOverflow.clip,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        Date.getShortDateString(widget.match.time),
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      NextMatchesLocationIndicatorButton(
-                        match: widget.match,
-                        homeTeamName: widget.team.name,
-                      ),
-                    ],
+    return LeagueInfoCard(
+      title: Date.getShortDateString(widget.match.time),
+      child: Stack(
+        children: [
+          Text(
+            getOpponent(widget.match, widget.team),
+            style: Theme.of(context).textTheme.titleLarge,
+            overflow: TextOverflow.clip,
+            maxLines: 3,
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 2.0, color: Colors.transparent),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                    blurRadius: 10.0,
+                    spreadRadius: 10.0,
                   ),
                 ],
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
+              ),
+
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: NextMatchesLocationIndicatorButton(
+                  match: widget.match,
+                  homeTeamName: widget.team.name,
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

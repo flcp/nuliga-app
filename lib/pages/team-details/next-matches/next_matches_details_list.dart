@@ -54,7 +54,7 @@ class _NextMatchesDetailsListState extends State<NextMatchesDetailsList> {
                       .map(
                         (match) => NextMatchesDetailsListItem(
                           match: match,
-                          hometeam: widget.teamName,
+                          team: widget.teamName,
                           matchOverviewUrl: widget.matchOverviewUrl,
                         ),
                       )

@@ -16,13 +16,14 @@ void main() async {
         home: const BottomNavigation(),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade200),
-          scaffoldBackgroundColor: Colors.grey.shade100,
-          appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade100),
+          scaffoldBackgroundColor: Colors.grey.shade50,
+          appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade50),
           cardTheme: CardThemeData(
             color: Colors.white,
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
+              side: BorderSide(color: Colors.grey.shade100, width: 1),
             ),
           ),
         ),

@@ -38,7 +38,7 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
         final locationMapsLink = getDataOrDefault(snapshot, "");
 
         if (locationMapsLink.isEmpty || !locationMapsLink.startsWith("http")) {
-          return Icon(Icons.directions, color: color);
+          return Icon(Icons.directions_car, color: color);
         }
 
         Uri uri;
@@ -57,14 +57,14 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
-              color: Theme.of(context).colorScheme.onSurface,
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 Icons.directions,
                 size: size,
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
           ),

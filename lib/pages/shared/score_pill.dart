@@ -3,29 +3,6 @@ import 'package:nuliga_app/model/game_result.dart';
 import 'package:nuliga_app/model/match_result.dart';
 
 // TODO: delete
-class MatchResultScorePill extends StatelessWidget {
-  final MatchResult matchResult;
-  final String teamName;
-
-  const MatchResultScorePill({
-    super.key,
-    required this.matchResult,
-    required this.teamName,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final leftScore = matchResult.homeTeamMatchesWon;
-    final rightScore = matchResult.opponentTeamMatchesWon;
-
-    return ScorePill(
-      status: matchResult.getMatchStatusForTeam(teamName),
-      leftScore: leftScore,
-      rightScore: rightScore,
-    );
-  }
-}
-
 class GameResultScorePill extends StatelessWidget {
   const GameResultScorePill({
     super.key,
@@ -64,23 +41,16 @@ class ScorePill extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(12, 8, 18, 8),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          children: [
-            WinLossIndicator(size: 10, status: status),
-            SizedBox(width: 8),
-            Text(
-              '$leftScore-$rightScore',
+      child: Row(
+        children: [
+          WinLossIndicator(size: 10, status: status),
+          SizedBox(width: 8),
+          Text(
+            '$leftScore : $rightScore',
 
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }

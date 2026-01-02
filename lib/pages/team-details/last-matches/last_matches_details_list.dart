@@ -4,6 +4,7 @@ import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/match-result/match_result_page.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
 import 'package:nuliga_app/services/last_matches_service.dart';
+import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class LastMatchesDetailsList extends StatefulWidget {
@@ -39,29 +40,32 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
           children: matchResults.map((result) {
             return ListTile(
               onTap: () => goToMatchResult(result, widget.teamName),
-              trailing: Icon(Icons.chevron_right),
-              title: Row(
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(
-                    child: LastMatchesTeamName(
-                      teamName: result.homeTeamName,
-                      align: TextAlign.left,
-                      highlighted: result.isHomeTeam(widget.teamName),
+                  Text(
+                    '${result.homeTeamMatchesWon} : ${result.opponentTeamMatchesWon}  ',
+                    style: TextStyle(
+                      fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  MatchResultScorePill(
-                    matchResult: result,
-                    teamName: widget.teamName,
-                  ),
-
-                  Expanded(
-                    child: LastMatchesTeamName(
-                      teamName: result.opponentTeamName,
-                      align: TextAlign.right,
-                      highlighted: result.isOpponentTeam(widget.teamName),
-                    ),
-                  ),
+                  Icon(Icons.chevron_right),
                 ],
+              ),
+              leading: WinLossIndicator(
+                size: 10,
+                status: result.getMatchStatusForTeam(widget.teamName),
+                isTextDisplayed: true,
+              ),
+              subtitle: Text(Date.getDateString(result.time)),
+              title: Text(
+                result.homeTeamName == widget.teamName
+                    ? result.opponentTeamName
+                    : result.homeTeamName,
+
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
               ),
             );
           }).toList(),

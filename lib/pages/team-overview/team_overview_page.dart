@@ -3,7 +3,7 @@ import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/pages/team-overview/last-matches/last_matches.dart';
-import 'package:nuliga_app/pages/team-overview/league-ranking-cards/league_ranking_cards.dart';
+import 'package:nuliga_app/pages/team-overview/league-info/league_info.dart';
 import 'package:nuliga_app/pages/team-overview/league-table/short_league_table.dart';
 import 'package:nuliga_app/pages/team-overview/next-matches/next_matches.dart';
 import 'package:nuliga_app/services/followed_teams_provider.dart';
@@ -31,68 +31,37 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
     final provider = context.watch<FollowedTeamsProvider>();
     final teams = provider.followedTeams;
 
-    return Padding(
-      padding: const EdgeInsets.all(Constants.pagePadding),
-      child: RefreshIndicator(
-        onRefresh: refresh,
-        child: ListView(
-          children: [
-
-            LeagueRankingCards(teams: teams),
-            ...teams.map((team) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
+    return RefreshIndicator(
+      onRefresh: refresh,
+      child: ListView(
+        children: [
+          ...teams.map((team) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(Constants.pagePadding),
+                  child: Text(
                     team.name,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "UP NEXT",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      TextButton(
-                        onPressed: () => goToNextMatches(team),
-                        child: Text("View all"),
-                      ),
-                    ],
-                  ),
-                  NextMatches(matchesUrl: team.matchesUrl, team: team),
-                  SizedBox(height: 24),
+                ),
 
-                  Text(
-                    "RANKING",
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  SizedBox(height: 12),
-                  ShortLeagueTable(team: team),
-                  SizedBox(height: 12),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "LAST",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      TextButton(
-                        onPressed: () => goToResults(team),
-                        child: Text("View all"),
-                      ),
-                    ],
-                  ),
-                  LastMatches(team: team),
-
-                  SizedBox(height: 48),
-                ],
-              );
-            }),
-          ],
-        ),
+                DashboardSection(
+                  title: "UP NEXT",
+                  onViewAll: () => goToNextMatches(team),
+                  child: NextMatches(matchesUrl: team.matchesUrl, team: team),
+                ),
+                DashboardSection(
+                  title: "LAST",
+                  child: LastMatches(team: team),
+                  onViewAll: () => goToResults(team),
+                ),
+                SizedBox(height: 48),
+              ],
+            );
+          }),
+        ],
       ),
     );
   }
@@ -111,5 +80,49 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
         builder: (context) => TeamDetailsPage(team: team, startIndex: 2),
       ),
     );
+  }
+}
+
+class DashboardSection extends StatelessWidget {
+  final String title;
+  final Widget child;
+  final VoidCallback onViewAll;
+
+  const DashboardSection({
+    super.key,
+    required this.title,
+    required this.child,
+    required this.onViewAll,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Constants.pagePadding,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(title, style: Theme.of(context).textTheme.titleMedium),
+              TextButton(onPressed: onViewAll, child: Text("View all")),
+            ],
+          ),
+        ),
+        child,
+      ],
+    );
+  }
+}
+
+class GeneralInfo extends StatelessWidget {
+  const GeneralInfo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(scrollDirection: Axis.horizontal, children: []);
   }
 }

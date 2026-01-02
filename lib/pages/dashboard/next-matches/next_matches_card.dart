@@ -3,7 +3,7 @@ import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
 import 'package:nuliga_app/pages/next-match/next_match_page.dart';
-import 'package:nuliga_app/pages/dasboard/next-matches/next_matches_location_indicator.dart';
+import 'package:nuliga_app/pages/dashboard/next-matches/next_matches_location_indicator.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 
 class NextMatchesCard extends StatefulWidget {

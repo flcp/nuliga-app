@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nuliga_app/mockpage.dart';
 import 'package:nuliga_app/mockpage2.dart';
-import 'package:nuliga_app/pages/dasboard/dashboard.dart';
+import 'package:nuliga_app/pages/dashboard/dashboard.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});

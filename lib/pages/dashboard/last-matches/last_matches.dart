@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/pages/match-result/match_result_page.dart';
-import 'package:nuliga_app/pages/dasboard/last-matches/last_matches_card.dart';
+import 'package:nuliga_app/pages/dashboard/last-matches/last_matches_card.dart';
 import 'package:nuliga_app/services/last_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 

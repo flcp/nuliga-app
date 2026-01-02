@@ -17,7 +17,7 @@ class LeagueInfo extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: Constants.pagePadding),
       child: SizedBox(
-        height: 150,
+        height: 140,
         child: FutureBuilder(
           future: leagueTableService.getShortRankingForTeam(
             team.rankingTableUrl,

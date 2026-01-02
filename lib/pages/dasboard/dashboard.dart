@@ -47,11 +47,14 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                   ),
                 ),
                 LeagueInfo(team: team),
+                SizedBox(height: 16),
                 DashboardSection(
+                  isContentWidthConstrained: false,
                   title: "UP NEXT",
                   onViewAll: () => goToNextMatches(team),
                   child: NextMatches(matchesUrl: team.matchesUrl, team: team),
                 ),
+                SizedBox(height: 16),
                 DashboardSection(
                   title: "LAST",
                   child: LastMatches(team: team),

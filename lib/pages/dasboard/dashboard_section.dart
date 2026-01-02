@@ -5,23 +5,25 @@ class DashboardSection extends StatelessWidget {
   final String title;
   final Widget child;
   final VoidCallback onViewAll;
+  final bool isContentWidthConstrained;
 
   const DashboardSection({
     super.key,
     required this.title,
     required this.child,
     required this.onViewAll,
+    this.isContentWidthConstrained = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final padding = isContentWidthConstrained ? Constants.pagePadding : 0.0;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Constants.pagePadding,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: Constants.pagePadding),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -30,7 +32,10 @@ class DashboardSection extends StatelessWidget {
             ],
           ),
         ),
-        child,
+        Padding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: padding),
+          child: child,
+        ),
       ],
     );
   }

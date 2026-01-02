@@ -50,7 +50,7 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                 SizedBox(height: 16),
                 DashboardSection(
                   isContentWidthConstrained: false,
-                  title: "UP NEXT",
+                  title: "NEXT",
                   onViewAll: () => goToNextMatches(team),
                   child: NextMatches(matchesUrl: team.matchesUrl, team: team),
                 ),

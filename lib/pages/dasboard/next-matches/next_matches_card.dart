@@ -25,7 +25,7 @@ class NextMatchesCard extends StatefulWidget {
 class _NextMatchesCardState extends State<NextMatchesCard> {
   @override
   Widget build(BuildContext context) {
-    return SurfaceCard(
+    return SquareSurfaceCard(
       onTap: () {
         navigateToUpcomingMatch(widget.match, widget.team.name);
       },

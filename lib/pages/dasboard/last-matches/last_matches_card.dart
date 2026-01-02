@@ -3,6 +3,8 @@ import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
+import 'package:nuliga_app/pages/shared/surface_card.dart';
+import 'package:nuliga_app/services/shared/date.dart';
 
 class LastMatchesCard extends StatelessWidget {
   const LastMatchesCard({
@@ -16,34 +18,47 @@ class LastMatchesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      child: Padding(
-        padding: const EdgeInsets.all(Constants.smallCardPadding),
-        child: Row(
-          children: [
-            Expanded(
-              child: MatchResultHeroElementTeamName(matchResult.homeTeamName),
+    return SurfaceCard(
+      padding: const EdgeInsets.fromLTRB(
+        Constants.bigCardPadding,
+        Constants.smallCardPadding,
+        4,
+        Constants.smallCardPadding,
+      ),
+      title: Date.getDateString(matchResult.time),
+      titleTrailing: WinLossIndicator(
+        isTextDisplayed: true,
+        size: 10,
+        status: matchResult.getMatchStatusForTeam(homeTeam.name),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MatchResultText(matchResult.homeTeamName),
+                MatchResultText(matchResult.opponentTeamName),
+              ],
             ),
-            MatchResultScorePill(
-              matchResult: matchResult,
-              teamName: homeTeam.name,
-            ),
-            Expanded(
-              child: MatchResultHeroElementTeamName(
-                matchResult.opponentTeamName,
-              ),
-            ),
-            Icon(Icons.chevron_right),
-          ],
-        ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MatchResultText(matchResult.homeTeamMatchesWon.toString()),
+              MatchResultText(matchResult.opponentTeamMatchesWon.toString()),
+            ],
+          ),
+        ],
       ),
     );
   }
 }
 
-class MatchResultHeroElementTeamName extends StatelessWidget {
-  const MatchResultHeroElementTeamName(this.teamName, {super.key});
+class MatchResultText extends StatelessWidget {
+  const MatchResultText(this.teamName, {super.key});
 
   final String teamName;
 
@@ -51,10 +66,9 @@ class MatchResultHeroElementTeamName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       teamName,
-      softWrap: true,
+      softWrap: false,
       overflow: TextOverflow.ellipsis,
-      textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      style: Theme.of(context).textTheme.bodyLarge,
     );
   }
 }

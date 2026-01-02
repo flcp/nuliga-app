@@ -3,6 +3,7 @@ import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/short_league_team_ranking.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
+import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/services/league_table_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
@@ -28,8 +29,8 @@ class LeagueInfo extends StatelessWidget {
               return ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  SurfaceCard(child: Center()),
-                  SurfaceCard(child: Center()),
+                  SquareSurfaceCard(child: Center()),
+                  SquareSurfaceCard(child: Center()),
                 ],
               );
             }
@@ -45,15 +46,17 @@ class LeagueInfo extends StatelessWidget {
             return ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                SurfaceCard(
+                SquareSurfaceCard(
                   title: shortRank.leagueName,
+                  onTap: () => navigateToTeamDetails(context),
                   child: Text(
                     "${shortRank.rank.toString()}.",
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                 ),
-                SurfaceCard(
+                SquareSurfaceCard(
                   title: "Matches gespielt",
+                  onTap: () => navigateToResults(context),
                   child: Row(
                     children: [
                       Text(
@@ -73,6 +76,24 @@ class LeagueInfo extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+
+  void navigateToTeamDetails(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TeamDetailsPage(team: team, startIndex: 1),
+      ),
+    );
+  }
+
+  void navigateToResults(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TeamDetailsPage(team: team, startIndex: 2),
       ),
     );
   }

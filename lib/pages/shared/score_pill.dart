@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/game_result.dart';
 import 'package:nuliga_app/model/match_result.dart';
 
+// TODO: delete
 class MatchResultScorePill extends StatelessWidget {
   final MatchResult matchResult;
   final String teamName;
@@ -86,10 +87,16 @@ class ScorePill extends StatelessWidget {
 }
 
 class WinLossIndicator extends StatelessWidget {
-  const WinLossIndicator({super.key, required this.size, required this.status});
+  const WinLossIndicator({
+    super.key,
+    required this.size,
+    required this.status,
+    this.isTextDisplayed = false,
+  });
 
   final double size;
   final MatchResultStatus status;
+  final bool isTextDisplayed;
 
   @override
   Widget build(BuildContext context) {

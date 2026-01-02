@@ -36,6 +36,16 @@ class LastMatches extends StatelessWidget {
           children: lastThreeMatchResults
               .map(
                 (result) => InkWell(
+                  borderRadius: BorderRadius.circular(
+                    Theme.of(context).cardTheme.shape is RoundedRectangleBorder
+                        ? (Theme.of(context).cardTheme.shape
+                                  as RoundedRectangleBorder)
+                              .borderRadius
+                              .resolve(TextDirection.ltr)
+                              .topLeft
+                              .x
+                        : 16.0,
+                  ),
                   onTap: () => navigateToMatchResult(context, result),
                   child: LastMatchesCard(matchResult: result, homeTeam: team),
                 ),

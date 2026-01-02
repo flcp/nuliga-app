@@ -26,40 +26,19 @@ class _NextMatchesCardState extends State<NextMatchesCard> {
   @override
   Widget build(BuildContext context) {
     return LeagueInfoCard(
+      onTap: () {
+        navigateToUpcomingMatch(widget.match, widget.team.name);
+      },
+      titleTrailing: NextMatchesLocationIndicatorButton(
+        match: widget.match,
+        homeTeamName: widget.team.name,
+      ),
       title: Date.getShortDateString(widget.match.time),
-      child: Stack(
-        children: [
-          Text(
-            getOpponent(widget.match, widget.team),
-            style: Theme.of(context).textTheme.titleLarge,
-            overflow: TextOverflow.clip,
-            maxLines: 3,
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 2.0, color: Colors.transparent),
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                    blurRadius: 10.0,
-                    spreadRadius: 10.0,
-                  ),
-                ],
-                color: Theme.of(context).colorScheme.surfaceContainerLowest,
-              ),
-
-              child: Padding(
-                padding: const EdgeInsets.all(6.0),
-                child: NextMatchesLocationIndicatorButton(
-                  match: widget.match,
-                  homeTeamName: widget.team.name,
-                ),
-              ),
-            ),
-          ),
-        ],
+      child: Text(
+        getOpponent(widget.match, widget.team),
+        style: Theme.of(context).textTheme.titleLarge,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 3,
       ),
     );
   }

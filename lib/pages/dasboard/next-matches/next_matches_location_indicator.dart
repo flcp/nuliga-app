@@ -22,30 +22,23 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = Theme.of(
       context,
-    ).colorScheme.onPrimaryContainer.withAlpha(70);
+    ).colorScheme.onPrimaryContainer.withAlpha(50);
 
     if (match.homeTeam == homeTeamName) {
-      return Icon(Icons.home, color: color, size: size);
+      return Icon(Icons.home, color: color);
     }
 
     return FutureBuilder(
       future: locationService.getLocationMapsLink(match),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SizedBox(
-            width: size,
-            height: size,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation(color),
-            ),
-          );
+          return SizedBox.shrink();
         }
 
         final locationMapsLink = getDataOrDefault(snapshot, "");
 
         if (locationMapsLink.isEmpty || !locationMapsLink.startsWith("http")) {
-          return Icon(Icons.directions, size: size, color: color);
+          return Icon(Icons.directions, color: color);
         }
 
         Uri uri;
@@ -56,20 +49,24 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
           return SizedBox.shrink();
         }
 
-        // sizedbox, sonst verschiebt sich iconbutton gegenueber icon
-        return SizedBox(
-          height: size,
-          width: size,
-          child: IconButton(
-            padding: EdgeInsets.zero,
-            icon: Icon(
-              Icons.directions,
-              size: size,
-              color: Theme.of(context).colorScheme.primary,
+        return InkWell(
+          onTap: () async {
+            await launchUrl(uri);
+          },
+          borderRadius: BorderRadius.circular(16.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.0),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
-            onPressed: () async {
-              await launchUrl(uri);
-            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.directions,
+                size: size,
+                color: Theme.of(context).colorScheme.surface,
+              ),
+            ),
           ),
         );
       },

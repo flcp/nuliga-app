@@ -54,20 +54,17 @@ class LeagueInfo extends StatelessWidget {
                 ),
                 LeagueInfoCard(
                   title: "Matches gespielt",
-                  child: Column(
+                  child: Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            shortRank.played.toString(),
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
-                          Text(
-                            "  / ${(shortRank.totalTeams - 1) * 2}",
-                            style: Theme.of(context).textTheme.bodyMedium
-                                ?.copyWith(color: greyedOutColor),
-                          ),
-                        ],
+                      Text(
+                        shortRank.played.toString(),
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      Text(
+                        "  / ${(shortRank.totalTeams - 1) * 2}",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(color: greyedOutColor),
                       ),
                     ],
                   ),

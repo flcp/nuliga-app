@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/pages/team-overview/next-matches/next_matches_card.dart';
+import 'package:nuliga_app/pages/dasboard/next-matches/next_matches_card.dart';
 import 'package:nuliga_app/services/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 

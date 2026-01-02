@@ -3,7 +3,7 @@ import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/pages/next-match/next_match_page.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
-import 'package:nuliga_app/pages/team-overview/next-matches/next_matches_location_indicator.dart';
+import 'package:nuliga_app/pages/dasboard/next-matches/next_matches_location_indicator.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 
 class NextMatchesCard extends StatefulWidget {
@@ -67,7 +67,9 @@ class _NextMatchesCardState extends State<NextMatchesCard> {
   void navigateToUpcomingMatch(FutureMatch match, String teamName) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NextMatchPage(match: match, teamName: teamName,)),
+      MaterialPageRoute(
+        builder: (context) => NextMatchPage(match: match, teamName: teamName),
+      ),
     );
   }
 

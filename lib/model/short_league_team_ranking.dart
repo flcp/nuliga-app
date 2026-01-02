@@ -9,6 +9,7 @@ class ShortLeagueTeamRanking {
   ShortLeagueTeamRanking({
     required this.rank,
     required this.wins,
+    required this.played,
     required this.teamName,
     required this.teamUrl,
     required this.totalTeams,
@@ -18,9 +19,12 @@ class ShortLeagueTeamRanking {
   static ShortLeagueTeamRanking empty = ShortLeagueTeamRanking(
     rank: 0,
     wins: 0,
+    played: 0,
     teamName: "",
     teamUrl: "",
     totalTeams: 0,
     leagueName: "",
   );
+
+  var played;
 }

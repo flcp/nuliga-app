@@ -45,29 +45,45 @@ class LeagueInfo extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: [
                 LeagueInfoCard(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
+                  title: shortRank.leagueName,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
                     children: [
-                      Text(
-                        shortRank.leagueName,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyMedium?.copyWith(color: greyedOutColor),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                      Baseline(
+                        baseline: 30,
+                        baselineType: TextBaseline.alphabetic,
+
+                        child: Text(
+                          shortRank.rank.toString(),
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
                       ),
+                      Baseline(
+                        baseline: 30,
+                        baselineType: TextBaseline.alphabetic,
+                        child: Text(
+                          "  / ${shortRank.totalTeams}",
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: greyedOutColor),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                LeagueInfoCard(
+                  title: "Matches played",
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
                         children: [
                           Baseline(
                             baseline: 30,
                             baselineType: TextBaseline.alphabetic,
-
                             child: Text(
-                              shortRank.rank.toString(),
+                              shortRank.played.toString(),
                               style: Theme.of(context).textTheme.displayMedium,
                             ),
                           ),
@@ -75,26 +91,13 @@ class LeagueInfo extends StatelessWidget {
                             baseline: 30,
                             baselineType: TextBaseline.alphabetic,
                             child: Text(
-                              "  / ${shortRank.totalTeams}",
+                              "  / ${(shortRank.totalTeams - 1) * 2}",
                               style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(color: greyedOutColor),
                             ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-                LeagueInfoCard(
-                  child: Column(
-                    children: [
-                      Text(
-                        "Matches won",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyMedium?.copyWith(color: greyedOutColor),
-                      ),
-                      Text(shortRank.wins.toString()),
                     ],
                   ),
                 ),
@@ -109,13 +112,24 @@ class LeagueInfo extends StatelessWidget {
 
 class LeagueInfoCard extends StatelessWidget {
   final Widget child;
-  const LeagueInfoCard({super.key, required this.child});
+  final String title;
+  final String subtitle;
+  const LeagueInfoCard({
+    super.key,
+    required this.child,
+    this.title = "",
+    this.subtitle = "",
+  });
 
   @override
   Widget build(BuildContext context) {
     final chevronColor = Theme.of(
       context,
     ).colorScheme.onPrimaryContainer.withAlpha(50);
+
+    final greyedOutColor = Theme.of(
+      context,
+    ).colorScheme.onPrimaryContainer.withAlpha(120);
 
     return Padding(
       padding: const EdgeInsets.only(right: Constants.bigCardListSpacing),
@@ -134,7 +148,34 @@ class LeagueInfoCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(child: child),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      if (title.isNotEmpty)
+                        Text(
+                          title,
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: greyedOutColor),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+
+                      child,
+                      if (subtitle.isNotEmpty) ...[
+                        Text(
+                          subtitle,
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: greyedOutColor),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
                 Icon(Icons.chevron_right, color: chevronColor),
               ],
             ),

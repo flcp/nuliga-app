@@ -43,38 +43,40 @@ class NextMatchInfo extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
                 if (match.locationUrl.isNotEmpty)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton.icon(
-                        onPressed: () async {
-                          if (match.locationUrl.isNotEmpty) {
-                            final bwbvUri = Uri.parse(match.locationUrl);
-                            launchUrl(bwbvUri);
-                          }
-                        },
-                        icon: Icon(Icons.open_in_new),
-                        label: Text("View"),
-                      ),
-                      SizedBox(width: 16),
-                      FilledButton.icon(
-                        onPressed: () async {
-                          if (match.locationUrl.isEmpty) return;
-                          final mapsLink =
-                              LocationService.convertToGoogleMapsLink(
-                                locationMultiline.join(", "),
-                              );
-                          Uri mapsLinkUri = Uri.parse(mapsLink);
-                          if (mapsLink.isNotEmpty) {
-                            launchUrl(mapsLinkUri);
-                          }
-                        },
-                        icon: Icon(Icons.directions),
-                        label: Text("Maps"),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TextButton.icon(
+                          onPressed: () async {
+                            if (match.locationUrl.isNotEmpty) {
+                              final bwbvUri = Uri.parse(match.locationUrl);
+                              launchUrl(bwbvUri);
+                            }
+                          },
+                          icon: Icon(Icons.open_in_new),
+                          label: Text("View"),
+                        ),
+                        SizedBox(width: 16),
+                        FilledButton.icon(
+                          onPressed: () async {
+                            if (match.locationUrl.isEmpty) return;
+                            final mapsLink =
+                                LocationService.convertToGoogleMapsLink(
+                                  locationMultiline.join(", "),
+                                );
+                            Uri mapsLinkUri = Uri.parse(mapsLink);
+                            if (mapsLink.isNotEmpty) {
+                              launchUrl(mapsLinkUri);
+                            }
+                          },
+                          icon: Icon(Icons.directions),
+                          label: Text("Maps"),
+                        ),
+                      ],
+                    ),
                   ),
               ],
             );

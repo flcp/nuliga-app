@@ -78,7 +78,6 @@ class _NextMatchCountdownState extends State<NextMatchCountdown> {
   }
 }
 
-// TODO: colors, size
 Widget _timeBox(int value, String label, ColorScheme currentColorScheme) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 6),
@@ -100,7 +99,10 @@ Widget _timeBox(int value, String label, ColorScheme currentColorScheme) {
         const SizedBox(height: 4),
         Text(
           label,
-          style: const TextStyle(color: Colors.white70, fontSize: 12),
+          style: TextStyle(
+            color: currentColorScheme.onPrimary.withAlpha(200),
+            fontSize: 12,
+          ),
         ),
       ],
     ),

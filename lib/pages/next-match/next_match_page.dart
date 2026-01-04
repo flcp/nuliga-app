@@ -18,7 +18,7 @@ class NextMatchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Next match")),
+      appBar: AppBar(title: Text("Upcoming")),
       body: Padding(
         padding: const EdgeInsets.all(Constants.pagePadding),
         child: ListView(

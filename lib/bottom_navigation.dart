@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:nuliga_app/mockpage.dart';
 import 'package:nuliga_app/mockpage2.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard.dart';
@@ -25,13 +24,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          systemNavigationBarColor: Colors.white,
-        ),
-        title: const Text("NuLiga App"),
-      ),
-      body: _widgets.elementAt(_selectedIndex),
+      body: SafeArea(child: _widgets.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const [

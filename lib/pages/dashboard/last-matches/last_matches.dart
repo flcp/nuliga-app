@@ -14,48 +14,52 @@ class LastMatches extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: LastMatchesService.getLastMatchesForTeam(
-        team.matchesUrl,
-        team.name,
+    return SizedBox(
+      height: 290,
+      child: FutureBuilder(
+        future: LastMatchesService.getLastMatchesForTeam(
+          team.matchesUrl,
+          team.name,
+        ),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("loading");
+          }
+
+          final matchResults = getDataOrEmptyList(snapshot).reversed.toList();
+          final lastThreeMatchResults = matchResults.getRange(
+            0,
+            min(3, matchResults.length),
+          );
+
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 0,
+            children: lastThreeMatchResults
+                .map(
+                  (result) => InkWell(
+                    borderRadius: BorderRadius.circular(
+                      Theme.of(context).cardTheme.shape
+                              is RoundedRectangleBorder
+                          ? (Theme.of(context).cardTheme.shape
+                                    as RoundedRectangleBorder)
+                                .borderRadius
+                                .resolve(TextDirection.ltr)
+                                .topLeft
+                                .x
+                          : 16.0,
+                    ),
+                    onTap: () => navigateToMatchResult(context, result),
+                    child: LastMatchesCard(
+                      matchResult: result,
+                      teamName: team.name,
+                    ),
+                  ),
+                )
+                .toList(),
+          );
+        },
       ),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("loading");
-        }
-
-        final matchResults = getDataOrEmptyList(snapshot).reversed.toList();
-        final lastThreeMatchResults = matchResults.getRange(
-          0,
-          min(3, matchResults.length),
-        );
-
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 0,
-          children: lastThreeMatchResults
-              .map(
-                (result) => InkWell(
-                  borderRadius: BorderRadius.circular(
-                    Theme.of(context).cardTheme.shape is RoundedRectangleBorder
-                        ? (Theme.of(context).cardTheme.shape
-                                  as RoundedRectangleBorder)
-                              .borderRadius
-                              .resolve(TextDirection.ltr)
-                              .topLeft
-                              .x
-                        : 16.0,
-                  ),
-                  onTap: () => navigateToMatchResult(context, result),
-                  child: LastMatchesCard(
-                    matchResult: result,
-                    teamName: team.name,
-                  ),
-                ),
-              )
-              .toList(),
-        );
-      },
     );
   }
 

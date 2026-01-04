@@ -15,7 +15,10 @@ void main() async {
       child: MaterialApp(
         home: const BottomNavigation(),
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade200),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.redAccent.shade200,
+            brightness: Brightness.light,
+          ),
           scaffoldBackgroundColor: Colors.grey.shade50,
           appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade50),
           cardTheme: CardThemeData(

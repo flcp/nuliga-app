@@ -5,7 +5,7 @@ import 'package:nuliga_app/pages/shared/constants.dart';
 
 class NextMatchCountdown extends StatefulWidget {
   const NextMatchCountdown({super.key, required this.matchTime});
-  
+
   final DateTime matchTime;
 
   @override
@@ -39,11 +39,12 @@ class _NextMatchCountdownState extends State<NextMatchCountdown> {
   @override
   void dispose() {
     _timer.cancel();
-    super.dispose();}
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-   final days = _remaining.inDays;
+    final days = _remaining.inDays;
     final hours = _remaining.inHours % 24;
     final minutes = _remaining.inMinutes % 60;
     final seconds = _remaining.inSeconds % 60;
@@ -51,46 +52,57 @@ class _NextMatchCountdownState extends State<NextMatchCountdown> {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(Constants.bigCardPadding),
-        child: Row(mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          children: [
+            Text(
+              "Spiel startet in",
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _timeBox(days, "Tage"),
-                _timeBox(hours, "Std"),
-                _timeBox(minutes, "Min"),
-                _timeBox(seconds, "Sek"),
-              ],),
+                _timeBox(days, "Tage", Theme.of(context).colorScheme),
+                _timeBox(hours, "Std", Theme.of(context).colorScheme),
+                _timeBox(minutes, "Min", Theme.of(context).colorScheme),
+                _timeBox(seconds, "Sek", Theme.of(context).colorScheme),
+              ],
+            ),
+            SizedBox(height: 12),
+          ],
+        ),
       ),
     );
   }
 }
 
 // TODO: colors, size
-  Widget _timeBox(int value, String label) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 6),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          Text(
-            value.toString().padLeft(2, '0'),
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+Widget _timeBox(int value, String label, ColorScheme currentColorScheme) {
+  return Container(
+    margin: const EdgeInsets.symmetric(horizontal: 6),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: currentColorScheme.onPrimaryContainer,
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Column(
+      children: [
+        Text(
+          value.toString().padLeft(2, '0'),
+          style: TextStyle(
+            color: currentColorScheme.onPrimary,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
           ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 12,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white70, fontSize: 12),
+        ),
+      ],
+    ),
+  );
+}

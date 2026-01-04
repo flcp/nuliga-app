@@ -13,7 +13,6 @@ class NextMatchMatchup extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return Card(
-
       child: Padding(
         padding: const EdgeInsets.all(Constants.bigCardPadding),
         child: Column(
@@ -31,29 +30,14 @@ class NextMatchMatchup extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Divider(
-                    color: theme.colorScheme.outline,
-                    thickness: 1.5,
-                    indent: 24,
-                    endIndent: 12,
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
                     "VS",
                     style: textTheme.titleMedium?.copyWith(
+                      color: theme.colorScheme.primary.withAlpha(150),
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Divider(
-                    color: theme.colorScheme.outline,
-                    thickness: 1.5,
-                    indent: 12,
-                    endIndent: 24,
                   ),
                 ),
               ],

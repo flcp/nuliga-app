@@ -51,6 +51,7 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
           ),
           Expanded(
             child: ScrollablePositionedList.builder(
+              addAutomaticKeepAlives: true,
               itemScrollController: _itemScrollController,
               itemPositionsListener: _itemPositionsListener,
               itemCount: teams.length,

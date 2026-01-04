@@ -16,7 +16,7 @@ void main() async {
         home: const BottomNavigation(),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.redAccent.shade200,
+            seedColor: Colors.blueAccent.shade200,
             brightness: Brightness.light,
           ),
           scaffoldBackgroundColor: Colors.grey.shade50,

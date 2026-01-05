@@ -16,7 +16,7 @@ class NextMatches extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 170,
+      height: 180,
       child: FutureBuilder(
         future: nextMatchesService.getNextMatchesWithNextGamedaySeparate(
           matchesUrl,

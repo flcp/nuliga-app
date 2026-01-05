@@ -64,7 +64,8 @@ class SurfaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final greyedOutColor = Theme.of(
       context,
-    ).colorScheme.onPrimaryContainer.withAlpha(120);
+    ).colorScheme.onPrimaryContainer.withAlpha(100);
+
     final chevronColor = Theme.of(
       context,
     ).colorScheme.onPrimaryContainer.withAlpha(50);
@@ -113,6 +114,7 @@ class SurfaceCard extends StatelessWidget {
                           Flexible(child: titleTrailing!),
                       ],
                     ),
+                    SizedBox(height: 4),
                     child,
                     if (subtitle.isNotEmpty) ...[
                       Text(

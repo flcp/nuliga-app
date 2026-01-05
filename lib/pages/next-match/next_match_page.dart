@@ -27,7 +27,7 @@ class NextMatchPage extends StatelessWidget {
             SizedBox(height: 16),
             NextMatchCountdown(matchTime: match.time),
             SizedBox(height: 16),
-            NextMatchDateInfo(match: match),
+            NextMatchDateInfo(matchTime: match.time),
             SizedBox(height: 16),
             NextMatchInfo(match: match, teamName: teamName),
           ],

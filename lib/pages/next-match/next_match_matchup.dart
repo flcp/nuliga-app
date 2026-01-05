@@ -18,42 +18,37 @@ class NextMatchMatchup extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              match.homeTeam,
-              style: textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: theme.colorScheme.onSurface,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    "VS",
-                    style: textTheme.titleMedium?.copyWith(
-                      color: theme.colorScheme.primary.withAlpha(150),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            MatchupTeamText(teamName: match.homeTeam),
             const SizedBox(height: 12),
             Text(
-              match.opponentTeam,
-              style: textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: theme.colorScheme.onSurface,
+              "VS",
+              style: textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.primary.withAlpha(80),
               ),
-              textAlign: TextAlign.center,
             ),
+            const SizedBox(height: 12),
+            MatchupTeamText(teamName: match.opponentTeam),
           ],
         ),
       ),
+    );
+  }
+}
+
+class MatchupTeamText extends StatelessWidget {
+  const MatchupTeamText({super.key, required this.teamName});
+
+  final String teamName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      teamName,
+      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.onSurface,
+      ),
+      textAlign: TextAlign.center,
     );
   }
 }

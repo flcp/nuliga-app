@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 
 class NextMatchDateInfo extends StatelessWidget {
-  const NextMatchDateInfo({super.key, required this.match});
-  final FutureMatch match;
+  const NextMatchDateInfo({super.key, required this.matchTime});
+  final DateTime matchTime;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +26,12 @@ class NextMatchDateInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      Date.getLongDateString(match.time),
+                      Date.getLongDateString(matchTime),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 6),
                     Text(
-                      "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")} Uhr",
+                      "${matchTime.hour}:${matchTime.minute.toString().padLeft(2, "0")} Uhr",
                     ),
                   ],
                 ),

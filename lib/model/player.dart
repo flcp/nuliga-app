@@ -11,14 +11,17 @@ class Player {
 
     if (nameParts.length < 2) {
       developer.log(
-        "Cannot parse name, returning Unknown Unknown",
+        "Cannot parse name, returning name as firstName only",
         name: "nuliga.warning",
       );
-      return Player(firstName: "Unknown", lastName: "Unknown");
+      return Player(firstName: name, lastName: "");
     }
 
     return Player(firstName: nameParts[1], lastName: nameParts[0]);
   }
+
+  static Player absent = Player(firstName: "Nicht angetreten", lastName: "");
+  static Player unknown = Player(firstName: "Unbekannt", lastName: "");
 
   String getFullname() {
     return "$firstName $lastName";

@@ -7,6 +7,7 @@ import 'package:nuliga_app/model/game_type.dart';
 import 'package:nuliga_app/model/match_result_detail.dart';
 import 'package:nuliga_app/model/player.dart';
 import 'package:nuliga_app/model/set_result.dart';
+import 'package:nuliga_app/services/shared/parser.dart';
 
 class MatchResultParser {
   Future<MatchResultDetail> getGamesAndResults(String htmlContent) async {
@@ -75,30 +76,69 @@ class MatchResultParser {
   }
 
   GameResult getGameResult(List<Element> cells) {
-    final homePlayers = cells[1]
-        .querySelectorAll('a')
-        .map((a) => a.text.trim())
-        .map((playerName) => Player.fromCommaSeparatedString(playerName))
-        .toList();
-    final opponentPlayers = cells[2]
-        .querySelectorAll('a')
-        .map((a) => a.text.trim())
-        .map((playerName) => Player.fromCommaSeparatedString(playerName))
-        .toList();
+    final homePlayers = getPlayerNamesFromLinks(cells, 1);
+    final opponentPlayers = getPlayerNamesFromLinks(cells, 2);
+    final sets = getSets(cells, 3, 6, homePlayers, opponentPlayers);
 
     final type = GameType.getGameType(cells[0].text.trim());
 
     final result = GameResult(
       homePlayers: homePlayers,
       opponentPlayers: opponentPlayers,
-      sets: cells
-          .sublist(3, 6)
-          .map((c) => c.text.trim())
-          .where((text) => text.isNotEmpty)
-          .map((cellText) => SetResult.fromString(cellText))
-          .toList(),
+      sets: sets,
       gameType: type,
     );
     return result;
+  }
+
+  List<Player> getPlayerNamesFromLinks(List<Element> cells, int i) {
+    if (cells.length < i) {
+      return [Player.unknown];
+    }
+
+    final cell = cells[i];
+    if (cell.text.isEmpty) {
+      return [Player.unknown];
+    }
+
+    if (cell.text.trim().contains("nicht angetreten") ||
+        cell.text.trim().contains("nicht anwesend")) {
+      return [Player.absent];
+    }
+
+    return cell
+        .querySelectorAll('a')
+        .map((a) => a.text.trim())
+        .map((playerName) => Player.fromCommaSeparatedString(playerName))
+        .toList();
+  }
+
+  List<SetResult> getSets(
+    List<Element> cells,
+    int i,
+    int j,
+    List<Player> homePlayers,
+    List<Player> opponentPlayers,
+  ) {
+    if (homePlayers.contains(Player.absent)) {
+      return [
+        SetResult(homeScore: 0, opponentScore: 21),
+        SetResult(homeScore: 0, opponentScore: 21),
+      ];
+    }
+
+    if (opponentPlayers.contains(Player.absent)) {
+      return [
+        SetResult(homeScore: 21, opponentScore: 0),
+        SetResult(homeScore: 21, opponentScore: 0),
+      ];
+    }
+
+    return cells
+        .sublist(3, 6)
+        .map((c) => c.text.trim())
+        .where((text) => text.isNotEmpty)
+        .map((cellText) => SetResult.fromString(cellText))
+        .toList();
   }
 }

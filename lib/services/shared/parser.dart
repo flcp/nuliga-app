@@ -76,4 +76,16 @@ class Parser {
 
     return baseUrl + relativeUrl;
   }
+
+  static List<String> getPlayersLinkTextOrEmpty(
+    List<Element> cells,
+    int index,
+  ) {
+    if (index >= cells.length) return [];
+
+    return cells[index]
+        .querySelectorAll('a')
+        .map((a) => a.text.trim())
+        .toList();
+  }
 }

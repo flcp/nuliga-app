@@ -105,13 +105,48 @@ class MatchResultPageContent extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        MatchResultGameResultRow(
-                          players: gameResult.homePlayers,
-                          setsWon: gameResult.homeSetsWon,
-                        ),
-                        MatchResultGameResultRow(
-                          players: gameResult.opponentPlayers,
-                          setsWon: gameResult.opponentSetsWon,
+                        Row(
+                          spacing: 8,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GameResultPlayerText(
+                                    players: gameResult.homePlayers,
+                                    isWinner: gameResult.homeTeamWon,
+                                  ),
+                                  GameResultPlayerText(
+                                    players: gameResult.opponentPlayers,
+                                    isWinner: !gameResult.homeTeamWon,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ...gameResult.sets.map(
+                              (set) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    set.homeScore.toString(),
+                                    style: TextStyle(
+                                      fontWeight: set.didHomeTeamWin()
+                                          ? FontWeight.w900
+                                          : FontWeight.normal,
+                                    ),
+                                  ),
+                                  Text(
+                                    set.opponentScore.toString(),
+                                    style: TextStyle(
+                                      fontWeight: set.didOpponentTeamWin()
+                                          ? FontWeight.w900
+                                          : FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -125,35 +160,27 @@ class MatchResultPageContent extends StatelessWidget {
   }
 }
 
-class MatchResultGameResultRow extends StatelessWidget {
-  const MatchResultGameResultRow({
+class GameResultPlayerText extends StatelessWidget {
+  const GameResultPlayerText({
     super.key,
     required this.players,
-    required this.setsWon,
+    required this.isWinner,
   });
 
   final List<Player> players;
-  final int setsWon;
+  final bool isWinner;
 
   @override
   Widget build(BuildContext context) {
-    final isWinner = setsWon == 2;
-
     final playerText = players.length > 1
         ? players.map((p) => p.lastName).join(" / ")
         : players.first.getFullname();
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          playerText,
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontWeight: isWinner ? FontWeight.w900 : FontWeight.normal,
-          ),
-        ),
-        Text(setsWon.toString(), style: Theme.of(context).textTheme.titleSmall),
-      ],
+    return Text(
+      playerText,
+      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+        fontWeight: isWinner ? FontWeight.w900 : FontWeight.normal,
+      ),
     );
   }
 }

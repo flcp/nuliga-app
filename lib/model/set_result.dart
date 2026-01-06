@@ -16,5 +16,14 @@ class SetResult {
     final opponentScore = Parser.convertToIntOrZero(splitText[1]);
     return SetResult(homeScore: homeScore, opponentScore: opponentScore);
   }
+
   SetResult({required this.homeScore, required this.opponentScore});
+
+  bool didHomeTeamWin() {
+    return homeScore > opponentScore;
+  }
+
+  bool didOpponentTeamWin() {
+    return homeScore < opponentScore;
+  }
 }

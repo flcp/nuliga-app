@@ -107,18 +107,24 @@ class _MatchResultHeroElementRow extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Flexible(
-              child: _MatchResultHeroElementText(name, highlighted: isWinner),
-            ),
-            SizedBox(width: 12),
-            if (isWinner) ...[
-              Icon(Icons.emoji_events_outlined, color: Colors.amber, size: 24),
+        Flexible(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: _MatchResultHeroElementText(name, highlighted: isWinner),
+              ),
               SizedBox(width: 12),
+              if (isWinner) ...[
+                Icon(
+                  Icons.emoji_events_outlined,
+                  color: Colors.amber,
+                  size: 24,
+                ),
+                SizedBox(width: 12),
+              ],
             ],
-          ],
+          ),
         ),
         _MatchResultHeroElementText(score.toString(), highlighted: true),
       ],

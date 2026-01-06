@@ -37,39 +37,12 @@ class LastMatches extends StatelessWidget {
             spacing: 0,
             children: lastThreeMatchResults
                 .map(
-                  (result) => InkWell(
-                    borderRadius: BorderRadius.circular(
-                      Theme.of(context).cardTheme.shape
-                              is RoundedRectangleBorder
-                          ? (Theme.of(context).cardTheme.shape
-                                    as RoundedRectangleBorder)
-                                .borderRadius
-                                .resolve(TextDirection.ltr)
-                                .topLeft
-                                .x
-                          : 16.0,
-                    ),
-                    onTap: () => navigateToMatchResult(context, result),
-                    child: LastMatchesCard(
-                      matchResult: result,
-                      teamName: team.name,
-                    ),
-                  ),
+                  (result) =>
+                      LastMatchesCard(matchResult: result, teamName: team.name),
                 )
                 .toList(),
           );
         },
-      ),
-    );
-  }
-
-  // TODO: überall diese Struktur
-  void navigateToMatchResult(BuildContext context, MatchResult result) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            MatchResultPage(matchResult: result, teamName: team.name),
       ),
     );
   }

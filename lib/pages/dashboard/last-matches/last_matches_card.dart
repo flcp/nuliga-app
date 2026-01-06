@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/match_result.dart';
+import 'package:nuliga_app/pages/match-result/match_result_page.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
@@ -30,6 +31,7 @@ class LastMatchesCard extends StatelessWidget {
         size: 10,
         status: matchResult.getMatchStatusForTeam(teamName),
       ),
+      onTap: () => navigateToMatchResult(context, matchResult, teamName),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,6 +56,21 @@ class LastMatchesCard extends StatelessWidget {
       ),
     );
   }
+}
+
+// TODO: Überall diese Struktur
+void navigateToMatchResult(
+  BuildContext context,
+  MatchResult result,
+  String teamName,
+) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) =>
+          MatchResultPage(matchResult: result, teamName: teamName),
+    ),
+  );
 }
 
 class MatchResultText extends StatelessWidget {

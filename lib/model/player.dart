@@ -7,7 +7,7 @@ class Player {
   Player({required this.firstName, required this.lastName});
 
   factory Player.fromCommaSeparatedString(String name) {
-    final nameParts = name.split(",");
+    final nameParts = name.split(",").map((e) => e.trim()).toList();
 
     if (nameParts.length < 2) {
       developer.log(

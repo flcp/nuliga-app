@@ -111,6 +111,7 @@ class MatchResultPageContent extends StatelessWidget {
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.max,
                                 children: [
                                   GameResultPlayerText(
                                     players: gameResult.homePlayers,

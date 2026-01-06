@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/game_result.dart';
-import 'package:nuliga_app/model/game_type.dart';
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/model/player.dart';
 import 'package:nuliga_app/pages/match-result/game_result_detail.dart';
@@ -90,7 +88,11 @@ class MatchResultPageContent extends StatelessWidget {
                     onTap: () => showModalBottomSheet(
                       context: context,
                       builder: (BuildContext context) {
-                        return GameResultDetail(gameResult);
+                        return GameResultDetail(
+                          gameResult: gameResult,
+                          homeTeamName: matchResult.homeTeamName,
+                          opponentTeamName: matchResult.opponentTeamName,
+                        );
                       },
                     ),
                     titleLeading: GameTypeIcon(gameResult.gameType),

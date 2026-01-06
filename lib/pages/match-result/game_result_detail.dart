@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/game_result.dart';
-import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/model/set_result.dart';
 import 'package:nuliga_app/pages/match-result/game_type_icon.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
-import 'package:nuliga_app/pages/shared/score_pill.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
 
 class GameResultDetail extends StatelessWidget {
-  const GameResultDetail(this.gameResult, {super.key});
+  const GameResultDetail({
+    super.key,
+    required this.gameResult,
+    required this.homeTeamName,
+    required this.opponentTeamName,
+  });
 
   final GameResult gameResult;
+  final String homeTeamName;
+  final String opponentTeamName;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,7 @@ class GameResultDetail extends StatelessWidget {
             ),
             SurfaceCard(
               padding: const EdgeInsets.all(Constants.bigCardPadding),
-              title: "Team A",
+              title: homeTeamName,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: gameResult.homePlayers
@@ -58,7 +63,7 @@ class GameResultDetail extends StatelessWidget {
             ),
             SurfaceCard(
               padding: const EdgeInsets.all(Constants.bigCardPadding),
-              title: "Team B`",
+              title: opponentTeamName,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: gameResult.opponentPlayers

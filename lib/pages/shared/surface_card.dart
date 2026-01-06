@@ -131,7 +131,7 @@ class SurfaceCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Icon(Icons.chevron_right, color: chevronColor),
+              if (onTap != null) Icon(Icons.chevron_right, color: chevronColor),
             ],
           ),
         ),

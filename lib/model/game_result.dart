@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:nuliga_app/model/game_type.dart';
+import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/model/player.dart';
 import 'package:nuliga_app/model/set_result.dart';
 
@@ -26,5 +27,13 @@ class GameResult {
 
   int _getOpponentSetsWon() {
     return sets.where((set) => set.homeScore < set.opponentScore).length;
+  }
+
+  MatchResultStatus getMatchStatusForHomeTeam() {
+    return homeTeamWon ? MatchResultStatus.Win : MatchResultStatus.Loss;
+  }
+
+  MatchResultStatus getMatchStatusForOpponentTeam() {
+    return !homeTeamWon ? MatchResultStatus.Win : MatchResultStatus.Loss;
   }
 }

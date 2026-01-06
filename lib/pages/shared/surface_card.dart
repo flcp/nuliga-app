@@ -46,6 +46,7 @@ class SurfaceCard extends StatelessWidget {
     super.key,
     required this.child,
     this.onTap,
+    this.titleLeading,
     this.title = "",
     this.titleTrailing,
     this.subtitle = "",
@@ -55,6 +56,7 @@ class SurfaceCard extends StatelessWidget {
   final VoidCallback? onTap;
   final String title;
   final Widget? titleTrailing;
+  final Widget? titleLeading;
   final Widget child;
   final String subtitle;
 
@@ -100,8 +102,9 @@ class SurfaceCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        if (titleLeading != null) titleLeading!,
                         if (title.isNotEmpty)
-                          Flexible(
+                          Expanded(
                             child: Text(
                               title,
                               style: Theme.of(context).textTheme.bodyMedium
@@ -110,8 +113,7 @@ class SurfaceCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                        if (titleTrailing != null)
-                          Flexible(child: titleTrailing!),
+                        if (titleTrailing != null) titleTrailing!,
                       ],
                     ),
                     SizedBox(height: 4),

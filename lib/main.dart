@@ -10,7 +10,7 @@ void main() async {
   await followedTeamsProvider.initialize();
 
   runApp(
-    ChangeNotifierProvider.value(
+    ChangeNotifierProvider<FollowedTeamsProvider>.value(
       value: followedTeamsProvider,
       child: MaterialApp(
         home: const BottomNavigation(),

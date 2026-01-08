@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/mockpage.dart';
 import 'package:nuliga_app/mockpage2.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard.dart';
+import 'package:nuliga_app/pages/settings/settings_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -13,35 +14,35 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
-  static const _widgets = [TeamOverviewPage(), Mockpage(), Mockpage2()];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  final List<Widget> _pages = [
+    TeamOverviewPage(),
+    Mockpage(),
+    const SettingsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: _widgets.elementAt(_selectedIndex)),
+      body: SafeArea(child: _pages.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
             icon: Icon(Icons.question_mark),
             // TODO: remove
-            label: "TODO",
+            label: "mock",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.question_mark),
-            // TODO: remove
-            label: "TODO",
+            icon: Icon(Icons.settings),
+            label: 'Einstellungen',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }

@@ -40,6 +40,7 @@ dependencies:
   url_launcher: ^6.3.2
   async: ^2.13.0
   scrollable_positioned_list: ^0.3.8
+  shared_preferences: ^2.5.4
 
 dev_dependencies:
   flutter_test:

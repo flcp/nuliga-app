@@ -7,6 +7,7 @@ class SquareSurfaceCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback? onTap;
+  final bool highlighted;
 
   const SquareSurfaceCard({
     super.key,
@@ -14,6 +15,7 @@ class SquareSurfaceCard extends StatelessWidget {
     this.titleTrailing,
     this.onTap,
     this.title = "",
+    this.highlighted = false,
     this.subtitle = "",
   });
 

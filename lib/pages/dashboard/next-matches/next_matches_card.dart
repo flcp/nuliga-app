@@ -34,6 +34,7 @@ class _NextMatchesCardState extends State<NextMatchesCard> {
         homeTeamName: widget.team.name,
       ),
       title: Date.getShortDateString(widget.match.time),
+      highlighted: widget.highlighted,
       child: Text(
         getOpponent(widget.match, widget.team),
         style: Theme.of(context).textTheme.titleLarge,

@@ -49,6 +49,7 @@ class LeagueInfo extends StatelessWidget {
                 SquareSurfaceCard(
                   title: shortRank.leagueName,
                   onTap: () => navigateToTeamDetails(context),
+                  highlighted: true,
                   child: Text(
                     "${shortRank.rank.toString()}.",
                     style: Theme.of(context).textTheme.displayMedium,

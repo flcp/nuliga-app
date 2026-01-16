@@ -7,7 +7,6 @@ import 'package:nuliga_app/model/game_type.dart';
 import 'package:nuliga_app/model/match_result_detail.dart';
 import 'package:nuliga_app/model/player.dart';
 import 'package:nuliga_app/model/set_result.dart';
-import 'package:nuliga_app/services/shared/parser.dart';
 
 class MatchResultParser {
   Future<MatchResultDetail> getGamesAndResults(String htmlContent) async {

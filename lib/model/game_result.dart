@@ -30,10 +30,10 @@ class GameResult {
   }
 
   MatchResultStatus getMatchStatusForHomeTeam() {
-    return homeTeamWon ? MatchResultStatus.Win : MatchResultStatus.Loss;
+    return homeTeamWon ? MatchResultStatus.win : MatchResultStatus.loss;
   }
 
   MatchResultStatus getMatchStatusForOpponentTeam() {
-    return !homeTeamWon ? MatchResultStatus.Win : MatchResultStatus.Loss;
+    return !homeTeamWon ? MatchResultStatus.win : MatchResultStatus.loss;
   }
 }

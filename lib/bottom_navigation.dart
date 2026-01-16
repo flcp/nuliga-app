@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/mockpage.dart';
-import 'package:nuliga_app/mockpage2.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard.dart';
 import 'package:nuliga_app/pages/settings/settings_page.dart';
 
@@ -14,11 +12,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    TeamOverviewPage(),
-    Mockpage(),
-    const SettingsPage(),
-  ];
+  final List<Widget> _pages = [TeamOverviewPage(), const SettingsPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +27,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.question_mark),
-            // TODO: remove
-            label: "mock",
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Einstellungen',

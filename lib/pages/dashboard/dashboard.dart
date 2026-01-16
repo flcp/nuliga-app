@@ -87,7 +87,6 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                     SizedBox(height: 48),
                   ],
                 );
-                ;
               },
             ),
           ),

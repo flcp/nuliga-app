@@ -20,7 +20,7 @@ class GameResultScorePill extends StatelessWidget {
     return ScorePill(
       leftScore: gameResult.homeSetsWon,
       rightScore: gameResult.opponentSetsWon,
-      status: status ? MatchResultStatus.Win : MatchResultStatus.Loss,
+      status: status ? MatchResultStatus.win : MatchResultStatus.loss,
     );
   }
 }
@@ -71,9 +71,9 @@ class WinLossIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color color = switch (status) {
-      MatchResultStatus.Win => const Color.fromARGB(255, 140, 227, 145),
-      MatchResultStatus.Loss => const Color.fromARGB(255, 255, 147, 137),
-      MatchResultStatus.Draw => Colors.grey.shade300,
+      MatchResultStatus.win => const Color.fromARGB(255, 140, 227, 145),
+      MatchResultStatus.loss => const Color.fromARGB(255, 255, 147, 137),
+      MatchResultStatus.draw => Colors.grey.shade300,
       _ => Colors.grey,
     };
 

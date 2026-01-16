@@ -61,7 +61,7 @@ class LeagueInfo extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        shortRank.played.toString(),
+                        shortRank.playedMatches.toString(),
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
                       Text(

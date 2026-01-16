@@ -19,20 +19,20 @@ class MatchResult {
 
   MatchResultStatus getMatchStatusForTeam(String teamName) {
     if (homeTeamMatchesWon == opponentTeamMatchesWon) {
-      return MatchResultStatus.Draw;
+      return MatchResultStatus.draw;
     }
 
     if (isHomeTeam(teamName)) {
-      return didHomeTeamWin() ? MatchResultStatus.Win : MatchResultStatus.Loss;
+      return didHomeTeamWin() ? MatchResultStatus.win : MatchResultStatus.loss;
     }
 
     if (isOpponentTeam(teamName)) {
       return didOpponentTeamWin()
-          ? MatchResultStatus.Win
-          : MatchResultStatus.Loss;
+          ? MatchResultStatus.win
+          : MatchResultStatus.loss;
     }
 
-    return MatchResultStatus.Unknown;
+    return MatchResultStatus.unknown;
   }
 
   bool isHomeTeam(String teamName) {
@@ -52,4 +52,4 @@ class MatchResult {
   }
 }
 
-enum MatchResultStatus { Win, Loss, Draw, Unknown }
+enum MatchResultStatus { win, loss, draw, unknown }

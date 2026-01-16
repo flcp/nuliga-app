@@ -34,7 +34,7 @@ class LeagueTableService {
       ShortLeagueTeamRanking(
         rank: teamRanking.rank,
         wins: teamRanking.wins,
-        played: teamRanking.totalMatches,
+        playedMatches: teamRanking.totalMatches,
         totalTeams: totalTeams,
         teamName: teamRanking.teamName,
         teamUrl: teamRanking.teamUrl,

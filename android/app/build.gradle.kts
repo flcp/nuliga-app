@@ -16,7 +16,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.flex.neoliga"
-    compileSdk = 36
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -29,11 +29,13 @@ android {
     }
 
     defaultConfig {
+        // TODO: fix namespace in android folder structure
+        // namespace = "com.flex.neoliga"
         applicationId = "com.flex.neoliga"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
-        targetSdk = 36
+        targetSdk = flutter.targetSdkVersion
         versionCode = 2
         versionName = "1.0.1"
     }

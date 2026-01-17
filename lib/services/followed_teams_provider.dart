@@ -12,9 +12,8 @@ class FollowedTeamsProvider extends ChangeNotifier {
   List<FollowedClub> get followedTeams => _followedTeams;
 
   Future<void> initialize() async {
-    // _prefs = await SharedPreferences.getInstance();
-    _loadDefaults();
-    // await _loadFromStorage();
+    _prefs = await SharedPreferences.getInstance();
+    await _loadFromStorage();
   }
 
   Future<void> _loadFromStorage() async {
@@ -37,7 +36,7 @@ class FollowedTeamsProvider extends ChangeNotifier {
 
   void _loadDefaults() {
     _followedTeams = navigationItems;
-    // _saveToStorage();
+    _saveToStorage();
   }
 
   Future<void> _saveToStorage() async {

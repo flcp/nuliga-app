@@ -1,4 +1,4 @@
-package com.example.nuliga_app
+package com.flex.neoliga
 
 import io.flutter.embedding.android.FlutterActivity
 

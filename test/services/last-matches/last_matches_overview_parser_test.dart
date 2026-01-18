@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nuliga_app/services/last-matches/last_matches_overview_parser.dart';
+import 'package:nuliga_app/services/matches/last-matches/last_matches_overview_parser.dart';
 
 void main() {
   group('LastMatchesOverviewParser with valid file input', () {

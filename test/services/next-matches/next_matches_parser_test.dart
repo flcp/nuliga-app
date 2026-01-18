@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nuliga_app/services/next-matches/next_matches_parser.dart';
+import 'package:nuliga_app/services/matches/next-matches/next_matches_parser.dart';
 
 void main() {
   group('NextMatchesParser with valid file input', () {
@@ -9,7 +9,7 @@ void main() {
       final file = File('test/assets/next-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = NextMatchesParser.getEntriesAsFutureMatches(
+      final result = NextMatchesParser().getEntriesAsFutureMatches(
         html,
         "http://example.com/",
       );
@@ -22,7 +22,7 @@ void main() {
       final file = File('test/assets/next-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = NextMatchesParser.getEntriesAsFutureMatches(
+      final result = NextMatchesParser().getEntriesAsFutureMatches(
         html,
         "http://example.com/",
       );
@@ -33,7 +33,7 @@ void main() {
       final file = File('test/assets/next-matches/test-page.html');
       final html = await file.readAsString();
 
-      final result = NextMatchesParser.getEntriesAsFutureMatches(
+      final result = NextMatchesParser().getEntriesAsFutureMatches(
         html,
         "http://example.com/",
       );
@@ -48,7 +48,7 @@ void main() {
       final file = File('test/assets/next-matches/otherFormat.json');
       final html = await file.readAsString();
 
-      final result = NextMatchesParser.getEntriesAsFutureMatches(
+      final result = NextMatchesParser().getEntriesAsFutureMatches(
         html,
         "http://example.com/",
       );

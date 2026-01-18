@@ -7,7 +7,7 @@ import 'package:nuliga_app/services/shared/parser.dart';
 import 'package:nuliga_app/services/shared/table_parser.dart';
 
 class LeagueParser {
-  final tableParser = TableParser();
+  final tableParser = MatchesTableParser();
   List<LeagueTeamRanking> parseLeagueTable(String htmlContent) {
     final rows = tableParser.getTableRows(htmlContent);
 

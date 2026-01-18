@@ -1,4 +1,4 @@
-import 'package:nuliga_app/services/next-matches/match_location_parser.dart';
+import 'package:nuliga_app/services/matches/next-matches/match_location_parser.dart';
 import 'package:nuliga_app/services/shared/http_client.dart';
 
 class MatchLocationRepository {

@@ -1,5 +1,5 @@
 import 'package:nuliga_app/model/future_match.dart';
-import 'package:nuliga_app/services/next-matches/match_location_repository.dart';
+import 'package:nuliga_app/services/matches/next-matches/match_location_repository.dart';
 
 class LocationService {
   final matchLocationRepository = MatchLocationRepository();

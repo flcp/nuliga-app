@@ -1,9 +1,9 @@
 import 'dart:developer' as developer;
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
-import 'package:nuliga_app/services/shared/tableheader_parser.dart';
+import 'package:nuliga_app/services/matches/tableheader_parser.dart';
 
-class TableParser {
+class MatchesTableParser {
   static const tableClass = "result-set";
 
   List<Element> getTableRows(String htmlContent) {

@@ -5,7 +5,7 @@ import 'package:nuliga_app/services/shared/parser.dart';
 import 'package:nuliga_app/services/shared/table_parser.dart';
 
 class LastMatchesOverviewParser {
-  final tableParser = TableParser();
+  final tableParser = MatchesTableParser();
 
   List<MatchResult> getMatchResultEntries(String htmlContent, String baseUrl) {
     final rows = tableParser.getTableRows(htmlContent);

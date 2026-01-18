@@ -1,8 +1,6 @@
 import 'package:html/dom.dart';
 
 class Parser {
-  static const tableClass = "result-set";
-
   // date in format 25.10.2025
   // time in format 14:00
   // time sometimes 14:05 v

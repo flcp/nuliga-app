@@ -1,51 +1,26 @@
 import 'dart:developer' as developer;
 
-import 'package:html/parser.dart' as html;
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
-import 'package:nuliga_app/services/shared/tableheader_parser.dart';
+import 'package:nuliga_app/services/shared/table_parser.dart';
 
 class LastMatchesOverviewParser {
+  final tableParser = TableParser();
+
   List<MatchResult> getMatchResultEntries(String htmlContent, String baseUrl) {
-    if (htmlContent.trim().isEmpty) {
-      developer.log("Empty html received in matches overview", level: 800);
-
-      return [];
-    }
-
-    final document = html.parse(htmlContent);
-
-    final table = document.querySelector('table.${Parser.tableClass}');
-
-    if (table == null) {
-      developer.log("Matches table not found", level: 800);
-
-      return [];
-    }
-
-    final rows = table.querySelectorAll('tr');
+    final rows = tableParser.getTableRows(htmlContent);
     if (rows.isEmpty) {
-      developer.log("No rows in matches table", level: 800);
+      developer.log("No rows in last matches overview", level: 800);
       return [];
     }
 
-    final dataRows = rows
-        .map((row) => row.querySelectorAll('td'))
-        .where((cells) => cells.isNotEmpty)
-        .toList();
-
-    final headerRow = rows.first.querySelectorAll('th');
-    final tableIndizes = TableheaderParser.getIndices(headerRow);
+    final tableIndizes = tableParser.getTableIndizesFromHeaderRow(rows);
+    final dataRows = tableParser.getDataRows(rows);
 
     final List<MatchResult> result = [];
 
     for (int i = 0; i < dataRows.length; i++) {
       final cells = dataRows[i];
-
-      if (cells.length < 7) {
-        developer.log("could not find all info, skipping row", level: 800);
-        continue;
-      }
 
       if (cells[tableIndizes.resultIndex].text.trim().isEmpty) continue;
 

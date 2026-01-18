@@ -10,7 +10,7 @@ class NextMatchesRepository {
 
     final baseUrl = HttpClient.getBaseUrl(matchupsUrl);
 
-    final result = NextMatchesParser.getEntriesAsFutureMatches(
+    final result = NextMatchesParser().getEntriesAsFutureMatches(
       htmlContent,
       baseUrl,
     );

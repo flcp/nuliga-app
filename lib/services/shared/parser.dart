@@ -3,13 +3,6 @@ import 'package:html/dom.dart';
 class Parser {
   static const tableClass = "result-set";
 
-  static const int matchesDateIndex = 1;
-  static const int matchesTimeIndex = 2;
-  static const int matchesLocationIndex = 3;
-  static const int matchesHomeTeamIndex = 4;
-  static const int matchesOpponentTeamIndex = 5;
-  static const int matchesResultIndex = 6;
-
   // date in format 25.10.2025
   // time in format 14:00
   // time sometimes 14:05 v

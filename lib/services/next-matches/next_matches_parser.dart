@@ -3,6 +3,7 @@ import 'dart:developer' as developer;
 import 'package:html/parser.dart' as html;
 import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
+import 'package:nuliga_app/services/shared/tableheader_parser.dart';
 
 class NextMatchesParser {
   static List<FutureMatch> getEntriesAsFutureMatches(
@@ -28,33 +29,38 @@ class NextMatchesParser {
       return [];
     }
 
-    final dataRows = rows.skip(1).toList();
+    final dataRows = rows
+        .map((row) => row.querySelectorAll('td'))
+        .where((cells) => cells.isNotEmpty)
+        .toList();
+    final headerRow = rows.first.querySelectorAll('th');
+    final tableIndizes = TableheaderParser.getIndices(headerRow);
+
     final List<FutureMatch> result = [];
 
     for (int i = 0; i < dataRows.length; i++) {
-      final row = dataRows[i];
-      final cells = row.querySelectorAll('td');
+      final cells = dataRows[i];
 
       if (cells.length < 6) {
         developer.log("could not find all info, skipping row", level: 800);
         continue;
       }
 
-      if (i > 0 && cells[Parser.matchesDateIndex].text.trim().isEmpty) {
-        cells[Parser.matchesDateIndex].text = dataRows[i - 1]
-            .querySelectorAll('td')[Parser.matchesDateIndex]
-            .text;
+      if (i > 0 && cells[tableIndizes.dateIndex].text.trim().isEmpty) {
+        final cellsOfLastRow = dataRows[i - 1];
+        cells[tableIndizes.dateIndex].text =
+            cellsOfLastRow[tableIndizes.dateIndex].text;
       }
 
       // TODO: use parser helper function
       final dateTime = Parser.getMatchDateTime(
-        cells[Parser.matchesDateIndex],
-        cells[Parser.matchesTimeIndex],
+        cells[tableIndizes.dateIndex],
+        cells[tableIndizes.timeIndex],
       );
 
       final locationUrl = Parser.getLinkOrEmpty(
         cells,
-        Parser.matchesLocationIndex,
+        tableIndizes.locationIndex,
         baseUrl,
       );
 
@@ -62,10 +68,10 @@ class NextMatchesParser {
         FutureMatch(
           time: dateTime,
           locationUrl: locationUrl,
-          homeTeam: Parser.getCellOrEmpty(cells, Parser.matchesHomeTeamIndex),
+          homeTeam: Parser.getCellOrEmpty(cells, tableIndizes.homeTeamIndex),
           opponentTeam: Parser.getCellOrEmpty(
             cells,
-            Parser.matchesOpponentTeamIndex,
+            tableIndizes.opponentTeamIndex,
           ),
         ),
       );

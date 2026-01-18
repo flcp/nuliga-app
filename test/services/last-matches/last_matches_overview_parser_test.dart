@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nuliga_app/services/matches/last-matches/last_matches_overview_parser.dart';
 
+// TODO: alle verbaende abtesten
+
 void main() {
   group('LastMatchesOverviewParser with valid file input', () {
     test('parses sample file and identifies first entry correctly', () async {

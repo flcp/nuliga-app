@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/services/settings_service.dart';
 
 class ClubEditPage extends StatefulWidget {
   final FollowedClub? club;
@@ -16,6 +19,12 @@ class _ClubEditPageState extends State<ClubEditPage> {
   late TextEditingController _rankingUrlController;
   late TextEditingController _matchesUrlController;
 
+  Timer? _rankingUrlDebounceTimer;
+
+  bool? _isRankingUrlValid;
+
+  final settingsService = SettingsService();
+
   @override
   void initState() {
     super.initState();
@@ -29,15 +38,44 @@ class _ClubEditPageState extends State<ClubEditPage> {
     _matchesUrlController = TextEditingController(
       text: widget.club?.matchesUrl ?? '',
     );
+
+    _rankingUrlController.addListener(_onRankingUrlChanged);
   }
 
   @override
   void dispose() {
     _nameController.dispose();
     _shortNameController.dispose();
+    _rankingUrlController.removeListener(_onRankingUrlChanged);
     _rankingUrlController.dispose();
     _matchesUrlController.dispose();
+
+    _rankingUrlDebounceTimer?.cancel();
     super.dispose();
+  }
+
+  void _onRankingUrlChanged() async {
+    _rankingUrlDebounceTimer?.cancel();
+    if (_rankingUrlController.text.isEmpty) {
+      setState(() {
+        _isRankingUrlValid = null;
+      });
+      return;
+    }
+
+    _rankingUrlDebounceTimer = Timer(
+      const Duration(milliseconds: 500),
+      () async {
+        final isValid = await _validateRankingUrl();
+        setState(() {
+          _isRankingUrlValid = isValid;
+        });
+      },
+    );
+  }
+
+  Future<bool> _validateRankingUrl() {
+    return settingsService.validateRankingTableUrl(_rankingUrlController.text);
   }
 
   void _saveClub() {
@@ -72,9 +110,14 @@ class _ClubEditPageState extends State<ClubEditPage> {
             const SizedBox(height: 16),
             _buildTextField('Kürzel', _shortNameController),
             const SizedBox(height: 16),
-            _buildTextField('Tabelle', _rankingUrlController),
+            _buildTextField(
+              'Liga Überblick URL',
+              _rankingUrlController,
+              isValid: _isRankingUrlValid,
+            ),
             const SizedBox(height: 16),
             _buildTextField('Spielplan - gesamt', _matchesUrlController),
+
             const SizedBox(height: 32),
             FilledButton(onPressed: _saveClub, child: const Text('Speichern')),
           ],
@@ -83,13 +126,42 @@ class _ClubEditPageState extends State<ClubEditPage> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-      ),
+  Widget _buildTextField(
+    String label,
+    TextEditingController controller, {
+    bool? isValid,
+    String? validationText,
+  }) {
+    final validColor = Colors.green;
+    final invalidColor = Colors.red;
+
+    final border = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: isValid != null
+          ? BorderSide(color: isValid ? validColor : invalidColor, width: 2)
+          : const BorderSide(width: 2),
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            labelText: label,
+            border: border,
+            enabledBorder: border,
+            focusedBorder: border,
+          ),
+        ),
+        if (isValid == false && validationText != null) ...[
+          const SizedBox(height: 4),
+          Text(
+            validationText,
+            style: TextStyle(fontSize: 12, color: invalidColor),
+          ),
+        ],
+      ],
     );
   }
 }

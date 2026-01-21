@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/match_result.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/match-result/match_result_page.dart';
+import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
 import 'package:nuliga_app/services/last_matches_service.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
+import 'package:nuliga_app/services/shared/http_client.dart';
 
 class LastMatchesDetailsList extends StatefulWidget {
   final String matchOverviewUrl;
@@ -22,6 +24,8 @@ class LastMatchesDetailsList extends StatefulWidget {
 }
 
 class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
+  final httpClient = HttpClient();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -36,39 +40,47 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
 
         final matchResults = getDataOrEmptyList(snapshot).reversed;
 
-        return ListView(
-          children: matchResults.map((result) {
-            return ListTile(
-              onTap: () => goToMatchResult(result, widget.teamName),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '${result.homeTeamMatchesWon} : ${result.opponentTeamMatchesWon}  ',
-                    style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
-                      fontWeight: FontWeight.bold,
-                    ),
+        return RefreshIndicator(
+          onRefresh: refresh,
+          child: ListView(
+            children: [
+              if (matchResults.isEmpty) NothingToDisplayIndicator(),
+              ...matchResults.map((result) {
+                return ListTile(
+                  onTap: () => goToMatchResult(result, widget.teamName),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '${result.homeTeamMatchesWon} : ${result.opponentTeamMatchesWon}  ',
+                        style: TextStyle(
+                          fontSize: Theme.of(
+                            context,
+                          ).textTheme.bodyLarge?.fontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(Icons.chevron_right),
+                    ],
                   ),
-                  Icon(Icons.chevron_right),
-                ],
-              ),
-              leading: WinLossIndicator(
-                size: 10,
-                status: result.getMatchStatusForTeam(widget.teamName),
-                isTextDisplayed: true,
-              ),
-              subtitle: Text(Date.getDateString(result.time)),
-              title: Text(
-                result.homeTeamName == widget.teamName
-                    ? result.opponentTeamName
-                    : result.homeTeamName,
+                  leading: WinLossIndicator(
+                    size: 10,
+                    status: result.getMatchStatusForTeam(widget.teamName),
+                    isTextDisplayed: true,
+                  ),
+                  subtitle: Text(Date.getDateString(result.time)),
+                  title: Text(
+                    result.homeTeamName == widget.teamName
+                        ? result.opponentTeamName
+                        : result.homeTeamName,
 
-                softWrap: false,
-                overflow: TextOverflow.ellipsis,
-              ),
-            );
-          }).toList(),
+                    softWrap: false,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                );
+              }),
+            ],
+          ),
         );
       },
     );
@@ -82,6 +94,12 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
             MatchResultPage(matchResult: result, teamName: teamName),
       ),
     );
+  }
+
+  Future<void> refresh() {
+    httpClient.clearCache();
+    setState(() {});
+    return Future.value();
   }
 }
 

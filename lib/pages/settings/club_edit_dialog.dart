@@ -15,6 +15,7 @@ class ClubEditPage extends StatefulWidget {
   State<ClubEditPage> createState() => _ClubEditPageState();
 }
 
+// TODO: in schritt 2, wenn nichts angeklickt, team ist leer am ende
 // TODO: continue refactor
 // TODO: edit Dialog: leerer Name
 // TODO: edit Dialog: Dialog nur bei add anzeigen, bei edit einfache Textboxen?

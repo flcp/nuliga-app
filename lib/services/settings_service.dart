@@ -9,6 +9,10 @@ class SettingsService {
   }
 
   Future<List<LeagueTeamRanking>> fetchTeamRankings(String url) async {
+    if (url.isEmpty) {
+      return [];
+    }
+
     var teamRankings = await leagueTableRepository.getLeagueTeamRankings(url);
     teamRankings.sort((a, b) => a.teamName.compareTo(b.teamName));
     return teamRankings;

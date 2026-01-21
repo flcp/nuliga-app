@@ -74,7 +74,6 @@ class MatchResultPageContent extends StatelessWidget {
         }
 
         final matchResultDetail = getDataOrDefault(asyncSnapshot, null);
-
         if (matchResultDetail == null) {
           return Text("Nothing to display");
         }

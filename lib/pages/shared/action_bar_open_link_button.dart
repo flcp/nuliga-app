@@ -21,7 +21,7 @@ class ActionBarFollowedTeamOpenLinkButton extends StatelessWidget {
     return IconButton(
       icon: Icon(Icons.open_in_new),
       onPressed: () async {
-        // TODO: sanitize with toast?
+        // TODO: IMPORTANT: sanitize!! with toast?
         var uri = Uri.parse(urlAccessor(selectedFollowedTeam!));
         await launchUrl(uri);
       },

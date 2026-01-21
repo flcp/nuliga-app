@@ -1,0 +1,129 @@
+import 'package:flutter/material.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class ClubEditDialogStep1LeagueUrl extends StatefulWidget {
+  final String initialValue;
+  final ValueChanged<String> onUrlChanged;
+
+  const ClubEditDialogStep1LeagueUrl({
+    super.key,
+    required this.initialValue,
+    required this.onUrlChanged,
+  });
+
+  @override
+  State<ClubEditDialogStep1LeagueUrl> createState() =>
+      _ClubEditDialogStep1LeagueUrlState();
+}
+
+class _ClubEditDialogStep1LeagueUrlState
+    extends State<ClubEditDialogStep1LeagueUrl> {
+  late TextEditingController _rankingUrlController;
+
+  @override
+  void initState() {
+    super.initState();
+    _rankingUrlController = TextEditingController(text: widget.initialValue);
+    _rankingUrlController.addListener(() {
+      widget.onUrlChanged(_rankingUrlController.text);
+    });
+  }
+
+  @override
+  void dispose() {
+    _rankingUrlController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 8),
+        buildDialogTextField(
+          'Liga Überblick URL',
+          _rankingUrlController,
+          validationText: "Ungültige URL",
+        ),
+        const SizedBox(height: 16),
+        ExpansionTile(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          collapsedShape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+
+          title: Text("Anleitung"),
+          children: [
+            _TutorialRow(
+              index: 1,
+              subtitle: Text("Beispiel: https://bwbv-badminton.liga.nu"),
+              trailing: IconButton(
+                onPressed: () async {
+                  var uri = Uri.parse("https://badminton.liga.nu/");
+                  await launchUrl(uri);
+                },
+                icon: Icon(Icons.open_in_new),
+              ),
+              child: Text("Öffne die Website deines Verbandes"),
+            ),
+            const SizedBox(height: 8),
+            _TutorialRow(
+              index: 2,
+              subtitle: Text('Beispiel: BWBV-Ligen > Landesliga "Oberrhein"'),
+              child: Text("Navigiere zur Liga deines Vereines"),
+            ),
+            const SizedBox(height: 8),
+            _TutorialRow(
+              index: 3,
+              child: Text("Kopiere die URL und füge sie oben ein"),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _TutorialRow extends StatelessWidget {
+  final Widget child;
+  final int index;
+  final Widget? trailing;
+  final Widget? subtitle;
+
+  const _TutorialRow({
+    required this.child,
+    required this.index,
+    this.trailing,
+    this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("$index.", style: Theme.of(context).textTheme.bodyLarge),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DefaultTextStyle(
+                style: Theme.of(context).textTheme.bodyLarge!,
+                child: child,
+              ),
+              DefaultTextStyle(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
+                ),
+                child: subtitle ?? Container(),
+              ),
+            ],
+          ),
+        ),
+        trailing ?? Container(),
+      ],
+    );
+  }
+}

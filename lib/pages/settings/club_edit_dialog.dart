@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_league_url.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_matchups_url.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_name.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_short_name.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_final_check.dart';
@@ -30,9 +31,9 @@ class _ClubEditPageState extends State<ClubEditPage> {
   void initState() {
     super.initState();
     _rankingUrl = widget.club?.rankingTableUrl ?? "";
+    _matchesUrl = widget.club?.matchesUrl ?? "";
     _teamName = widget.club?.name ?? "";
     _shortName = widget.club?.shortName ?? "";
-    _matchesUrl = widget.club?.matchesUrl ?? "";
   }
 
   List<Step> buildSteps() {
@@ -47,6 +48,7 @@ class _ClubEditPageState extends State<ClubEditPage> {
       Step(
         title: Text("Spielplan URL"),
         content: ClubEditDialogStepMatchupsUrl(
+          initialValue: _matchesUrl,
           rankingUrl: _rankingUrl,
           onMatchupsUrlChanged: _onMatchupsUrlChanged,
         ),
@@ -182,18 +184,5 @@ class _ClubEditPageState extends State<ClubEditPage> {
         },
       ),
     );
-  }
-}
-
-class ClubEditDialogStepMatchupsUrl extends StatelessWidget {
-  const ClubEditDialogStepMatchupsUrl({
-    super.key,
-    required String rankingUrl,
-    required Function(String) onMatchupsUrlChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center();
   }
 }

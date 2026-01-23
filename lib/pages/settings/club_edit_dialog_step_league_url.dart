@@ -25,7 +25,6 @@ class _ClubEditDialogStepLeagueUrlState
     extends State<ClubEditDialogStepLeagueUrl> {
   late TextEditingController _rankingUrlController;
   final settingsService = SettingsService();
-  bool? isRankingUrlValid;
   Timer? _debounceTimer;
 
   @override
@@ -55,7 +54,7 @@ class _ClubEditDialogStepLeagueUrlState
         _rankingUrlController.text,
       ),
       builder: (context, asyncSnapshot) {
-        isRankingUrlValid = getDataOrDefault(asyncSnapshot, null);
+        final isRankingUrlValid = getDataOrDefault(asyncSnapshot, null);
 
         return Column(
           children: [

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/services/settings_service.dart';
+import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class ClubEditDialogStepFinalCheck extends StatelessWidget {
   final String rankingUrl;
@@ -6,7 +8,9 @@ class ClubEditDialogStepFinalCheck extends StatelessWidget {
   final String selectedTeamName;
   final String matchesUrl;
 
-  const ClubEditDialogStepFinalCheck({
+  final settingsService = SettingsService();
+
+  ClubEditDialogStepFinalCheck({
     super.key,
     required this.rankingUrl,
     required this.shortName,
@@ -18,27 +22,73 @@ class ClubEditDialogStepFinalCheck extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ListTile(
-          trailing: Icon(Icons.check, color: Colors.green),
-          title: Text("Liga Überblick URL"),
-          subtitle: Text(rankingUrl),
+        ValidationListItem(
+          title: "Liga Überblick URL",
+          subtitle: rankingUrl,
+          isValid: _checkRankingUrlValid,
         ),
-        ListTile(
-          trailing: Icon(Icons.check, color: Colors.green),
-          title: Text("Spielplan URL"),
-          subtitle: Text(matchesUrl),
+        ValidationListItem(
+          title: "Spielplan URL",
+          subtitle: matchesUrl,
+          isValid: _checkMatchesUrlValid,
         ),
-        ListTile(
-          trailing: Icon(Icons.check, color: Colors.green),
-          title: Text("Team"),
-          subtitle: Text(selectedTeamName),
+        ValidationListItem(
+          title: "Team",
+          subtitle: selectedTeamName,
+          isValid: _checkTeamValid,
         ),
-        ListTile(
-          trailing: Icon(Icons.close, color: Colors.red),
-          title: Text("Team Kürzel"),
-          subtitle: Text(shortName),
+        ValidationListItem(
+          title: "Team Kürzel",
+          subtitle: shortName,
+          isValid: _checkShortNameValid,
         ),
       ],
+    );
+  }
+
+  Future<bool> _checkShortNameValid() async {
+    return settingsService.validateShortName(shortName) ?? false;
+  }
+
+  Future<bool> _checkTeamValid() async {
+    return settingsService.validateTeam(selectedTeamName);
+  }
+
+  Future<bool> _checkMatchesUrlValid() async {
+    return settingsService.validateMatchupsUrl(matchesUrl);
+  }
+
+  Future<bool> _checkRankingUrlValid() async {
+    return settingsService.validateRankingTableUrl(rankingUrl);
+  }
+}
+
+class ValidationListItem extends StatelessWidget {
+  final Future<bool> Function() isValid;
+  final String title;
+  final String subtitle;
+
+  const ValidationListItem({
+    super.key,
+    required this.isValid,
+    required this.title,
+    required this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<bool>(
+      future: isValid(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        final isValid = getDataOrDefault(snapshot, false);
+        return ListTile(
+          trailing: isValid
+              ? Icon(Icons.check, color: Colors.green)
+              : Icon(Icons.close, color: Colors.red),
+          title: Text(title),
+          subtitle: Text(subtitle),
+        );
+      },
     );
   }
 }

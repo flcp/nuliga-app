@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
+import 'package:nuliga_app/services/settings_service.dart';
 
 class ClubEditDialogStepShortName extends StatefulWidget {
   final String initialValue;
@@ -20,6 +21,8 @@ class _ClubEditDialogStepShortNameState
     extends State<ClubEditDialogStepShortName> {
   late TextEditingController _shortNameController;
 
+  final settingsService = SettingsService();
+
   @override
   void initState() {
     super.initState();
@@ -39,8 +42,6 @@ class _ClubEditDialogStepShortNameState
 
   @override
   Widget build(BuildContext context) {
-    final isShortNameValid = _shortNameController.text.length <= 7;
-
     return Column(
       children: [
         SizedBox(height: 8),
@@ -48,7 +49,7 @@ class _ClubEditDialogStepShortNameState
         buildDialogTextField(
           'Team Kürzel',
           _shortNameController,
-          isValid: isShortNameValid,
+          isValid: settingsService.validateShortName(_shortNameController.text),
           validationText: "Kürzel darf maximal 7 Zeichen lang sein",
         ),
       ],

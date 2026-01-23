@@ -24,6 +24,8 @@ class _ClubEditDialogStep3State extends State<ClubEditDialogStep3> {
     _shortNameController = TextEditingController(text: widget.initialValue);
     _shortNameController.addListener(() {
       widget.onShortNameChanged(_shortNameController.text);
+
+      setState(() {});
     });
   }
 
@@ -35,6 +37,8 @@ class _ClubEditDialogStep3State extends State<ClubEditDialogStep3> {
 
   @override
   Widget build(BuildContext context) {
+    final isShortNameValid = _shortNameController.text.length <= 7;
+
     return Column(
       children: [
         SizedBox(height: 8),
@@ -42,7 +46,7 @@ class _ClubEditDialogStep3State extends State<ClubEditDialogStep3> {
         buildDialogTextField(
           'Team Kürzel',
           _shortNameController,
-          // isValid: isShortNameValid,
+          isValid: isShortNameValid,
           validationText: "Kürzel darf maximal 7 Zeichen lang sein",
         ),
       ],

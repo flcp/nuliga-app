@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
+import 'package:nuliga_app/services/settings_service.dart';
+import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ClubEditDialogStep1LeagueUrl extends StatefulWidget {
@@ -20,6 +24,9 @@ class ClubEditDialogStep1LeagueUrl extends StatefulWidget {
 class _ClubEditDialogStep1LeagueUrlState
     extends State<ClubEditDialogStep1LeagueUrl> {
   late TextEditingController _rankingUrlController;
+  final settingsService = SettingsService();
+  bool? isRankingUrlValid;
+  Timer? _debounceTimer;
 
   @override
   void initState() {
@@ -27,6 +34,11 @@ class _ClubEditDialogStep1LeagueUrlState
     _rankingUrlController = TextEditingController(text: widget.initialValue);
     _rankingUrlController.addListener(() {
       widget.onUrlChanged(_rankingUrlController.text);
+
+      _debounceTimer?.cancel();
+      _debounceTimer = Timer(const Duration(milliseconds: 1000), () {
+        setState(() {});
+      });
     });
   }
 
@@ -38,49 +50,63 @@ class _ClubEditDialogStep1LeagueUrlState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 8),
-        buildDialogTextField(
-          'Liga Überblick URL',
-          _rankingUrlController,
-          validationText: "Ungültige URL",
-        ),
-        const SizedBox(height: 16),
-        ExpansionTile(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          collapsedShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+    return FutureBuilder(
+      future: settingsService.validateRankingTableUrl(
+        _rankingUrlController.text,
+      ),
+      builder: (context, asyncSnapshot) {
+        isRankingUrlValid = getDataOrDefault(asyncSnapshot, null);
 
-          title: Text("Anleitung"),
+        return Column(
           children: [
-            _TutorialRow(
-              index: 1,
-              subtitle: Text("Beispiel: https://bwbv-badminton.liga.nu"),
-              trailing: IconButton(
-                onPressed: () async {
-                  var uri = Uri.parse("https://badminton.liga.nu/");
-                  await launchUrl(uri);
-                },
-                icon: Icon(Icons.open_in_new),
+            const SizedBox(height: 8),
+            buildDialogTextField(
+              'Liga Überblick URL',
+              _rankingUrlController,
+              isValid: isRankingUrlValid,
+              validationText: "Ungültige URL",
+            ),
+            const SizedBox(height: 16),
+            ExpansionTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
               ),
-              child: Text("Öffne die Website deines Verbandes"),
-            ),
-            const SizedBox(height: 8),
-            _TutorialRow(
-              index: 2,
-              subtitle: Text('Beispiel: BWBV-Ligen > Landesliga "Oberrhein"'),
-              child: Text("Navigiere zur Liga deines Vereines"),
-            ),
-            const SizedBox(height: 8),
-            _TutorialRow(
-              index: 3,
-              child: Text("Kopiere die URL und füge sie oben ein"),
+              collapsedShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+
+              title: Text("Anleitung"),
+              children: [
+                _TutorialRow(
+                  index: 1,
+                  subtitle: Text("Beispiel: https://bwbv-badminton.liga.nu"),
+                  trailing: IconButton(
+                    onPressed: () async {
+                      var uri = Uri.parse("https://badminton.liga.nu/");
+                      await launchUrl(uri);
+                    },
+                    icon: Icon(Icons.open_in_new),
+                  ),
+                  child: Text("Öffne die Website deines Verbandes"),
+                ),
+                const SizedBox(height: 8),
+                _TutorialRow(
+                  index: 2,
+                  subtitle: Text(
+                    'Beispiel: BWBV-Ligen > Landesliga "Oberrhein"',
+                  ),
+                  child: Text("Navigiere zur Liga deines Vereines"),
+                ),
+                const SizedBox(height: 8),
+                _TutorialRow(
+                  index: 3,
+                  child: Text("Kopiere die URL und füge sie oben ein"),
+                ),
+              ],
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

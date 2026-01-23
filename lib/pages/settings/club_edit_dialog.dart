@@ -15,10 +15,7 @@ class ClubEditPage extends StatefulWidget {
   State<ClubEditPage> createState() => _ClubEditPageState();
 }
 
-// TODO: in schritt 2, wenn nichts angeklickt, team ist leer am ende
-// TODO: continue refactor
-// TODO: edit Dialog: leerer Name
-// TODO: edit Dialog: Dialog nur bei add anzeigen, bei edit einfache Textboxen?
+// setState is only called when changing steps. If you need setState of this file when any of the steps change data, refactor to use provider
 class _ClubEditPageState extends State<ClubEditPage> {
   int _currentStepIndex = 0;
 
@@ -63,9 +60,9 @@ class _ClubEditPageState extends State<ClubEditPage> {
       Step(
         title: Text("Überprüfen"),
         content: ClubEditDialogStep4(
-          rankingUrl: _rankingUrl ?? "",
-          shortName: _shortName ?? "",
-          selectedTeamName: _teamName ?? "",
+          rankingUrl: _rankingUrl,
+          shortName: _shortName,
+          selectedTeamName: _teamName,
         ),
       ),
     ];

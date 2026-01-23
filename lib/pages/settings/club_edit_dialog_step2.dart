@@ -42,6 +42,14 @@ class _ClubEditDialogStep2State extends State<ClubEditDialogStep2> {
                       getDataOrEmptyList(snapshot);
                   final hasTeams = teamRankings.isNotEmpty;
 
+                  final initialSelection = hasTeams
+                      ? teamRankings.firstWhere(
+                          (team) => team.teamName == widget.initialValue,
+                          orElse: () => teamRankings.first,
+                        )
+                      : null;
+                  widget.onTeamNameChanged(initialSelection?.teamName ?? "");
+
                   return Column(
                     children: [
                       const SizedBox(height: 8),
@@ -56,12 +64,7 @@ class _ClubEditDialogStep2State extends State<ClubEditDialogStep2> {
                             ? Text("Team")
                             : Text("Kein Team gefunden"),
                         enabled: hasTeams,
-                        initialSelection: hasTeams
-                            ? teamRankings.firstWhere(
-                                (team) => team.teamName == widget.initialValue,
-                                orElse: () => teamRankings.first,
-                              )
-                            : null,
+                        initialSelection: initialSelection,
                         onSelected: (selected) {
                           widget.onTeamNameChanged(selected?.teamName ?? "");
                         },

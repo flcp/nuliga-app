@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/pages/settings/club_edit_dialog_step1.dart';
-import 'package:nuliga_app/pages/settings/club_edit_dialog_step2.dart';
-import 'package:nuliga_app/pages/settings/club_edit_dialog_step3.dart';
-import 'package:nuliga_app/pages/settings/club_edit_dialog_step4.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_league_url.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_name.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_short_name.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_final_check.dart';
 import 'package:nuliga_app/services/settings_service.dart';
 
 class ClubEditPage extends StatefulWidget {
@@ -22,6 +22,7 @@ class _ClubEditPageState extends State<ClubEditPage> {
   late String _rankingUrl;
   late String _teamName;
   late String _shortName;
+  late String _matchesUrl;
 
   final settingsService = SettingsService();
 
@@ -31,20 +32,28 @@ class _ClubEditPageState extends State<ClubEditPage> {
     _rankingUrl = widget.club?.rankingTableUrl ?? "";
     _teamName = widget.club?.name ?? "";
     _shortName = widget.club?.shortName ?? "";
+    _matchesUrl = widget.club?.matchesUrl ?? "";
   }
 
   List<Step> buildSteps() {
     return [
       Step(
         title: Text("Liga URL"),
-        content: ClubEditDialogStep1LeagueUrl(
+        content: ClubEditDialogStepLeagueUrl(
           initialValue: _rankingUrl,
           onUrlChanged: _onRankingUrlChanged,
         ),
       ),
       Step(
+        title: Text("Spielplan URL"),
+        content: ClubEditDialogStepMatchupsUrl(
+          rankingUrl: _rankingUrl,
+          onMatchupsUrlChanged: _onMatchupsUrlChanged,
+        ),
+      ),
+      Step(
         title: Text("Team"),
-        content: ClubEditDialogStep2(
+        content: ClubEditDialogStepTeamName(
           initialValue: _teamName,
           rankingUrl: _rankingUrl,
           onTeamNameChanged: _onTeamNameChanged,
@@ -52,17 +61,18 @@ class _ClubEditPageState extends State<ClubEditPage> {
       ),
       Step(
         title: Text("Team Kürzel"),
-        content: ClubEditDialogStep3(
+        content: ClubEditDialogStepShortName(
           initialValue: _shortName,
           onShortNameChanged: _onShortNameChanged,
         ),
       ),
       Step(
         title: Text("Überprüfen"),
-        content: ClubEditDialogStep4(
+        content: ClubEditDialogStepFinalCheck(
           rankingUrl: _rankingUrl,
-          shortName: _shortName,
+          matchesUrl: _matchesUrl,
           selectedTeamName: _teamName,
+          shortName: _shortName,
         ),
       ),
     ];
@@ -78,6 +88,10 @@ class _ClubEditPageState extends State<ClubEditPage> {
 
   void _onTeamNameChanged(String value) {
     _teamName = value;
+  }
+
+  void _onMatchupsUrlChanged(String value) {
+    _matchesUrl = value;
   }
 
   // Future<bool> _validateRankingUrl(String url) async {
@@ -142,10 +156,10 @@ class _ClubEditPageState extends State<ClubEditPage> {
         onStepContinue: () {
           if (_currentStepIndex >= steps.length - 1) {
             final club = FollowedClub(
-              name: _teamName ?? "",
-              shortName: _shortName ?? "",
-              rankingTableUrl: _rankingUrl ?? "",
-              matchesUrl: "",
+              name: _teamName,
+              shortName: _shortName,
+              rankingTableUrl: _rankingUrl,
+              matchesUrl: _matchesUrl,
             );
             Navigator.pop(context, club);
 
@@ -168,5 +182,18 @@ class _ClubEditPageState extends State<ClubEditPage> {
         },
       ),
     );
+  }
+}
+
+class ClubEditDialogStepMatchupsUrl extends StatelessWidget {
+  const ClubEditDialogStepMatchupsUrl({
+    super.key,
+    required String rankingUrl,
+    required Function(String) onMatchupsUrlChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center();
   }
 }

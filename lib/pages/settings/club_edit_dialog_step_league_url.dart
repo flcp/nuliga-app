@@ -6,23 +6,23 @@ import 'package:nuliga_app/services/settings_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ClubEditDialogStep1LeagueUrl extends StatefulWidget {
+class ClubEditDialogStepLeagueUrl extends StatefulWidget {
   final String initialValue;
   final ValueChanged<String> onUrlChanged;
 
-  const ClubEditDialogStep1LeagueUrl({
+  const ClubEditDialogStepLeagueUrl({
     super.key,
     required this.initialValue,
     required this.onUrlChanged,
   });
 
   @override
-  State<ClubEditDialogStep1LeagueUrl> createState() =>
-      _ClubEditDialogStep1LeagueUrlState();
+  State<ClubEditDialogStepLeagueUrl> createState() =>
+      _ClubEditDialogStepLeagueUrlState();
 }
 
-class _ClubEditDialogStep1LeagueUrlState
-    extends State<ClubEditDialogStep1LeagueUrl> {
+class _ClubEditDialogStepLeagueUrlState
+    extends State<ClubEditDialogStepLeagueUrl> {
   late TextEditingController _rankingUrlController;
   final settingsService = SettingsService();
   bool? isRankingUrlValid;

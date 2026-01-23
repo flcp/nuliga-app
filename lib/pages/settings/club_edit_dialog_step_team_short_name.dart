@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
 
-class ClubEditDialogStep3 extends StatefulWidget {
+class ClubEditDialogStepShortName extends StatefulWidget {
   final String initialValue;
   final ValueChanged<String> onShortNameChanged;
 
-  const ClubEditDialogStep3({
+  const ClubEditDialogStepShortName({
     super.key,
     required this.initialValue,
     required this.onShortNameChanged,
   });
 
   @override
-  State<ClubEditDialogStep3> createState() => _ClubEditDialogStep3State();
+  State<ClubEditDialogStepShortName> createState() =>
+      _ClubEditDialogStepShortNameState();
 }
 
-class _ClubEditDialogStep3State extends State<ClubEditDialogStep3> {
+class _ClubEditDialogStepShortNameState
+    extends State<ClubEditDialogStepShortName> {
   late TextEditingController _shortNameController;
 
   @override

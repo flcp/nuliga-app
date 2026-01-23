@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/validation_result.dart';
 
 Widget buildDialogTextField(
   String label,
   TextEditingController controller, {
-  bool? isValid,
+  ValidationResult isValid = ValidationResult.unknown,
   String? validationText,
 }) {
   final validColor = Colors.green;
@@ -11,9 +12,11 @@ Widget buildDialogTextField(
 
   final border = OutlineInputBorder(
     borderRadius: BorderRadius.circular(8),
-    borderSide: isValid != null
-        ? BorderSide(color: isValid ? validColor : invalidColor, width: 2)
-        : const BorderSide(width: 2),
+    borderSide: switch (isValid) {
+      ValidationResult.unknown => const BorderSide(width: 2),
+      ValidationResult.valid => BorderSide(color: validColor, width: 2),
+      ValidationResult.invalid => BorderSide(color: invalidColor, width: 2),
+    },
   );
 
   return Column(
@@ -28,7 +31,7 @@ Widget buildDialogTextField(
           focusedBorder: border,
         ),
       ),
-      if (isValid == false && validationText != null) ...[
+      if (isValid == ValidationResult.invalid && validationText != null) ...[
         const SizedBox(height: 4),
         Text(
           validationText,

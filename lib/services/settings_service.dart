@@ -1,4 +1,5 @@
 import 'package:nuliga_app/model/league_team_ranking.dart';
+import 'package:nuliga_app/model/validation_result.dart';
 import 'package:nuliga_app/services/league-table/league_table_repository.dart';
 import 'package:nuliga_app/services/matches/next-matches/next_matches_repository.dart';
 
@@ -6,9 +7,16 @@ class SettingsService {
   final LeagueTableRepository leagueTableRepository = LeagueTableRepository();
   final NextMatchesRepository nextMatchesRepository = NextMatchesRepository();
 
-  Future<bool> validateRankingTableUrl(String url) async {
+  Future<ValidationResult> validateRankingTableUrl(String url) async {
+    if (url.isEmpty) {
+      return ValidationResult.unknown;
+    }
+
     final rankings = await leagueTableRepository.getLeagueTeamRankings(url);
-    return rankings.isNotEmpty;
+
+    return rankings.isNotEmpty
+        ? ValidationResult.valid
+        : ValidationResult.invalid;
   }
 
   Future<List<LeagueTeamRanking>> fetchTeamRankings(String url) async {
@@ -29,20 +37,30 @@ class SettingsService {
     return leagueTableRepository.getMatchupsUrlFromRankingUrl(rankingUrl);
   }
 
-  Future<bool> validateMatchupsUrl(String matchupsUrl) async {
-    final rankings = await nextMatchesRepository.getNextMatches(matchupsUrl);
-    return rankings.isNotEmpty;
-  }
-
-  bool? validateShortName(String shortName) {
-    if (shortName.isEmpty) {
-      return null;
+  Future<ValidationResult> validateMatchupsUrl(String matchupsUrl) async {
+    if (matchupsUrl.isEmpty) {
+      return ValidationResult.unknown;
     }
 
-    return shortName.length <= 7;
+    final rankings = await nextMatchesRepository.getNextMatches(matchupsUrl);
+    return rankings.isNotEmpty
+        ? ValidationResult.valid
+        : ValidationResult.invalid;
   }
 
-  bool validateTeam(String selectedTeamName) {
-    return selectedTeamName.isNotEmpty;
+  ValidationResult validateShortName(String shortName) {
+    if (shortName.isEmpty) {
+      return ValidationResult.unknown;
+    }
+
+    return shortName.length <= 7
+        ? ValidationResult.valid
+        : ValidationResult.invalid;
+  }
+
+  ValidationResult validateTeam(String selectedTeamName) {
+    return selectedTeamName.isEmpty
+        ? ValidationResult.invalid
+        : ValidationResult.valid;
   }
 }

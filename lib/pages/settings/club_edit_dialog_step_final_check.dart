@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/validation_result.dart';
 import 'package:nuliga_app/services/settings_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
@@ -46,25 +47,37 @@ class ClubEditDialogStepFinalCheck extends StatelessWidget {
     );
   }
 
-  Future<bool> _checkShortNameValid() async {
-    return settingsService.validateShortName(shortName) ?? false;
+  Future<ValidationResult> _checkShortNameValid() async {
+    if (shortName.isEmpty) {
+      return ValidationResult.invalid;
+    }
+
+    return settingsService.validateShortName(shortName);
   }
 
-  Future<bool> _checkTeamValid() async {
+  Future<ValidationResult> _checkTeamValid() async {
     return settingsService.validateTeam(selectedTeamName);
   }
 
-  Future<bool> _checkMatchesUrlValid() async {
+  Future<ValidationResult> _checkMatchesUrlValid() async {
+    if (matchesUrl.isEmpty) {
+      return ValidationResult.invalid;
+    }
+
     return settingsService.validateMatchupsUrl(matchesUrl);
   }
 
-  Future<bool> _checkRankingUrlValid() async {
+  Future<ValidationResult> _checkRankingUrlValid() async {
+    if (rankingUrl.isEmpty) {
+      return ValidationResult.invalid;
+    }
+
     return settingsService.validateRankingTableUrl(rankingUrl);
   }
 }
 
 class ValidationListItem extends StatelessWidget {
-  final Future<bool> Function() isValid;
+  final Future<ValidationResult> Function() isValid;
   final String title;
   final String subtitle;
 
@@ -77,14 +90,17 @@ class ValidationListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
+    return FutureBuilder<ValidationResult>(
       future: isValid(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        final isValid = getDataOrDefault(snapshot, false);
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        final isValid = getDataOrDefault(snapshot, ValidationResult.unknown);
         return ListTile(
-          trailing: isValid
-              ? Icon(Icons.check, color: Colors.green)
-              : Icon(Icons.close, color: Colors.red),
+          trailing: switch (isValid) {
+            ValidationResult.valid => Icon(Icons.check, color: Colors.green),
+            ValidationResult.invalid => Icon(Icons.close, color: Colors.red),
+            _ => Icon(Icons.help, color: Colors.grey),
+          },
+
           title: Text(title),
           subtitle: Text(subtitle),
         );

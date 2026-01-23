@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/validation_result.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
 import 'package:nuliga_app/services/settings_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -49,12 +50,15 @@ class _ClubEditDialogStepLeagueUrlState
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<ValidationResult>(
       future: settingsService.validateRankingTableUrl(
         _rankingUrlController.text,
       ),
       builder: (context, asyncSnapshot) {
-        final isRankingUrlValid = getDataOrDefault(asyncSnapshot, null);
+        final isRankingUrlValid = getDataOrDefault(
+          asyncSnapshot,
+          ValidationResult.unknown,
+        );
 
         return Column(
           children: [

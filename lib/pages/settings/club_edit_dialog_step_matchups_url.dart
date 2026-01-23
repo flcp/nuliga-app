@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/validation_result.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
 import 'package:nuliga_app/services/settings_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -51,10 +52,10 @@ class _ClubEditDialogStepMatchupsUrlState
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<ValidationResult>(
       future: settingsService.validateMatchupsUrl(_matchupsUrlController.text),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        final isValid = getDataOrDefault(snapshot, false);
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        final isValid = getDataOrDefault(snapshot, ValidationResult.unknown);
 
         return Column(
           children: [

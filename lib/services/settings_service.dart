@@ -9,7 +9,7 @@ class SettingsService {
 
   Future<ValidationResult> validateRankingTableUrl(String url) async {
     if (url.isEmpty) {
-      return ValidationResult.unknown;
+      return ValidationResult.invalid;
     }
 
     final rankings = await leagueTableRepository.getLeagueTeamRankings(url);
@@ -39,7 +39,7 @@ class SettingsService {
 
   Future<ValidationResult> validateMatchupsUrl(String matchupsUrl) async {
     if (matchupsUrl.isEmpty) {
-      return ValidationResult.unknown;
+      return ValidationResult.invalid;
     }
 
     final rankings = await nextMatchesRepository.getNextMatches(matchupsUrl);
@@ -50,7 +50,7 @@ class SettingsService {
 
   ValidationResult validateShortName(String shortName) {
     if (shortName.isEmpty) {
-      return ValidationResult.unknown;
+      return ValidationResult.invalid;
     }
 
     return shortName.length <= 7

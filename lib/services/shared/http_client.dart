@@ -1,7 +1,7 @@
 import 'dart:developer' as developer;
-
 import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
+import 'package:nuliga_app/services/shared/http_urls.dart';
 
 abstract class HttpClientInterface {
   Future<String> get(String url);
@@ -22,20 +22,35 @@ class HttpClient implements HttpClientInterface {
 
   @override
   Future<String> get(String url) async {
+    if (!HttpUrls.isUrlValid(url)) {
+      return "";
+    }
+
     _cache.putIfAbsent(url, () => AsyncCache<String>(Duration(minutes: 2)));
 
     return _cache[url]!.fetch(() => _fetchWebsiteOrEmpty(url));
   }
 
   static String getBaseUrl(String url) {
-    final uri = Uri.parse(url);
+    if (!HttpUrls.isUrlValid(url)) {
+      return "";
+    }
+
+    final uri = HttpUrls.tryParse(url);
+
+    if (uri.scheme.isEmpty || uri.host.isEmpty) {
+      return "";
+    }
 
     return "${uri.scheme}://${uri.host}";
   }
 
   Future<String> _fetchWebsiteOrEmpty(String urlString) async {
-    final url = Uri.parse(urlString);
+    if (!HttpUrls.isUrlValid(urlString)) {
+      return "";
+    }
 
+    final url = HttpUrls.tryParse(urlString);
     developer.log("retrieving url $url", name: "info", level: 800);
 
     try {

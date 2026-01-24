@@ -53,7 +53,7 @@ class _ClubEditDialogStepMatchupsUrlState
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ValidationResult>(
-      future: settingsService.validateMatchupsUrl(_matchupsUrlController.text),
+      future: validateMatchupsUrl(_matchupsUrlController.text),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         final isValid = getDataOrDefault(snapshot, ValidationResult.unknown);
 
@@ -110,6 +110,13 @@ class _ClubEditDialogStepMatchupsUrlState
         );
       },
     );
+  }
+
+  Future<ValidationResult> validateMatchupsUrl(String matchupsUrl) {
+    if (matchupsUrl.isEmpty) {
+      return Future.value(ValidationResult.unknown);
+    }
+    return settingsService.validateMatchupsUrl(matchupsUrl);
   }
 
   void _fillMatchupsUrlFromRankingUrl() async {

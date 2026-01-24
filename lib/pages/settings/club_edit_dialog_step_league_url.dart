@@ -5,7 +5,7 @@ import 'package:nuliga_app/model/validation_result.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
 import 'package:nuliga_app/services/settings_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:nuliga_app/services/shared/http_urls.dart';
 
 class ClubEditDialogStepLeagueUrl extends StatefulWidget {
   final String initialValue;
@@ -51,9 +51,7 @@ class _ClubEditDialogStepLeagueUrlState
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ValidationResult>(
-      future: settingsService.validateRankingTableUrl(
-        _rankingUrlController.text,
-      ),
+      future: validateRankingTableUrl(_rankingUrlController.text),
       builder: (context, asyncSnapshot) {
         final isRankingUrlValid = getDataOrDefault(
           asyncSnapshot,
@@ -85,8 +83,7 @@ class _ClubEditDialogStepLeagueUrlState
                   subtitle: Text("Beispiel: https://bwbv-badminton.liga.nu"),
                   trailing: IconButton(
                     onPressed: () async {
-                      var uri = Uri.parse("https://badminton.liga.nu/");
-                      await launchUrl(uri);
+                      await HttpUrls.openUrl("https://badminton.liga.nu/");
                     },
                     icon: Icon(Icons.open_in_new),
                   ),
@@ -111,6 +108,14 @@ class _ClubEditDialogStepLeagueUrlState
         );
       },
     );
+  }
+
+  Future<ValidationResult> validateRankingTableUrl(String rankingUrl) {
+    if (rankingUrl.isEmpty) {
+      return Future.value(ValidationResult.unknown);
+    }
+
+    return settingsService.validateRankingTableUrl(rankingUrl);
   }
 }
 

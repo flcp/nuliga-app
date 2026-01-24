@@ -31,7 +31,9 @@ Widget buildDialogTextField(
           focusedBorder: border,
         ),
       ),
-      if (isValid == ValidationResult.invalid && validationText != null) ...[
+      if (isValid == ValidationResult.invalid &&
+          validationText != null &&
+          validationText.isNotEmpty) ...[
         const SizedBox(height: 4),
         Text(
           validationText,

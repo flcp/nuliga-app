@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/services/location_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:nuliga_app/services/shared/http_urls.dart';
 
 class NextMatchesLocationIndicatorButton extends StatelessWidget {
   final FutureMatch match;
@@ -41,17 +41,13 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
           return Icon(Icons.directions_car, color: color);
         }
 
-        Uri uri;
-
-        try {
-          uri = Uri.parse(locationMapsLink);
-        } on FormatException {
+        if (!HttpUrls.isUrlValid(locationMapsLink)) {
           return SizedBox.shrink();
         }
 
         return InkWell(
           onTap: () async {
-            await launchUrl(uri);
+            await HttpUrls.openUrl(locationMapsLink);
           },
           borderRadius: BorderRadius.circular(16.0),
           child: Container(

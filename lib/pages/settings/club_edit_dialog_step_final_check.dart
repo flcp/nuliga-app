@@ -48,10 +48,6 @@ class ClubEditDialogStepFinalCheck extends StatelessWidget {
   }
 
   Future<ValidationResult> _checkShortNameValid() async {
-    if (shortName.isEmpty) {
-      return ValidationResult.invalid;
-    }
-
     return settingsService.validateShortName(shortName);
   }
 
@@ -60,18 +56,10 @@ class ClubEditDialogStepFinalCheck extends StatelessWidget {
   }
 
   Future<ValidationResult> _checkMatchesUrlValid() async {
-    if (matchesUrl.isEmpty) {
-      return ValidationResult.invalid;
-    }
-
     return settingsService.validateMatchupsUrl(matchesUrl);
   }
 
   Future<ValidationResult> _checkRankingUrlValid() async {
-    if (rankingUrl.isEmpty) {
-      return ValidationResult.invalid;
-    }
-
     return settingsService.validateRankingTableUrl(rankingUrl);
   }
 }

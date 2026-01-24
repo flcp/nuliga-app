@@ -3,6 +3,7 @@ import 'dart:developer' as developer;
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
 import 'package:nuliga_app/model/league_team_ranking.dart';
+import 'package:nuliga_app/services/shared/http_urls.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
 import 'package:nuliga_app/services/shared/table_parser.dart';
 
@@ -146,6 +147,8 @@ class LeagueParser {
     }
 
     final href = a.attributes['href']!;
-    return Uri.parse(baseUrl).resolve(href).toString();
+
+    final baseUri = HttpUrls.tryParse(baseUrl);
+    return baseUri.resolve(href).toString();
   }
 }

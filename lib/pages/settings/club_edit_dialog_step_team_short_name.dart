@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/model/validation_result.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
 import 'package:nuliga_app/services/settings_service.dart';
 
@@ -49,10 +50,18 @@ class _ClubEditDialogStepShortNameState
         buildDialogTextField(
           'Team Kürzel',
           _shortNameController,
-          isValid: settingsService.validateShortName(_shortNameController.text),
+          isValid: validateShortName(_shortNameController.text),
           validationText: "Kürzel darf maximal 7 Zeichen lang sein",
         ),
       ],
     );
+  }
+
+  ValidationResult validateShortName(String shortName) {
+    if (shortName.isEmpty) {
+      return ValidationResult.unknown;
+    }
+
+    return settingsService.validateShortName(shortName);
   }
 }

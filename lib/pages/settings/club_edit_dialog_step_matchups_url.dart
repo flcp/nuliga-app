@@ -143,6 +143,7 @@ class _ClubEditDialogStepMatchupsUrlState
       widget.rankingUrl,
     );
 
+    if (!mounted) return;
     setState(() {
       _matchupsUrlController.text = generatedUrl;
     });

@@ -3,7 +3,7 @@ import 'package:nuliga_app/model/future_match.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/location_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:nuliga_app/services/shared/http_urls.dart';
 
 class NextMatchInfo extends StatelessWidget {
   NextMatchInfo({super.key, required this.match, required this.teamName});
@@ -51,10 +51,7 @@ class NextMatchInfo extends StatelessWidget {
                       children: [
                         TextButton.icon(
                           onPressed: () async {
-                            if (match.locationUrl.isNotEmpty) {
-                              final bwbvUri = Uri.parse(match.locationUrl);
-                              launchUrl(bwbvUri);
-                            }
+                            await HttpUrls.openUrl(match.locationUrl);
                           },
                           icon: Icon(Icons.open_in_new),
                           label: Text("View"),
@@ -67,10 +64,7 @@ class NextMatchInfo extends StatelessWidget {
                                 LocationService.convertToGoogleMapsLink(
                                   locationMultiline.join(", "),
                                 );
-                            Uri mapsLinkUri = Uri.parse(mapsLink);
-                            if (mapsLink.isNotEmpty) {
-                              launchUrl(mapsLinkUri);
-                            }
+                            await HttpUrls.openUrl(mapsLink);
                           },
                           icon: Icon(Icons.directions),
                           label: Text("Maps"),

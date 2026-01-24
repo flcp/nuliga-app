@@ -136,4 +136,30 @@ void main() {
       expect(karlsruhe.setsLost, 0);
     });
   });
+
+  group('Parses league name correctly', () {
+    test('for sample file', () async {
+      final file = File('test/assets/league-table/test-page.html');
+      final html = await file.readAsString();
+
+      final leagueName = await LeagueParser.parseLeagueName(html);
+
+      expect(leagueName, 'Verbandsliga Nordbaden');
+    });
+  });
+
+  group('Parses matchups url correctly', () {
+    test('for sample file', () async {
+      final file = File('test/assets/league-table/test-page.html');
+      final html = await file.readAsString();
+      final baseUrl = 'https://bwbv-badminton.liga.nu';
+
+      final matchupsUrl = await LeagueParser().parseMatchupsUrl(baseUrl, html);
+
+      expect(
+        matchupsUrl,
+        'https://bwbv-badminton.liga.nu/cgi-bin/WebObjects/nuLigaBADDE.woa/wa/groupPage?displayTyp=gesamt&displayDetail=meetings&championship=NB+25%2F26&group=35307',
+      );
+    });
+  });
 }

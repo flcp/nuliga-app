@@ -48,20 +48,17 @@ class _LeagueTableDetailsRankingListState
 
         return RefreshIndicator(
           onRefresh: refresh,
-          child: Stack(
+          child: ListView(
             children: [
               if (teamStandings.isEmpty) NothingToDisplayIndicator(),
-              ListView(
-                children: [
-                  LeagueTableDetailsRankingListHeader(),
-                  ...teamStandings.map(
-                    (teamStanding) => LeagueTableDetailsRankingListItem(
-                      teamStanding: teamStanding,
-                      team: widget.teamName,
-                      matchOverviewUrl: widget.matchOverviewUrl,
-                    ),
-                  ),
-                ],
+              if (teamStandings.isNotEmpty)
+                LeagueTableDetailsRankingListHeader(),
+              ...teamStandings.map(
+                (teamStanding) => LeagueTableDetailsRankingListItem(
+                  teamStanding: teamStanding,
+                  team: widget.teamName,
+                  matchOverviewUrl: widget.matchOverviewUrl,
+                ),
               ),
             ],
           ),

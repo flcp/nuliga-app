@@ -3,6 +3,7 @@ import 'dart:developer' as developer;
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
 import 'package:nuliga_app/model/league_team_ranking.dart';
+import 'package:nuliga_app/services/shared/http_urls.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
 import 'package:nuliga_app/services/shared/table_parser.dart';
 
@@ -89,5 +90,65 @@ class LeagueParser {
     }
 
     return "";
+  }
+
+  Future<String> parseMatchupsUrl(String baseUrl, String htmlContent) async {
+    if (htmlContent.trim().isEmpty) {
+      return "";
+    }
+
+    final document = html.parse(htmlContent);
+
+    final h2 = document
+        .getElementsByTagName('h2')
+        .where((element) => element.text.trim() == 'Tabellen und Spielpläne')
+        .firstOrNull;
+
+    if (h2 == null) {
+      developer.log('No h2 "Tabellen und Spielpläne found"', level: 900);
+      return "";
+    }
+
+    final ul = h2.nextElementSibling;
+    if (ul == null || ul.localName != 'ul') {
+      developer.log(
+        'No ul found after h2 "Tabellen und Spielpläne"',
+        level: 900,
+      );
+      return "";
+    }
+
+    final li = ul
+        .getElementsByTagName('li')
+        .where(
+          (li) =>
+              li.text.contains('Spielplan') &&
+              !li.text.contains('Tabelle und Spielplan'),
+        )
+        .firstOrNull;
+    if (li == null) {
+      developer.log(
+        'No li with "Spielplan" found in ul after h2 "Tabellen und Spielpläne"',
+        level: 900,
+      );
+      return "";
+    }
+
+    final a = li
+        .getElementsByTagName('a')
+        .where((a) => a.text.contains('gesamt'))
+        .firstOrNull;
+    if (a == null || !a.attributes.containsKey('href')) {
+      developer.log(
+        'No a with href with text "gesamt" found in li with "Spielplan"',
+        level: 900,
+      );
+      return "";
+    }
+
+    final href = a.attributes['href']!;
+
+    final baseUri = HttpUrls.tryParse(baseUrl);
+    return baseUri.resolve(href).toString();
   }
 }

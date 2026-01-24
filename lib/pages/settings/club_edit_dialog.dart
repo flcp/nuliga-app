@@ -1,7 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_league_url.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_matchups_url.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_name.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_short_name.dart';
+import 'package:nuliga_app/pages/settings/club_edit_dialog_step_final_check.dart';
 import 'package:nuliga_app/services/settings_service.dart';
 
 class ClubEditPage extends StatefulWidget {
@@ -13,83 +16,90 @@ class ClubEditPage extends StatefulWidget {
   State<ClubEditPage> createState() => _ClubEditPageState();
 }
 
+// setState is only called when changing steps. If you need setState of this file when any of the steps change data, refactor to use provider
 class _ClubEditPageState extends State<ClubEditPage> {
-  late TextEditingController _nameController;
-  late TextEditingController _shortNameController;
-  late TextEditingController _rankingUrlController;
-  late TextEditingController _matchesUrlController;
+  int _currentStepIndex = 0;
 
-  Timer? _rankingUrlDebounceTimer;
-
-  bool? _isRankingUrlValid;
+  late String _rankingUrl;
+  late String _teamName;
+  late String _shortName;
+  late String _matchesUrl;
 
   final settingsService = SettingsService();
 
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: widget.club?.name ?? '');
-    _shortNameController = TextEditingController(
-      text: widget.club?.shortName ?? '',
-    );
-    _rankingUrlController = TextEditingController(
-      text: widget.club?.rankingTableUrl ?? '',
-    );
-    _matchesUrlController = TextEditingController(
-      text: widget.club?.matchesUrl ?? '',
-    );
-
-    _rankingUrlController.addListener(_onRankingUrlChanged);
+    _rankingUrl = widget.club?.rankingTableUrl ?? "";
+    _matchesUrl = widget.club?.matchesUrl ?? "";
+    _teamName = widget.club?.name ?? "";
+    _shortName = widget.club?.shortName ?? "";
   }
 
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _shortNameController.dispose();
-    _rankingUrlController.removeListener(_onRankingUrlChanged);
-    _rankingUrlController.dispose();
-    _matchesUrlController.dispose();
-
-    _rankingUrlDebounceTimer?.cancel();
-    super.dispose();
+  List<Step> buildSteps() {
+    return [
+      Step(
+        title: Text("Liga URL"),
+        content: ClubEditDialogStepLeagueUrl(
+          initialValue: _rankingUrl,
+          onUrlChanged: _onRankingUrlChanged,
+        ),
+      ),
+      Step(
+        title: Text("Spielplan URL"),
+        content: ClubEditDialogStepMatchupsUrl(
+          initialValue: _matchesUrl,
+          rankingUrl: _rankingUrl,
+          onMatchupsUrlChanged: _onMatchupsUrlChanged,
+        ),
+      ),
+      Step(
+        title: Text("Team"),
+        content: ClubEditDialogStepTeamName(
+          initialValue: _teamName,
+          rankingUrl: _rankingUrl,
+          onTeamNameChanged: _onTeamNameChanged,
+        ),
+      ),
+      Step(
+        title: Text("Team Kürzel"),
+        content: ClubEditDialogStepShortName(
+          initialValue: _shortName,
+          onShortNameChanged: _onShortNameChanged,
+        ),
+      ),
+      Step(
+        title: Text("Überprüfen"),
+        content: ClubEditDialogStepFinalCheck(
+          rankingUrl: _rankingUrl,
+          matchesUrl: _matchesUrl,
+          selectedTeamName: _teamName,
+          shortName: _shortName,
+        ),
+      ),
+    ];
   }
 
-  void _onRankingUrlChanged() async {
-    _rankingUrlDebounceTimer?.cancel();
-    if (_rankingUrlController.text.isEmpty) {
-      setState(() {
-        _isRankingUrlValid = null;
-      });
-      return;
-    }
-
-    _rankingUrlDebounceTimer = Timer(
-      const Duration(milliseconds: 500),
-      () async {
-        final isValid = await _validateRankingUrl();
-        setState(() {
-          _isRankingUrlValid = isValid;
-        });
-      },
-    );
+  void _onShortNameChanged(String value) {
+    _shortName = value;
   }
 
-  Future<bool> _validateRankingUrl() {
-    return settingsService.validateRankingTableUrl(_rankingUrlController.text);
+  void _onRankingUrlChanged(String url) {
+    _rankingUrl = url;
   }
 
-  void _saveClub() {
-    final club = FollowedClub(
-      name: _nameController.text,
-      shortName: _shortNameController.text,
-      rankingTableUrl: _rankingUrlController.text,
-      matchesUrl: _matchesUrlController.text,
-    );
-    Navigator.pop(context, club);
+  void _onTeamNameChanged(String value) {
+    _teamName = value;
+  }
+
+  void _onMatchupsUrlChanged(String value) {
+    _matchesUrl = value;
   }
 
   @override
   Widget build(BuildContext context) {
+    final steps = buildSteps();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -102,66 +112,56 @@ class _ClubEditPageState extends State<ClubEditPage> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            _buildTextField('Name', _nameController),
-            const SizedBox(height: 16),
-            _buildTextField('Kürzel', _shortNameController),
-            const SizedBox(height: 16),
-            _buildTextField(
-              'Liga Überblick URL',
-              _rankingUrlController,
-              isValid: _isRankingUrlValid,
+      body: Stepper(
+        steps: steps,
+        currentStep: _currentStepIndex,
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(
+                  onPressed: details.onStepCancel,
+                  child: Text('Zurück'),
+                ),
+                SizedBox(width: 10),
+                FilledButton(
+                  onPressed: details.onStepContinue,
+                  child: Text('Weiter'),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            _buildTextField('Spielplan - gesamt', _matchesUrlController),
+          );
+        },
+        onStepContinue: () {
+          if (_currentStepIndex >= steps.length - 1) {
+            final club = FollowedClub(
+              name: _teamName,
+              shortName: _shortName,
+              rankingTableUrl: _rankingUrl,
+              matchesUrl: _matchesUrl,
+            );
+            Navigator.pop(context, club);
 
-            const SizedBox(height: 32),
-            FilledButton(onPressed: _saveClub, child: const Text('Speichern')),
-          ],
-        ),
+            return;
+          }
+
+          setState(() {
+            _currentStepIndex += 1;
+          });
+        },
+        onStepCancel: () {
+          if (_currentStepIndex <= 0) {
+            Navigator.pop(context);
+            return;
+          }
+
+          setState(() {
+            _currentStepIndex -= 1;
+          });
+        },
       ),
-    );
-  }
-
-  Widget _buildTextField(
-    String label,
-    TextEditingController controller, {
-    bool? isValid,
-    String? validationText,
-  }) {
-    final validColor = Colors.green;
-    final invalidColor = Colors.red;
-
-    final border = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: isValid != null
-          ? BorderSide(color: isValid ? validColor : invalidColor, width: 2)
-          : const BorderSide(width: 2),
-    );
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            labelText: label,
-            border: border,
-            enabledBorder: border,
-            focusedBorder: border,
-          ),
-        ),
-        if (isValid == false && validationText != null) ...[
-          const SizedBox(height: 4),
-          Text(
-            validationText,
-            style: TextStyle(fontSize: 12, color: invalidColor),
-          ),
-        ],
-      ],
     );
   }
 }

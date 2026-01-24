@@ -7,8 +7,11 @@ class NothingToDisplayIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Nothing to display. Try refreshing or another URL"),
+    return SizedBox(
+      height: 200,
+      child: Center(
+        child: Text("Nothing to display. Try refreshing or another URL"),
+      ),
     );
   }
 }

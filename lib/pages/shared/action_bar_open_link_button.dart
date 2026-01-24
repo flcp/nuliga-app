@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:nuliga_app/services/shared/http_urls.dart';
 
 class ActionBarFollowedTeamOpenLinkButton extends StatelessWidget {
   const ActionBarFollowedTeamOpenLinkButton({
@@ -21,9 +21,7 @@ class ActionBarFollowedTeamOpenLinkButton extends StatelessWidget {
     return IconButton(
       icon: Icon(Icons.open_in_new),
       onPressed: () async {
-        // TODO: sanitize with toast?
-        var uri = Uri.parse(urlAccessor(selectedFollowedTeam!));
-        await launchUrl(uri);
+        await HttpUrls.openUrl(urlAccessor(selectedFollowedTeam!));
       },
     );
   }
@@ -43,8 +41,7 @@ class ActionBarOpenLinkButton extends StatelessWidget {
     return IconButton(
       icon: Icon(Icons.open_in_new),
       onPressed: () async {
-        var uri = Uri.parse(url);
-        await launchUrl(uri);
+        await HttpUrls.openUrl(url);
       },
     );
   }

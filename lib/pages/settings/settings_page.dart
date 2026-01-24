@@ -31,7 +31,7 @@ class SettingsPage extends StatelessWidget {
                   final club = provider.followedTeams[index];
                   return Dismissible(
                     direction: DismissDirection.endToStart,
-                    key: Key(club.name),
+                    key: Key(club.name + club.rankingTableUrl),
                     onDismissed: (_) {
                       provider.removeClub(index);
                     },
@@ -54,6 +54,25 @@ class SettingsPage extends StatelessWidget {
                           ),
                         );
                         if (result != null) {
+                          if (provider.followedTeams.any(
+                            (club) =>
+                                club.name == result.name &&
+                                club.rankingTableUrl == result.rankingTableUrl,
+                          )) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Dieser Verein wird bereits verfolgt.',
+                                  ),
+                                ),
+                              );
+                            }
+
+                            provider.removeClub(index);
+                            return;
+                          }
+
                           provider.updateClub(index, result);
                         }
                       },
@@ -78,8 +97,24 @@ class SettingsPage extends StatelessWidget {
                       builder: (context) => const ClubEditPage(),
                     ),
                   );
-                  if (result != null && context.mounted) {
-                    context.read<FollowedTeamsProvider>().addClub(result);
+                  if (result != null) {
+                    if (provider.followedTeams.any(
+                      (club) =>
+                          club.name == result.name &&
+                          club.rankingTableUrl == result.rankingTableUrl,
+                    )) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Dieser Verein wird bereits verfolgt.',
+                            ),
+                          ),
+                        );
+                      }
+                      return;
+                    }
+                    provider.addClub(result);
                   }
                 },
                 icon: const Icon(Icons.add),

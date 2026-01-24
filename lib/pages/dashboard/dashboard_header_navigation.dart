@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/pages/settings/settings_page.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class DashboardHeaderNavigation extends StatefulWidget {
@@ -52,28 +53,52 @@ class _DashboardHeaderNavigationState extends State<DashboardHeaderNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.horizontal,
+    return Row(
       children: [
-        ...widget.teams.map(
-          (team) => TextButton(
-            child: Text(
-              team.shortName,
-              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                color: _visibleIndices.contains(widget.teams.indexOf(team))
-                    ? Theme.of(context).colorScheme.primary
-                    : Colors.grey.shade300,
+        Expanded(
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              ...widget.teams.map(
+                (team) => TextButton(
+                  child: Text(
+                    team.shortName,
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color:
+                          _visibleIndices.contains(widget.teams.indexOf(team))
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.grey.shade300,
+                    ),
+                  ),
+                  onPressed: () {
+                    widget.itemScrollController.scrollTo(
+                      index: widget.teams.indexOf(team),
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                ),
               ),
-            ),
-            onPressed: () {
-              widget.itemScrollController.scrollTo(
-                index: widget.teams.indexOf(team),
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOut,
-              );
-            },
+            ],
           ),
         ),
+        PopupMenuButton<String>(
+          onSelected: (value) {
+            if (value == 'settings') {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            }
+          },
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+            const PopupMenuItem<String>(
+              value: 'settings',
+              child: Text('Settings'),
+            ),
+          ],
+          icon: Icon(Icons.menu),
+        ),
+        SizedBox(width: 8),
       ],
     );
   }

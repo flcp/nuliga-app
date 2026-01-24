@@ -96,27 +96,6 @@ class _ClubEditPageState extends State<ClubEditPage> {
     _matchesUrl = value;
   }
 
-  // Future<bool> _validateRankingUrl(String url) async {
-  //   final uri = Uri.tryParse(url);
-  //   if (uri == null || !uri.hasAbsolutePath) {
-  //     return false;
-  //   }
-
-  //   return settingsService.validateRankingTableUrl(url);
-  // }
-
-  // void _onShortNameChanged() {
-  //   if (_shortNameController.text.isEmpty) {
-  //     setState(() => _isShortNameValid = null);
-  //     return;
-  //   }
-
-  //   final isValid = _shortNameController.text.length <= 7;
-  //   setState(() {
-  //     _isShortNameValid = isValid;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     final steps = buildSteps();

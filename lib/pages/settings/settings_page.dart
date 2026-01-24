@@ -54,22 +54,24 @@ class SettingsPage extends StatelessWidget {
                           ),
                         );
                         if (result != null) {
-                          if (provider.followedTeams.any(
-                            (club) =>
-                                club.name == result.name &&
-                                club.rankingTableUrl == result.rankingTableUrl,
-                          )) {
+                          if (provider.followedTeams.indexed
+                              .where((tuple) => tuple.$1 != index)
+                              .any(
+                                (tuple) =>
+                                    tuple.$2.name == result.name &&
+                                    tuple.$2.rankingTableUrl ==
+                                        result.rankingTableUrl,
+                              )) {
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text(
-                                    'Dieser Verein wird bereits verfolgt.',
+                                    'Dieser Verein ist bereits vorhanden. Update abgebrochen.',
                                   ),
                                 ),
                               );
                             }
 
-                            provider.removeClub(index);
                             return;
                           }
 
@@ -107,7 +109,7 @@ class SettingsPage extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text(
-                              'Dieser Verein wird bereits verfolgt.',
+                              'Dieser Verein ist bereits vorhanden.',
                             ),
                           ),
                         );

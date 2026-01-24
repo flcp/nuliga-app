@@ -47,6 +47,7 @@ class _ClubEditDialogStepMatchupsUrlState
   @override
   void dispose() {
     _matchupsUrlController.dispose();
+    _debounceTimer?.cancel();
     super.dispose();
   }
 

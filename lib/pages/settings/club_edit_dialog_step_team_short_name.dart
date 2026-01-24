@@ -45,7 +45,6 @@ class _ClubEditDialogStepShortNameState
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 8),
         const SizedBox(height: 8),
         buildDialogTextField(
           'Team Kürzel',

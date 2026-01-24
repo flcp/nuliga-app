@@ -45,6 +45,7 @@ class _ClubEditDialogStepLeagueUrlState
   @override
   void dispose() {
     _rankingUrlController.dispose();
+    _debounceTimer?.cancel();
     super.dispose();
   }
 

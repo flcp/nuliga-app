@@ -13,7 +13,6 @@ class HttpUrls {
   static Uri tryParse(String url) {
     try {
       final uri = Uri.parse(url);
-      // testen mit Uri()
       return uri;
     } catch (e) {
       return Uri();

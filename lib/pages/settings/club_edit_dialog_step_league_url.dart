@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/validation_result.dart';
@@ -28,18 +29,46 @@ class _ClubEditDialogStepLeagueUrlState
   final settingsService = SettingsService();
   Timer? _debounceTimer;
 
+  late Future<ValidationResult> _rankingUrlCachedFuture;
+
   @override
   void initState() {
     super.initState();
     _rankingUrlController = TextEditingController(text: widget.initialValue);
+    _rankingUrlCachedFuture = _checkRankingUrlValid(_rankingUrlController.text);
+
     _rankingUrlController.addListener(() {
       widget.onUrlChanged(_rankingUrlController.text);
 
       _debounceTimer?.cancel();
       _debounceTimer = Timer(const Duration(milliseconds: 1000), () {
-        setState(() {});
+        setState(() {
+          developer.log(
+            'debounce timer over, checking ranking url validity',
+            name: 'ClubEditDialogStepLeagueUrl',
+          );
+          _rankingUrlCachedFuture = _checkRankingUrlValid(
+            _rankingUrlController.text,
+          );
+        });
       });
     });
+  }
+
+  @override
+  void didUpdateWidget(ClubEditDialogStepLeagueUrl oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.initialValue != widget.initialValue) {
+      _rankingUrlCachedFuture = _checkRankingUrlValid(
+        _rankingUrlController.text,
+      );
+    }
+  }
+
+  Future<ValidationResult> _checkRankingUrlValid(String rankingUrl) async {
+    developer.log('checking ranking url', name: 'ClubEditDialogStepLeagueUrl');
+    return settingsService.validateRankingTableUrl(rankingUrl);
   }
 
   @override
@@ -52,7 +81,7 @@ class _ClubEditDialogStepLeagueUrlState
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ValidationResult>(
-      future: validateRankingTableUrl(_rankingUrlController.text),
+      future: _rankingUrlCachedFuture,
       builder: (context, asyncSnapshot) {
         final isRankingUrlValid = getDataOrDefault(
           asyncSnapshot,

@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/league_team_ranking.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
@@ -25,12 +27,34 @@ class _ClubEditDialogStepTeamNameState
     extends State<ClubEditDialogStepTeamName> {
   final SettingsService settingsService = SettingsService();
 
+  late Future<List<LeagueTeamRanking>> _teamRankingsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _teamRankingsFuture = _loadTeamRankings();
+  }
+
+  Future<List<LeagueTeamRanking>> _loadTeamRankings() {
+    developer.log('loading team rankings', name: 'ClubEditDialogStepTeamName');
+    return settingsService.fetchTeamRankings(widget.rankingUrl);
+  }
+
+  @override
+  void didUpdateWidget(ClubEditDialogStepTeamName oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.rankingUrl != widget.rankingUrl) {
+      _teamRankingsFuture = _loadTeamRankings();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return widget.rankingUrl.isEmpty
         ? Text("Bitte Liga URL in Schritt 1 eingeben.")
-        : FutureBuilder(
-            future: settingsService.fetchTeamRankings(widget.rankingUrl),
+        : FutureBuilder<List<LeagueTeamRanking>>(
+            future: _teamRankingsFuture,
             builder:
                 (
                   BuildContext context,

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/model/validation_result.dart';
@@ -28,20 +29,37 @@ class _ClubEditDialogStepMatchupsUrlState
   late TextEditingController _matchupsUrlController;
   final settingsService = SettingsService();
 
+  late Future<ValidationResult> _matchupsUrlCachedFuture;
+
   Timer? _debounceTimer;
 
   @override
   void initState() {
     super.initState();
     _matchupsUrlController = TextEditingController(text: widget.initialValue);
+    _matchupsUrlCachedFuture = validateMatchupsUrl(_matchupsUrlController.text);
     _matchupsUrlController.addListener(() {
       widget.onMatchupsUrlChanged(_matchupsUrlController.text);
 
       _debounceTimer?.cancel();
       _debounceTimer = Timer(const Duration(milliseconds: 1000), () {
-        setState(() {});
+        developer.log(
+          'debounce timer over, checking matchups url validity',
+          name: 'ClubEditDialogStepMatchupsUrl',
+        );
+        setState(() {
+          _matchupsUrlCachedFuture = _checkMatchupsUrlValid();
+        });
       });
     });
+  }
+
+  Future<ValidationResult> _checkMatchupsUrlValid() {
+    developer.log(
+      'checking matchups url',
+      name: 'ClubEditDialogStepMatchupsUrl',
+    );
+    return validateMatchupsUrl(_matchupsUrlController.text);
   }
 
   @override
@@ -54,7 +72,7 @@ class _ClubEditDialogStepMatchupsUrlState
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ValidationResult>(
-      future: validateMatchupsUrl(_matchupsUrlController.text),
+      future: _matchupsUrlCachedFuture,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         final isValid = getDataOrDefault(snapshot, ValidationResult.unknown);
 

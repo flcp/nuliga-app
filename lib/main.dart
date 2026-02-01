@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nuliga_app/bottom_navigation.dart';
 import 'package:nuliga_app/services/followed-teams/followed_teams_provider.dart';
 import 'package:provider/provider.dart';
+import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +15,8 @@ void main() async {
     ChangeNotifierProvider<FollowedTeamsProvider>.value(
       value: followedTeamsProvider,
       child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: const BottomNavigation(),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(

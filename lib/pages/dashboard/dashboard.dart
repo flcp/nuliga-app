@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/followed-teams/followed_club.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard_header_navigation.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard_section.dart';
@@ -41,6 +42,7 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
       onRefresh: refresh,
       child: Column(
         children: [
+          Text(AppLocalizations.of(context)!.helloWorld),
           SizedBox(
             height: 45,
             child: DashboardHeaderNavigation(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/pages/settings/localization_dropdown_menu.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
 import 'package:provider/provider.dart';
@@ -122,6 +123,8 @@ class SettingsPage extends StatelessWidget {
                 icon: const Icon(Icons.add),
                 label: const Text('Club hinzufügen'),
               ),
+              const SizedBox(height: 24),
+              LocalizationDropdownMenu(),
             ],
           );
         },

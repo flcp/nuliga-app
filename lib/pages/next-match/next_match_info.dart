@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/location/location_service.dart';
@@ -13,6 +14,8 @@ class NextMatchInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(Constants.bigCardPadding),
@@ -54,7 +57,7 @@ class NextMatchInfo extends StatelessWidget {
                             await HttpUrls.openUrl(match.locationUrl);
                           },
                           icon: Icon(Icons.open_in_new),
-                          label: Text("View"),
+                          label: Text(l10n.view),
                         ),
                         SizedBox(width: 16),
                         FilledButton.icon(
@@ -67,7 +70,7 @@ class NextMatchInfo extends StatelessWidget {
                             await HttpUrls.openUrl(mapsLink);
                           },
                           icon: Icon(Icons.directions),
-                          label: Text("Maps"),
+                          label: Text(l10n.maps),
                         ),
                       ],
                     ),
@@ -93,12 +96,14 @@ class LocationText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     if (isHomeTeam) {
-      return Text("Heimspiel");
+      return Text(l10n.homeGame);
     }
 
     if (locationMultiline.toList().isEmpty) {
-      return Text("Unbekannt");
+      return Text(l10n.unknown);
     }
 
     return Column(

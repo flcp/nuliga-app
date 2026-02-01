@@ -10,4 +10,180 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helloWorld => 'Hello World!';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get addClub => 'Add Club';
+
+  @override
+  String get editClub => 'Edit Club';
+
+  @override
+  String get clubAlreadyExists => 'This club already exists.';
+
+  @override
+  String get clubAlreadyExistsUpdateCancelled =>
+      'This club already exists. Update cancelled.';
+
+  @override
+  String get next => 'NEXT';
+
+  @override
+  String get last => 'LAST';
+
+  @override
+  String get viewAll => 'View all';
+
+  @override
+  String get upcoming => 'Upcoming';
+
+  @override
+  String get table => 'Table';
+
+  @override
+  String get results => 'Results';
+
+  @override
+  String get result => 'Result';
+
+  @override
+  String get loading => 'Loading';
+
+  @override
+  String get nothingToDisplay => 'Nothing to display';
+
+  @override
+  String get matchesPlayed => 'Matches played';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get points => 'Pts';
+
+  @override
+  String get wins => 'W';
+
+  @override
+  String get draws => 'D';
+
+  @override
+  String get losses => 'L';
+
+  @override
+  String get matches => 'M';
+
+  @override
+  String get versus => 'VS';
+
+  @override
+  String get view => 'Nuliga';
+
+  @override
+  String get maps => 'Maps';
+
+  @override
+  String get homeGame => 'Home game';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get matchStartsIn => 'Match starts in';
+
+  @override
+  String get days => 'Days';
+
+  @override
+  String get hours => 'Hrs';
+
+  @override
+  String get minutes => 'Min';
+
+  @override
+  String get seconds => 'Sec';
+
+  @override
+  String set(String number) {
+    return 'Set $number';
+  }
+
+  @override
+  String get leagueUrl => 'League URL';
+
+  @override
+  String get matchesUrl => 'Matches URL';
+
+  @override
+  String get team => 'Team';
+
+  @override
+  String get teamShortName => 'Team Abbreviation';
+
+  @override
+  String get review => 'Review';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get next_button => 'Next';
+
+  @override
+  String get leagueOverviewUrl => 'League Overview URL';
+
+  @override
+  String get invalidUrl => 'Invalid URL';
+
+  @override
+  String get instructions => 'Instructions';
+
+  @override
+  String get openYourAssociationWebsite =>
+      'Open the website of your association';
+
+  @override
+  String get exampleAssociationUrl => 'Example: https://bwbv-badminton.liga.nu';
+
+  @override
+  String get navigateToYourLeague => 'Navigate to your club\'s league';
+
+  @override
+  String get exampleLeaguePath =>
+      'Example: BWBV-Ligen > Landesliga \"Oberrhein\"';
+
+  @override
+  String get copyUrlAndPasteAbove => 'Copy the URL and paste it above';
+
+  @override
+  String get matchPlanOverallUrl => 'Match Plan (Overall) URL';
+
+  @override
+  String get confirmOverwrite => 'Confirm Overwrite';
+
+  @override
+  String get confirmOverwriteMatchPlanUrl =>
+      'Do you really want to overwrite the current match plan URL?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get overwrite => 'Overwrite';
+
+  @override
+  String get generateFromLeagueUrl => 'Generate from League URL';
+
+  @override
+  String get pleaseEnterLeagueUrlInStep1 =>
+      'Please enter League URL in step 1.';
+
+  @override
+  String get noTeamFound => 'No team found';
+
+  @override
+  String get shortNameMaxLength =>
+      'Abbreviation may be maximum 7 characters long';
 }

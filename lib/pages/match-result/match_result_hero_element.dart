@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
@@ -18,6 +19,7 @@ class MatchResultHeroElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final infoColor = Theme.of(context).colorScheme.onSurface.withAlpha(150);
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       children: [
@@ -34,7 +36,7 @@ class MatchResultHeroElement extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  "VS",
+                  l10n.versus,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Theme.of(context).colorScheme.primary.withAlpha(80),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
 import 'package:nuliga_app/services/match-result/model/player.dart';
 import 'package:nuliga_app/pages/match-result/game_result_detail.dart';
@@ -24,9 +25,11 @@ class MatchResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ergebnis"),
+        title: Text(l10n.result),
         actions: [ActionBarOpenLinkButton(url: matchResult.resultDetailUrl)],
       ),
       body: Padding(
@@ -63,6 +66,7 @@ class MatchResultPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isHomeTeam = matchResult.homeTeamName == teamName;
+    final l10n = AppLocalizations.of(context)!;
 
     return FutureBuilder(
       future: matchResultService.getMatchResultDetails(
@@ -75,7 +79,7 @@ class MatchResultPageContent extends StatelessWidget {
 
         final matchResultDetail = getDataOrDefault(asyncSnapshot, null);
         if (matchResultDetail == null) {
-          return Text("Nothing to display");
+          return Text(l10n.nothingToDisplay);
         }
 
         return Expanded(

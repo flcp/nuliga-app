@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/shared/model/validation_result.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
 import 'package:nuliga_app/services/settings/settings_service.dart';
@@ -71,6 +72,8 @@ class _ClubEditDialogStepMatchupsUrlState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return FutureBuilder<ValidationResult>(
       future: _matchupsUrlCachedFuture,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -80,10 +83,10 @@ class _ClubEditDialogStepMatchupsUrlState
           children: [
             const SizedBox(height: 8),
             buildDialogTextField(
-              "Spielplan (Gesamt) URL",
+              l10n.matchPlanOverallUrl,
               _matchupsUrlController,
               isValid: isValid,
-              validationText: "Ungültige URL",
+              validationText: l10n.invalidUrl,
             ),
             const SizedBox(height: 8),
             ElevatedButton(
@@ -92,14 +95,12 @@ class _ClubEditDialogStepMatchupsUrlState
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: const Text('Überschreiben bestätigen'),
-                      content: const Text(
-                        'Möchten Sie die aktuelle Spielplan URL wirklich überschreiben?',
-                      ),
+                      title: Text(l10n.confirmOverwrite),
+                      content: Text(l10n.confirmOverwriteMatchPlanUrl),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: const Text('Abbrechen'),
+                          child: Text(l10n.cancel),
                         ),
                         TextButton(
                           onPressed: () {
@@ -107,7 +108,7 @@ class _ClubEditDialogStepMatchupsUrlState
 
                             _fillMatchupsUrlFromRankingUrl();
                           },
-                          child: const Text('Überschreiben'),
+                          child: Text(l10n.overwrite),
                         ),
                       ],
                     ),
@@ -121,7 +122,7 @@ class _ClubEditDialogStepMatchupsUrlState
                 children: [
                   const Icon(Icons.auto_fix_high),
                   const SizedBox(width: 8),
-                  const Text('Aus Liga URL generieren'),
+                  Text(l10n.generateFromLeagueUrl),
                 ],
               ),
             ),

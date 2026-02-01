@@ -103,6 +103,342 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hello World!'**
   String get helloWorld;
+
+  /// Settings page title
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// Button to add a new club
+  ///
+  /// In en, this message translates to:
+  /// **'Add Club'**
+  String get addClub;
+
+  /// Title when editing a club
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Club'**
+  String get editClub;
+
+  /// Error message when trying to add a duplicate club
+  ///
+  /// In en, this message translates to:
+  /// **'This club already exists.'**
+  String get clubAlreadyExists;
+
+  /// Error message when trying to update to a duplicate club
+  ///
+  /// In en, this message translates to:
+  /// **'This club already exists. Update cancelled.'**
+  String get clubAlreadyExistsUpdateCancelled;
+
+  /// Label for next matches section
+  ///
+  /// In en, this message translates to:
+  /// **'NEXT'**
+  String get next;
+
+  /// Label for last matches section
+  ///
+  /// In en, this message translates to:
+  /// **'LAST'**
+  String get last;
+
+  /// Button to view all items
+  ///
+  /// In en, this message translates to:
+  /// **'View all'**
+  String get viewAll;
+
+  /// Label for upcoming matches
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get upcoming;
+
+  /// Label for league table
+  ///
+  /// In en, this message translates to:
+  /// **'Table'**
+  String get table;
+
+  /// Label for match results
+  ///
+  /// In en, this message translates to:
+  /// **'Results'**
+  String get results;
+
+  /// Label for single match result
+  ///
+  /// In en, this message translates to:
+  /// **'Result'**
+  String get result;
+
+  /// Loading indicator text
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get loading;
+
+  /// Message when there is no data to show
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing to display'**
+  String get nothingToDisplay;
+
+  /// Label for matches played
+  ///
+  /// In en, this message translates to:
+  /// **'Matches played'**
+  String get matchesPlayed;
+
+  /// Column header for team name
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// Short label for points
+  ///
+  /// In en, this message translates to:
+  /// **'Pts'**
+  String get points;
+
+  /// Short label for wins
+  ///
+  /// In en, this message translates to:
+  /// **'W'**
+  String get wins;
+
+  /// Short label for draws
+  ///
+  /// In en, this message translates to:
+  /// **'D'**
+  String get draws;
+
+  /// Short label for losses
+  ///
+  /// In en, this message translates to:
+  /// **'L'**
+  String get losses;
+
+  /// Short label for matches
+  ///
+  /// In en, this message translates to:
+  /// **'M'**
+  String get matches;
+
+  /// Versus label between teams
+  ///
+  /// In en, this message translates to:
+  /// **'VS'**
+  String get versus;
+
+  /// Button to view details
+  ///
+  /// In en, this message translates to:
+  /// **'Nuliga'**
+  String get view;
+
+  /// Button to open in maps
+  ///
+  /// In en, this message translates to:
+  /// **'Maps'**
+  String get maps;
+
+  /// Label for home game
+  ///
+  /// In en, this message translates to:
+  /// **'Home game'**
+  String get homeGame;
+
+  /// Label for unknown location or data
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// Countdown label
+  ///
+  /// In en, this message translates to:
+  /// **'Match starts in'**
+  String get matchStartsIn;
+
+  /// Label for days in countdown
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get days;
+
+  /// Label for hours in countdown
+  ///
+  /// In en, this message translates to:
+  /// **'Hrs'**
+  String get hours;
+
+  /// Label for minutes in countdown
+  ///
+  /// In en, this message translates to:
+  /// **'Min'**
+  String get minutes;
+
+  /// Label for seconds in countdown
+  ///
+  /// In en, this message translates to:
+  /// **'Sec'**
+  String get seconds;
+
+  /// Label for set number
+  ///
+  /// In en, this message translates to:
+  /// **'Set {number}'**
+  String set(String number);
+
+  /// Label for league URL
+  ///
+  /// In en, this message translates to:
+  /// **'League URL'**
+  String get leagueUrl;
+
+  /// Label for matches URL
+  ///
+  /// In en, this message translates to:
+  /// **'Matches URL'**
+  String get matchesUrl;
+
+  /// Label for team
+  ///
+  /// In en, this message translates to:
+  /// **'Team'**
+  String get team;
+
+  /// Label for team short name
+  ///
+  /// In en, this message translates to:
+  /// **'Team Abbreviation'**
+  String get teamShortName;
+
+  /// Label for final review step
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get review;
+
+  /// Back button label
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// Next button label
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next_button;
+
+  /// Label for league overview URL field
+  ///
+  /// In en, this message translates to:
+  /// **'League Overview URL'**
+  String get leagueOverviewUrl;
+
+  /// Validation error for invalid URL
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid URL'**
+  String get invalidUrl;
+
+  /// Label for instructions section
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions'**
+  String get instructions;
+
+  /// Instruction step
+  ///
+  /// In en, this message translates to:
+  /// **'Open the website of your association'**
+  String get openYourAssociationWebsite;
+
+  /// Example text for association URL
+  ///
+  /// In en, this message translates to:
+  /// **'Example: https://bwbv-badminton.liga.nu'**
+  String get exampleAssociationUrl;
+
+  /// Instruction step
+  ///
+  /// In en, this message translates to:
+  /// **'Navigate to your club\'s league'**
+  String get navigateToYourLeague;
+
+  /// Example text for league path
+  ///
+  /// In en, this message translates to:
+  /// **'Example: BWBV-Ligen > Landesliga \"Oberrhein\"'**
+  String get exampleLeaguePath;
+
+  /// Instruction step
+  ///
+  /// In en, this message translates to:
+  /// **'Copy the URL and paste it above'**
+  String get copyUrlAndPasteAbove;
+
+  /// Label for match plan URL field
+  ///
+  /// In en, this message translates to:
+  /// **'Match Plan (Overall) URL'**
+  String get matchPlanOverallUrl;
+
+  /// Dialog title for confirming overwrite
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Overwrite'**
+  String get confirmOverwrite;
+
+  /// Confirmation message for overwriting URL
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to overwrite the current match plan URL?'**
+  String get confirmOverwriteMatchPlanUrl;
+
+  /// Cancel button label
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// Overwrite button label
+  ///
+  /// In en, this message translates to:
+  /// **'Overwrite'**
+  String get overwrite;
+
+  /// Button to auto-generate URL
+  ///
+  /// In en, this message translates to:
+  /// **'Generate from League URL'**
+  String get generateFromLeagueUrl;
+
+  /// Message when league URL is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter League URL in step 1.'**
+  String get pleaseEnterLeagueUrlInStep1;
+
+  /// Message when no team is found
+  ///
+  /// In en, this message translates to:
+  /// **'No team found'**
+  String get noTeamFound;
+
+  /// Validation error for short name length
+  ///
+  /// In en, this message translates to:
+  /// **'Abbreviation may be maximum 7 characters long'**
+  String get shortNameMaxLength;
 }
 
 class _AppLocalizationsDelegate

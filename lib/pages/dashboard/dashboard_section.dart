@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 
 class DashboardSection extends StatelessWidget {
@@ -18,6 +19,7 @@ class DashboardSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = isContentWidthConstrained ? Constants.pagePadding : 0.0;
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +30,7 @@ class DashboardSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(title, style: Theme.of(context).textTheme.titleMedium),
-              TextButton(onPressed: onViewAll, child: Text("View all")),
+              TextButton(onPressed: onViewAll, child: Text(l10n.viewAll)),
             ],
           ),
         ),

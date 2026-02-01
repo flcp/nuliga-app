@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/match-result/model/game_result.dart';
 import 'package:nuliga_app/services/match-result/model/set_result.dart';
 import 'package:nuliga_app/pages/match-result/game_type_icon.dart';
@@ -19,6 +20,8 @@ class GameResultDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Padding(
       padding: const EdgeInsets.all(Constants.pagePadding),
       child: Center(
@@ -50,7 +53,7 @@ class GameResultDetail extends StatelessWidget {
             ),
             SurfaceCard(
               padding: const EdgeInsets.all(Constants.bigCardPadding),
-              title: "Ergebnisse",
+              title: l10n.results,
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -86,6 +89,8 @@ class _SetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.all(12),
@@ -96,7 +101,7 @@ class _SetCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Satz ${setNumber.toString()}",
+            l10n.set(setNumber.toString()),
             style: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary.withAlpha(180),
             ),

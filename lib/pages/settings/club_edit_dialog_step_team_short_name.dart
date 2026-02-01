@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/shared/model/validation_result.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
 import 'package:nuliga_app/services/settings/settings_service.dart';
@@ -43,14 +44,16 @@ class _ClubEditDialogStepShortNameState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Column(
       children: [
         const SizedBox(height: 8),
         buildDialogTextField(
-          'Team Kürzel',
+          l10n.teamShortName,
           _shortNameController,
           isValid: validateShortName(_shortNameController.text),
-          validationText: "Kürzel darf maximal 7 Zeichen lang sein",
+          validationText: l10n.shortNameMaxLength,
         ),
       ],
     );

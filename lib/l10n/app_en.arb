@@ -1,6 +1,292 @@
 {
+  "@@locale": "en",
   "helloWorld": "Hello World!",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
+  },
+  
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings page title"
+  },
+  
+  "addClub": "Add Club",
+  "@addClub": {
+    "description": "Button to add a new club"
+  },
+  
+  "editClub": "Edit Club",
+  "@editClub": {
+    "description": "Title when editing a club"
+  },
+  
+  "clubAlreadyExists": "This club already exists.",
+  "@clubAlreadyExists": {
+    "description": "Error message when trying to add a duplicate club"
+  },
+  
+  "clubAlreadyExistsUpdateCancelled": "This club already exists. Update cancelled.",
+  "@clubAlreadyExistsUpdateCancelled": {
+    "description": "Error message when trying to update to a duplicate club"
+  },
+  
+  "next": "NEXT",
+  "@next": {
+    "description": "Label for next matches section"
+  },
+  
+  "last": "LAST",
+  "@last": {
+    "description": "Label for last matches section"
+  },
+  
+  "viewAll": "View all",
+  "@viewAll": {
+    "description": "Button to view all items"
+  },
+  
+  "upcoming": "Upcoming",
+  "@upcoming": {
+    "description": "Label for upcoming matches"
+  },
+  
+  "table": "Table",
+  "@table": {
+    "description": "Label for league table"
+  },
+  
+  "results": "Results",
+  "@results": {
+    "description": "Label for match results"
+  },
+  
+  "result": "Result",
+  "@result": {
+    "description": "Label for single match result"
+  },
+  
+  "loading": "Loading",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  
+  "nothingToDisplay": "Nothing to display",
+  "@nothingToDisplay": {
+    "description": "Message when there is no data to show"
+  },
+  
+  "matchesPlayed": "Matches played",
+  "@matchesPlayed": {
+    "description": "Label for matches played"
+  },
+  
+  "name": "Name",
+  "@name": {
+    "description": "Column header for team name"
+  },
+  
+  "points": "Pts",
+  "@points": {
+    "description": "Short label for points"
+  },
+  
+  "wins": "W",
+  "@wins": {
+    "description": "Short label for wins"
+  },
+  
+  "draws": "D",
+  "@draws": {
+    "description": "Short label for draws"
+  },
+  
+  "losses": "L",
+  "@losses": {
+    "description": "Short label for losses"
+  },
+  
+  "matches": "M",
+  "@matches": {
+    "description": "Short label for matches"
+  },
+  
+  "versus": "VS",
+  "@versus": {
+    "description": "Versus label between teams"
+  },
+
+  "view": "Nuliga",
+  "@view": {
+    "description": "Button to view details"
+  },
+  
+  "maps": "Maps",
+  "@maps": {
+    "description": "Button to open in maps"
+  },
+  
+  "homeGame": "Home game",
+  "@homeGame": {
+    "description": "Label for home game"
+  },
+  
+  "unknown": "Unknown",
+  "@unknown": {
+    "description": "Label for unknown location or data"
+  },
+  
+  "matchStartsIn": "Match starts in",
+  "@matchStartsIn": {
+    "description": "Countdown label"
+  },
+  
+  "days": "Days",
+  "@days": {
+    "description": "Label for days in countdown"
+  },
+  
+  "hours": "Hrs",
+  "@hours": {
+    "description": "Label for hours in countdown"
+  },
+  
+  "minutes": "Min",
+  "@minutes": {
+    "description": "Label for minutes in countdown"
+  },
+  
+  "seconds": "Sec",
+  "@seconds": {
+    "description": "Label for seconds in countdown"
+  },
+  
+  "set": "Set {number}",
+  "@set": {
+    "description": "Label for set number",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "leagueUrl": "League URL",
+  "@leagueUrl": {
+    "description": "Label for league URL"
+  },
+  
+  "matchesUrl": "Matches URL",
+  "@matchesUrl": {
+    "description": "Label for matches URL"
+  },
+  
+  "team": "Team",
+  "@team": {
+    "description": "Label for team"
+  },
+  
+  "teamShortName": "Team Abbreviation",
+  "@teamShortName": {
+    "description": "Label for team short name"
+  },
+  
+  "review": "Review",
+  "@review": {
+    "description": "Label for final review step"
+  },
+  
+  "back": "Back",
+  "@back": {
+    "description": "Back button label"
+  },
+  
+  "next_button": "Next",
+  "@next_button": {
+    "description": "Next button label"
+  },
+  
+  "leagueOverviewUrl": "League Overview URL",
+  "@leagueOverviewUrl": {
+    "description": "Label for league overview URL field"
+  },
+  
+  "invalidUrl": "Invalid URL",
+  "@invalidUrl": {
+    "description": "Validation error for invalid URL"
+  },
+  
+  "instructions": "Instructions",
+  "@instructions": {
+    "description": "Label for instructions section"
+  },
+  
+  "openYourAssociationWebsite": "Open the website of your association",
+  "@openYourAssociationWebsite": {
+    "description": "Instruction step"
+  },
+  
+  "exampleAssociationUrl": "Example: https://bwbv-badminton.liga.nu",
+  "@exampleAssociationUrl": {
+    "description": "Example text for association URL"
+  },
+  
+  "navigateToYourLeague": "Navigate to your club's league",
+  "@navigateToYourLeague": {
+    "description": "Instruction step"
+  },
+  
+  "exampleLeaguePath": "Example: BWBV-Ligen > Landesliga \"Oberrhein\"",
+  "@exampleLeaguePath": {
+    "description": "Example text for league path"
+  },
+  
+  "copyUrlAndPasteAbove": "Copy the URL and paste it above",
+  "@copyUrlAndPasteAbove": {
+    "description": "Instruction step"
+  },
+  
+  "matchPlanOverallUrl": "Match Plan (Overall) URL",
+  "@matchPlanOverallUrl": {
+    "description": "Label for match plan URL field"
+  },
+  
+  "confirmOverwrite": "Confirm Overwrite",
+  "@confirmOverwrite": {
+    "description": "Dialog title for confirming overwrite"
+  },
+  
+  "confirmOverwriteMatchPlanUrl": "Do you really want to overwrite the current match plan URL?",
+  "@confirmOverwriteMatchPlanUrl": {
+    "description": "Confirmation message for overwriting URL"
+  },
+  
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  
+  "overwrite": "Overwrite",
+  "@overwrite": {
+    "description": "Overwrite button label"
+  },
+  
+  "generateFromLeagueUrl": "Generate from League URL",
+  "@generateFromLeagueUrl": {
+    "description": "Button to auto-generate URL"
+  },
+  
+  "pleaseEnterLeagueUrlInStep1": "Please enter League URL in step 1.",
+  "@pleaseEnterLeagueUrlInStep1": {
+    "description": "Message when league URL is missing"
+  },
+  
+  "noTeamFound": "No team found",
+  "@noTeamFound": {
+    "description": "Message when no team is found"
+  },
+  
+  "shortNameMaxLength": "Abbreviation may be maximum 7 characters long",
+  "@shortNameMaxLength": {
+    "description": "Validation error for short name length"
   }
 }

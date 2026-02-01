@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/league-table/model/league_team_ranking.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/services/settings/settings_service.dart';
@@ -51,8 +52,10 @@ class _ClubEditDialogStepTeamNameState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return widget.rankingUrl.isEmpty
-        ? Text("Bitte Liga URL in Schritt 1 eingeben.")
+        ? Text(l10n.pleaseEnterLeagueUrlInStep1)
         : FutureBuilder<List<LeagueTeamRanking>>(
             future: _teamRankingsFuture,
             builder:
@@ -87,8 +90,8 @@ class _ClubEditDialogStepTeamNameState
                           ),
                         ),
                         label: hasTeams
-                            ? Text("Team")
-                            : Text("Kein Team gefunden"),
+                            ? Text(l10n.team)
+                            : Text(l10n.noTeamFound),
                         enabled: hasTeams,
                         initialSelection: initialSelection,
                         onSelected: (selected) {

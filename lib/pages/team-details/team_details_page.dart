@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/followed-teams/followed_club.dart';
 import 'package:nuliga_app/pages/team-details/last-matches/last_matches_details_list.dart';
 import 'package:nuliga_app/pages/team-details/league-table/league_table_details_ranking_list.dart';
@@ -13,6 +14,8 @@ class TeamDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return DefaultTabController(
       length: 3,
       initialIndex: startIndex,
@@ -25,11 +28,11 @@ class TeamDetailsPage extends StatelessWidget {
               urlAccessor: (i) => i.rankingTableUrl,
             ),
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.event), text: "Upcoming"),
-              Tab(icon: Icon(Icons.format_list_numbered), text: "Tabelle"),
-              Tab(icon: Icon(Icons.history), text: "Results"),
+              Tab(icon: Icon(Icons.event), text: l10n.upcoming),
+              Tab(icon: Icon(Icons.format_list_numbered), text: l10n.table),
+              Tab(icon: Icon(Icons.history), text: l10n.results),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/pages/settings/localization_dropdown_menu.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
@@ -11,11 +12,13 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Einstellungen'),
+        title: Text(l10n.settings),
       ),
       body: Consumer<FollowedTeamsProvider>(
         builder: (context, provider, child) {
@@ -65,9 +68,9 @@ class SettingsPage extends StatelessWidget {
                               )) {
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
+                                SnackBar(
                                   content: Text(
-                                    'Dieser Verein ist bereits vorhanden. Update abgebrochen.',
+                                    l10n.clubAlreadyExistsUpdateCancelled,
                                   ),
                                 ),
                               );
@@ -108,9 +111,9 @@ class SettingsPage extends StatelessWidget {
                     )) {
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
+                          SnackBar(
                             content: Text(
-                              'Dieser Verein ist bereits vorhanden.',
+                              l10n.clubAlreadyExists,
                             ),
                           ),
                         );
@@ -121,7 +124,7 @@ class SettingsPage extends StatelessWidget {
                   }
                 },
                 icon: const Icon(Icons.add),
-                label: const Text('Club hinzufügen'),
+                label: Text(l10n.addClub),
               ),
               const SizedBox(height: 24),
               LocalizationDropdownMenu(),

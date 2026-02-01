@@ -1,5 +1,5 @@
-import 'package:nuliga_app/model/match_result.dart';
-import 'package:nuliga_app/services/matches/last-matches/last_matches_repository.dart';
+import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
+import 'package:nuliga_app/services/matches/last-matches/repository/last_matches_repository.dart';
 
 class LastMatchesService {
   static Future<List<MatchResult>> getLastMatchesForTeam(

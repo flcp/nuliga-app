@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
-import 'package:nuliga_app/services/location_service.dart';
+import 'package:nuliga_app/services/location/location_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http_urls.dart';
 

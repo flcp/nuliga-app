@@ -1,7 +1,7 @@
-import 'package:nuliga_app/model/league_team_ranking.dart';
-import 'package:nuliga_app/model/validation_result.dart';
-import 'package:nuliga_app/services/league-table/league_table_repository.dart';
-import 'package:nuliga_app/services/matches/next-matches/next_matches_repository.dart';
+import 'package:nuliga_app/services/league-table/model/league_team_ranking.dart';
+import 'package:nuliga_app/services/shared/model/validation_result.dart';
+import 'package:nuliga_app/services/league-table/repository/league_table_repository.dart';
+import 'package:nuliga_app/services/matches/next-matches/repository/next_matches_repository.dart';
 
 class SettingsService {
   final LeagueTableRepository leagueTableRepository = LeagueTableRepository();

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/followed_club.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_league_url.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_matchups_url.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_name.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_short_name.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_final_check.dart';
-import 'package:nuliga_app/services/settings_service.dart';
+import 'package:nuliga_app/services/settings/settings_service.dart';
 
 class ClubEditPage extends StatefulWidget {
   final FollowedClub? club;

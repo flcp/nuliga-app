@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/game_type.dart';
+import 'package:nuliga_app/services/match-result/model/game_type.dart';
 
 class GameTypeIcon extends StatelessWidget {
   final GameType gameType;

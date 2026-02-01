@@ -1,6 +1,6 @@
-import 'package:nuliga_app/model/league_team_ranking.dart';
+import 'package:nuliga_app/services/league-table/model/league_team_ranking.dart';
 import 'package:nuliga_app/services/shared/http_client.dart';
-import 'package:nuliga_app/services/league-table/league_parser.dart';
+import 'package:nuliga_app/services/league-table/repository/league_parser.dart';
 
 class LeagueTableRepository {
   final HttpClient httpClient = HttpClient();

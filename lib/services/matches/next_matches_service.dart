@@ -1,6 +1,6 @@
-import 'package:nuliga_app/model/future_match.dart';
-import 'package:nuliga_app/services/matches/next-matches/match_location_repository.dart';
-import 'package:nuliga_app/services/matches/next-matches/next_matches_repository.dart';
+import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
+import 'package:nuliga_app/services/matches/next-matches/repository/match_location_repository.dart';
+import 'package:nuliga_app/services/matches/next-matches/repository/next_matches_repository.dart';
 
 class NextMatchesService {
   final nextMatchesRepository = NextMatchesRepository();

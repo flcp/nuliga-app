@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/game_result.dart';
-import 'package:nuliga_app/model/match_result.dart';
+import 'package:nuliga_app/services/match-result/model/game_result.dart';
+import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
 
 // TODO: delete
 class GameResultScorePill extends StatelessWidget {

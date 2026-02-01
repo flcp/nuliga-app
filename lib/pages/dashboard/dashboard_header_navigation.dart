@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/followed_club.dart';
 import 'package:nuliga_app/pages/settings/settings_page.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/game_result.dart';
-import 'package:nuliga_app/model/set_result.dart';
+import 'package:nuliga_app/services/match-result/model/game_result.dart';
+import 'package:nuliga_app/services/match-result/model/set_result.dart';
 import 'package:nuliga_app/pages/match-result/game_type_icon.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';

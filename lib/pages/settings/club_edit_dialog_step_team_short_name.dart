@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/validation_result.dart';
+import 'package:nuliga_app/services/shared/model/validation_result.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
-import 'package:nuliga_app/services/settings_service.dart';
+import 'package:nuliga_app/services/settings/settings_service.dart';
 
 class ClubEditDialogStepShortName extends StatefulWidget {
   final String initialValue;

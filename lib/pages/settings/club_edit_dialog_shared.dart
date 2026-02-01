@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/validation_result.dart';
+import 'package:nuliga_app/services/shared/model/validation_result.dart';
 
 Widget buildDialogTextField(
   String label,

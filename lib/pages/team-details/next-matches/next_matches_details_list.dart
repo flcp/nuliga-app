@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/pages/team-details/next-matches/next_matches_details_list_item.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
-import 'package:nuliga_app/services/next_matches_service.dart';
+import 'package:nuliga_app/services/matches/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http_client.dart';
 

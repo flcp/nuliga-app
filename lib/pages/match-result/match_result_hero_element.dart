@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/match_result.dart';
+import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
 import 'package:nuliga_app/services/shared/date.dart';

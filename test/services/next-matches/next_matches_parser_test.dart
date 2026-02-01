@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nuliga_app/services/matches/next-matches/next_matches_parser.dart';
+import 'package:nuliga_app/services/matches/next-matches/repository/next_matches_parser.dart';
 
 void main() {
   group('NextMatchesParser with valid file input', () {

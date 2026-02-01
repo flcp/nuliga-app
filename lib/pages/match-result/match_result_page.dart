@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/match_result.dart';
-import 'package:nuliga_app/model/player.dart';
+import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
+import 'package:nuliga_app/services/match-result/model/player.dart';
 import 'package:nuliga_app/pages/match-result/game_result_detail.dart';
 import 'package:nuliga_app/pages/match-result/game_type_icon.dart';
 import 'package:nuliga_app/pages/match-result/match_result_hero_element.dart';
@@ -9,7 +9,7 @@ import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
-import 'package:nuliga_app/services/match_result_service.dart';
+import 'package:nuliga_app/services/match-result/match_result_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class MatchResultPage extends StatelessWidget {

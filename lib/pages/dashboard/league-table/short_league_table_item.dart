@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/league_team_ranking.dart';
+import 'package:nuliga_app/services/league-table/model/league_team_ranking.dart';
 
 class ShortLeagueTableItem extends StatelessWidget {
   final LeagueTeamRanking teamRanking;

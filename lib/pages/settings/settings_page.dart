@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
 import 'package:provider/provider.dart';
-import 'package:nuliga_app/services/followed_teams_provider.dart';
+import 'package:nuliga_app/services/followed-teams/followed_teams_provider.dart';
 import 'club_edit_dialog.dart';
 
 class SettingsPage extends StatelessWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/followed_club.dart';
-import 'package:nuliga_app/model/short_league_team_ranking.dart';
+import 'package:nuliga_app/services/followed-teams/followed_club.dart';
+import 'package:nuliga_app/services/league-table/model/short_league_team_ranking.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
-import 'package:nuliga_app/services/league_table_service.dart';
+import 'package:nuliga_app/services/league-table/league_table_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class LeagueInfo extends StatelessWidget {

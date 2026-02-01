@@ -1,9 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:nuliga_app/model/game_type.dart';
-import 'package:nuliga_app/model/match_result.dart';
-import 'package:nuliga_app/model/player.dart';
-import 'package:nuliga_app/model/set_result.dart';
+import 'package:nuliga_app/services/match-result/model/game_type.dart';
+import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
+import 'package:nuliga_app/services/match-result/model/player.dart';
+import 'package:nuliga_app/services/match-result/model/set_result.dart';
 
 class GameResult {
   final List<Player> homePlayers;

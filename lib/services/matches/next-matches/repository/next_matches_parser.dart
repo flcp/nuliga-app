@@ -1,6 +1,6 @@
 import 'dart:developer' as developer;
 
-import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/services/shared/parser.dart';
 import 'package:nuliga_app/services/shared/table_parser.dart';
 

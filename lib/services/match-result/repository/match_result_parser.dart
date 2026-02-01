@@ -2,11 +2,11 @@ import 'dart:developer' as developer;
 
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html;
-import 'package:nuliga_app/model/game_result.dart';
-import 'package:nuliga_app/model/game_type.dart';
-import 'package:nuliga_app/model/match_result_detail.dart';
-import 'package:nuliga_app/model/player.dart';
-import 'package:nuliga_app/model/set_result.dart';
+import 'package:nuliga_app/services/match-result/model/game_result.dart';
+import 'package:nuliga_app/services/match-result/model/game_type.dart';
+import 'package:nuliga_app/services/match-result/model/match_result_detail.dart';
+import 'package:nuliga_app/services/match-result/model/player.dart';
+import 'package:nuliga_app/services/match-result/model/set_result.dart';
 
 class MatchResultParser {
   Future<MatchResultDetail> getGamesAndResults(String htmlContent) async {

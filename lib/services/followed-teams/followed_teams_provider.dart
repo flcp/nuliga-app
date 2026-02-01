@@ -3,7 +3,7 @@ import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/followed_club.dart';
 
 class FollowedTeamsProvider extends ChangeNotifier {
   late List<FollowedClub> _followedTeams = [];

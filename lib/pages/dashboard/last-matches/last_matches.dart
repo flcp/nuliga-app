@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/followed_club.dart';
 import 'package:nuliga_app/pages/dashboard/last-matches/last_matches_card.dart';
-import 'package:nuliga_app/services/last_matches_service.dart';
+import 'package:nuliga_app/services/matches/last_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class LastMatches extends StatelessWidget {

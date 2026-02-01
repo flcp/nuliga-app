@@ -1,9 +1,9 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/league_team_ranking.dart';
+import 'package:nuliga_app/services/league-table/model/league_team_ranking.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
-import 'package:nuliga_app/services/settings_service.dart';
+import 'package:nuliga_app/services/settings/settings_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class ClubEditDialogStepTeamName extends StatefulWidget {

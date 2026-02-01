@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/model/future_match.dart';
+import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/pages/next-match/next_match_page.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 

@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -26,7 +28,7 @@ class FollowedTeamsProvider extends ChangeNotifier {
             .toList();
         notifyListeners();
       } catch (e) {
-        print('Error loading followed clubs: $e');
+        developer.log('Error loading followed clubs: $e');
         _loadDefaults();
       }
     } else {

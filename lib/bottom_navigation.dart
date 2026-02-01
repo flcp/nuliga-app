@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard.dart';
-import 'package:nuliga_app/pages/settings/settings_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -10,9 +9,9 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int _selectedIndex = 0;
+  // int _selectedIndex = 0;
 
-  final List<Widget> _pages = [TeamOverviewPage()];
+  // final List<Widget> _pages = [TeamOverviewPage()];
   // final List<Widget> _pages = [TeamOverviewPage(), const SettingsPage()];
 
   @override

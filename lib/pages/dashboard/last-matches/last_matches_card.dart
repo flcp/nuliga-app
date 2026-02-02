@@ -18,6 +18,7 @@ class LastMatchesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final date = context.getDate();
     return SurfaceCard(
       padding: const EdgeInsets.fromLTRB(
         Constants.bigCardPadding,
@@ -25,7 +26,7 @@ class LastMatchesCard extends StatelessWidget {
         4,
         Constants.smallCardPadding,
       ),
-      title: Date.getDateString(matchResult.time),
+      title: date.getDateString(matchResult.time),
       titleTrailing: WinLossIndicator(
         isTextDisplayed: true,
         size: 10,

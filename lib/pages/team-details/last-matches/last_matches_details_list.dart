@@ -34,6 +34,7 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
         widget.teamName,
       ),
       builder: (context, snapshot) {
+        final date = context.getDate();
         if (snapshot.connectionState == ConnectionState.waiting) {
           return LoadingIndicator();
         }
@@ -68,7 +69,7 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
                     status: result.getMatchStatusForTeam(widget.teamName),
                     isTextDisplayed: true,
                   ),
-                  subtitle: Text(Date.getDateString(result.time)),
+                  subtitle: Text(date.getDateString(result.time)),
                   title: Text(
                     result.homeTeamName == widget.teamName
                         ? result.opponentTeamName

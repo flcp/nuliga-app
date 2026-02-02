@@ -13,11 +13,11 @@ class MatchResultHeroElement extends StatelessWidget {
   });
 
   final MatchResult matchResult;
-
   final String teamName;
 
   @override
   Widget build(BuildContext context) {
+    final date = context.getDate();
     final infoColor = Theme.of(context).colorScheme.onSurface.withAlpha(150);
     final l10n = AppLocalizations.of(context)!;
 
@@ -70,7 +70,7 @@ class MatchResultHeroElement extends StatelessWidget {
                     Icon(Icons.calendar_today, size: 18.0, color: infoColor),
                     SizedBox(width: Constants.iconTextSpacing),
                     Text(
-                      Date.getDateString(matchResult.time),
+                      date.getDateString(matchResult.time),
                       style: TextStyle(color: infoColor),
                     ),
                     SizedBox(width: 16),

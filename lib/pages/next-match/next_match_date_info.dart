@@ -8,6 +8,7 @@ class NextMatchDateInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final date = context.getDate();
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(Constants.bigCardPadding),
@@ -26,7 +27,7 @@ class NextMatchDateInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      Date.getLongDateString(matchTime),
+                      date.getLongDateString(matchTime),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 6),

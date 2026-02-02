@@ -25,6 +25,7 @@ class NextMatchesCard extends StatefulWidget {
 class _NextMatchesCardState extends State<NextMatchesCard> {
   @override
   Widget build(BuildContext context) {
+    final date = context.getDate();
     return SquareSurfaceCard(
       onTap: () {
         navigateToUpcomingMatch(widget.match, widget.team.name);
@@ -33,7 +34,7 @@ class _NextMatchesCardState extends State<NextMatchesCard> {
         match: widget.match,
         homeTeamName: widget.team.name,
       ),
-      title: Date.getShortDateString(widget.match.time),
+      title: date.getShortDateString(widget.match.time),
       highlighted: widget.highlighted,
       child: Text(
         getOpponent(widget.match, widget.team),

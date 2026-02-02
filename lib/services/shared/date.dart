@@ -1,46 +1,35 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:nuliga_app/services/localization/localization_provider.dart';
+import 'package:provider/provider.dart';
+
 class Date {
-  static const _weekdayNames = [
-    "Montag",
-    "Dienstag",
-    "Mittwoch",
-    "Donnerstag",
-    "Freitag",
-    "Samstag",
-    "Sonntag",
-  ];
+  final String locale;
 
-  static const _monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  Date({this.locale = 'de_DE'});
 
-  static String getDateString(DateTime date) {
+  String getDateString(DateTime date) {
     return "${date.day}. ${_getMonth(date)} ${date.year}";
   }
 
-  static String getShortDateString(DateTime date) {
+  String getShortDateString(DateTime date) {
     return "${date.day}. ${_getMonth(date)}";
   }
 
-  static String getLongDateString(DateTime date) {
+  String getLongDateString(DateTime date) {
     return "${_getWeekdayName(date)}, ${date.day}. ${_getMonth(date)} ${date.year}";
   }
 
-  static String _getMonth(DateTime date) {
-    return _monthNames[date.month - 1];
+  String _getMonth(DateTime date) {
+    return DateFormat.MMM(locale).format(date);
   }
 
-  static String _getWeekdayName(DateTime date) {
-    return _weekdayNames[date.weekday - 1];
+  String _getWeekdayName(DateTime date) {
+    return DateFormat.EEEE(locale).format(date);
   }
+}
+
+extension DateExtension on BuildContext {
+  Date getDate() =>
+      Date(locale: watch<LocalizationProvider>().locale.toString());
 }

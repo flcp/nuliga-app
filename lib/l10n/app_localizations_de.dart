@@ -43,10 +43,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get table => 'Tabelle';
 
   @override
-  String get results => 'Ergebnisse';
-
-  @override
-  String get result => 'Ergebnis';
+  String resultCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Ergebnisse',
+      one: 'Ergebnis',
+      zero: 'Keine Ergebnisse',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get loading => 'Lädt';

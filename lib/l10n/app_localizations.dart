@@ -164,17 +164,11 @@ abstract class AppLocalizations {
   /// **'Table'**
   String get table;
 
-  /// Label for match results
+  /// Text for result or results
   ///
   /// In en, this message translates to:
-  /// **'Results'**
-  String get results;
-
-  /// Label for single match result
-  ///
-  /// In en, this message translates to:
-  /// **'Result'**
-  String get result;
+  /// **'{count, plural, =0{No results} =1{Result} other{Results}}'**
+  String resultCount(num count);
 
   /// Loading indicator text
   ///

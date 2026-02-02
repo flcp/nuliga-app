@@ -26,10 +26,10 @@ class MatchResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.result),
+        title: Text(l10n.resultCount(1)),
         actions: [ActionBarOpenLinkButton(url: matchResult.resultDetailUrl)],
       ),
       body: Padding(

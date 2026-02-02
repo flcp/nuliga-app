@@ -55,14 +55,9 @@
     "description": "Label for league table"
   },
   
-  "results": "Results",
-  "@results": {
-    "description": "Label for match results"
-  },
-  
-  "result": "Result",
-  "@result": {
-    "description": "Label for single match result"
+  "resultCount": "{count, plural, =0{No results} =1{Result} other{Results}}",  
+  "@resultCount": {
+    "description": "Text for result or results"
   },
   
   "loading": "Loading",

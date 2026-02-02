@@ -15,7 +15,7 @@ class TeamDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return DefaultTabController(
       length: 3,
       initialIndex: startIndex,
@@ -32,7 +32,7 @@ class TeamDetailsPage extends StatelessWidget {
             tabs: [
               Tab(icon: Icon(Icons.event), text: l10n.upcoming),
               Tab(icon: Icon(Icons.format_list_numbered), text: l10n.table),
-              Tab(icon: Icon(Icons.history), text: l10n.results),
+              Tab(icon: Icon(Icons.history), text: l10n.resultCount(2)),
             ],
           ),
         ),

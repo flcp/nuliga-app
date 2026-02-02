@@ -21,7 +21,7 @@ class GameResultDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Padding(
       padding: const EdgeInsets.all(Constants.pagePadding),
       child: Center(
@@ -53,7 +53,7 @@ class GameResultDetail extends StatelessWidget {
             ),
             SurfaceCard(
               padding: const EdgeInsets.all(Constants.bigCardPadding),
-              title: l10n.results,
+              title: l10n.resultCount(2),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -90,7 +90,7 @@ class _SetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.all(12),

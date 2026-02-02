@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/l10n/app_localizations.dart';
 import 'package:nuliga_app/services/followed-teams/followed_club.dart';
 import 'package:nuliga_app/pages/settings/settings_page.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -53,6 +54,8 @@ class _DashboardHeaderNavigationState extends State<DashboardHeaderNavigation> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Row(
       children: [
         Expanded(
@@ -91,9 +94,9 @@ class _DashboardHeaderNavigationState extends State<DashboardHeaderNavigation> {
             }
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-            const PopupMenuItem<String>(
+            PopupMenuItem<String>(
               value: 'settings',
-              child: Text('Settings'),
+              child: Text(l10n.settings),
             ),
           ],
           icon: Icon(Icons.menu),

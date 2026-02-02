@@ -43,7 +43,6 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
       onRefresh: refresh,
       child: Column(
         children: [
-          Text(AppLocalizations.of(context)!.helloWorld),
           SizedBox(
             height: 45,
             child: DashboardHeaderNavigation(

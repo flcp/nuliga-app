@@ -73,7 +73,7 @@ class _ClubEditDialogStepMatchupsUrlState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return FutureBuilder<ValidationResult>(
       future: _matchupsUrlCachedFuture,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -100,7 +100,7 @@ class _ClubEditDialogStepMatchupsUrlState
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: Text(l10n.cancel),
+                          child: Text(l10n.cancel_button),
                         ),
                         TextButton(
                           onPressed: () {
@@ -108,7 +108,7 @@ class _ClubEditDialogStepMatchupsUrlState
 
                             _fillMatchupsUrlFromRankingUrl();
                           },
-                          child: Text(l10n.overwrite),
+                          child: Text(l10n.overwrite_button),
                         ),
                       ],
                     ),
@@ -122,7 +122,7 @@ class _ClubEditDialogStepMatchupsUrlState
                 children: [
                   const Icon(Icons.auto_fix_high),
                   const SizedBox(width: 8),
-                  Text(l10n.generateFromLeagueUrl),
+                  Text(l10n.generateFromLeagueUrl_button),
                 ],
               ),
             ),

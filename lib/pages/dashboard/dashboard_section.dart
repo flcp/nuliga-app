@@ -30,7 +30,10 @@ class DashboardSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(title, style: Theme.of(context).textTheme.titleMedium),
-              TextButton(onPressed: onViewAll, child: Text(l10n.viewAll)),
+              TextButton(
+                onPressed: onViewAll,
+                child: Text(l10n.viewAll_button),
+              ),
             ],
           ),
         ),

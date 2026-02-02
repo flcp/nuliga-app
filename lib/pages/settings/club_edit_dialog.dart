@@ -39,7 +39,7 @@ class _ClubEditPageState extends State<ClubEditPage> {
 
   List<Step> buildSteps() {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return [
       Step(
         title: Text(l10n.leagueUrl),
@@ -108,9 +108,7 @@ class _ClubEditPageState extends State<ClubEditPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
-          widget.club == null ? l10n.addClub : l10n.editClub,
-        ),
+        title: Text(widget.club == null ? l10n.addClub : l10n.editClub),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -127,7 +125,7 @@ class _ClubEditPageState extends State<ClubEditPage> {
               children: <Widget>[
                 TextButton(
                   onPressed: details.onStepCancel,
-                  child: Text(l10n.back),
+                  child: Text(l10n.back_button),
                 ),
                 SizedBox(width: 10),
                 FilledButton(

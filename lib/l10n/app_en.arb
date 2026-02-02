@@ -1,9 +1,5 @@
 {
   "@@locale": "en",
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  },
   
   "settings": "Settings",
   "@settings": {
@@ -12,7 +8,7 @@
   
   "addClub": "Add Club",
   "@addClub": {
-    "description": "Button to add a new club"
+    "description": "Title when adding a club"
   },
   
   "editClub": "Edit Club",
@@ -40,8 +36,8 @@
     "description": "Label for last matches section"
   },
   
-  "viewAll": "View all",
-  "@viewAll": {
+  "viewAll_button": "View all",
+  "@viewAll_button": {
     "description": "Button to view all items"
   },
   
@@ -110,13 +106,13 @@
     "description": "Versus label between teams"
   },
 
-  "view": "Nuliga",
-  "@view": {
-    "description": "Button to view details"
+  "nuliga_button": "Nuliga",
+  "@nuliga_button": {
+    "description": "Button to view details on nuliga"
   },
   
-  "maps": "Maps",
-  "@maps": {
+  "maps_button": "Maps",
+  "@maps_button": {
     "description": "Button to open in maps"
   },
   
@@ -190,8 +186,8 @@
     "description": "Label for final review step"
   },
   
-  "back": "Back",
-  "@back": {
+  "back_button": "Back",
+  "@back_button": {
     "description": "Back button label"
   },
   
@@ -255,17 +251,17 @@
     "description": "Confirmation message for overwriting URL"
   },
   
-  "cancel": "Cancel",
-  "@cancel": {
+  "cancel_button": "Cancel",
+  "@cancel_button": {
     "description": "Cancel button label"
   },
   
-  "overwrite": "Overwrite",
+  "overwrite_button": "Overwrite",
   "@overwrite": {
     "description": "Overwrite button label"
   },
   
-  "generateFromLeagueUrl": "Generate from League URL",
+  "generateFromLeagueUrl_button": "Generate from League URL",
   "@generateFromLeagueUrl": {
     "description": "Button to auto-generate URL"
   },

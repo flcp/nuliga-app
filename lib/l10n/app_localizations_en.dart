@@ -9,9 +9,6 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get helloWorld => 'Hello World!';
-
-  @override
   String get settings => 'Settings';
 
   @override
@@ -34,7 +31,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get last => 'LAST';
 
   @override
-  String get viewAll => 'View all';
+  String get viewAll_button => 'View all';
 
   @override
   String get upcoming => 'Upcoming';
@@ -85,10 +82,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get versus => 'VS';
 
   @override
-  String get view => 'Nuliga';
+  String get nuliga_button => 'Nuliga';
 
   @override
-  String get maps => 'Maps';
+  String get maps_button => 'Maps';
 
   @override
   String get homeGame => 'Home game';
@@ -132,7 +129,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get review => 'Review';
 
   @override
-  String get back => 'Back';
+  String get back_button => 'Back';
 
   @override
   String get next_button => 'Next';
@@ -174,13 +171,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Do you really want to overwrite the current match plan URL?';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel_button => 'Cancel';
 
   @override
-  String get overwrite => 'Overwrite';
+  String get overwrite_button => 'Overwrite';
 
   @override
-  String get generateFromLeagueUrl => 'Generate from League URL';
+  String get generateFromLeagueUrl_button => 'Generate from League URL';
 
   @override
   String get pleaseEnterLeagueUrlInStep1 =>

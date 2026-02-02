@@ -98,19 +98,13 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
-  /// The conventional newborn programmer greeting
-  ///
-  /// In en, this message translates to:
-  /// **'Hello World!'**
-  String get helloWorld;
-
   /// Settings page title
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
 
-  /// Button to add a new club
+  /// Title when adding a club
   ///
   /// In en, this message translates to:
   /// **'Add Club'**
@@ -150,7 +144,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'View all'**
-  String get viewAll;
+  String get viewAll_button;
 
   /// Label for upcoming matches
   ///
@@ -230,17 +224,17 @@ abstract class AppLocalizations {
   /// **'VS'**
   String get versus;
 
-  /// Button to view details
+  /// Button to view details on nuliga
   ///
   /// In en, this message translates to:
   /// **'Nuliga'**
-  String get view;
+  String get nuliga_button;
 
   /// Button to open in maps
   ///
   /// In en, this message translates to:
   /// **'Maps'**
-  String get maps;
+  String get maps_button;
 
   /// Label for home game
   ///
@@ -324,7 +318,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Back'**
-  String get back;
+  String get back_button;
 
   /// Next button label
   ///
@@ -402,19 +396,19 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
-  String get cancel;
+  String get cancel_button;
 
-  /// Overwrite button label
+  /// No description provided for @overwrite_button.
   ///
   /// In en, this message translates to:
   /// **'Overwrite'**
-  String get overwrite;
+  String get overwrite_button;
 
-  /// Button to auto-generate URL
+  /// No description provided for @generateFromLeagueUrl_button.
   ///
   /// In en, this message translates to:
   /// **'Generate from League URL'**
-  String get generateFromLeagueUrl;
+  String get generateFromLeagueUrl_button;
 
   /// Message when league URL is missing
   ///

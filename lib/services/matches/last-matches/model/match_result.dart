@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:nuliga_app/l10n/app_localizations.dart';
 
 class MatchResult {
@@ -58,16 +57,12 @@ class MatchResult {
 enum MatchResultStatus { win, loss, draw, unknown }
 
 extension MatchResultStatusExtension on MatchResultStatus {
-  String localized(BuildContext context) {
-    switch (this) {
-      case MatchResultStatus.win:
-        return AppLocalizations.of(context)!.matchResultWin;
-      case MatchResultStatus.loss:
-        return AppLocalizations.of(context)!.matchResultLoss;
-      case MatchResultStatus.draw:
-        return AppLocalizations.of(context)!.matchResultDraw;
-      case MatchResultStatus.unknown:
-        return AppLocalizations.of(context)!.matchResultUnknown;
-    }
+  String localized(AppLocalizations localizations) {
+    return switch (this) {
+      MatchResultStatus.win => localizations.matchResultWin,
+      MatchResultStatus.loss => localizations.matchResultLoss,
+      MatchResultStatus.draw => localizations.matchResultDraw,
+      MatchResultStatus.unknown => localizations.matchResultUnknown,
+    };
   }
 }

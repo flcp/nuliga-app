@@ -54,5 +54,9 @@
   "generateFromLeagueUrl_button": "Aus Liga URL generieren",
   "pleaseEnterLeagueUrlInStep1": "Bitte Liga URL in Schritt 1 eingeben.",
   "noTeamFound": "Kein Team gefunden",
-  "shortNameMaxLength": "Kürzel darf maximal 7 Zeichen lang sein"
+  "shortNameMaxLength": "Kürzel darf maximal 7 Zeichen lang sein",
+  "matchResultWin": "Sieg",
+  "matchResultLoss": "Niederlage",
+  "matchResultDraw": "Unentschieden",
+  "matchResultUnknown": "Unbekannt"
 }

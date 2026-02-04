@@ -188,4 +188,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get shortNameMaxLength => 'Kürzel darf maximal 7 Zeichen lang sein';
+
+  @override
+  String get matchResultWin => 'Sieg';
+
+  @override
+  String get matchResultLoss => 'Niederlage';
+
+  @override
+  String get matchResultDraw => 'Unentschieden';
+
+  @override
+  String get matchResultUnknown => 'Unbekannt';
 }

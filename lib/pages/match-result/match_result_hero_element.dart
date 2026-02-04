@@ -63,7 +63,9 @@ class MatchResultHeroElement extends StatelessWidget {
                     ),
                     SizedBox(width: Constants.iconTextSpacing),
                     Text(
-                      matchResult.getMatchStatusForTeam(teamName).name,
+                      matchResult
+                          .getMatchStatusForTeam(teamName)
+                          .localized(context),
                       style: TextStyle(color: infoColor),
                     ),
                     SizedBox(width: 24),

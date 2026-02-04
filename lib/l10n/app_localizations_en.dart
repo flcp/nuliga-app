@@ -189,4 +189,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get shortNameMaxLength =>
       'Abbreviation may be maximum 7 characters long';
+
+  @override
+  String get matchResultWin => 'Win';
+
+  @override
+  String get matchResultLoss => 'Loss';
+
+  @override
+  String get matchResultDraw => 'Draw';
+
+  @override
+  String get matchResultUnknown => 'Unknown';
 }

@@ -279,5 +279,25 @@
   "shortNameMaxLength": "Abbreviation may be maximum 7 characters long",
   "@shortNameMaxLength": {
     "description": "Validation error for short name length"
+  },
+
+  "matchResultWin": "Win",
+  "@matchResultWin": {
+    "description": "Label for enum match result win"
+  },
+
+  "matchResultLoss": "Loss",
+  "@matchResultLoss": {
+    "description": "Label for enum match result loss"
+  },
+
+  "matchResultDraw": "Draw",
+  "@matchResultDraw": {
+    "description": "Label for enum match result draw"
+  },
+
+  "matchResultUnknown": "Unknown",
+  "@matchResultUnknown": {
+    "description": "Label for enum match result unknown"
   }
 }

@@ -427,6 +427,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Abbreviation may be maximum 7 characters long'**
   String get shortNameMaxLength;
+
+  /// Label for enum match result win
+  ///
+  /// In en, this message translates to:
+  /// **'Win'**
+  String get matchResultWin;
+
+  /// Label for enum match result loss
+  ///
+  /// In en, this message translates to:
+  /// **'Loss'**
+  String get matchResultLoss;
+
+  /// Label for enum match result draw
+  ///
+  /// In en, this message translates to:
+  /// **'Draw'**
+  String get matchResultDraw;
+
+  /// Label for enum match result unknown
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get matchResultUnknown;
 }
 
 class _AppLocalizationsDelegate

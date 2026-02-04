@@ -12,7 +12,6 @@
   "table": "Tabelle",
   "resultCount": "{count, plural, =0{Keine Ergebnisse} =1{Ergebnis} other{Ergebnisse}}",  
   "loading": "Lädt",
-  "nothingToDisplay": "Nichts anzuzeigen",
   "matchesPlayed": "Matches gespielt",
   "name": "Name",
   "points": "Pkt",
@@ -67,4 +66,5 @@
   "gameTypeMixedDoubles": "Gemischtes Doppel",
   "gameTypeWomenSingles": "Dameneinzel",
   "gameTypeWomenDoubles": "Damendoppel",
+  "nothingToDisplay": "Nichts zum Anzeigen. Lade die Seite neu oder versuche eine andere URL."
 }

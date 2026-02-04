@@ -55,9 +55,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loading => 'Loading';
 
   @override
-  String get nothingToDisplay => 'Nothing to display';
-
-  @override
   String get matchesPlayed => 'Matches played';
 
   @override
@@ -225,4 +222,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gameTypeWomenDoubles => 'Women\'s Doubles';
+
+  @override
+  String get nothingToDisplay =>
+      'Nothing to display. Try refreshing or another URL';
 }

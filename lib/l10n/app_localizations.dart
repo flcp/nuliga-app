@@ -170,12 +170,6 @@ abstract class AppLocalizations {
   /// **'Loading'**
   String get loading;
 
-  /// Message when there is no data to show
-  ///
-  /// In en, this message translates to:
-  /// **'Nothing to display'**
-  String get nothingToDisplay;
-
   /// Label for matches played
   ///
   /// In en, this message translates to:
@@ -499,6 +493,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Women\'s Doubles'**
   String get gameTypeWomenDoubles;
+
+  /// Label to display when no data is present in nothingToDisplayIndicator
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing to display. Try refreshing or another URL'**
+  String get nothingToDisplay;
 }
 
 class _AppLocalizationsDelegate

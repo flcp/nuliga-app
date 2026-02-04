@@ -60,12 +60,7 @@
   "@loading": {
     "description": "Loading indicator text"
   },
-  
-  "nothingToDisplay": "Nothing to display",
-  "@nothingToDisplay": {
-    "description": "Message when there is no data to show"
-  },
-  
+   
   "matchesPlayed": "Matches played",
   "@matchesPlayed": {
     "description": "Label for matches played"
@@ -339,5 +334,10 @@
   "gameTypeWomenDoubles": "Women's Doubles",
   "@gameTypeWomenDoubles": {
     "description": "Label for women's doubles game type"
+  },
+  
+  "nothingToDisplay": "Nothing to display. Try refreshing or another URL",
+  "@nothingToDisplay": {
+    "description": "Label to display when no data is present in nothingToDisplayIndicator"
   }
 }

@@ -55,9 +55,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get loading => 'Lädt';
 
   @override
-  String get nothingToDisplay => 'Nichts anzuzeigen';
-
-  @override
   String get matchesPlayed => 'Matches gespielt';
 
   @override
@@ -224,4 +221,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get gameTypeWomenDoubles => 'Damendoppel';
+
+  @override
+  String get nothingToDisplay =>
+      'Nichts zum Anzeigen. Lade die Seite neu oder versuche eine andere URL.';
 }

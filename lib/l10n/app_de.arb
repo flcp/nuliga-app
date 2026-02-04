@@ -58,5 +58,13 @@
   "matchResultWin": "Sieg",
   "matchResultLoss": "Niederlage",
   "matchResultDraw": "Unentschieden",
-  "matchResultUnknown": "Unbekannt"
+  "matchResultUnknown": "Unbekannt",
+  "gameTypeMen1Singles": "1. Herreneinzel",
+  "gameTypeMen2Singles": "2. Herreneinzel",
+  "gameTypeMen3Singles": "3. Herreneinzel",
+  "gameTypeMen1Doubles": "1. Herrendoppel",
+  "gameTypeMen2Doubles": "2. Herrendoppel",
+  "gameTypeMixedDoubles": "Gemischtes Doppel",
+  "gameTypeWomenSingles": "Dameneinzel",
+  "gameTypeWomenDoubles": "Damendoppel",
 }

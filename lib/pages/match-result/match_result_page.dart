@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/l10n/app_localizations.dart';
+import 'package:nuliga_app/services/match-result/model/game_type.dart';
 import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
 import 'package:nuliga_app/services/match-result/model/player.dart';
 import 'package:nuliga_app/pages/match-result/game_result_detail.dart';
@@ -99,7 +100,7 @@ class MatchResultPageContent extends StatelessWidget {
                       },
                     ),
                     titleLeading: GameTypeIcon(gameResult.gameType),
-                    title: gameResult.gameType.displayName,
+                    title: gameResult.gameType.localize(l10n),
                     titleTrailing: WinLossIndicator(
                       size: 12,
                       status: isHomeTeam

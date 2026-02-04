@@ -451,6 +451,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown'**
   String get matchResultUnknown;
+
+  /// Label for 1st men's singles game type
+  ///
+  /// In en, this message translates to:
+  /// **'1st Men\'s Singles'**
+  String get gameTypeMen1Singles;
+
+  /// Label for 2nd men's singles game type
+  ///
+  /// In en, this message translates to:
+  /// **'2nd Men\'s Singles'**
+  String get gameTypeMen2Singles;
+
+  /// Label for 3rd men's singles game type
+  ///
+  /// In en, this message translates to:
+  /// **'3rd Men\'s Singles'**
+  String get gameTypeMen3Singles;
+
+  /// Label for 1st men's doubles game type
+  ///
+  /// In en, this message translates to:
+  /// **'1st Men\'s Doubles'**
+  String get gameTypeMen1Doubles;
+
+  /// Label for 2nd men's doubles game type
+  ///
+  /// In en, this message translates to:
+  /// **'2nd Men\'s Doubles'**
+  String get gameTypeMen2Doubles;
+
+  /// Label for mixed doubles game type
+  ///
+  /// In en, this message translates to:
+  /// **'Mixed Doubles'**
+  String get gameTypeMixedDoubles;
+
+  /// Label for women's singles game type
+  ///
+  /// In en, this message translates to:
+  /// **'Women\'s Singles'**
+  String get gameTypeWomenSingles;
+
+  /// Label for women's doubles game type
+  ///
+  /// In en, this message translates to:
+  /// **'Women\'s Doubles'**
+  String get gameTypeWomenDoubles;
 }
 
 class _AppLocalizationsDelegate

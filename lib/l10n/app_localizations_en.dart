@@ -201,4 +201,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get matchResultUnknown => 'Unknown';
+
+  @override
+  String get gameTypeMen1Singles => '1st Men\'s Singles';
+
+  @override
+  String get gameTypeMen2Singles => '2nd Men\'s Singles';
+
+  @override
+  String get gameTypeMen3Singles => '3rd Men\'s Singles';
+
+  @override
+  String get gameTypeMen1Doubles => '1st Men\'s Doubles';
+
+  @override
+  String get gameTypeMen2Doubles => '2nd Men\'s Doubles';
+
+  @override
+  String get gameTypeMixedDoubles => 'Mixed Doubles';
+
+  @override
+  String get gameTypeWomenSingles => 'Women\'s Singles';
+
+  @override
+  String get gameTypeWomenDoubles => 'Women\'s Doubles';
 }

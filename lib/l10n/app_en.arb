@@ -299,5 +299,45 @@
   "matchResultUnknown": "Unknown",
   "@matchResultUnknown": {
     "description": "Label for enum match result unknown"
+  },
+
+  "gameTypeMen1Singles": "1st Men's Singles",
+  "@gameTypeMen1Singles": {
+    "description": "Label for 1st men's singles game type"
+  },
+
+  "gameTypeMen2Singles": "2nd Men's Singles",
+  "@gameTypeMen2Singles": {
+    "description": "Label for 2nd men's singles game type"
+  },
+
+  "gameTypeMen3Singles": "3rd Men's Singles",
+  "@gameTypeMen3Singles": {
+    "description": "Label for 3rd men's singles game type"
+  },
+
+  "gameTypeMen1Doubles": "1st Men's Doubles",
+  "@gameTypeMen1Doubles": {
+    "description": "Label for 1st men's doubles game type"
+  },
+
+  "gameTypeMen2Doubles": "2nd Men's Doubles",
+  "@gameTypeMen2Doubles": {
+    "description": "Label for 2nd men's doubles game type"
+  },
+
+  "gameTypeMixedDoubles": "Mixed Doubles",
+  "@gameTypeMixedDoubles": {
+    "description": "Label for mixed doubles game type"
+  },
+
+  "gameTypeWomenSingles": "Women's Singles",
+  "@gameTypeWomenSingles": {
+    "description": "Label for women's singles game type"
+  },
+
+  "gameTypeWomenDoubles": "Women's Doubles",
+  "@gameTypeWomenDoubles": {
+    "description": "Label for women's doubles game type"
   }
 }

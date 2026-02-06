@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/services/followed-teams/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
 import 'package:nuliga_app/pages/next-match/next_match_page.dart';

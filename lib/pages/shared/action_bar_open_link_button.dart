@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/services/followed-teams/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/services/shared/http_urls.dart';
 
 class ActionBarFollowedTeamOpenLinkButton extends StatelessWidget {

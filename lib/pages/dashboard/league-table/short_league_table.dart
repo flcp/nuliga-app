@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
-import 'package:nuliga_app/services/followed-teams/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/pages/dashboard/league-table/short_league_table_item.dart';

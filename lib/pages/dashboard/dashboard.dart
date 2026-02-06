@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
-import 'package:nuliga_app/services/followed-teams/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard_header_navigation.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard_section.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';

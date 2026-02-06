@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
-import 'package:nuliga_app/services/followed-teams/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_league_url.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_matchups_url.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_name.dart';

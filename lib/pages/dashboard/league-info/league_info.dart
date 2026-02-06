@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/l10n/app_localizations.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/followed-teams/followed_club.dart';
 import 'package:nuliga_app/services/league-table/model/short_league_team_ranking.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
@@ -17,7 +17,7 @@ class LeagueInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: Constants.pagePadding),
       child: SizedBox(

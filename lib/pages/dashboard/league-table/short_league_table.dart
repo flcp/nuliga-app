@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/l10n/app_localizations.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/followed-teams/followed_club.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
@@ -16,7 +16,7 @@ class ShortLeagueTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return FutureBuilder(
       future: leagueTableService.getClosestRankingsToTeam(
         team.rankingTableUrl,

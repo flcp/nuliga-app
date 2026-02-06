@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/l10n/app_localizations.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/pages/settings/localization_dropdown_menu.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
@@ -13,7 +13,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -111,11 +111,7 @@ class SettingsPage extends StatelessWidget {
                     )) {
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              l10n.clubAlreadyExists,
-                            ),
-                          ),
+                          SnackBar(content: Text(l10n.clubAlreadyExists)),
                         );
                       }
                       return;

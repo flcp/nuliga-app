@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/l10n/app_localizations.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/match-result/model/game_result.dart';
 import 'package:nuliga_app/services/match-result/model/game_type.dart';
 import 'package:nuliga_app/services/match-result/model/set_result.dart';

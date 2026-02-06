@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/l10n/app_localizations.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/shared/model/validation_result.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
 import 'package:nuliga_app/services/settings/settings_service.dart';
@@ -82,7 +82,7 @@ class _ClubEditDialogStepLeagueUrlState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return FutureBuilder<ValidationResult>(
       future: _rankingUrlCachedFuture,
       builder: (context, asyncSnapshot) {
@@ -129,10 +129,7 @@ class _ClubEditDialogStepLeagueUrlState
                   child: Text(l10n.navigateToYourLeague),
                 ),
                 const SizedBox(height: 8),
-                _TutorialRow(
-                  index: 3,
-                  child: Text(l10n.copyUrlAndPasteAbove),
-                ),
+                _TutorialRow(index: 3, child: Text(l10n.copyUrlAndPasteAbove)),
               ],
             ),
           ],

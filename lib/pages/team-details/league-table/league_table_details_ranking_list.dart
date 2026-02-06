@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/l10n/app_localizations.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/league-table/model/league_team_ranking.dart';
 import 'package:nuliga_app/pages/team-details/league-table/league_table_details_ranking_list_item.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
@@ -75,7 +75,7 @@ class LeagueTableDetailsRankingListHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 12),
 
@@ -91,13 +91,20 @@ class LeagueTableDetailsRankingListHeader extends StatelessWidget {
             SizedBox(width: 24, child: Text("#", textAlign: TextAlign.center)),
             SizedBox(width: 8),
             Expanded(
-              child: Text(l10n.name, overflow: TextOverflow.ellipsis, maxLines: 1),
+              child: Text(
+                l10n.name,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
             ),
             SizedBox(width: 20, child: Text(l10n.wins)),
             SizedBox(width: 16, child: Text(l10n.draws)),
             SizedBox(width: 16, child: Text(l10n.losses)),
             SizedBox(width: 24, child: Text(l10n.points)),
-            SizedBox(width: 18, child: Text(l10n.matches, textAlign: TextAlign.center)),
+            SizedBox(
+              width: 18,
+              child: Text(l10n.matches, textAlign: TextAlign.center),
+            ),
             SizedBox(width: 40),
           ],
         ),

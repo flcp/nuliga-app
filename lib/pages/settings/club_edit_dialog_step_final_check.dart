@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/l10n/app_localizations.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/shared/model/validation_result.dart';
 import 'package:nuliga_app/services/settings/settings_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -65,7 +65,7 @@ class _ClubEditDialogStepFinalCheckState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Column(
       children: [
         ValidationListItem(

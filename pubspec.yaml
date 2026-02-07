@@ -44,7 +44,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.4
   flutter_localizations:
     sdk: flutter
-  intl: any
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

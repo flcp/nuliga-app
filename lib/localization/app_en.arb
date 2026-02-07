@@ -252,7 +252,7 @@
   },
   
   "overwrite_button": "Overwrite",
-  "@overwrite": {
+  "@overwrite_button": {
     "description": "Overwrite button label"
   },
   

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/services/followed-teams/followed_club.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
+import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_league_url.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_matchups_url.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_step_team_name.dart';
@@ -37,16 +38,18 @@ class _ClubEditPageState extends State<ClubEditPage> {
   }
 
   List<Step> buildSteps() {
+    final localization = AppLocalizations.of(context)!;
+
     return [
       Step(
-        title: Text("Liga URL"),
+        title: Text(localization.leagueUrl),
         content: ClubEditDialogStepLeagueUrl(
           initialValue: _rankingUrl,
           onUrlChanged: _onRankingUrlChanged,
         ),
       ),
       Step(
-        title: Text("Spielplan URL"),
+        title: Text(localization.matchesUrl),
         content: ClubEditDialogStepMatchupsUrl(
           initialValue: _matchesUrl,
           rankingUrl: _rankingUrl,
@@ -54,7 +57,7 @@ class _ClubEditPageState extends State<ClubEditPage> {
         ),
       ),
       Step(
-        title: Text("Team"),
+        title: Text(localization.team),
         content: ClubEditDialogStepTeamName(
           initialValue: _teamName,
           rankingUrl: _rankingUrl,
@@ -62,14 +65,14 @@ class _ClubEditPageState extends State<ClubEditPage> {
         ),
       ),
       Step(
-        title: Text("Team Kürzel"),
+        title: Text(localization.teamShortName),
         content: ClubEditDialogStepShortName(
           initialValue: _shortName,
           onShortNameChanged: _onShortNameChanged,
         ),
       ),
       Step(
-        title: Text("Überprüfen"),
+        title: Text(localization.review),
         content: ClubEditDialogStepFinalCheck(
           rankingUrl: _rankingUrl,
           matchesUrl: _matchesUrl,
@@ -99,13 +102,14 @@ class _ClubEditPageState extends State<ClubEditPage> {
   @override
   Widget build(BuildContext context) {
     final steps = buildSteps();
+    final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          widget.club == null ? 'Club hinzufügen' : 'Club bearbeiten',
+          widget.club == null ? localization.addClub : localization.editClub,
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -123,12 +127,12 @@ class _ClubEditPageState extends State<ClubEditPage> {
               children: <Widget>[
                 TextButton(
                   onPressed: details.onStepCancel,
-                  child: Text('Zurück'),
+                  child: Text(localization.back_button),
                 ),
                 SizedBox(width: 10),
                 FilledButton(
                   onPressed: details.onStepContinue,
-                  child: Text('Weiter'),
+                  child: Text(localization.next_button),
                 ),
               ],
             ),

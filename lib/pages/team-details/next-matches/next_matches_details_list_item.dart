@@ -28,6 +28,7 @@ class _NextMatchesDetailsListItemState
 
   @override
   Widget build(BuildContext context) {
+    final date = context.getDate();
     final subtitleIconColor = Theme.of(
       context,
     ).colorScheme.onSurface.withAlpha(120);
@@ -43,7 +44,7 @@ class _NextMatchesDetailsListItemState
       trailing: Icon(Icons.chevron_right),
       subtitle: Row(
         spacing: spacingSubtitleBlocks,
-        children: [Text(Date.getDateString(widget.match.time))],
+        children: [Text(date.getDateString(widget.match.time))],
       ),
       title: Text(
         widget.match.isHomeTeam(widget.team)

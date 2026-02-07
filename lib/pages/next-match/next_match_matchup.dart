@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 
@@ -11,6 +12,7 @@ class NextMatchMatchup extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final localization = AppLocalizations.of(context)!;
 
     return Card(
       child: Padding(
@@ -21,7 +23,7 @@ class NextMatchMatchup extends StatelessWidget {
             MatchupTeamText(teamName: match.homeTeam),
             const SizedBox(height: 12),
             Text(
-              "VS",
+              localization.versus,
               style: textTheme.titleMedium?.copyWith(
                 color: theme.colorScheme.primary.withAlpha(80),
               ),

@@ -1,3 +1,5 @@
+import 'package:nuliga_app/localization/app_localizations.dart';
+
 class MatchResult {
   final DateTime time;
   final String homeTeamName;
@@ -53,3 +55,14 @@ class MatchResult {
 }
 
 enum MatchResultStatus { win, loss, draw, unknown }
+
+extension MatchResultStatusExtension on MatchResultStatus {
+  String localized(AppLocalizations localizations) {
+    return switch (this) {
+      MatchResultStatus.win => localizations.matchResultWin,
+      MatchResultStatus.loss => localizations.matchResultLoss,
+      MatchResultStatus.draw => localizations.matchResultDraw,
+      MatchResultStatus.unknown => localizations.matchResultUnknown,
+    };
+  }
+}

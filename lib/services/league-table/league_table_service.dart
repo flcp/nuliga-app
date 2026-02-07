@@ -1,4 +1,4 @@
-import 'package:nuliga_app/services/followed-teams/followed_club.dart';
+import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/services/league-table/model/league_team_ranking.dart';
 import 'package:nuliga_app/services/league-table/model/short_league_team_ranking.dart';
 import 'package:nuliga_app/services/league-table/repository/league_table_repository.dart';

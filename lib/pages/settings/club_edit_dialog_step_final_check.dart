@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/shared/model/validation_result.dart';
 import 'package:nuliga_app/services/settings/settings_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
@@ -63,25 +64,27 @@ class _ClubEditDialogStepFinalCheckState
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Column(
       children: [
         ValidationListItem(
-          title: "Liga Überblick URL",
+          title: localization.leagueOverviewUrl,
           value: widget.rankingUrl,
           isValidFuture: _rankingUrlCachedFuture,
         ),
         ValidationListItem(
-          title: "Spielplan URL",
+          title: localization.matchesUrl,
           value: widget.matchesUrl,
           isValidFuture: _matchesUrlCachedFuture,
         ),
         ValidationListItem(
-          title: "Team",
+          title: localization.team,
           value: widget.selectedTeamName,
           isValidFuture: _teamCachedFuture,
         ),
         ValidationListItem(
-          title: "Team Kürzel",
+          title: localization.teamShortName,
           value: widget.shortName,
           isValidFuture: _shortNameCachedFuture,
         ),

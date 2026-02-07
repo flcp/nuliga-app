@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/match-result/model/game_result.dart';
+import 'package:nuliga_app/services/match-result/model/game_type.dart';
 import 'package:nuliga_app/services/match-result/model/set_result.dart';
 import 'package:nuliga_app/pages/match-result/game_type_icon.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
@@ -19,6 +21,8 @@ class GameResultDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.all(Constants.pagePadding),
       child: Center(
@@ -29,7 +33,7 @@ class GameResultDetail extends StatelessWidget {
               children: [
                 GameTypeIcon(gameResult.gameType),
                 Text(
-                  gameResult.gameType.displayName,
+                  gameResult.gameType.localize(localization),
                   style: TextStyle(
                     color: Theme.of(
                       context,
@@ -50,7 +54,7 @@ class GameResultDetail extends StatelessWidget {
             ),
             SurfaceCard(
               padding: const EdgeInsets.all(Constants.bigCardPadding),
-              title: "Ergebnisse",
+              title: localization.resultCount(2),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -86,6 +90,8 @@ class _SetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.all(12),
@@ -96,7 +102,7 @@ class _SetCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Satz ${setNumber.toString()}",
+            localization.set(setNumber.toString()),
             style: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary.withAlpha(180),
             ),

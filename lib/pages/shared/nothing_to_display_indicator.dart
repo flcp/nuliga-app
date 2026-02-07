@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
+import 'package:nuliga_app/pages/settings/settings_page.dart';
 
 // TODO: use again
 
@@ -7,10 +9,46 @@ class NothingToDisplayIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return SizedBox(
-      height: 200,
+      height: 100,
       child: Center(
-        child: Text("Nothing to display. Try refreshing or another URL"),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            localization.nothingToDisplay,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NothingToDisplayIndicatorWithSettingsButton extends StatelessWidget {
+  const NothingToDisplayIndicatorWithSettingsButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
+    return SizedBox(
+      height: 300,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          NothingToDisplayIndicator(),
+          const SizedBox(height: 8),
+          FilledButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+            child: Text(localization.settings),
+          ),
+        ],
       ),
     );
   }

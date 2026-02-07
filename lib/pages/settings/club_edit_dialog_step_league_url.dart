@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/shared/model/validation_result.dart';
 import 'package:nuliga_app/pages/settings/club_edit_dialog_shared.dart';
 import 'package:nuliga_app/services/settings/settings_service.dart';
@@ -80,6 +81,8 @@ class _ClubEditDialogStepLeagueUrlState
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return FutureBuilder<ValidationResult>(
       future: _rankingUrlCachedFuture,
       builder: (context, asyncSnapshot) {
@@ -92,10 +95,10 @@ class _ClubEditDialogStepLeagueUrlState
           children: [
             const SizedBox(height: 8),
             buildDialogTextField(
-              'Liga Überblick URL',
+              localization.leagueOverviewUrl,
               _rankingUrlController,
               isValid: isRankingUrlValid,
-              validationText: "Ungültige URL",
+              validationText: localization.invalidUrl,
             ),
             const SizedBox(height: 16),
             ExpansionTile(
@@ -106,31 +109,29 @@ class _ClubEditDialogStepLeagueUrlState
                 borderRadius: BorderRadius.circular(8),
               ),
 
-              title: Text("Anleitung"),
+              title: Text(localization.instructions),
               children: [
                 _TutorialRow(
                   index: 1,
-                  subtitle: Text("Beispiel: https://bwbv-badminton.liga.nu"),
+                  subtitle: Text(localization.exampleAssociationUrl),
                   trailing: IconButton(
                     onPressed: () async {
                       await HttpUrls.openUrl("https://badminton.liga.nu/");
                     },
                     icon: Icon(Icons.open_in_new),
                   ),
-                  child: Text("Öffne die Website deines Verbandes"),
+                  child: Text(localization.openYourAssociationWebsite),
                 ),
                 const SizedBox(height: 8),
                 _TutorialRow(
                   index: 2,
-                  subtitle: Text(
-                    'Beispiel: BWBV-Ligen > Landesliga "Oberrhein"',
-                  ),
-                  child: Text("Navigiere zur Liga deines Vereines"),
+                  subtitle: Text(localization.exampleLeaguePath),
+                  child: Text(localization.navigateToYourLeague),
                 ),
                 const SizedBox(height: 8),
                 _TutorialRow(
                   index: 3,
-                  child: Text("Kopiere die URL und füge sie oben ein"),
+                  child: Text(localization.copyUrlAndPasteAbove),
                 ),
               ],
             ),

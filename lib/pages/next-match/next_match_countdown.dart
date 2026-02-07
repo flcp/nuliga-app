@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 
 class NextMatchCountdown extends StatefulWidget {
@@ -48,6 +49,7 @@ class _NextMatchCountdownState extends State<NextMatchCountdown> {
     final hours = _remaining.inHours % 24;
     final minutes = _remaining.inMinutes % 60;
     final seconds = _remaining.inSeconds % 60;
+    final localization = AppLocalizations.of(context)!;
 
     return Card(
       child: Padding(
@@ -55,7 +57,7 @@ class _NextMatchCountdownState extends State<NextMatchCountdown> {
         child: Column(
           children: [
             Text(
-              "Spiel startet in",
+              localization.matchStartsIn,
               style: Theme.of(
                 context,
               ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
@@ -64,10 +66,26 @@ class _NextMatchCountdownState extends State<NextMatchCountdown> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _timeBox(days, "Tage", Theme.of(context).colorScheme),
-                _timeBox(hours, "Std", Theme.of(context).colorScheme),
-                _timeBox(minutes, "Min", Theme.of(context).colorScheme),
-                _timeBox(seconds, "Sek", Theme.of(context).colorScheme),
+                _timeBox(
+                  days,
+                  localization.days,
+                  Theme.of(context).colorScheme,
+                ),
+                _timeBox(
+                  hours,
+                  localization.hours,
+                  Theme.of(context).colorScheme,
+                ),
+                _timeBox(
+                  minutes,
+                  localization.minutes,
+                  Theme.of(context).colorScheme,
+                ),
+                _timeBox(
+                  seconds,
+                  localization.seconds,
+                  Theme.of(context).colorScheme,
+                ),
               ],
             ),
             SizedBox(height: 12),

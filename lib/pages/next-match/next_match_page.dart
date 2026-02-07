@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/pages/next-match/next_match_countdown.dart';
 import 'package:nuliga_app/pages/next-match/next_match_date_info.dart';
@@ -17,8 +18,10 @@ class NextMatchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(title: Text("Upcoming")),
+      appBar: AppBar(title: Text(localization.upcoming)),
       body: Padding(
         padding: const EdgeInsets.all(Constants.pagePadding),
         child: ListView(

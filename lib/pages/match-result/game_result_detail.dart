@@ -21,7 +21,7 @@ class GameResultDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.all(Constants.pagePadding),
@@ -33,7 +33,7 @@ class GameResultDetail extends StatelessWidget {
               children: [
                 GameTypeIcon(gameResult.gameType),
                 Text(
-                  gameResult.gameType.localize(l10n),
+                  gameResult.gameType.localize(localization),
                   style: TextStyle(
                     color: Theme.of(
                       context,
@@ -54,7 +54,7 @@ class GameResultDetail extends StatelessWidget {
             ),
             SurfaceCard(
               padding: const EdgeInsets.all(Constants.bigCardPadding),
-              title: l10n.resultCount(2),
+              title: localization.resultCount(2),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -90,7 +90,7 @@ class _SetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 6),
@@ -102,7 +102,7 @@ class _SetCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            l10n.set(setNumber.toString()),
+            localization.set(setNumber.toString()),
             style: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary.withAlpha(180),
             ),

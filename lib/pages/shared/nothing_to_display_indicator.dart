@@ -9,14 +9,17 @@ class NothingToDisplayIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l18n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return SizedBox(
       height: 100,
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(l18n.nothingToDisplay, textAlign: TextAlign.center),
+          child: Text(
+            localization.nothingToDisplay,
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
@@ -28,7 +31,7 @@ class NothingToDisplayIndicatorWithSettingsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l18n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return SizedBox(
       height: 300,
@@ -43,7 +46,7 @@ class NothingToDisplayIndicatorWithSettingsButton extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const SettingsPage()),
               );
             },
-            child: Text(l18n.settings),
+            child: Text(localization.settings),
           ),
         ],
       ),

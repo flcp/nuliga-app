@@ -64,27 +64,27 @@ class _ClubEditDialogStepFinalCheckState
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Column(
       children: [
         ValidationListItem(
-          title: l10n.leagueOverviewUrl,
+          title: localization.leagueOverviewUrl,
           value: widget.rankingUrl,
           isValidFuture: _rankingUrlCachedFuture,
         ),
         ValidationListItem(
-          title: l10n.matchesUrl,
+          title: localization.matchesUrl,
           value: widget.matchesUrl,
           isValidFuture: _matchesUrlCachedFuture,
         ),
         ValidationListItem(
-          title: l10n.team,
+          title: localization.team,
           value: widget.selectedTeamName,
           isValidFuture: _teamCachedFuture,
         ),
         ValidationListItem(
-          title: l10n.teamShortName,
+          title: localization.teamShortName,
           value: widget.shortName,
           isValidFuture: _shortNameCachedFuture,
         ),

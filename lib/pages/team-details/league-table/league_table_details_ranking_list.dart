@@ -74,7 +74,7 @@ class LeagueTableDetailsRankingListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 12),
@@ -92,18 +92,18 @@ class LeagueTableDetailsRankingListHeader extends StatelessWidget {
             SizedBox(width: 8),
             Expanded(
               child: Text(
-                l10n.name,
+                localization.name,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),
             ),
-            SizedBox(width: 20, child: Text(l10n.wins)),
-            SizedBox(width: 16, child: Text(l10n.draws)),
-            SizedBox(width: 16, child: Text(l10n.losses)),
-            SizedBox(width: 24, child: Text(l10n.points)),
+            SizedBox(width: 20, child: Text(localization.wins)),
+            SizedBox(width: 16, child: Text(localization.draws)),
+            SizedBox(width: 16, child: Text(localization.losses)),
+            SizedBox(width: 24, child: Text(localization.points)),
             SizedBox(
               width: 18,
-              child: Text(l10n.matches, textAlign: TextAlign.center),
+              child: Text(localization.matches, textAlign: TextAlign.center),
             ),
             SizedBox(width: 40),
           ],

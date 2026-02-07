@@ -18,7 +18,7 @@ import 'app_localizations_en.dart';
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'l10n/app_localizations.dart';
+/// import 'localization/app_localizations.dart';
 ///
 /// return MaterialApp(
 ///   localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -398,7 +398,7 @@ abstract class AppLocalizations {
   /// **'Overwrite'**
   String get overwrite_button;
 
-  /// No description provided for @generateFromLeagueUrl_button.
+  /// Button to auto-generate URL
   ///
   /// In en, this message translates to:
   /// **'Generate from League URL'**

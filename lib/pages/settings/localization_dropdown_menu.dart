@@ -15,21 +15,23 @@ class LocalizationDropdownMenu extends StatelessWidget {
       child: DropdownButton(
         value: locale,
         icon: Container(width: 12),
-        items: AppLocalizations.supportedLocales.map((nextLocale) {
+        items: AppLocalizations.supportedLocales.map((l) {
           return DropdownMenuItem(
-            value: nextLocale,
-            onTap: () {
-              final provider = Provider.of<LocalizationProvider>(
-                context,
-                listen: false,
-              );
-
-              provider.setLocale(nextLocale);
-            },
-            child: Center(child: Text(nextLocale.toString())),
+            value: l,
+            child: Center(child: Text(l.toString())),
           );
         }).toList(),
-        onChanged: (_) {},
+        onChanged: (nextLocale) {
+          if (nextLocale == null) {
+            return;
+          }
+          final provider = Provider.of<LocalizationProvider>(
+            context,
+            listen: false,
+          );
+
+          provider.setLocale(nextLocale);
+        },
       ),
     );
   }

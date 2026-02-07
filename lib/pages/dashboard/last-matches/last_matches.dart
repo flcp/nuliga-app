@@ -13,7 +13,7 @@ class LastMatches extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return SizedBox(
       height: 290,
@@ -24,7 +24,7 @@ class LastMatches extends StatelessWidget {
         ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text(l10n.loading);
+            return Text(localization.loading);
           }
 
           final matchResults = getDataOrEmptyList(snapshot).reversed.toList();

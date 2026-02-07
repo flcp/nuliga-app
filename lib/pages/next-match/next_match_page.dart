@@ -18,10 +18,10 @@ class NextMatchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.upcoming)),
+      appBar: AppBar(title: Text(localization.upcoming)),
       body: Padding(
         padding: const EdgeInsets.all(Constants.pagePadding),
         child: ListView(

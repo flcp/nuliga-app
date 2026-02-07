@@ -52,10 +52,10 @@ class _ClubEditDialogStepTeamNameState
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return widget.rankingUrl.isEmpty
-        ? Text(l10n.pleaseEnterLeagueUrlInStep1)
+        ? Text(localization.pleaseEnterLeagueUrlInStep1)
         : FutureBuilder<List<LeagueTeamRanking>>(
             future: _teamRankingsFuture,
             builder:
@@ -90,8 +90,8 @@ class _ClubEditDialogStepTeamNameState
                           ),
                         ),
                         label: hasTeams
-                            ? Text(l10n.team)
-                            : Text(l10n.noTeamFound),
+                            ? Text(localization.team)
+                            : Text(localization.noTeamFound),
                         enabled: hasTeams,
                         initialSelection: initialSelection,
                         onSelected: (selected) {

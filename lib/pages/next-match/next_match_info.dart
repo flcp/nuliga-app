@@ -14,7 +14,7 @@ class NextMatchInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Card(
       child: Padding(
@@ -57,7 +57,7 @@ class NextMatchInfo extends StatelessWidget {
                             await HttpUrls.openUrl(match.locationUrl);
                           },
                           icon: Icon(Icons.open_in_new),
-                          label: Text(l10n.nuliga_button),
+                          label: Text(localization.nuliga_button),
                         ),
                         SizedBox(width: 16),
                         FilledButton.icon(
@@ -70,7 +70,7 @@ class NextMatchInfo extends StatelessWidget {
                             await HttpUrls.openUrl(mapsLink);
                           },
                           icon: Icon(Icons.directions),
-                          label: Text(l10n.maps_button),
+                          label: Text(localization.maps_button),
                         ),
                       ],
                     ),
@@ -96,14 +96,14 @@ class LocationText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     if (isHomeTeam) {
-      return Text(l10n.homeGame);
+      return Text(localization.homeGame);
     }
 
     if (locationMultiline.toList().isEmpty) {
-      return Text(l10n.unknown);
+      return Text(localization.unknown);
     }
 
     return Column(

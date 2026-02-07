@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/bottom_navigation.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/followed-teams/followed_teams_provider.dart';
 import 'package:nuliga_app/services/localization/localization_provider.dart';
 import 'package:provider/provider.dart';
-import 'localization/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

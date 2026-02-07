@@ -26,11 +26,11 @@ class MatchResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.resultCount(1)),
+        title: Text(localization.resultCount(1)),
         actions: [ActionBarOpenLinkButton(url: matchResult.resultDetailUrl)],
       ),
       body: Padding(
@@ -67,7 +67,7 @@ class MatchResultPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isHomeTeam = matchResult.homeTeamName == teamName;
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return FutureBuilder(
       future: matchResultService.getMatchResultDetails(
@@ -80,7 +80,7 @@ class MatchResultPageContent extends StatelessWidget {
 
         final matchResultDetail = getDataOrDefault(asyncSnapshot, null);
         if (matchResultDetail == null) {
-          return Text(l10n.nothingToDisplay);
+          return Text(localization.nothingToDisplay);
         }
 
         return Expanded(
@@ -100,7 +100,7 @@ class MatchResultPageContent extends StatelessWidget {
                       },
                     ),
                     titleLeading: GameTypeIcon(gameResult.gameType),
-                    title: gameResult.gameType.localize(l10n),
+                    title: gameResult.gameType.localize(localization),
                     titleTrailing: WinLossIndicator(
                       size: 12,
                       status: isHomeTeam

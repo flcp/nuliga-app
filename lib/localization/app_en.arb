@@ -257,7 +257,7 @@
   },
   
   "generateFromLeagueUrl_button": "Generate from League URL",
-  "@generateFromLeagueUrl": {
+  "@generateFromLeagueUrl_button": {
     "description": "Button to auto-generate URL"
   },
   

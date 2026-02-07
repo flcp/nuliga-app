@@ -16,7 +16,7 @@ class LeagueInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: Constants.pagePadding),
@@ -59,7 +59,7 @@ class LeagueInfo extends StatelessWidget {
                   ),
                 ),
                 SquareSurfaceCard(
-                  title: l10n.matchesPlayed,
+                  title: localization.matchesPlayed,
                   onTap: () => navigateToResults(context),
                   child: Row(
                     children: [

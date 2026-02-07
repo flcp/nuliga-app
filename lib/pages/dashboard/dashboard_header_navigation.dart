@@ -54,7 +54,7 @@ class _DashboardHeaderNavigationState extends State<DashboardHeaderNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Row(
       children: [
@@ -96,7 +96,7 @@ class _DashboardHeaderNavigationState extends State<DashboardHeaderNavigation> {
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             PopupMenuItem<String>(
               value: 'settings',
-              child: Text(l10n.settings),
+              child: Text(localization.settings),
             ),
           ],
           icon: Icon(Icons.menu),

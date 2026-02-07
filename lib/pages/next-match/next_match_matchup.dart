@@ -12,7 +12,7 @@ class NextMatchMatchup extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Card(
       child: Padding(
@@ -23,7 +23,7 @@ class NextMatchMatchup extends StatelessWidget {
             MatchupTeamText(teamName: match.homeTeam),
             const SizedBox(height: 12),
             Text(
-              l10n.versus,
+              localization.versus,
               style: textTheme.titleMedium?.copyWith(
                 color: theme.colorScheme.primary.withAlpha(80),
               ),

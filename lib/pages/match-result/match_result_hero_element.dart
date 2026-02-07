@@ -19,7 +19,7 @@ class MatchResultHeroElement extends StatelessWidget {
   Widget build(BuildContext context) {
     final date = context.getDate();
     final infoColor = Theme.of(context).colorScheme.onSurface.withAlpha(150);
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Column(
       children: [
@@ -36,7 +36,7 @@ class MatchResultHeroElement extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  l10n.versus,
+                  localization.versus,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Theme.of(context).colorScheme.primary.withAlpha(80),
                   ),
@@ -65,7 +65,7 @@ class MatchResultHeroElement extends StatelessWidget {
                     Text(
                       matchResult
                           .getMatchStatusForTeam(teamName)
-                          .localized(l10n),
+                          .localized(localization),
                       style: TextStyle(color: infoColor),
                     ),
                     SizedBox(width: 24),

@@ -38,18 +38,18 @@ class _ClubEditPageState extends State<ClubEditPage> {
   }
 
   List<Step> buildSteps() {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return [
       Step(
-        title: Text(l10n.leagueUrl),
+        title: Text(localization.leagueUrl),
         content: ClubEditDialogStepLeagueUrl(
           initialValue: _rankingUrl,
           onUrlChanged: _onRankingUrlChanged,
         ),
       ),
       Step(
-        title: Text(l10n.matchesUrl),
+        title: Text(localization.matchesUrl),
         content: ClubEditDialogStepMatchupsUrl(
           initialValue: _matchesUrl,
           rankingUrl: _rankingUrl,
@@ -57,7 +57,7 @@ class _ClubEditPageState extends State<ClubEditPage> {
         ),
       ),
       Step(
-        title: Text(l10n.team),
+        title: Text(localization.team),
         content: ClubEditDialogStepTeamName(
           initialValue: _teamName,
           rankingUrl: _rankingUrl,
@@ -65,14 +65,14 @@ class _ClubEditPageState extends State<ClubEditPage> {
         ),
       ),
       Step(
-        title: Text(l10n.teamShortName),
+        title: Text(localization.teamShortName),
         content: ClubEditDialogStepShortName(
           initialValue: _shortName,
           onShortNameChanged: _onShortNameChanged,
         ),
       ),
       Step(
-        title: Text(l10n.review),
+        title: Text(localization.review),
         content: ClubEditDialogStepFinalCheck(
           rankingUrl: _rankingUrl,
           matchesUrl: _matchesUrl,
@@ -102,13 +102,15 @@ class _ClubEditPageState extends State<ClubEditPage> {
   @override
   Widget build(BuildContext context) {
     final steps = buildSteps();
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(widget.club == null ? l10n.addClub : l10n.editClub),
+        title: Text(
+          widget.club == null ? localization.addClub : localization.editClub,
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -125,12 +127,12 @@ class _ClubEditPageState extends State<ClubEditPage> {
               children: <Widget>[
                 TextButton(
                   onPressed: details.onStepCancel,
-                  child: Text(l10n.back_button),
+                  child: Text(localization.back_button),
                 ),
                 SizedBox(width: 10),
                 FilledButton(
                   onPressed: details.onStepContinue,
-                  child: Text(l10n.next_button),
+                  child: Text(localization.next_button),
                 ),
               ],
             ),

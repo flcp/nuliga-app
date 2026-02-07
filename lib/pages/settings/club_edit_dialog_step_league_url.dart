@@ -81,7 +81,7 @@ class _ClubEditDialogStepLeagueUrlState
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return FutureBuilder<ValidationResult>(
       future: _rankingUrlCachedFuture,
@@ -95,10 +95,10 @@ class _ClubEditDialogStepLeagueUrlState
           children: [
             const SizedBox(height: 8),
             buildDialogTextField(
-              l10n.leagueOverviewUrl,
+              localization.leagueOverviewUrl,
               _rankingUrlController,
               isValid: isRankingUrlValid,
-              validationText: l10n.invalidUrl,
+              validationText: localization.invalidUrl,
             ),
             const SizedBox(height: 16),
             ExpansionTile(
@@ -109,27 +109,30 @@ class _ClubEditDialogStepLeagueUrlState
                 borderRadius: BorderRadius.circular(8),
               ),
 
-              title: Text(l10n.instructions),
+              title: Text(localization.instructions),
               children: [
                 _TutorialRow(
                   index: 1,
-                  subtitle: Text(l10n.exampleAssociationUrl),
+                  subtitle: Text(localization.exampleAssociationUrl),
                   trailing: IconButton(
                     onPressed: () async {
                       await HttpUrls.openUrl("https://badminton.liga.nu/");
                     },
                     icon: Icon(Icons.open_in_new),
                   ),
-                  child: Text(l10n.openYourAssociationWebsite),
+                  child: Text(localization.openYourAssociationWebsite),
                 ),
                 const SizedBox(height: 8),
                 _TutorialRow(
                   index: 2,
-                  subtitle: Text(l10n.exampleLeaguePath),
-                  child: Text(l10n.navigateToYourLeague),
+                  subtitle: Text(localization.exampleLeaguePath),
+                  child: Text(localization.navigateToYourLeague),
                 ),
                 const SizedBox(height: 8),
-                _TutorialRow(index: 3, child: Text(l10n.copyUrlAndPasteAbove)),
+                _TutorialRow(
+                  index: 3,
+                  child: Text(localization.copyUrlAndPasteAbove),
+                ),
               ],
             ),
           ],

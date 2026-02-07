@@ -49,7 +49,7 @@ class _NextMatchCountdownState extends State<NextMatchCountdown> {
     final hours = _remaining.inHours % 24;
     final minutes = _remaining.inMinutes % 60;
     final seconds = _remaining.inSeconds % 60;
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Card(
       child: Padding(
@@ -57,7 +57,7 @@ class _NextMatchCountdownState extends State<NextMatchCountdown> {
         child: Column(
           children: [
             Text(
-              l10n.matchStartsIn,
+              localization.matchStartsIn,
               style: Theme.of(
                 context,
               ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
@@ -66,10 +66,26 @@ class _NextMatchCountdownState extends State<NextMatchCountdown> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _timeBox(days, l10n.days, Theme.of(context).colorScheme),
-                _timeBox(hours, l10n.hours, Theme.of(context).colorScheme),
-                _timeBox(minutes, l10n.minutes, Theme.of(context).colorScheme),
-                _timeBox(seconds, l10n.seconds, Theme.of(context).colorScheme),
+                _timeBox(
+                  days,
+                  localization.days,
+                  Theme.of(context).colorScheme,
+                ),
+                _timeBox(
+                  hours,
+                  localization.hours,
+                  Theme.of(context).colorScheme,
+                ),
+                _timeBox(
+                  minutes,
+                  localization.minutes,
+                  Theme.of(context).colorScheme,
+                ),
+                _timeBox(
+                  seconds,
+                  localization.seconds,
+                  Theme.of(context).colorScheme,
+                ),
               ],
             ),
             SizedBox(height: 12),

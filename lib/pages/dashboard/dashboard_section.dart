@@ -19,7 +19,7 @@ class DashboardSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = isContentWidthConstrained ? Constants.pagePadding : 0.0;
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +32,7 @@ class DashboardSection extends StatelessWidget {
               Text(title, style: Theme.of(context).textTheme.titleMedium),
               TextButton(
                 onPressed: onViewAll,
-                child: Text(l10n.viewAll_button),
+                child: Text(localization.viewAll_button),
               ),
             ],
           ),

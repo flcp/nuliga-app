@@ -44,16 +44,16 @@ class _ClubEditDialogStepShortNameState
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Column(
       children: [
         const SizedBox(height: 8),
         buildDialogTextField(
-          l10n.teamShortName,
+          localization.teamShortName,
           _shortNameController,
           isValid: validateShortName(_shortNameController.text),
-          validationText: l10n.shortNameMaxLength,
+          validationText: localization.shortNameMaxLength,
         ),
       ],
     );

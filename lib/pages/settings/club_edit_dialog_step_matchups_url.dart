@@ -72,7 +72,7 @@ class _ClubEditDialogStepMatchupsUrlState
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return FutureBuilder<ValidationResult>(
       future: _matchupsUrlCachedFuture,
@@ -83,10 +83,10 @@ class _ClubEditDialogStepMatchupsUrlState
           children: [
             const SizedBox(height: 8),
             buildDialogTextField(
-              l10n.matchPlanOverallUrl,
+              localization.matchPlanOverallUrl,
               _matchupsUrlController,
               isValid: isValid,
-              validationText: l10n.invalidUrl,
+              validationText: localization.invalidUrl,
             ),
             const SizedBox(height: 8),
             ElevatedButton(
@@ -95,12 +95,12 @@ class _ClubEditDialogStepMatchupsUrlState
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text(l10n.confirmOverwrite),
-                      content: Text(l10n.confirmOverwriteMatchPlanUrl),
+                      title: Text(localization.confirmOverwrite),
+                      content: Text(localization.confirmOverwriteMatchPlanUrl),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: Text(l10n.cancel_button),
+                          child: Text(localization.cancel_button),
                         ),
                         TextButton(
                           onPressed: () {
@@ -108,7 +108,7 @@ class _ClubEditDialogStepMatchupsUrlState
 
                             _fillMatchupsUrlFromRankingUrl();
                           },
-                          child: Text(l10n.overwrite_button),
+                          child: Text(localization.overwrite_button),
                         ),
                       ],
                     ),
@@ -122,7 +122,7 @@ class _ClubEditDialogStepMatchupsUrlState
                 children: [
                   const Icon(Icons.auto_fix_high),
                   const SizedBox(width: 8),
-                  Text(l10n.generateFromLeagueUrl_button),
+                  Text(localization.generateFromLeagueUrl_button),
                 ],
               ),
             ),

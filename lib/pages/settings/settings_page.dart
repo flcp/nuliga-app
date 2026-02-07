@@ -12,13 +12,13 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(l10n.settings),
+        title: Text(localization.settings),
       ),
       body: Consumer<FollowedTeamsProvider>(
         builder: (context, provider, child) {
@@ -70,7 +70,8 @@ class SettingsPage extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    l10n.clubAlreadyExistsUpdateCancelled,
+                                    localization
+                                        .clubAlreadyExistsUpdateCancelled,
                                   ),
                                 ),
                               );
@@ -111,7 +112,9 @@ class SettingsPage extends StatelessWidget {
                     )) {
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(l10n.clubAlreadyExists)),
+                          SnackBar(
+                            content: Text(localization.clubAlreadyExists),
+                          ),
                         );
                       }
                       return;
@@ -120,7 +123,7 @@ class SettingsPage extends StatelessWidget {
                   }
                 },
                 icon: const Icon(Icons.add),
-                label: Text(l10n.addClub),
+                label: Text(localization.addClub),
               ),
               const SizedBox(height: 24),
               LocalizationDropdownMenu(),

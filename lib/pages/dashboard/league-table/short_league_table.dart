@@ -15,7 +15,7 @@ class ShortLeagueTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return FutureBuilder(
       future: leagueTableService.getClosestRankingsToTeam(
@@ -31,7 +31,7 @@ class ShortLeagueTable extends StatelessWidget {
               child: SizedBox(
                 height: 160,
                 width: double.infinity,
-                child: Center(child: Text(l10n.loading)),
+                child: Center(child: Text(localization.loading)),
               ),
             ),
           );

@@ -38,7 +38,7 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
   Widget build(BuildContext context) {
     final provider = context.watch<FollowedTeamsProvider>();
     final teams = provider.followedTeams;
-    final l10n = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context)!;
 
     return RefreshIndicator(
       onRefresh: refresh,
@@ -78,7 +78,7 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                           SizedBox(height: 16),
                           DashboardSection(
                             isContentWidthConstrained: false,
-                            title: l10n.next,
+                            title: localization.next,
                             onViewAll: () => goToNextMatches(team),
                             child: NextMatches(
                               matchesUrl: team.matchesUrl,
@@ -87,7 +87,7 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
                           ),
                           SizedBox(height: 16),
                           DashboardSection(
-                            title: l10n.last,
+                            title: localization.last,
                             child: LastMatches(team: team),
                             onViewAll: () => goToResults(team),
                           ),

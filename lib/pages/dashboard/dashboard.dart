@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
+import 'package:nuliga_app/pages/dashboard/dashboard_team_section.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
 import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard_header_navigation.dart';
@@ -56,44 +57,12 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
             child: teams.isEmpty
                 ? NothingToDisplayIndicatorWithSettingsButton()
                 : ScrollablePositionedList.builder(
-                    addAutomaticKeepAlives: true,
                     itemScrollController: _itemScrollController,
                     itemPositionsListener: _itemPositionsListener,
                     itemCount: teams.length,
                     itemBuilder: (context, index) {
                       final team = teams[index];
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(
-                              Constants.pagePadding,
-                            ),
-                            child: Text(
-                              team.name,
-                              style: Theme.of(context).textTheme.displaySmall,
-                            ),
-                          ),
-                          LeagueInfo(team: team),
-                          SizedBox(height: 16),
-                          DashboardSection(
-                            isContentWidthConstrained: false,
-                            title: localization.next,
-                            onViewAll: () => goToNextMatches(team),
-                            child: NextMatches(
-                              matchesUrl: team.matchesUrl,
-                              team: team,
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          DashboardSection(
-                            title: localization.last,
-                            child: LastMatches(team: team),
-                            onViewAll: () => goToResults(team),
-                          ),
-                          SizedBox(height: 48),
-                        ],
-                      );
+                      return DashboardTeamSection(team: team);
                     },
                   ),
           ),

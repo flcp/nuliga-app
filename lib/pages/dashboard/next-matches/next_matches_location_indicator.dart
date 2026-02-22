@@ -4,19 +4,32 @@ import 'package:nuliga_app/services/location/location_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http_urls.dart';
 
-class NextMatchesLocationIndicatorButton extends StatelessWidget {
+class NextMatchesLocationIndicatorButton extends StatefulWidget {
   final FutureMatch match;
   final String homeTeamName;
 
-  final double size = 30.0;
-
-  final locationService = LocationService();
-
-  NextMatchesLocationIndicatorButton({
+  const NextMatchesLocationIndicatorButton({
     required this.match,
     super.key,
     required this.homeTeamName,
   });
+
+  @override
+  State<NextMatchesLocationIndicatorButton> createState() =>
+      _NextMatchesLocationIndicatorButtonState();
+}
+
+class _NextMatchesLocationIndicatorButtonState
+    extends State<NextMatchesLocationIndicatorButton> {
+  final double size = 30.0;
+  final locationService = LocationService();
+  late Future<String> _locationMapsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _locationMapsFuture = locationService.getLocationMapsLink(widget.match);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +37,12 @@ class NextMatchesLocationIndicatorButton extends StatelessWidget {
       context,
     ).colorScheme.onPrimaryContainer.withAlpha(50);
 
-    if (match.homeTeam == homeTeamName) {
+    if (widget.match.homeTeam == widget.homeTeamName) {
       return Icon(Icons.home, color: color);
     }
 
     return FutureBuilder(
-      future: locationService.getLocationMapsLink(match),
+      future: _locationMapsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox.shrink();

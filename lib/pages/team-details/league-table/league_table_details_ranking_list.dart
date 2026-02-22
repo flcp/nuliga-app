@@ -29,17 +29,30 @@ class _LeagueTableDetailsRankingListState
     extends State<LeagueTableDetailsRankingList> {
   final httpClient = HttpClient();
   final leagueTableRepository = LeagueTableRepository();
+  late Future<List<LeagueTeamRanking>> _leagueTeamRankingsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _leagueTeamRankingsFuture = leagueTableRepository.getLeagueTeamRankings(
+      widget.url,
+    );
+  }
 
   Future<void> refresh() {
     httpClient.clearCache();
-    setState(() {});
+    setState(() {
+      _leagueTeamRankingsFuture = leagueTableRepository.getLeagueTeamRankings(
+        widget.url,
+      );
+    });
     return Future.value();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<LeagueTeamRanking>>(
-      future: leagueTableRepository.getLeagueTeamRankings(widget.url),
+      future: _leagueTeamRankingsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return LoadingIndicator();

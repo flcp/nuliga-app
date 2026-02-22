@@ -8,11 +8,27 @@ import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/services/league-table/league_table_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
-class LeagueInfo extends StatelessWidget {
-  LeagueInfo({super.key, required this.team});
+class LeagueInfo extends StatefulWidget {
+  const LeagueInfo({super.key, required this.team});
 
-  final LeagueTableService leagueTableService = LeagueTableService();
   final FollowedClub team;
+
+  @override
+  State<LeagueInfo> createState() => _LeagueInfoState();
+}
+
+class _LeagueInfoState extends State<LeagueInfo> {
+  late Future<ShortLeagueTeamRanking> _leagueTableFuture;
+  final LeagueTableService leagueTableService = LeagueTableService();
+
+  @override
+  void initState() {
+    super.initState();
+    _leagueTableFuture = leagueTableService.getShortRankingForTeam(
+      widget.team.rankingTableUrl,
+      widget.team.name,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +39,7 @@ class LeagueInfo extends StatelessWidget {
       child: SizedBox(
         height: 140,
         child: FutureBuilder(
-          future: leagueTableService.getShortRankingForTeam(
-            team.rankingTableUrl,
-            team.name,
-          ),
+          future: _leagueTableFuture,
           builder: (context, asyncSnapshot) {
             if (asyncSnapshot.connectionState == ConnectionState.waiting) {
               return ListView(
@@ -88,7 +101,7 @@ class LeagueInfo extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TeamDetailsPage(team: team, startIndex: 1),
+        builder: (context) => TeamDetailsPage(team: widget.team, startIndex: 1),
       ),
     );
   }
@@ -97,7 +110,7 @@ class LeagueInfo extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TeamDetailsPage(team: team, startIndex: 2),
+        builder: (context) => TeamDetailsPage(team: widget.team, startIndex: 2),
       ),
     );
   }

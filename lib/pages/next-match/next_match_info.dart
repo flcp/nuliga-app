@@ -6,11 +6,24 @@ import 'package:nuliga_app/services/location/location_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http_urls.dart';
 
-class NextMatchInfo extends StatelessWidget {
-  NextMatchInfo({super.key, required this.match, required this.teamName});
-  final locationService = LocationService();
+class NextMatchInfo extends StatefulWidget {
+  const NextMatchInfo({super.key, required this.match, required this.teamName});
   final FutureMatch match;
   final String teamName;
+
+  @override
+  State<NextMatchInfo> createState() => _NextMatchInfoState();
+}
+
+class _NextMatchInfoState extends State<NextMatchInfo> {
+  final locationService = LocationService();
+  late Future<String> _locationFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _locationFuture = locationService.getLocation(widget.match);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +33,7 @@ class NextMatchInfo extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(Constants.bigCardPadding),
         child: FutureBuilder(
-          future: locationService.getLocation(match),
+          future: _locationFuture,
           builder: (context, asyncSnapshot) {
             if (asyncSnapshot.connectionState == ConnectionState.waiting) {
               return Center();
@@ -40,13 +53,13 @@ class NextMatchInfo extends StatelessWidget {
                     const SizedBox(width: 18),
                     Expanded(
                       child: LocationText(
-                        isHomeTeam: match.isHomeTeam(teamName),
+                        isHomeTeam: widget.match.isHomeTeam(widget.teamName),
                         locationMultiline: locationMultiline,
                       ),
                     ),
                   ],
                 ),
-                if (match.locationUrl.isNotEmpty)
+                if (widget.match.locationUrl.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -54,7 +67,7 @@ class NextMatchInfo extends StatelessWidget {
                       children: [
                         TextButton.icon(
                           onPressed: () async {
-                            await HttpUrls.openUrl(match.locationUrl);
+                            await HttpUrls.openUrl(widget.match.locationUrl);
                           },
                           icon: Icon(Icons.open_in_new),
                           label: Text(localization.nuliga_button),
@@ -62,7 +75,7 @@ class NextMatchInfo extends StatelessWidget {
                         SizedBox(width: 16),
                         FilledButton.icon(
                           onPressed: () async {
-                            if (match.locationUrl.isEmpty) return;
+                            if (widget.match.locationUrl.isEmpty) return;
                             final mapsLink =
                                 LocationService.convertToGoogleMapsLink(
                                   locationMultiline.join(", "),

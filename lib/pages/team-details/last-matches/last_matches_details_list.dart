@@ -25,14 +25,21 @@ class LastMatchesDetailsList extends StatefulWidget {
 
 class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
   final httpClient = HttpClient();
+  late Future<List<MatchResult>> _lastMatchesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _lastMatchesFuture = LastMatchesService.getLastMatchesForTeam(
+      widget.matchOverviewUrl,
+      widget.teamName,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: LastMatchesService.getLastMatchesForTeam(
-        widget.matchOverviewUrl,
-        widget.teamName,
-      ),
+      future: _lastMatchesFuture,
       builder: (context, snapshot) {
         final date = context.getDate();
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -99,7 +106,12 @@ class _LastMatchesDetailsListState extends State<LastMatchesDetailsList> {
 
   Future<void> refresh() {
     httpClient.clearCache();
-    setState(() {});
+    setState(() {
+      _lastMatchesFuture = LastMatchesService.getLastMatchesForTeam(
+        widget.matchOverviewUrl,
+        widget.teamName,
+      );
+    });
     return Future.value();
   }
 }

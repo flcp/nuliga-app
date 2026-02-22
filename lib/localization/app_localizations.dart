@@ -392,7 +392,7 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel_button;
 
-  /// No description provided for @overwrite_button.
+  /// Overwrite button label
   ///
   /// In en, this message translates to:
   /// **'Overwrite'**

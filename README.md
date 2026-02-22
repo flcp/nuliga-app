@@ -1,16 +1,27 @@
-# nuliga_app
+# Neoliga
 
-A new Flutter project.
+A modern app to access Nuliga website.
 
-## Getting Started
+## Download
 
-This project is a starting point for a Flutter application.
+App Store
+LINK
 
-A few resources to get you started if this is your first Flutter project:
+Play Store
+LINK
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Feedback
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Feedback is always welcome. Consider leaving feedback in any of the following places:
+- App Store
+- Play Store
+- Github issue
+- E-Mail
+
+# For developers
+
+This app was written in Flutter. 
+
+## Setup workspace
+
+## Release

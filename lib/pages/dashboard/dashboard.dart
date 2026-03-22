@@ -39,7 +39,6 @@ class _TeamOverviewPageState extends State<TeamOverviewPage> {
   Widget build(BuildContext context) {
     final provider = context.watch<FollowedTeamsProvider>();
     final teams = provider.followedTeams;
-    final localization = AppLocalizations.of(context)!;
 
     return RefreshIndicator(
       onRefresh: refresh,

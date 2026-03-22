@@ -499,6 +499,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing to display. Try refreshing or another URL'**
   String get nothingToDisplay;
+
+  /// Content of card when no upcoming matches exist
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming matches'**
+  String get noUpcomingMatches;
 }
 
 class _AppLocalizationsDelegate

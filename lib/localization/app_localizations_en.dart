@@ -226,4 +226,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get nothingToDisplay =>
       'Nothing to display. Try refreshing or another URL';
+
+  @override
+  String get noUpcomingMatches => 'No upcoming matches';
 }

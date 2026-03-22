@@ -66,5 +66,6 @@
   "gameTypeMixedDoubles": "Gemischtes Doppel",
   "gameTypeWomenSingles": "Dameneinzel",
   "gameTypeWomenDoubles": "Damendoppel",
-  "nothingToDisplay": "Nichts zum Anzeigen. Lade die Seite neu oder versuche eine andere URL."
+  "nothingToDisplay": "Nichts zum Anzeigen. Lade die Seite neu oder versuche eine andere URL.",
+  "noUpcomingMatches": "Keine nächsten Spiele"
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
-import 'package:nuliga_app/pages/dashboard/dashboard.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard_section.dart';
 import 'package:nuliga_app/pages/dashboard/last-matches/last_matches.dart';
 import 'package:nuliga_app/pages/dashboard/league-info/league_info.dart';

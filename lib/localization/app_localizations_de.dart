@@ -225,4 +225,7 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get nothingToDisplay =>
       'Nichts zum Anzeigen. Lade die Seite neu oder versuche eine andere URL.';
+
+  @override
+  String get noUpcomingMatches => 'Keine nächsten Spiele';
 }

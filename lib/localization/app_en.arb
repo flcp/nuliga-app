@@ -339,5 +339,10 @@
   "nothingToDisplay": "Nothing to display. Try refreshing or another URL",
   "@nothingToDisplay": {
     "description": "Label to display when no data is present in nothingToDisplayIndicator"
+  },
+
+  "noUpcomingMatches": "No upcoming matches",
+  "@noUpcomingMatches": {
+    "description": "Content of card when no upcoming matches exist"
   }
 }

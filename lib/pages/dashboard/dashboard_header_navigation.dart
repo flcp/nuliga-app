@@ -22,7 +22,7 @@ class DashboardHeaderNavigation extends StatefulWidget {
 }
 
 class _DashboardHeaderNavigationState extends State<DashboardHeaderNavigation> {
-  Iterable<int> _visibleIndices = Iterable.empty();
+  int? _activeNavigationElementIndex;
   late VoidCallback _positionsListener;
 
   @override
@@ -30,13 +30,26 @@ class _DashboardHeaderNavigationState extends State<DashboardHeaderNavigation> {
     super.initState();
 
     _positionsListener = () {
-      final newPositions = widget.itemPositionsListener.itemPositions.value;
-      final newIndices = newPositions.map((pos) => pos.index).toList();
+      final positions = widget.itemPositionsListener.itemPositions.value;
+      if (positions.isEmpty) return;
 
-      if (_visibleIndices.length != newIndices.length ||
-          !_visibleIndices.every((element) => newIndices.contains(element))) {
+      int? largestIndex;
+      double largestFraction = 0;
+
+      for (final pos in positions) {
+        final visibleStart = pos.itemLeadingEdge.clamp(0.0, 1.0);
+        final visibleEnd = pos.itemTrailingEdge.clamp(0.0, 1.0);
+        final visibleFraction = visibleEnd - visibleStart;
+
+        if (visibleFraction > largestFraction) {
+          largestFraction = visibleFraction;
+          largestIndex = pos.index;
+        }
+      }
+
+      if (_activeNavigationElementIndex != largestIndex) {
         setState(() {
-          _visibleIndices = newIndices;
+          _activeNavigationElementIndex = largestIndex;
         });
       }
     };
@@ -68,7 +81,8 @@ class _DashboardHeaderNavigationState extends State<DashboardHeaderNavigation> {
                     team.shortName,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color:
-                          _visibleIndices.contains(widget.teams.indexOf(team))
+                          _activeNavigationElementIndex ==
+                              widget.teams.indexOf(team)
                           ? Theme.of(context).colorScheme.primary
                           : Colors.grey.shade300,
                     ),

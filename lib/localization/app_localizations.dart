@@ -505,6 +505,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No upcoming matches'**
   String get noUpcomingMatches;
+
+  /// Settings group title for followed clubs
+  ///
+  /// In en, this message translates to:
+  /// **'Clubs'**
+  String get followedClubs;
+
+  /// Settings group title for language selection
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// Name of german language
+  ///
+  /// In en, this message translates to:
+  /// **'German'**
+  String get languageGerman;
+
+  /// Name of english language
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
 }
 
 class _AppLocalizationsDelegate

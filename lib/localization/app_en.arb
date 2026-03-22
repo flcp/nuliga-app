@@ -344,5 +344,25 @@
   "noUpcomingMatches": "No upcoming matches",
   "@noUpcomingMatches": {
     "description": "Content of card when no upcoming matches exist"
+  },
+
+  "followedClubs": "Clubs",
+  "@followedClubs": {
+    "description": "Settings group title for followed clubs"
+  },
+
+  "language": "Language",
+  "@language": {
+    "description": "Settings group title for language selection"
+  },
+
+  "languageGerman": "German",
+  "@languageGerman": {
+    "description": "Name of german language"
+  },
+
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "Name of english language"
   }
 }

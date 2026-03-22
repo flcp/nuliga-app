@@ -229,4 +229,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noUpcomingMatches => 'No upcoming matches';
+
+  @override
+  String get followedClubs => 'Clubs';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get languageGerman => 'German';
+
+  @override
+  String get languageEnglish => 'English';
 }

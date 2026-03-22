@@ -10,6 +10,18 @@ class LocalizationDropdownMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<LocalizationProvider>(context);
     final locale = provider.locale;
+    final localization = AppLocalizations.of(context)!;
+
+    String localeDisplayName(Locale l) {
+      switch (l.languageCode) {
+        case 'de':
+          return localization.languageGerman;
+        case 'en':
+          return localization.languageEnglish;
+        default:
+          return l.toString();
+      }
+    }
 
     return DropdownButtonHideUnderline(
       child: DropdownButton(
@@ -18,7 +30,7 @@ class LocalizationDropdownMenu extends StatelessWidget {
         items: AppLocalizations.supportedLocales.map((l) {
           return DropdownMenuItem(
             value: l,
-            child: Center(child: Text(l.toString())),
+            child: Center(child: Text(localeDisplayName(l))),
           );
         }).toList(),
         onChanged: (nextLocale) {

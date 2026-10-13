@@ -23,6 +23,27 @@ void main() {
       expect(result[0].opponentTeamMatchesWon, 1);
     });
 
+    test(
+      'parses 26/27 sample file and identifies first entry correctly',
+      () async {
+        final file = File(
+          'test/assets/last-matches/test-page-season-2627.html',
+        );
+        final html = await file.readAsString();
+
+        final result = LastMatchesOverviewParser().getMatchResultEntries(
+          html,
+          "http://example.com/",
+        );
+
+        expect(result.length, 4);
+        expect(result[0].homeTeamName, "SG Heilbronn/Leingarten II");
+        expect(result[0].opponentTeamName, "SSC Karlsruhe");
+        expect(result[0].homeTeamMatchesWon, 4);
+        expect(result[0].opponentTeamMatchesWon, 4);
+      },
+    );
+
     test('parses sample file and parses date and time correctly', () async {
       final file = File('test/assets/last-matches/test-page.html');
       final html = await file.readAsString();

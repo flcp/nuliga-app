@@ -48,7 +48,7 @@ class _LastMatchesState extends State<LastMatches> {
           );
 
           return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             spacing: 0,
             children: lastThreeMatchResults
                 .map(

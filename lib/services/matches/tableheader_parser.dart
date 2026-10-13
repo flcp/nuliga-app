@@ -17,11 +17,15 @@ class TableheaderParser {
   }
 
   static int getLocationIndex(List<Element> headerCells) {
-    return _getIndexByHeaderName(
+    var sportHallIndex = _getIndexByHeaderName(
       headerCells,
       "Sporthalle",
       defaultLocationIndex,
     );
+    if (sportHallIndex == defaultLocationIndex) {
+      return _getIndexByHeaderName(headerCells, "Ort", defaultLocationIndex);
+    }
+    return sportHallIndex;
   }
 
   static int getHomeTeamIndex(List<Element> headerCells) {
@@ -49,17 +53,35 @@ class TableheaderParser {
     String headerText,
     int defaultMatchesDateIndex,
   ) {
+    final hasMergedDateHeader = _hasMergedDateHeader(headerCells);
+
     for (int i = 0; i < headerCells.length; i++) {
       final cellText = headerCells[i].text.trim();
       if (headerText.contains(cellText)) {
-        // first three indices are squashed into single column
-        if (i > 0) {
+        if (hasMergedDateHeader && i > 0) {
           i = i + 2;
         }
         return i;
       }
     }
     return defaultMatchesDateIndex;
+  }
+
+  // legacy pages use a merged header cell for date and time, which spans three columns.
+  static bool _hasMergedDateHeader(List<Element> headerCells) {
+    if (headerCells.isEmpty) {
+      return false;
+    }
+
+    final firstCell = headerCells.first;
+    if (firstCell.attributes['colspan'] == '3') {
+      return true;
+    }
+
+    final normalizedText = firstCell.text.toLowerCase().replaceAll(' ', '');
+    return normalizedText.contains('tag') &&
+        normalizedText.contains('datum') &&
+        normalizedText.contains('zeit');
   }
 
   static TableIndizes getIndices(List<Element> headerCells) {

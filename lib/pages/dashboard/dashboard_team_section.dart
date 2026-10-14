@@ -27,13 +27,6 @@ class _DashboardTeamSectionState extends State<DashboardTeamSection>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(Constants.pagePadding),
-          child: Text(
-            widget.team.name,
-            style: Theme.of(context).textTheme.displaySmall,
-          ),
-        ),
         LeagueInfo(team: widget.team),
         SizedBox(height: 16),
         DashboardSection(

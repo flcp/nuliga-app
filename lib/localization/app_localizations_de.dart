@@ -55,7 +55,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get loading => 'Lädt';
 
   @override
-  String get matchesPlayed => 'Matches gespielt';
+  String get matchesPlayed => 'Gespielt';
+
+  @override
+  String get rank => 'Rang';
 
   @override
   String get name => 'Name';

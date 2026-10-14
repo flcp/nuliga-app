@@ -55,7 +55,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loading => 'Loading';
 
   @override
-  String get matchesPlayed => 'Matches played';
+  String get matchesPlayed => 'Played';
+
+  @override
+  String get rank => 'Rank';
 
   @override
   String get name => 'Name';

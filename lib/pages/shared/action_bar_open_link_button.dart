@@ -7,10 +7,12 @@ class ActionBarFollowedTeamOpenLinkButton extends StatelessWidget {
     super.key,
     required this.selectedFollowedTeam,
     required this.urlAccessor,
+    this.color,
   });
 
   final FollowedClub? selectedFollowedTeam;
   final String Function(FollowedClub) urlAccessor;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class ActionBarFollowedTeamOpenLinkButton extends StatelessWidget {
     }
 
     return IconButton(
-      icon: Icon(Icons.open_in_new),
+      icon: Icon(Icons.open_in_new, color: color),
       onPressed: () async {
         await HttpUrls.openUrl(urlAccessor(selectedFollowedTeam!));
       },

@@ -68,14 +68,13 @@ class SurfaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final greyedOutColor = Theme.of(
       context,
-    ).colorScheme.onPrimaryContainer.withAlpha(100);
+    ).colorScheme.onPrimaryContainer.withAlpha(150);
 
     final chevronColor = Theme.of(
       context,
-    ).colorScheme.onPrimaryContainer.withAlpha(50);
+    ).colorScheme.onPrimaryContainer.withAlpha(100);
 
     return InkWell(
-      enableFeedback: false,
       onTap: onTap,
       borderRadius: BorderRadius.circular(
         Theme.of(context).cardTheme.shape is RoundedRectangleBorder
@@ -104,14 +103,14 @@ class SurfaceCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (titleLeading != null) titleLeading!,
+                        ?titleLeading,
                         if (title.isNotEmpty)
                           Expanded(
                             child: Text(
                               title,
-                              style: Theme.of(context).textTheme.bodyMedium
+                              style: Theme.of(context).textTheme.bodyLarge
                                   ?.copyWith(color: greyedOutColor),
-                              maxLines: 2,
+                              maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),

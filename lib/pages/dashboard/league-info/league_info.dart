@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
+import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
+import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/services/league-table/model/short_league_team_ranking.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
@@ -33,66 +35,112 @@ class _LeagueInfoState extends State<LeagueInfo> {
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
+    final greyedOutColor = Theme.of(
+      context,
+    ).colorScheme.onPrimaryContainer.withAlpha(150);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Constants.pagePadding),
-      child: SizedBox(
-        height: 140,
-        child: FutureBuilder(
-          future: _leagueTableFuture,
-          builder: (context, asyncSnapshot) {
-            if (asyncSnapshot.connectionState == ConnectionState.waiting) {
-              return ListView(
-                scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.all(Constants.pagePadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                widget.team.name,
+                style: Theme.of(
+                  context,
+                ).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              Expanded(child: Container()),
+              ActionBarFollowedTeamOpenLinkButton(
+                selectedFollowedTeam: widget.team,
+                urlAccessor: (i) => widget.team.rankingTableUrl,
+                color: greyedOutColor,
+              ),
+            ],
+          ),
+          FutureBuilder(
+            future: _leagueTableFuture,
+            builder: (context, asyncSnapshot) {
+              if (asyncSnapshot.connectionState == ConnectionState.waiting) {
+                return Row(
+                  children: [
+                    Expanded(child: SquareSurfaceCard(child: Center())),
+                  ],
+                );
+              }
+
+              final shortRank = getDataOrDefault(
+                asyncSnapshot,
+                ShortLeagueTeamRanking.empty,
+              );
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SquareSurfaceCard(child: Center()),
-                  SquareSurfaceCard(child: Center()),
+                  Text(
+                    shortRank.leagueName,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge!.copyWith(color: greyedOutColor),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Constants.pagePadding,
+                    ),
+                    child: SizedBox(
+                      height: 125,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SquareSurfaceCard(
+                              title: localization.rank,
+                              onTap: () => navigateToTeamDetails(context),
+                              highlighted: true,
+                              child: Text(
+                                "${shortRank.rank.toString()}.",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 24),
+                          Expanded(
+                            child: SquareSurfaceCard(
+                              title: localization.matchesPlayed,
+                              onTap: () => navigateToResults(context),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.baseline,
+                                textBaseline: TextBaseline.alphabetic,
+                                children: [
+                                  Text(
+                                    shortRank.playedMatches.toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayMedium!
+                                        .copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "  / ${(shortRank.totalTeams - 1) * 2}",
+                                    style: Theme.of(context).textTheme.bodyLarge
+                                        ?.copyWith(color: greyedOutColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               );
-            }
-
-            final shortRank = getDataOrDefault(
-              asyncSnapshot,
-              ShortLeagueTeamRanking.empty,
-            );
-            final greyedOutColor = Theme.of(
-              context,
-            ).colorScheme.onPrimaryContainer.withAlpha(120);
-
-            return ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                SquareSurfaceCard(
-                  title: shortRank.leagueName,
-                  onTap: () => navigateToTeamDetails(context),
-                  highlighted: true,
-                  child: Text(
-                    "${shortRank.rank.toString()}.",
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                ),
-                SquareSurfaceCard(
-                  title: localization.matchesPlayed,
-                  onTap: () => navigateToResults(context),
-                  child: Row(
-                    children: [
-                      Text(
-                        shortRank.playedMatches.toString(),
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
-                      Text(
-                        "  / ${(shortRank.totalTeams - 1) * 2}",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyMedium?.copyWith(color: greyedOutColor),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+            },
+          ),
+        ],
       ),
     );
   }

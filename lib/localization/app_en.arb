@@ -61,9 +61,14 @@
     "description": "Loading indicator text"
   },
    
-  "matchesPlayed": "Matches played",
+  "matchesPlayed": "Played",
   "@matchesPlayed": {
     "description": "Label for matches played"
+  },
+
+  "rank": "Rank",
+  "@rank": {
+    "description": "Label for rank"
   },
   
   "name": "Name",

@@ -173,8 +173,14 @@ abstract class AppLocalizations {
   /// Label for matches played
   ///
   /// In en, this message translates to:
-  /// **'Matches played'**
+  /// **'Played'**
   String get matchesPlayed;
+
+  /// Label for rank
+  ///
+  /// In en, this message translates to:
+  /// **'Rank'**
+  String get rank;
 
   /// Column header for team name
   ///

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/pages/dashboard/next-matches/next_matches_location_indicator.dart';
+import 'package:nuliga_app/pages/next-match/next_match_page.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
 import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
@@ -95,29 +96,34 @@ class _NextMatchesState extends State<NextMatches> {
                     spacing: 16,
                     children: [
                       ...nextTwoMatches.map(
-                        (match) => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                ),
-                                Text(
-                                  match.getOpponent(widget.team.name),
-                                  style: Theme.of(
-                                    context,
-                                  ).textTheme.titleMedium,
-                                ),
-                              ],
-                            ),
-                            NextMatchesLocationIndicatorButton(
-                              match: match,
-                              homeTeamName: widget.team.name,
-                            ),
-                          ],
+                        (match) => InkWell(
+                          onTap: () => goToMatch(match, widget.team.name),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall,
+                                  ),
+                                  Text(
+                                    match.getOpponent(widget.team.name),
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.titleMedium,
+                                  ),
+                                ],
+                              ),
+                              NextMatchesLocationIndicatorButton(
+                                match: match,
+                                homeTeamName: widget.team.name,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -135,6 +141,15 @@ class _NextMatchesState extends State<NextMatches> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TeamDetailsPage(team: team)),
+    );
+  }
+
+  void goToMatch(FutureMatch match, String teamName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NextMatchPage(match: match, teamName: teamName),
+      ),
     );
   }
 }

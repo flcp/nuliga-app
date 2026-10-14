@@ -85,58 +85,58 @@ class SurfaceCard extends StatelessWidget {
                   .x
             : 16.0,
       ),
-      child: Card(
-        elevation: 0,
-        child: Padding(
-          padding: padding,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ?titleLeading,
-                        if (title.isNotEmpty)
-                          Expanded(
-                            child: Text(
-                              title,
-                              style: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(color: greyedOutColor),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+      // child: Card(
+      //   elevation: 0,
+      child: Padding(
+        padding: padding,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ?titleLeading,
+                      if (title.isNotEmpty)
+                        Expanded(
+                          child: Text(
+                            title,
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(color: greyedOutColor),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        if (titleTrailing != null) titleTrailing!,
-                      ],
-                    ),
-                    SizedBox(height: 4),
-                    child,
-                    if (subtitle.isNotEmpty) ...[
-                      Text(
-                        subtitle,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodySmall?.copyWith(color: greyedOutColor),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                        ),
+                      if (titleTrailing != null) titleTrailing!,
                     ],
+                  ),
+                  SizedBox(height: 4),
+                  child,
+                  if (subtitle.isNotEmpty) ...[
+                    Text(
+                      subtitle,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: greyedOutColor),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
-                ),
+                ],
               ),
-              if (onTap != null) Icon(Icons.chevron_right, color: chevronColor),
-            ],
-          ),
+            ),
+            if (onTap != null) Icon(Icons.chevron_right, color: chevronColor),
+          ],
         ),
       ),
+      // ),
     );
   }
 }

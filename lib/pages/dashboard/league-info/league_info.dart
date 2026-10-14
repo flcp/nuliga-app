@@ -85,55 +85,48 @@ class _LeagueInfoState extends State<LeagueInfo> {
                       context,
                     ).textTheme.bodyLarge!.copyWith(color: greyedOutColor),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.pagePadding,
-                    ),
-                    child: SizedBox(
-                      height: 125,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: SquareSurfaceCard(
-                              title: localization.rank,
-                              onTap: () => navigateToTeamDetails(context),
-                              highlighted: true,
-                              child: Text(
-                                "${shortRank.rank.toString()}.",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayMedium!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
+                  SizedBox(
+                    height: 125,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: SquareSurfaceCard(
+                            title: localization.rank,
+                            onTap: () => navigateToTeamDetails(context),
+                            highlighted: true,
+                            child: Text(
+                              "${shortRank.rank.toString()}.",
+                              style: Theme.of(context).textTheme.displayMedium!
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                           ),
-                          SizedBox(width: 24),
-                          Expanded(
-                            child: SquareSurfaceCard(
-                              title: localization.matchesPlayed,
-                              onTap: () => navigateToResults(context),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.baseline,
-                                textBaseline: TextBaseline.alphabetic,
-                                children: [
-                                  Text(
-                                    shortRank.playedMatches.toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayMedium!
-                                        .copyWith(fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    "  / ${(shortRank.totalTeams - 1) * 2}",
-                                    style: Theme.of(context).textTheme.bodyLarge
-                                        ?.copyWith(color: greyedOutColor),
-                                  ),
-                                ],
-                              ),
+                        ),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: SquareSurfaceCard(
+                            title: localization.matchesPlayed,
+                            onTap: () => navigateToResults(context),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Text(
+                                  shortRank.playedMatches.toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "  / ${(shortRank.totalTeams - 1) * 2}",
+                                  style: Theme.of(context).textTheme.bodyLarge
+                                      ?.copyWith(color: greyedOutColor),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

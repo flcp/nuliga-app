@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
+import 'package:nuliga_app/pages/dashboard/next-matches/next_matches_location_indicator.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
+import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
-import 'package:nuliga_app/pages/dashboard/next-matches/next_matches_card.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/services/matches/next_matches_service.dart';
+import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class NextMatches extends StatefulWidget {
@@ -37,62 +39,102 @@ class _NextMatchesState extends State<NextMatches> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
 
-    return SizedBox(
-      height: 180,
-      child: FutureBuilder(
-        future: _nextMatchesFuture,
-        builder: (context, snapshot) {
-          final nextMatches = getDataOrDefault(snapshot, (next: [], later: []));
+    return FutureBuilder(
+      future: _nextMatchesFuture,
+      builder: (context, snapshot) {
+        final nextMatches = getDataOrDefault(snapshot, (
+          next: <FutureMatch>[],
+          later: <FutureMatch>[],
+        ));
 
-          if (nextMatches.next.isEmpty && nextMatches.later.isEmpty) {
-            return ListView(
-              padding: EdgeInsets.symmetric(
-                horizontal: Constants.bigCardPadding,
-              ),
-              scrollDirection: Axis.horizontal,
-              children: [
-                SquareSurfaceCard(
-                  title: localization.noUpcomingMatches,
-                  child: Expanded(
-                    child: Center(
-                      child: Icon(
-                        Icons.search_off,
-                        size: 40,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            );
-          }
+        if (nextMatches.next.isEmpty) {
+          // TODO: adjust to below
+          return SizedBox();
+        }
 
-          final nextTwoMatches = nextMatches.next;
-          final laterMatches = nextMatches.later;
+        final nextTwoMatches = nextMatches.next;
 
-          return ListView(
-            padding: EdgeInsets.symmetric(horizontal: Constants.bigCardPadding),
-
-            scrollDirection: Axis.horizontal,
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Constants.pagePadding,
+          ),
+          child: Column(
             children: [
-              ...nextTwoMatches.map(
-                (match) => NextMatchesCard(
-                  team: widget.team,
-                  match: match,
-                  highlighted: true,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        localization.next,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      SizedBox(width: 8),
+                      Text("·", style: Theme.of(context).textTheme.titleMedium),
+                      SizedBox(width: 8),
+                      Text(
+                        context.getDate().getLongDateString(
+                          nextTwoMatches.first.time,
+                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                  TextButton(
+                    onPressed: () => goToNextMatches(widget.team),
+                    child: Text(localization.viewAll_button),
+                  ),
+                ],
               ),
-              ...laterMatches.map(
-                (match) => NextMatchesCard(
-                  team: widget.team,
-                  match: match,
-                  highlighted: false,
+              SurfaceCard(
+                child: Padding(
+                  padding: EdgeInsets.all(Constants.bigCardPadding),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 16,
+                    children: [
+                      ...nextTwoMatches.map(
+                        (match) => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${match.time.hour}:${match.time.minute.toString().padLeft(2, "0")}",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                                Text(
+                                  match.getOpponent(widget.team.name),
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.titleMedium,
+                                ),
+                              ],
+                            ),
+                            NextMatchesLocationIndicatorButton(
+                              match: match,
+                              homeTeamName: widget.team.name,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
+    );
+  }
+
+  void goToNextMatches(FollowedClub team) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TeamDetailsPage(team: team)),
     );
   }
 }

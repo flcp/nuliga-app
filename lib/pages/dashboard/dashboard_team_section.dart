@@ -29,15 +29,7 @@ class _DashboardTeamSectionState extends State<DashboardTeamSection>
       children: [
         LeagueInfo(team: widget.team),
         SizedBox(height: 16),
-        DashboardSection(
-          isContentWidthConstrained: false,
-          title: localization.next,
-          onViewAll: () => goToNextMatches(widget.team),
-          child: NextMatches(
-            matchesUrl: widget.team.matchesUrl,
-            team: widget.team,
-          ),
-        ),
+        NextMatches(matchesUrl: widget.team.matchesUrl, team: widget.team),
         SizedBox(height: 16),
         DashboardSection(
           title: localization.last,
@@ -46,13 +38,6 @@ class _DashboardTeamSectionState extends State<DashboardTeamSection>
         ),
         SizedBox(height: 48),
       ],
-    );
-  }
-
-  void goToNextMatches(FollowedClub team) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TeamDetailsPage(team: team)),
     );
   }
 

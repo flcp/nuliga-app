@@ -73,7 +73,7 @@ class WinLossIndicator extends StatelessWidget {
     final Color color = switch (status) {
       MatchResultStatus.win => const Color.fromARGB(255, 140, 227, 145),
       MatchResultStatus.loss => const Color.fromARGB(255, 255, 147, 137),
-      MatchResultStatus.draw => Colors.grey.shade300,
+      MatchResultStatus.draw => const Color.fromARGB(255, 255, 194, 114),
       _ => Colors.grey,
     };
 

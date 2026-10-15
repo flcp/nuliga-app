@@ -34,6 +34,8 @@ class NeoligaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var backgroundColor = Color(0xfffbf8f3);
+
     return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -41,11 +43,11 @@ class NeoligaApp extends StatelessWidget {
       home: const BottomNavigation(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blueAccent.shade200,
+          seedColor: Colors.blueAccent,
           brightness: Brightness.light,
         ),
-        scaffoldBackgroundColor: Colors.grey.shade100,
-        appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade100),
+        scaffoldBackgroundColor: backgroundColor,
+        appBarTheme: AppBarTheme(backgroundColor: backgroundColor),
         cardTheme: CardThemeData(
           color: Colors.white,
           elevation: 0,

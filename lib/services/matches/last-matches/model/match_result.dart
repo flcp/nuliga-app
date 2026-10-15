@@ -52,6 +52,10 @@ class MatchResult {
   bool didOpponentTeamWin() {
     return opponentTeamMatchesWon > homeTeamMatchesWon;
   }
+
+  String getEnemyTeamName(String teamName) {
+    return isHomeTeam(teamName) ? opponentTeamName : homeTeamName;
+  }
 }
 
 enum MatchResultStatus { win, loss, draw, unknown }

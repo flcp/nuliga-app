@@ -44,7 +44,7 @@ class _LastMatchesState extends State<LastMatches> {
           final matchResults = getDataOrEmptyList(snapshot).reversed.toList();
           final lastThreeMatchResults = matchResults.getRange(
             0,
-            min(3, matchResults.length),
+            min(2, matchResults.length),
           );
 
           return Column(

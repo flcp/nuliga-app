@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/pages/shared/action_bar_open_link_button.dart';
-import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/services/league-table/model/short_league_team_ranking.dart';
 import 'package:nuliga_app/pages/shared/surface_card.dart';
@@ -45,14 +44,17 @@ class _LeagueInfoState extends State<LeagueInfo> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                widget.team.name,
-                style: Theme.of(
-                  context,
-                ).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),
+              Flexible(
+                child: Text(
+                  widget.team.name,
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              Expanded(child: Container()),
               ActionBarFollowedTeamOpenLinkButton(
                 selectedFollowedTeam: widget.team,
                 urlAccessor: (i) => widget.team.rankingTableUrl,
@@ -81,10 +83,9 @@ class _LeagueInfoState extends State<LeagueInfo> {
                 children: [
                   Text(
                     shortRank.leagueName,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyLarge!.copyWith(color: greyedOutColor),
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
+                  SizedBox(height: 12),
                   SizedBox(
                     height: 125,
                     child: Row(

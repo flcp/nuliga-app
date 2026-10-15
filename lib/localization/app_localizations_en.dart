@@ -91,6 +91,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeGame => 'Home game';
 
   @override
+  String get homeGame_short => 'Home';
+
+  @override
+  String get awayGame_short => 'Away';
+
+  @override
   String get unknown => 'Unknown';
 
   @override

@@ -24,6 +24,9 @@
   "nuliga_button": "Nuliga",
   "maps_button": "Maps",
   "homeGame": "Heimspiel",
+  "homeGame_short": "Zuhause",
+  "awayGame_short": "Auswärts",
+
   "unknown": "Unbekannt",
   "matchStartsIn": "Spiel startet in",
   "days": "Tage",

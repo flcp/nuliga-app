@@ -91,6 +91,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeGame => 'Heimspiel';
 
   @override
+  String get homeGame_short => 'Zuhause';
+
+  @override
+  String get awayGame_short => 'Auswärts';
+
+  @override
   String get unknown => 'Unbekannt';
 
   @override

@@ -16,6 +16,10 @@ class Date {
     return "${date.day}. ${_getMonth(date)}";
   }
 
+  String getLongDateStringWithoutYear(DateTime date) {
+    return "${_getWeekdayName(date)}, ${date.day}. ${_getMonth(date)}";
+  }
+
   String getLongDateString(DateTime date) {
     return "${_getWeekdayName(date)}, ${date.day}. ${_getMonth(date)} ${date.year}";
   }

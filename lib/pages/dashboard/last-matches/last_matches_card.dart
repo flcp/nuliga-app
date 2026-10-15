@@ -11,10 +11,12 @@ class LastMatchesCard extends StatelessWidget {
     super.key,
     required this.matchResult,
     required this.teamName,
+    required this.numberOfMatch,
   });
 
   final MatchResult matchResult;
   final String teamName;
+  final int numberOfMatch;
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +30,30 @@ class LastMatchesCard extends StatelessWidget {
           child: Column(
             children: [
               Row(
+                spacing: 8,
                 children: [
                   WinLossIndicator(
                     isTextDisplayed: true,
                     size: 10,
                     status: matchResult.getMatchStatusForTeam(teamName),
                   ),
-                  const SizedBox(width: 8),
+
                   Text(
                     matchResult
                         .getMatchStatusForTeam(teamName)
                         .localized(localization),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text("·"),
+                  Text(
+                    "Runde $numberOfMatch",
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text("·"),
+                  Text(
+                    matchResult.isHomeTeam(teamName)
+                        ? localization.homeGame_short
+                        : localization.awayGame_short,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],

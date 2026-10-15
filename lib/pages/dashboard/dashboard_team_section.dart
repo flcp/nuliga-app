@@ -26,6 +26,7 @@ class _DashboardTeamSectionState extends State<DashboardTeamSection>
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         LeagueInfo(team: widget.team),
         SizedBox(height: 16),

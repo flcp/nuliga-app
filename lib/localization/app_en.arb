@@ -121,6 +121,16 @@
     "description": "Label for home game"
   },
   
+  "homeGame_short": "Home",
+  "@homeGame_short": {
+    "description": "Short label for home game"
+  },
+
+  "awayGame_short": "Away",
+  "@awayGame_short": {
+    "description": "Short label for away (not home) game"
+  },
+
   "unknown": "Unknown",
   "@unknown": {
     "description": "Label for unknown location or data"

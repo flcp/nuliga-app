@@ -29,7 +29,12 @@ class DashboardSection extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                title,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
+              ),
               TextButton(
                 onPressed: onViewAll,
                 child: Text(localization.viewAll_button),

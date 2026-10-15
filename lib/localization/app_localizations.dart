@@ -242,6 +242,18 @@ abstract class AppLocalizations {
   /// **'Home game'**
   String get homeGame;
 
+  /// Short label for home game
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get homeGame_short;
+
+  /// Short label for away (not home) game
+  ///
+  /// In en, this message translates to:
+  /// **'Away'**
+  String get awayGame_short;
+
   /// Label for unknown location or data
   ///
   /// In en, this message translates to:

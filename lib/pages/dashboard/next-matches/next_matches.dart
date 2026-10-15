@@ -60,26 +60,16 @@ class _NextMatchesState extends State<NextMatches> {
             horizontal: Constants.pagePadding,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        localization.next,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      SizedBox(width: 8),
-                      Text("·", style: Theme.of(context).textTheme.titleMedium),
-                      SizedBox(width: 8),
-                      Text(
-                        context.getDate().getLongDateString(
-                          nextTwoMatches.first.time,
-                        ),
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
+                  Text(
+                    localization.next,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   TextButton(
                     onPressed: () => goToNextMatches(widget.team),
@@ -87,6 +77,13 @@ class _NextMatchesState extends State<NextMatches> {
                   ),
                 ],
               ),
+              Text(
+                context.getDate().getLongDateStringWithoutYear(
+                  nextTwoMatches.first.time,
+                ),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              SizedBox(height: 8),
               SurfaceCard(
                 child: Padding(
                   padding: EdgeInsets.all(Constants.bigCardPadding),

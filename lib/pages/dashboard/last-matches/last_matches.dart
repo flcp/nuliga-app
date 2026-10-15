@@ -32,35 +32,30 @@ class _LastMatchesState extends State<LastMatches> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
 
-    return SizedBox(
-      height: 290,
-      child: FutureBuilder(
-        future: _lastMatchesFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text(localization.loading);
-          }
+    return FutureBuilder(
+      future: _lastMatchesFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text(localization.loading);
+        }
 
-          final matchResults = getDataOrEmptyList(snapshot).reversed.toList();
-          final lastThreeMatchResults = matchResults.getRange(
-            0,
-            min(2, matchResults.length),
-          );
+        final matchResults = getDataOrEmptyList(snapshot).reversed.toList();
+        final lastMatchResults = matchResults.take(2).toList();
 
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            spacing: 0,
-            children: lastThreeMatchResults
-                .map(
-                  (result) => LastMatchesCard(
-                    matchResult: result,
-                    teamName: widget.team.name,
-                  ),
-                )
-                .toList(),
-          );
-        },
-      ),
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: lastMatchResults.asMap().entries.map((mapEntry) {
+            final numberOfMatch = matchResults.length - mapEntry.key;
+            final result = mapEntry.value;
+            return LastMatchesCard(
+              matchResult: result,
+              teamName: widget.team.name,
+              numberOfMatch: numberOfMatch,
+            );
+          }).toList(),
+        );
+      },
     );
   }
 }

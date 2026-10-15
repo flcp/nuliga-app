@@ -77,11 +77,22 @@ class _NextMatchesState extends State<NextMatches> {
                   ),
                 ],
               ),
-              Text(
-                context.getDate().getLongDateStringWithoutYear(
-                  nextTwoMatches.first.time,
-                ),
-                style: Theme.of(context).textTheme.bodyMedium,
+              Row(
+                spacing: 8,
+                children: [
+                  Text(
+                    context.getDate().getLongDateStringWithoutYear(
+                      nextTwoMatches.first.time,
+                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  Text("·"),
+                  Text(
+                    nextTwoMatches.first.isHomeTeam(widget.team.name)
+                        ? localization.homeGame_short
+                        : localization.awayGame_short,
+                  ),
+                ],
               ),
               SizedBox(height: 8),
               SurfaceCard(

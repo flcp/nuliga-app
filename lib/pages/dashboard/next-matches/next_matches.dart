@@ -7,7 +7,7 @@ import 'package:nuliga_app/pages/team-details/team_details_page.dart';
 import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
-import 'package:nuliga_app/services/matches/next_matches_service.dart';
+import 'package:nuliga_app/services/matches/next-matches/next_matches_service.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 

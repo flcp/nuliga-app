@@ -4,7 +4,7 @@ import 'package:nuliga_app/pages/shared/loading_indicator.dart';
 import 'package:nuliga_app/pages/match-result/match_result_page.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
-import 'package:nuliga_app/services/matches/last_matches_service.dart';
+import 'package:nuliga_app/services/matches/last-matches/last_matches_service.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:nuliga_app/services/shared/http_client.dart';

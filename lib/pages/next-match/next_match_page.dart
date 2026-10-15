@@ -6,7 +6,7 @@ import 'package:nuliga_app/pages/next-match/next_match_date_info.dart';
 import 'package:nuliga_app/pages/next-match/next_match_info.dart';
 import 'package:nuliga_app/pages/next-match/next_match_matchup.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
-import 'package:nuliga_app/services/matches/next_matches_service.dart';
+import 'package:nuliga_app/services/matches/next-matches/next_matches_service.dart';
 
 class NextMatchPage extends StatelessWidget {
   final FutureMatch match;

@@ -4,7 +4,7 @@ import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
 import 'package:nuliga_app/pages/dashboard/last-matches/last_matches_card.dart';
 import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
-import 'package:nuliga_app/services/matches/last_matches_service.dart';
+import 'package:nuliga_app/services/matches/last-matches/last_matches_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 
 class LastMatches extends StatefulWidget {

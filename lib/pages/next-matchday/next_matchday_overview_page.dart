@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
+import 'package:nuliga_app/pages/match-result/match_result_page.dart';
+import 'package:nuliga_app/pages/next-match/next_match_page.dart';
 import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/nothing_to_display_indicator.dart';
 import 'package:nuliga_app/services/followed-teams/model/followed_club.dart';
@@ -280,31 +282,38 @@ class _TeamMatchCard extends StatelessWidget {
                   )
                 else
                   ...matches.map(
-                    (match) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: _buildTeamName(
-                            context,
-                            name: match.scheduled.homeTeam,
-                            isFollowedTeam:
-                                match.scheduled.homeTeam == team.name,
-                            textAlign: TextAlign.left,
-                          ),
+                    (match) => InkWell(
+                      onTap: () => _goToMatchDetails(context, match),
+                      borderRadius: BorderRadius.circular(8),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: _buildTeamName(
+                                context,
+                                name: match.scheduled.homeTeam,
+                                isFollowedTeam:
+                                    match.scheduled.homeTeam == team.name,
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            _buildMatchState(context, match),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: _buildTeamName(
+                                context,
+                                name: match.scheduled.opponentTeam,
+                                isFollowedTeam:
+                                    match.scheduled.opponentTeam == team.name,
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 12),
-                        _buildMatchState(context, match),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: _buildTeamName(
-                            context,
-                            name: match.scheduled.opponentTeam,
-                            isFollowedTeam:
-                                match.scheduled.opponentTeam == team.name,
-                            textAlign: TextAlign.right,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
               ],
@@ -313,6 +322,29 @@ class _TeamMatchCard extends StatelessWidget {
         ),
         SizedBox(height: 16),
       ],
+    );
+  }
+
+  void _goToMatchDetails(BuildContext context, MergedTeamMatch match) {
+    final result = match.result;
+
+    if (result != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              MatchResultPage(matchResult: result, teamName: team.name),
+        ),
+      );
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            NextMatchPage(match: match.scheduled, teamName: team.name),
+      ),
     );
   }
 

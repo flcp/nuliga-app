@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
 import 'package:nuliga_app/pages/dashboard/dashboard.dart';
 import 'package:nuliga_app/pages/next-matchday/next_matchday_overview_page.dart';
 
@@ -17,6 +18,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       body: SafeArea(child: _pages[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
@@ -26,11 +28,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
             _selectedIndex = index;
           });
         },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Einstellungen',
+            icon: Icon(Icons.home),
+            label: localizations.home,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.event),
+            label: localizations.matchday,
           ),
         ],
       ),

@@ -379,5 +379,15 @@
   "languageEnglish": "English",
   "@languageEnglish": {
     "description": "Name of english language"
+  },
+
+  "matchday": "Matchday",
+  "@matchday": {
+    "description": "Label for matchday menu entry"
+  },
+
+  "home": "Overview",
+  "@home": {
+    "description": "Label for overview menu entry"
   }
 }

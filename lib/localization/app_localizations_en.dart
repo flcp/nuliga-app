@@ -250,4 +250,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageEnglish => 'English';
+
+  @override
+  String get matchday => 'Matchday';
+
+  @override
+  String get home => 'Overview';
 }

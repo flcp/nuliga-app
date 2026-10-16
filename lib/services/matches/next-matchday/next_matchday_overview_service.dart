@@ -25,7 +25,13 @@ class NextMatchdayOverviewService {
         .map(
           (day) => MatchdayOverview(
             date: day,
-            matches: mergedTeamMatchesByDate[day]!,
+            matches: [
+              ...mergedTeamMatchesByDate[day]!..sort(
+                (left, right) => left.scheduled.time.compareTo(
+                  right.scheduled.time,
+                ),
+              ),
+            ],
           ),
         )
         .toList();
@@ -34,43 +40,65 @@ class NextMatchdayOverviewService {
   Future<List<MergedTeamMatch>> _loadMergedTeamMatches(
     List<FollowedClub> teams,
   ) async {
-    final mergedTeamMatches = <MergedTeamMatch>[];
-
-    await Future.wait(
+    final mergedTeamMatchesByTeam = await Future.wait(
       teams.map((team) async {
-        final futureMatchesForTeam =
-            (await nextMatchesRepository.getNextMatches(team.matchesUrl)).where(
+        final futureMatchesForTeam = (await nextMatchesRepository
+            .getNextMatches(team.matchesUrl))
+            .where(
               (match) =>
                   match.homeTeam == team.name ||
                   match.opponentTeam == team.name,
-            );
+            )
+            .toList();
 
-        final resultsForTeam =
-            (await lastMatchesRepository.getLastMatches(team.matchesUrl)).where(
+        final resultsForTeam = (await lastMatchesRepository.getLastMatches(
+          team.matchesUrl,
+        ))
+            .where(
               (result) =>
                   result.homeTeamName == team.name ||
                   result.opponentTeamName == team.name,
-            );
+            )
+            .toList();
+
+        final matchesByKey = <String, _MergedMatchAggregation>{};
 
         for (final match in futureMatchesForTeam) {
           final key = _matchKey(match.time, match.homeTeam, match.opponentTeam);
-          final MatchResult? resultForMatch = resultsForTeam
-              .where(
-                (r) =>
-                    _matchKey(r.time, r.homeTeamName, r.opponentTeamName) ==
-                    key,
-              )
-              .firstOrNull;
+          matchesByKey.putIfAbsent(
+            key,
+            () => _MergedMatchAggregation(team: team),
+          ).scheduled = match;
+        }
 
-          mergedTeamMatches.add(
-            MergedTeamMatch(
-              scheduled: match,
-              result: resultForMatch,
-              team: team,
-            ),
+        for (final result in resultsForTeam) {
+          final key = _matchKey(
+            result.time,
+            result.homeTeamName,
+            result.opponentTeamName,
+          );
+          final aggregation = matchesByKey.putIfAbsent(
+            key,
+            () => _MergedMatchAggregation(team: team),
+          );
+          aggregation.result = result;
+          aggregation.scheduled ??= FutureMatch(
+            time: result.time,
+            homeTeam: result.homeTeamName,
+            opponentTeam: result.opponentTeamName,
+            locationUrl: result.location,
           );
         }
+
+        return matchesByKey.values
+            .map((aggregation) => aggregation.toMergedMatch())
+            .toList();
       }),
+    );
+
+    final mergedTeamMatches = mergedTeamMatchesByTeam.expand((matches) => matches).toList();
+    mergedTeamMatches.sort(
+      (left, right) => left.scheduled.time.compareTo(right.scheduled.time),
     );
 
     return mergedTeamMatches;
@@ -94,5 +122,21 @@ class NextMatchdayOverviewService {
       result.putIfAbsent(day, () => []).add(match);
     }
     return result;
+  }
+}
+
+class _MergedMatchAggregation {
+  final FollowedClub team;
+  FutureMatch? scheduled;
+  MatchResult? result;
+
+  _MergedMatchAggregation({required this.team});
+
+  MergedTeamMatch toMergedMatch() {
+    return MergedTeamMatch(
+      scheduled: scheduled!,
+      result: result,
+      team: team,
+    );
   }
 }

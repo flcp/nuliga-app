@@ -249,4 +249,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get languageEnglish => 'Englisch';
+
+  @override
+  String get matchday => 'Spieltag';
+
+  @override
+  String get home => 'Überblick';
 }

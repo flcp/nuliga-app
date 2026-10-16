@@ -75,5 +75,7 @@
   "followedClubs": "Vereine",
   "language": "Sprache",
   "languageGerman": "Deutsch",
-  "languageEnglish": "Englisch"
+  "languageEnglish": "Englisch",
+  "matchday": "Spieltag",
+  "home": "Überblick"
 }

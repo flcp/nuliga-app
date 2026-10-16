@@ -547,6 +547,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'English'**
   String get languageEnglish;
+
+  /// Label for matchday menu entry
+  ///
+  /// In en, this message translates to:
+  /// **'Matchday'**
+  String get matchday;
+
+  /// Label for overview menu entry
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get home;
 }
 
 class _AppLocalizationsDelegate

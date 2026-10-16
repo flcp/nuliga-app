@@ -174,11 +174,12 @@ class _TeamMatchCard extends StatelessWidget {
         ),
 
         Card(
-          margin: const EdgeInsets.only(bottom: Constants.bigCardListSpacing),
+          // margin: const EdgeInsets.only(bottom: Constants.bigCardListSpacing),
           child: Padding(
             padding: const EdgeInsets.all(Constants.bigCardPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 12,
               children: [
                 if (matches.isEmpty)
                   Padding(
@@ -187,34 +188,31 @@ class _TeamMatchCard extends StatelessWidget {
                   )
                 else
                   ...matches.map(
-                    (match) => Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: _buildTeamName(
-                              context,
-                              name: match.scheduled.homeTeam,
-                              isFollowedTeam:
-                                  match.scheduled.homeTeam == team.name,
-                              textAlign: TextAlign.left,
-                            ),
+                    (match) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: _buildTeamName(
+                            context,
+                            name: match.scheduled.homeTeam,
+                            isFollowedTeam:
+                                match.scheduled.homeTeam == team.name,
+                            textAlign: TextAlign.left,
                           ),
-                          const SizedBox(width: 12),
-                          _buildMatchState(context, match),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: _buildTeamName(
-                              context,
-                              name: match.scheduled.opponentTeam,
-                              isFollowedTeam:
-                                  match.scheduled.opponentTeam == team.name,
-                              textAlign: TextAlign.right,
-                            ),
+                        ),
+                        const SizedBox(width: 12),
+                        _buildMatchState(context, match),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: _buildTeamName(
+                            context,
+                            name: match.scheduled.opponentTeam,
+                            isFollowedTeam:
+                                match.scheduled.opponentTeam == team.name,
+                            textAlign: TextAlign.right,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
               ],

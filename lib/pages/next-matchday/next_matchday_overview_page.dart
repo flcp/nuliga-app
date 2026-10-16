@@ -80,10 +80,8 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
                 children: [
                   IconButton.filled(
                     onPressed: _selectedMatchdayIndex > 0
-                        ? () => _pageController.animateToPage(
+                        ? () => _pageController.jumpToPage(
                             _selectedMatchdayIndex - 1,
-                            duration: const Duration(milliseconds: 250),
-                            curve: Curves.easeInOut,
                           )
                         : null,
                     icon: const Icon(Icons.chevron_left),
@@ -96,21 +94,27 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
                         horizontal: 10,
                         vertical: 6,
                       ),
-                      child: Text(
-                        context.getDate().getLongDateWithFullMonthWithoutYear(
-                          date,
-                        ),
-                        style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
+                      child: Column(
+                        children: [
+                          Text(
+                            context
+                                .getDate()
+                                .getLongDateWithFullMonthWithoutYear(date),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          _MatchdayIndexIndicator(
+                            count: matchdays.length,
+                            selectedIndex: _selectedMatchdayIndex,
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   IconButton.filled(
                     onPressed: _selectedMatchdayIndex < matchdays.length - 1
-                        ? () => _pageController.animateToPage(
+                        ? () => _pageController.jumpToPage(
                             _selectedMatchdayIndex + 1,
-                            duration: const Duration(milliseconds: 250),
-                            curve: Curves.easeInOut,
                           )
                         : null,
                     icon: const Icon(Icons.chevron_right),
@@ -118,6 +122,7 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
                 ],
               ),
             ),
+
             SizedBox(height: 12),
             Expanded(
               child: PageView.builder(
@@ -159,11 +164,7 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
     setState(() => _selectedMatchdayIndex = defaultIndex);
 
     if (_pageController.hasClients) {
-      _pageController.animateToPage(
-        defaultIndex,
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeInOut,
-      );
+      _pageController.jumpToPage(defaultIndex);
     }
   }
 
@@ -245,6 +246,55 @@ class _ThresholdPageScrollPhysics extends PageScrollPhysics {
     return _ThresholdPageScrollPhysics(
       parent: buildParent(ancestor),
       dragStartDistanceMotionThreshold: dragStartDistanceMotionThreshold,
+    );
+  }
+}
+
+class _MatchdayIndexIndicator extends StatelessWidget {
+  const _MatchdayIndexIndicator({
+    required this.count,
+    required this.selectedIndex,
+  });
+
+  final int count;
+  final int selectedIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    if (count <= 1) {
+      return SizedBox(height: 8);
+    }
+
+    final theme = Theme.of(context);
+    final selectedColor = theme.colorScheme.primary;
+    final unselectedColor = theme.colorScheme.outlineVariant;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(count, (index) {
+            final isSelected = index == selectedIndex;
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 180),
+                curve: Curves.easeOutCubic,
+                width: isSelected ? 18 : 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  color: isSelected ? selectedColor : unselectedColor,
+                  borderRadius: BorderRadius.circular(999),
+                ),
+              ),
+            );
+          }),
+        ),
+      ),
     );
   }
 }

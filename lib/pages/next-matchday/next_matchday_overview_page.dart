@@ -89,13 +89,19 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
                     icon: const Icon(Icons.chevron_left),
                   ),
                   InkWell(
+                    borderRadius: BorderRadius.circular(10),
                     onTap: () => _resetMatchdayToDefault(matchdays),
-                    child: Text(
-                      context.getDate().getLongDateWithFullMonthWithoutYear(
-                        date,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
                       ),
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                      child: Text(
+                        context.getDate().getLongDateWithFullMonthWithoutYear(
+                          date,
+                        ),
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

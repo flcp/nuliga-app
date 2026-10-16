@@ -41,7 +41,7 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
 
     _currentTeamsHash = newHash;
     _selectedMatchdayIndex = 0;
-    _matchdaysFuture = _nextMatchdayOverviewService.loadMatchdays(teams);
+    _matchdaysFuture = _loadMatchdaysAndSelectDefault(teams);
   }
 
   @override
@@ -67,8 +67,8 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
         }
 
         final selectedMatchday = matchdays[_selectedMatchdayIndex];
+        final date = selectedMatchday.date;
 
-        var date = selectedMatchday.date;
         return Column(
           children: [
             Padding(
@@ -86,7 +86,8 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
                         : null,
                     icon: const Icon(Icons.chevron_left),
                   ),
-                  Center(
+                  InkWell(
+                    onTap: () => _resetMatchdayToDefault(matchdays),
                     child: Text(
                       context.getDate().getLongDateWithFullMonthWithoutYear(
                         date,
@@ -113,6 +114,9 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
+                physics: const _ThresholdPageScrollPhysics(
+                  dragStartDistanceMotionThreshold: 24,
+                ),
                 itemCount: matchdays.length,
                 onPageChanged: (index) {
                   setState(() => _selectedMatchdayIndex = index);
@@ -142,10 +146,98 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
     );
   }
 
+  void _resetMatchdayToDefault(List<MatchdayOverview> matchdays) {
+    final defaultIndex = _defaultMatchdayIndex(matchdays);
+    setState(() => _selectedMatchdayIndex = defaultIndex);
+
+    if (_pageController.hasClients) {
+      _pageController.animateToPage(
+        defaultIndex,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  Future<List<MatchdayOverview>> _loadMatchdaysAndSelectDefault(
+    List<FollowedClub> teams,
+  ) async {
+    final matchdays = await _nextMatchdayOverviewService.loadMatchdays(teams);
+
+    if (matchdays.isEmpty) {
+      return matchdays;
+    }
+
+    final defaultMatchdayIndex = _defaultMatchdayIndex(matchdays);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || _selectedMatchdayIndex == defaultMatchdayIndex) {
+        return;
+      }
+
+      setState(() => _selectedMatchdayIndex = defaultMatchdayIndex);
+
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(defaultMatchdayIndex);
+      }
+    });
+
+    return matchdays;
+  }
+
+  int _defaultMatchdayIndex(List<MatchdayOverview> matchdays) {
+    final today = DateTime.now();
+    final todayDate = DateTime(today.year, today.month, today.day);
+
+    for (var i = 0; i < matchdays.length; i++) {
+      final matchdayDate = DateTime(
+        matchdays[i].date.year,
+        matchdays[i].date.month,
+        matchdays[i].date.day,
+      );
+
+      if (matchdayDate == todayDate) {
+        return i;
+      }
+    }
+
+    for (var i = 0; i < matchdays.length; i++) {
+      final matchdayDate = DateTime(
+        matchdays[i].date.year,
+        matchdays[i].date.month,
+        matchdays[i].date.day,
+      );
+
+      if (matchdayDate.add(const Duration(days: 2)).isAfter(todayDate)) {
+        return i;
+      }
+    }
+
+    return matchdays.length - 1;
+  }
+
   String buildHash(List<FollowedClub> teams) {
     return teams
         .map((team) => '${team.name}|${team.shortName}|${team.matchesUrl}')
         .join(';;');
+  }
+}
+
+class _ThresholdPageScrollPhysics extends PageScrollPhysics {
+  const _ThresholdPageScrollPhysics({
+    this.dragStartDistanceMotionThreshold = 24,
+    super.parent,
+  });
+
+  @override
+  final double dragStartDistanceMotionThreshold;
+
+  @override
+  _ThresholdPageScrollPhysics applyTo(ScrollPhysics? ancestor) {
+    return _ThresholdPageScrollPhysics(
+      parent: buildParent(ancestor),
+      dragStartDistanceMotionThreshold: dragStartDistanceMotionThreshold,
+    );
   }
 }
 

@@ -9,6 +9,7 @@ import 'package:nuliga_app/services/matches/next-matchday/model/merged_team_matc
 import 'package:nuliga_app/services/matches/next-matchday/next_matchday_overview_service.dart';
 import 'package:nuliga_app/services/shared/future_async_snapshot.dart';
 import 'package:provider/provider.dart';
+import 'package:nuliga_app/services/shared/date.dart';
 
 class NextMatchdayOverviewPage extends StatefulWidget {
   const NextMatchdayOverviewPage({super.key});
@@ -21,9 +22,11 @@ class NextMatchdayOverviewPage extends StatefulWidget {
 class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
   final NextMatchdayOverviewService _nextMatchdayOverviewService =
       NextMatchdayOverviewService();
+  final PageController _pageController = PageController(initialPage: 0);
 
   late Future<List<MatchdayOverview>> _matchdaysFuture;
   String? _currentTeamsHash;
+  int _selectedMatchdayIndex = 0;
 
   @override
   void didChangeDependencies() {
@@ -37,7 +40,14 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
     }
 
     _currentTeamsHash = newHash;
+    _selectedMatchdayIndex = 0;
     _matchdaysFuture = _nextMatchdayOverviewService.loadMatchdays(teams);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,19 +66,76 @@ class _NextMatchdayOverviewPageState extends State<NextMatchdayOverviewPage> {
           return const Center(child: NothingToDisplayIndicator());
         }
 
-        final selectedDay = matchdays.first;
+        final selectedMatchday = matchdays[_selectedMatchdayIndex];
 
-        var matches = selectedDay.matches;
-        return ListView(
-          padding: const EdgeInsets.all(16),
+        var date = selectedMatchday.date;
+        return Column(
           children: [
-            for (final team in teams)
-              _TeamMatchCard(
-                team: team,
-                matches: matches
-                    .where((match) => match.team.name == team.name)
-                    .toList(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton.filled(
+                    onPressed: _selectedMatchdayIndex > 0
+                        ? () => _pageController.animateToPage(
+                            _selectedMatchdayIndex - 1,
+                            duration: const Duration(milliseconds: 250),
+                            curve: Curves.easeInOut,
+                          )
+                        : null,
+                    icon: const Icon(Icons.chevron_left),
+                  ),
+                  Center(
+                    child: Text(
+                      context.getDate().getLongDateWithFullMonthWithoutYear(
+                        date,
+                      ),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  IconButton.filled(
+                    onPressed: _selectedMatchdayIndex < matchdays.length - 1
+                        ? () => _pageController.animateToPage(
+                            _selectedMatchdayIndex + 1,
+                            duration: const Duration(milliseconds: 250),
+                            curve: Curves.easeInOut,
+                          )
+                        : null,
+                    icon: const Icon(Icons.chevron_right),
+                  ),
+                ],
               ),
+            ),
+            SizedBox(height: 12),
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: matchdays.length,
+                onPageChanged: (index) {
+                  setState(() => _selectedMatchdayIndex = index);
+                },
+                itemBuilder: (context, index) {
+                  final selectedDay = matchdays[index];
+                  final matches = selectedDay.matches;
+
+                  return ListView(
+                    padding: const EdgeInsets.all(16),
+                    children: [
+                      for (final team in teams)
+                        _TeamMatchCard(
+                          team: team,
+                          matches: matches
+                              .where((match) => match.team.name == team.name)
+                              .toList(),
+                        ),
+                    ],
+                  );
+                },
+              ),
+            ),
           ],
         );
       },

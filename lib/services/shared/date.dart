@@ -24,8 +24,16 @@ class Date {
     return "${_getWeekdayName(date)}, ${date.day}. ${_getMonth(date)} ${date.year}";
   }
 
+  String getLongDateWithFullMonthWithoutYear(DateTime date) {
+    return "${_getWeekdayName(date)}, ${date.day}. ${_getFullMonth(date)}";
+  }
+
   String _getMonth(DateTime date) {
     return DateFormat.MMM(locale).format(date);
+  }
+
+  String _getFullMonth(DateTime date) {
+    return DateFormat.MMMM(locale).format(date);
   }
 
   String _getWeekdayName(DateTime date) {

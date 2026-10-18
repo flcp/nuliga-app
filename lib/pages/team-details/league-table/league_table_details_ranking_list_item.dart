@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
+import 'package:nuliga_app/pages/shared/score_pill.dart';
 import 'package:nuliga_app/services/league-table/model/league_team_ranking.dart';
 import 'package:nuliga_app/pages/team-details/team_details_league_team_inspector.dart';
+import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
 
 class LeagueTableDetailsRankingListItem extends StatefulWidget {
   const LeagueTableDetailsRankingListItem({
@@ -24,52 +27,82 @@ class _LeagueTableDetailsRankingListItemState
   @override
   Widget build(BuildContext context) {
     final isHighlighted = widget.teamStanding.teamName == widget.team;
+    final titleStyle = Theme.of(context).textTheme.titleMedium;
+    final subTitleStyle = Theme.of(context).textTheme.bodySmall;
+    final padding = Constants.smallCardPadding / 2;
 
-    return ListTile(
-      dense: true,
-      onTap: () => goToTeamInspector(),
-      contentPadding: EdgeInsets.symmetric(horizontal: 12),
-      title: DefaultTextStyle.merge(
-        style: TextStyle(
-          color: isHighlighted
-              ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).textTheme.bodyMedium!.color,
-          fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-              width: 24,
-              child: Text(
-                widget.teamStanding.rank.toString(),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.w900),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: padding),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 16,
+            children: [
+              Text(widget.teamStanding.rank.toString(), style: titleStyle),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.teamStanding.teamName, style: titleStyle),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+
+                      children: [
+                        Text(
+                          'Played: ${widget.teamStanding.totalMatches}',
+                          style: subTitleStyle,
+                        ),
+                        SizedBox(width: 16),
+                        WinLossIndicator(
+                          size: 8,
+                          status: MatchResultStatus.win,
+                        ),
+                        SizedBox(width: 4),
+                        Text(
+                          'Wins: ${widget.teamStanding.wins}',
+                          style: subTitleStyle,
+                        ),
+                        SizedBox(width: 16),
+                        WinLossIndicator(
+                          size: 8,
+                          status: MatchResultStatus.draw,
+                        ),
+                        SizedBox(width: 4),
+                        Text(
+                          'Draws: ${widget.teamStanding.draws}',
+                          style: subTitleStyle,
+                        ),
+                        SizedBox(width: 16),
+                        WinLossIndicator(
+                          size: 8,
+                          status: MatchResultStatus.loss,
+                        ),
+                        SizedBox(width: 4),
+                        Text(
+                          'Losses: ${widget.teamStanding.losses}',
+                          style: subTitleStyle,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                widget.teamStanding.teamName,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              ),
-            ),
-            TwoLetterTextBox(text: widget.teamStanding.wins.toString()),
-            TwoLetterTextBox(text: widget.teamStanding.draws.toString()),
-            TwoLetterTextBox(text: widget.teamStanding.losses.toString()),
-            SizedBox(
-              width: 24,
-              child: Text(
+              Text(
                 widget.teamStanding.leaguePointsWon.toString(),
-                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
-            ),
-            TwoLetterTextBox(text: widget.teamStanding.totalMatches.toString()),
-          ],
+            ],
+          ),
         ),
-      ),
-      trailing: Icon(Icons.chevron_right),
+        Divider(
+          height: Constants.bigCardPadding,
+          thickness: 1,
+          color: Theme.of(context).dividerColor.withValues(alpha: 0.35),
+        ),
+      ],
     );
   }
 

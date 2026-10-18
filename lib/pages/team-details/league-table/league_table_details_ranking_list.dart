@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nuliga_app/localization/app_localizations.dart';
+
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/league-table/model/league_team_ranking.dart';
 import 'package:nuliga_app/pages/team-details/league-table/league_table_details_ranking_list_item.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
@@ -62,66 +63,28 @@ class _LeagueTableDetailsRankingListState
 
         return RefreshIndicator(
           onRefresh: refresh,
-          child: ListView(
-            children: [
-              if (teamStandings.isEmpty) NothingToDisplayIndicator(),
-              if (teamStandings.isNotEmpty)
-                LeagueTableDetailsRankingListHeader(),
-              ...teamStandings.map(
-                (teamStanding) => LeagueTableDetailsRankingListItem(
-                  teamStanding: teamStanding,
-                  team: widget.teamName,
-                  matchOverviewUrl: widget.matchOverviewUrl,
-                ),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Constants.pagePadding,
+            ),
+            child: ListView(
+              children: [
+                if (teamStandings.isEmpty) NothingToDisplayIndicator(),
+                if (teamStandings.isNotEmpty) ...[
+                  SizedBox(height: Constants.smallCardPadding),
+                  ...teamStandings.map(
+                    (teamStanding) => LeagueTableDetailsRankingListItem(
+                      teamStanding: teamStanding,
+                      team: widget.teamName,
+                      matchOverviewUrl: widget.matchOverviewUrl,
+                    ),
+                  ),
+                ],
+              ],
+            ),
           ),
         );
       },
-    );
-  }
-}
-
-class LeagueTableDetailsRankingListHeader extends StatelessWidget {
-  const LeagueTableDetailsRankingListHeader({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
-    return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 12),
-
-      title: DefaultTextStyle(
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(width: 24, child: Text("#", textAlign: TextAlign.center)),
-            SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                localization.name,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              ),
-            ),
-            SizedBox(width: 20, child: Text(localization.wins)),
-            SizedBox(width: 16, child: Text(localization.draws)),
-            SizedBox(width: 16, child: Text(localization.losses)),
-            SizedBox(width: 24, child: Text(localization.points)),
-            SizedBox(
-              width: 18,
-              child: Text(localization.matches, textAlign: TextAlign.center),
-            ),
-            SizedBox(width: 40),
-          ],
-        ),
-      ),
     );
   }
 }

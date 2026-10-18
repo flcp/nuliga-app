@@ -35,17 +35,9 @@ class MatchResultPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Constants.pagePadding),
-        child: Column(
-          children: [
-            MatchResultHeroElement(
-              matchResult: matchResult,
-              teamName: teamName,
-            ),
-            MatchResultPageContent(
-              matchResult: matchResult,
-              teamName: teamName,
-            ),
-          ],
+        child: MatchResultPageContent(
+          matchResult: matchResult,
+          teamName: teamName,
         ),
       ),
     );
@@ -68,6 +60,10 @@ class MatchResultPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final isHomeTeam = matchResult.homeTeamName == teamName;
     final localization = AppLocalizations.of(context)!;
+    final infoColor = Theme.of(context).colorScheme.onSurface.withAlpha(160);
+    final subtitleStyle = Theme.of(
+      context,
+    ).textTheme.bodyMedium?.copyWith(color: infoColor);
 
     return FutureBuilder(
       future: matchResultService.getMatchResultDetails(
@@ -83,82 +79,85 @@ class MatchResultPageContent extends StatelessWidget {
           return Text(localization.nothingToDisplay);
         }
 
-        return Expanded(
-          child: ListView(
-            children: matchResultDetail.gameResults
-                .map(
-                  (gameResult) => SurfaceCard(
-                    padding: const EdgeInsets.all(Constants.bigCardPadding),
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return GameResultDetail(
-                          gameResult: gameResult,
-                          homeTeamName: matchResult.homeTeamName,
-                          opponentTeamName: matchResult.opponentTeamName,
-                        );
-                      },
-                    ),
-                    titleLeading: GameTypeIcon(gameResult.gameType),
-                    title: gameResult.gameType.localize(localization),
-                    titleTrailing: WinLossIndicator(
-                      size: 12,
-                      status: isHomeTeam
-                          ? gameResult.getMatchStatusForHomeTeam()
-                          : gameResult.getMatchStatusForOpponentTeam(),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          spacing: 8,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  GameResultPlayerText(
-                                    players: gameResult.homePlayers,
-                                    isWinner: gameResult.homeTeamWon,
-                                  ),
-                                  GameResultPlayerText(
-                                    players: gameResult.opponentPlayers,
-                                    isWinner: !gameResult.homeTeamWon,
-                                  ),
-                                ],
-                              ),
+        return ListView(
+          children: [
+            MatchResultHeroElement(
+              matchResult: matchResult,
+              teamName: teamName,
+              gameResults: matchResultDetail.gameResults,
+            ),
+            SizedBox(height: 32),
+
+            ...matchResultDetail.gameResults.map((gameResult) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: SurfaceCard(
+                  padding: const EdgeInsets.all(Constants.bigCardPadding),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          WinLossIndicator(
+                            size: 8,
+                            status: isHomeTeam
+                                ? gameResult.getMatchStatusForHomeTeam()
+                                : gameResult.getMatchStatusForOpponentTeam(),
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            isHomeTeam
+                                ? gameResult
+                                      .getMatchStatusForHomeTeam()
+                                      .localized(localization)
+                                : gameResult
+                                      .getMatchStatusForOpponentTeam()
+                                      .localized(localization),
+                            style: subtitleStyle,
+                          ),
+                          SizedBox(width: 8),
+                          Text("·"),
+                          SizedBox(width: 8),
+                          GameTypeIcon(gameResult.gameType),
+                          Text(
+                            gameResult.gameType.localize(localization),
+                            style: subtitleStyle,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: GameResultPlayerText(
+                              players: gameResult.homePlayers,
+                              isWinner: gameResult.homeTeamWon,
+                              isLeftSide: true,
                             ),
-                            ...gameResult.sets.map(
-                              (set) => Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    set.homeScore.toString(),
-                                    style: TextStyle(
-                                      fontWeight: set.didHomeTeamWin()
-                                          ? FontWeight.w900
-                                          : FontWeight.normal,
-                                    ),
+                          ),
+                          Column(
+                            children: gameResult.sets
+                                .map(
+                                  (set) => Text(
+                                    "${set.homeScore}:${set.opponentScore}",
                                   ),
-                                  Text(
-                                    set.opponentScore.toString(),
-                                    style: TextStyle(
-                                      fontWeight: set.didOpponentTeamWin()
-                                          ? FontWeight.w900
-                                          : FontWeight.normal,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                )
+                                .toList(),
+                          ),
+                          Expanded(
+                            child: GameResultPlayerText(
+                              players: gameResult.opponentPlayers,
+                              isWinner: !gameResult.homeTeamWon,
+                              isLeftSide: false,
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                )
-                .toList(),
-          ),
+                ),
+              );
+            }),
+          ],
         );
       },
     );
@@ -170,22 +169,30 @@ class GameResultPlayerText extends StatelessWidget {
     super.key,
     required this.players,
     required this.isWinner,
+    required this.isLeftSide,
   });
 
   final List<Player> players;
   final bool isWinner;
+  final bool isLeftSide;
 
   @override
   Widget build(BuildContext context) {
-    final playerText = players.length > 1
-        ? players.map((p) => p.lastName).join(" / ")
-        : players.first.getFullname();
-
-    return Text(
-      playerText,
-      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-        fontWeight: isWinner ? FontWeight.w900 : FontWeight.normal,
-      ),
+    return Column(
+      crossAxisAlignment: isLeftSide
+          ? CrossAxisAlignment.start
+          : CrossAxisAlignment.end,
+      children: players
+          .map(
+            (player) => Text(
+              player.getFullname(),
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                fontWeight: isWinner ? FontWeight.w900 : FontWeight.normal,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          )
+          .toList(),
     );
   }
 }

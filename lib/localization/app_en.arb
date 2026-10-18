@@ -81,26 +81,11 @@
     "description": "Short label for points"
   },
   
-  "wins": "W",
-  "@wins": {
-    "description": "Short label for wins"
+  "won": "Won",
+  "@won": {
+    "description": "Short label for won"
   },
-  
-  "draws": "D",
-  "@draws": {
-    "description": "Short label for draws"
-  },
-  
-  "losses": "L",
-  "@losses": {
-    "description": "Short label for losses"
-  },
-  
-  "matches": "M",
-  "@matches": {
-    "description": "Short label for matches"
-  },
-  
+
   "versus": "VS",
   "@versus": {
     "description": "Versus label between teams"
@@ -389,5 +374,10 @@
   "home": "Overview",
   "@home": {
     "description": "Label for overview menu entry"
+  },
+
+  "matches": "Matches",
+  "@matches": {
+  "description": "Label for matches heading"
   }
 }

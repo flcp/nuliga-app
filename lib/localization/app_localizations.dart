@@ -194,29 +194,11 @@ abstract class AppLocalizations {
   /// **'Pts'**
   String get points;
 
-  /// Short label for wins
+  /// Short label for won
   ///
   /// In en, this message translates to:
-  /// **'W'**
-  String get wins;
-
-  /// Short label for draws
-  ///
-  /// In en, this message translates to:
-  /// **'D'**
-  String get draws;
-
-  /// Short label for losses
-  ///
-  /// In en, this message translates to:
-  /// **'L'**
-  String get losses;
-
-  /// Short label for matches
-  ///
-  /// In en, this message translates to:
-  /// **'M'**
-  String get matches;
+  /// **'Won'**
+  String get won;
 
   /// Versus label between teams
   ///
@@ -559,6 +541,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Overview'**
   String get home;
+
+  /// Label for matches heading
+  ///
+  /// In en, this message translates to:
+  /// **'Matches'**
+  String get matches;
 }
 
 class _AppLocalizationsDelegate

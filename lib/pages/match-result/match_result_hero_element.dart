@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nuliga_app/localization/app_localizations.dart';
+import 'package:nuliga_app/pages/match-result/game_type_icon.dart';
+import 'package:nuliga_app/services/match-result/model/game_result.dart';
+import 'package:nuliga_app/services/match-result/model/game_type.dart';
 import 'package:nuliga_app/services/matches/last-matches/model/match_result.dart';
-import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/pages/shared/score_pill.dart';
 import 'package:nuliga_app/services/shared/date.dart';
 
@@ -9,151 +11,132 @@ class MatchResultHeroElement extends StatelessWidget {
   const MatchResultHeroElement({
     super.key,
     required this.matchResult,
+    required this.gameResults,
     required this.teamName,
   });
 
   final MatchResult matchResult;
   final String teamName;
+  final List<GameResult> gameResults;
 
   @override
   Widget build(BuildContext context) {
     final date = context.getDate();
-    final infoColor = Theme.of(context).colorScheme.onSurface.withAlpha(150);
+    final infoColor = Theme.of(context).colorScheme.onSurface.withAlpha(160);
+    final subtitleStyle = Theme.of(
+      context,
+    ).textTheme.bodyMedium?.copyWith(color: infoColor);
     final localization = AppLocalizations.of(context)!;
 
     return Column(
+      spacing: 24,
       children: [
-        Card(
-          elevation: 0,
-          child: Padding(
-            padding: const EdgeInsets.all(Constants.bigCardPadding),
-            child: Column(
+        Row(
+          spacing: 8,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            WinLossIndicator(
+              size: 16,
+              status: matchResult.getMatchStatusForTeam(teamName),
+            ),
+            Expanded(
+              child: Text(
+                matchResult
+                    .getMatchStatusForTeam(teamName)
+                    .localized(localization),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(fontWeight: .bold),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Text(
+              matchResult.isHomeTeam(teamName)
+                  ? localization.homeGame_short
+                  : localization.awayGame_short,
+              style: subtitleStyle,
+            ),
+            Text("·"),
+            Text(
+              date.getLongDateStringWithoutYear(matchResult.time),
+              style: subtitleStyle,
+            ),
+          ],
+        ),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                matchResult.homeTeamName,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            Text(
+              "${matchResult.homeTeamMatchesWon}:${matchResult.opponentTeamMatchesWon}",
+              style: Theme.of(
+                context,
+              ).textTheme.displayMedium!.copyWith(fontWeight: FontWeight.w800),
+            ),
+            Expanded(
+              child: Text(
+                matchResult.opponentTeamName,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.end,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _MatchResultHeroElementRow(
-                  name: matchResult.homeTeamName,
-                  score: matchResult.homeTeamMatchesWon,
-                  isWinner: matchResult.didHomeTeamWin(),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  localization.versus,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.primary.withAlpha(80),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                _MatchResultHeroElementRow(
-                  name: matchResult.opponentTeamName,
-                  score: matchResult.opponentTeamMatchesWon,
-                  isWinner: matchResult.didOpponentTeamWin(),
-                ),
-                const SizedBox(height: 8),
-                Divider(
-                  thickness: 1,
-                  color: Theme.of(context).colorScheme.onSurface.withAlpha(50),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-
-                  children: [
-                    WinLossIndicator(
-                      size: 12,
-                      status: matchResult.getMatchStatusForTeam(teamName),
+                Text(localization.won, style: subtitleStyle),
+                ...gameResults
+                    .where((gameResult) => gameResult.homeTeamWon)
+                    .map(
+                      (gameResult) => Row(
+                        children: [
+                          GameTypeIcon(gameResult.gameType),
+                          Text(
+                            gameResult.gameType.localize(localization),
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(width: Constants.iconTextSpacing),
-                    Text(
-                      matchResult
-                          .getMatchStatusForTeam(teamName)
-                          .localized(localization),
-                      style: TextStyle(color: infoColor),
-                    ),
-                    SizedBox(width: 24),
-                    Icon(Icons.calendar_today, size: 18.0, color: infoColor),
-                    SizedBox(width: Constants.iconTextSpacing),
-                    Text(
-                      date.getDateString(matchResult.time),
-                      style: TextStyle(color: infoColor),
-                    ),
-                    SizedBox(width: 16),
-                    Icon(Icons.access_time, size: 18.0, color: infoColor),
-                    SizedBox(width: Constants.iconTextSpacing),
-
-                    Text(
-                      "${matchResult.time.hour}:${matchResult.time.minute.toString().padLeft(2, "0")}",
-                      style: TextStyle(color: infoColor),
-                    ),
-                  ],
-                ),
               ],
             ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _MatchResultHeroElementRow extends StatelessWidget {
-  const _MatchResultHeroElementRow({
-    required this.name,
-    required this.score,
-    required this.isWinner,
-  });
-
-  final String name;
-  final int score;
-  final bool isWinner;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: _MatchResultHeroElementText(name, highlighted: isWinner),
-              ),
-              SizedBox(width: 12),
-              if (isWinner) ...[
-                Icon(
-                  Icons.emoji_events_outlined,
-                  color: Colors.amber,
-                  size: 24,
-                ),
-                SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(localization.won, style: subtitleStyle),
+                ...gameResults
+                    .where((gameResult) => !gameResult.homeTeamWon)
+                    .map(
+                      (gameResult) => Row(
+                        children: [
+                          Text(
+                            gameResult.gameType.localize(localization),
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          GameTypeIcon(gameResult.gameType),
+                        ],
+                      ),
+                    ),
               ],
-            ],
-          ),
+            ),
+          ],
         ),
-        _MatchResultHeroElementText(score.toString(), highlighted: true),
       ],
-    );
-  }
-}
-
-class _MatchResultHeroElementText extends StatelessWidget {
-  const _MatchResultHeroElementText(this.teamName, {this.highlighted = false});
-
-  final String teamName;
-
-  final bool highlighted;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      teamName,
-      softWrap: false,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-        fontWeight: highlighted ? FontWeight.bold : FontWeight.normal,
-        color: Theme.of(context).colorScheme.onSurface,
-      ),
     );
   }
 }

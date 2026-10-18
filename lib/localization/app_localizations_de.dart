@@ -67,16 +67,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get points => 'Pkt';
 
   @override
-  String get wins => 'W';
-
-  @override
-  String get draws => 'D';
-
-  @override
-  String get losses => 'L';
-
-  @override
-  String get matches => 'M';
+  String get won => 'Gewonnen';
 
   @override
   String get versus => 'VS';
@@ -255,4 +246,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get home => 'Überblick';
+
+  @override
+  String get matches => 'Spiele';
 }

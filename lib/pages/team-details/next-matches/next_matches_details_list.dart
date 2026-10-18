@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/pages/team-details/next-matches/next_matches_details_list_item.dart';
 import 'package:nuliga_app/pages/shared/loading_indicator.dart';
@@ -57,19 +58,22 @@ class _NextMatchesDetailsListState extends State<NextMatchesDetailsList> {
 
         final nextMatches = getDataOrEmptyList(snapshot);
 
-        return RefreshIndicator(
-          onRefresh: () => refresh(),
-          child: ListView(
-            children: [
-              if (nextMatches.isEmpty) NothingToDisplayIndicator(),
-              ...nextMatches.map(
-                (match) => NextMatchesDetailsListItem(
-                  match: match,
-                  team: widget.teamName,
-                  matchOverviewUrl: widget.matchOverviewUrl,
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: Constants.bigCardPadding),
+          child: RefreshIndicator(
+            onRefresh: () => refresh(),
+            child: ListView(
+              children: [
+                if (nextMatches.isEmpty) NothingToDisplayIndicator(),
+                ...nextMatches.map(
+                  (match) => NextMatchesDetailsListItem(
+                    match: match,
+                    team: widget.teamName,
+                    matchOverviewUrl: widget.matchOverviewUrl,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

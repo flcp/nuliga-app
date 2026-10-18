@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nuliga_app/localization/app_localizations.dart';
+import 'package:nuliga_app/pages/shared/constants.dart';
 import 'package:nuliga_app/services/matches/next-matches/model/future_match.dart';
 import 'package:nuliga_app/pages/next-match/next_match_page.dart';
 import 'package:nuliga_app/services/shared/date.dart';
@@ -29,27 +31,53 @@ class _NextMatchesDetailsListItemState
   @override
   Widget build(BuildContext context) {
     final date = context.getDate();
-    final subtitleIconColor = Theme.of(
-      context,
-    ).colorScheme.onSurface.withAlpha(120);
+    final localization = AppLocalizations.of(context)!;
+    final iconColor = Theme.of(context).colorScheme.onSurface.withAlpha(120);
+    final subtitleTextStyle = Theme.of(context).textTheme.bodySmall;
+    final titleTextStyle = Theme.of(context).textTheme.titleMedium;
 
-    return ListTile(
-      onTap: () => goToUpComingMatch(widget.match, widget.team),
-      leading: Icon(
-        widget.match.isHomeTeam(widget.team)
-            ? Icons.home
-            : Icons.directions_car,
-        color: subtitleIconColor,
-      ),
-      trailing: Icon(Icons.chevron_right),
-      subtitle: Row(
-        spacing: spacingSubtitleBlocks,
-        children: [Text(date.getDateString(widget.match.time))],
-      ),
-      title: Text(
-        widget.match.isHomeTeam(widget.team)
-            ? widget.match.opponentTeam
-            : widget.match.homeTeam,
+    return Padding(
+      padding: const EdgeInsets.all(Constants.smallCardPadding),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                spacing: 8,
+                children: [
+                  Text(
+                    date.getLongDateStringWithoutYear(widget.match.time),
+                    style: subtitleTextStyle,
+                  ),
+                  Text("·"),
+                  Text(
+                    "${widget.match.time.hour}:${widget.match.time.minute.toString().padLeft(2, "0")}",
+                    style: subtitleTextStyle,
+                  ),
+                  Text("·"),
+                  Text(
+                    widget.match.isHomeTeam(widget.team)
+                        ? localization.homeGame_short
+                        : localization.awayGame_short,
+                    style: subtitleTextStyle,
+                  ),
+                ],
+              ),
+              Text(
+                widget.match.getOpponent(widget.team),
+                style: titleTextStyle,
+              ),
+            ],
+          ),
+          Icon(
+            widget.match.isHomeTeam(widget.team)
+                ? Icons.home
+                : Icons.directions_car,
+            color: iconColor,
+          ),
+        ],
       ),
     );
   }

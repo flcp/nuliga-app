@@ -36,48 +36,51 @@ class _NextMatchesDetailsListItemState
     final subtitleTextStyle = Theme.of(context).textTheme.bodySmall;
     final titleTextStyle = Theme.of(context).textTheme.titleMedium;
 
-    return Padding(
-      padding: const EdgeInsets.all(Constants.smallCardPadding),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                spacing: 8,
-                children: [
-                  Text(
-                    date.getLongDateStringWithoutYear(widget.match.time),
-                    style: subtitleTextStyle,
-                  ),
-                  Text("·"),
-                  Text(
-                    "${widget.match.time.hour}:${widget.match.time.minute.toString().padLeft(2, "0")}",
-                    style: subtitleTextStyle,
-                  ),
-                  Text("·"),
-                  Text(
-                    widget.match.isHomeTeam(widget.team)
-                        ? localization.homeGame_short
-                        : localization.awayGame_short,
-                    style: subtitleTextStyle,
-                  ),
-                ],
-              ),
-              Text(
-                widget.match.getOpponent(widget.team),
-                style: titleTextStyle,
-              ),
-            ],
-          ),
-          Icon(
-            widget.match.isHomeTeam(widget.team)
-                ? Icons.home
-                : Icons.directions_car,
-            color: iconColor,
-          ),
-        ],
+    return InkWell(
+      onTap: () => goToUpComingMatch(widget.match, widget.team),
+      child: Padding(
+        padding: const EdgeInsets.all(Constants.smallCardPadding),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  spacing: 8,
+                  children: [
+                    Text(
+                      date.getLongDateStringWithoutYear(widget.match.time),
+                      style: subtitleTextStyle,
+                    ),
+                    Text("·"),
+                    Text(
+                      "${widget.match.time.hour}:${widget.match.time.minute.toString().padLeft(2, "0")}",
+                      style: subtitleTextStyle,
+                    ),
+                    Text("·"),
+                    Text(
+                      widget.match.isHomeTeam(widget.team)
+                          ? localization.homeGame_short
+                          : localization.awayGame_short,
+                      style: subtitleTextStyle,
+                    ),
+                  ],
+                ),
+                Text(
+                  widget.match.getOpponent(widget.team),
+                  style: titleTextStyle,
+                ),
+              ],
+            ),
+            Icon(
+              widget.match.isHomeTeam(widget.team)
+                  ? Icons.home
+                  : Icons.directions_car,
+              color: iconColor,
+            ),
+          ],
+        ),
       ),
     );
   }

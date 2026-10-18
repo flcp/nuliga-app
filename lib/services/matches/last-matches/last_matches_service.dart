@@ -10,6 +10,11 @@ class LastMatchesService {
     return allMatches
         .where(
           (match) =>
+              match.homeTeamMatchesWon != 0 ||
+              match.opponentTeamMatchesWon != 0,
+        )
+        .where(
+          (match) =>
               match.homeTeamName == teamName ||
               match.opponentTeamName == teamName,
         )
